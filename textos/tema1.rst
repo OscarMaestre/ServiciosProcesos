@@ -22,16 +22,37 @@ Un EXE puede que no contenga las instrucciones de los microprocesadores más mod
 Procesos
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Es un archivo que está en ejecución y bajo el control del sistema operativo. Un proceso puede atravesar diversas etapas en su "ciclo de vida". Los estados en los que puede estar son:
 
-Estados de un proceso.
-----------------------
+* En ejecución: está dentro del microprocesador.
+* Pausado/detenido/en espera: el proceso tiene que seguir en ejecución pero en ese momento el S.O tomó la decisión de dejar paso a otro.
+* Interrumpido: el proceso tiene que seguir en ejecución pero *el usuario* ha decidido interrumpir la ejecución.
+* Existen otros estados pero ya son muy dependientes del sistema operativo concreto.
+
+
+Servicios
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Un servicio es un proceso que no muestra ninguna ventana ni gráfico en pantalla porque no está pensado para que el usuario lo maneje directamente.
+
+
+Habitualmente, un servicio es un programa que atiende a otro programa.
+
 
 Hilos.
 ------
+Un hilo es un concepto más avanzado que un proceso: en los procesos cada uno tiene su propio espacio en memoria. Si abrimos 20 procesos cada uno de ellos consume 20x de memoria RAM. Un hilo es un proceso mucho más ligero, el código y los datos se comparten de una forma distinta.
+
+Un proceso no tiene acceso a los datos de otro procesos. Sin embargo un hilo si accede a los datos de otro hilo. Esto complicará algunas cuestiones a la hora de programar.
+
 
 
 Programación concurrente.
 -------------------------
+
+La programación concurrente es la parte de la programación que se ocupa de crear programas que pueden tener varios procesos/hilos que colaboran para ejecutar un trabajo y aprovechar al máximo el rendimiento de sistemas multinúcleo.
+
+
 
 
 Programación paralela y distribuida.
