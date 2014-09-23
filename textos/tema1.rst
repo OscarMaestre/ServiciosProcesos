@@ -41,9 +41,9 @@ Habitualmente, un servicio es un programa que atiende a otro programa.
 
 Hilos.
 ------
-Un hilo es un concepto más avanzado que un proceso: en los procesos cada uno tiene su propio espacio en memoria. Si abrimos 20 procesos cada uno de ellos consume 20x de memoria RAM. Un hilo es un proceso mucho más ligero, el código y los datos se comparten de una forma distinta.
+Un hilo es un concepto más avanzado que un proceso: al hablar de procesos cada uno tiene su propio espacio en memoria. Si abrimos 20 procesos cada uno de ellos consume 20x de memoria RAM. Un hilo es un proceso mucho más ligero, en el que el código y los datos se comparten de una forma distinta.
 
-Un proceso no tiene acceso a los datos de otro procesos. Sin embargo un hilo si accede a los datos de otro hilo. Esto complicará algunas cuestiones a la hora de programar.
+Un proceso no tiene acceso a los datos de otro procesos. Sin embargo un hilo sí accede a los datos de otro hilo. Esto complicará algunas cuestiones a la hora de programar.
 
 
 
