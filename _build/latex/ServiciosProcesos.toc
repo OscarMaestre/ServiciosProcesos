@@ -6,8 +6,8 @@
 \contentsline {subsection}{\numberline {1.1.3}Servicios}{2}{subsection.1.1.3}
 \contentsline {section}{\numberline {1.2}Hilos.}{2}{section.1.2}
 \contentsline {section}{\numberline {1.3}Programaci\IeC {\'o}n concurrente.}{2}{section.1.3}
-\contentsline {section}{\numberline {1.4}Programaci\IeC {\'o}n paralela y distribuida.}{3}{section.1.4}
-\contentsline {section}{\numberline {1.5}Creaci\IeC {\'o}n de procesos.}{3}{section.1.5}
+\contentsline {section}{\numberline {1.4}Programaci\IeC {\'o}n paralela y distribuida.}{2}{section.1.4}
+\contentsline {section}{\numberline {1.5}Creaci\IeC {\'o}n de procesos.}{2}{section.1.5}
 \contentsline {section}{\numberline {1.6}Comunicaci\IeC {\'o}n entre procesos.}{3}{section.1.6}
 \contentsline {section}{\numberline {1.7}Gesti\IeC {\'o}n de procesos.}{3}{section.1.7}
 \contentsline {section}{\numberline {1.8}Comandos para la gesti\IeC {\'o}n de procesos en sistemas libres y propietarios.}{3}{section.1.8}

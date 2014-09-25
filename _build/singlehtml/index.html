@@ -80,9 +80,43 @@
 </div>
 <div class="section" id="programacion-paralela-y-distribuida">
 <h3>Programación paralela y distribuida.<a class="headerlink" href="#programacion-paralela-y-distribuida" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Dentro de la programación concurrente tenemos la paralela y la distribuida:</p>
+<ul class="simple">
+<li>En general se denomina &#8220;programación paralela&#8221; a la creación de software que se ejecuta siempre en un solo ordenador (con varios núcleos o no)</li>
+<li>Se denomina &#8220;programación distribuida&#8221; a la creación de software que se ejecuta en ordenadores distintos y que se comunican a través de una red.</li>
+</ul>
 </div>
 <div class="section" id="creacion-de-procesos">
 <h3>Creación de procesos.<a class="headerlink" href="#creacion-de-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En Java es posible crear procesos utilizando algunas clases que el entorno ofrece para esta tarea. En este tema, veremos en profundidad la clase ProcessBuilder.</p>
+<p>El ejemplo siguiente muestra como lanzar un proceso de Acrobat Reader:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LanzadorProcesos</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ejecutar</span><span class="o">(</span><span class="n">String</span> <span class="n">ruta</span><span class="o">){</span>
+
+                <span class="n">ProcessBuilder</span> <span class="n">pb</span><span class="o">;</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">pb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ProcessBuilder</span><span class="o">(</span><span class="n">ruta</span><span class="o">);</span>
+                        <span class="n">pb</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// TODO Auto-generated catch block</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+
+        <span class="o">}</span>
+        <span class="cm">/**</span>
+<span class="cm">         * @param args</span>
+<span class="cm">         */</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">String</span> <span class="n">ruta</span><span class="o">=</span>
+                        <span class="s">&quot;C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe&quot;</span><span class="o">;</span>
+                <span class="n">LanzadorProcesos</span> <span class="n">lp</span><span class="o">=</span><span class="k">new</span> <span class="n">LanzadorProcesos</span><span class="o">();</span>
+                <span class="n">lp</span><span class="o">.</span><span class="na">ejecutar</span><span class="o">(</span><span class="n">ruta</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Finalizado&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="comunicacion-entre-procesos">
 <h3>Comunicación entre procesos.<a class="headerlink" href="#comunicacion-entre-procesos" title="Enlazar permanentemente con este título">¶</a></h3>

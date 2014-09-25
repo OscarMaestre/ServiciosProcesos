@@ -57,11 +57,45 @@ La programación concurrente es la parte de la programación que se ocupa de cre
 
 Programación paralela y distribuida.
 ------------------------------------
+Dentro de la programación concurrente tenemos la paralela y la distribuida:
 
+* En general se denomina "programación paralela" a la creación de software que se ejecuta siempre en un solo ordenador (con varios núcleos o no)
+* Se denomina "programación distribuida" a la creación de software que se ejecuta en ordenadores distintos y que se comunican a través de una red.
 
 Creación de procesos.
 ---------------------
 
+En Java es posible crear procesos utilizando algunas clases que el entorno ofrece para esta tarea. En este tema, veremos en profundidad la clase ProcessBuilder.
+
+El ejemplo siguiente muestra como lanzar un proceso de Acrobat Reader:
+
+.. code-block:: java
+
+	public class LanzadorProcesos {
+		public void ejecutar(String ruta){
+			
+			ProcessBuilder pb;
+			try {
+				pb = new ProcessBuilder(ruta);
+				pb.start();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		/**
+		 * @param args
+		 */
+		public static void main(String[] args) {
+			String ruta=
+				"C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe";
+			LanzadorProcesos lp=new LanzadorProcesos();
+			lp.ejecutar(ruta);
+			System.out.println("Finalizado");
+		}
+
+	}	
 
 Comunicación entre procesos.
 ----------------------------
