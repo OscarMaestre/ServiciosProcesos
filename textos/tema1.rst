@@ -97,6 +97,103 @@ El ejemplo siguiente muestra como lanzar un proceso de Acrobat Reader:
 
 	}	
 
+Supongamos que necesitamos crear un programa que aproveche al máximo el número de CPUs para realizar alguna tarea intensiva. Supongamos que dicha tarea consiste en sumar números.
+
+Enunciado: crear una clase Java que sea capaz de sumar todos los números comprendidos entre dos valores incluyendo ambos valores.
+
+
+Para resolverlo crearemos una clase ``Sumador`` que tenga un método que acepte dos números ``n1`` y ``n2`` y que devuelva la suma de todo el intervalor.
+
+Además, incluiremos un método ``main`` que ejecute la operación de suma tomando los números de la línea de comandos (es decir, se pasan como argumentos al main).
+
+El código de dicha clase podría ser algo así:
+
+.. code-block:: java
+
+	package com.ies;
+
+	public class Sumador {
+		public int sumar(int n1, int n2){
+			int resultado=0;
+			for (int i=n1;i<=n2;i++){
+				resultado=resultado+i;
+			}
+			return resultado;
+		}
+		public static void main(String[] args){
+			Sumador s=new Sumador();
+			int n1=Integer.parseInt(args[0]);
+			int n2=Integer.parseInt(args[1]);
+			int resultado=s.sumar(n1, n2);
+			System.out.println(resultado);
+		}
+	}	
+
+Para ejecutar este programa desde dentro de Eclipse es necesario indicar que deseamos enviar *argumentos* al programa. Por ejemplo, si deseamos sumar los números del 2 al 10, deberemos ir a la venta "Run configuration" y en la pestaña "Arguments" indicar los argumentos (que en este caso son los dos números a indicar).
+
+.. figure:: ../imagenes/configuraciones.png
+   :figwidth: 50%
+   :align: center
+   
+   Modificando los argumentos del programa
+
+   
+Una vez hecha la prueba de la clase sumador, le quitamos el main, y crearemos una clase que sea capaz de lanzar varios procesos. La clase ``Sumador`` se quedará así:
+
+.. code-block:: java
+
+	public class Sumador {
+		public int sumar(int n1, int n2){
+			int resultado=0;
+			for (int i=n1;i<=n2;i++){
+				resultado=resultado+i;
+			}
+			return resultado;
+		}
+	}
+	
+   
+
+Y ahora tendremos una clase que lanza procesos de esta forma:
+
+.. code-block:: java
+
+	package com.ies;
+
+	public class Lanzador {
+		public void lanzarSumador(Integer n1, 
+				Integer n2){
+			String clase="com.ies.Sumador";
+			ProcessBuilder pb;
+			try {
+				pb = new ProcessBuilder(
+						"java",clase, 
+						n1.toString(), 
+						n2.toString());
+				pb.start();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		public static void main(String[] args){
+			Lanzador l=new Lanzador();
+			l.lanzarSumador(1, 51);
+			l.lanzarSumador(51, 100);
+			System.out.println("Ok");
+		}
+	}
+	
+
+
+
+
+
+
+
+	
+	
+	
 Comunicación entre procesos.
 ----------------------------
 

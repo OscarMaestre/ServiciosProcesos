@@ -117,6 +117,76 @@
 <span class="o">}</span>
 </pre></div>
 </div>
+<p>Supongamos que necesitamos crear un programa que aproveche al máximo el número de CPUs para realizar alguna tarea intensiva. Supongamos que dicha tarea consiste en sumar números.</p>
+<p>Enunciado: crear una clase Java que sea capaz de sumar todos los números comprendidos entre dos valores incluyendo ambos valores.</p>
+<p>Para resolverlo crearemos una clase <tt class="docutils literal"><span class="pre">Sumador</span></tt> que tenga un método que acepte dos números <tt class="docutils literal"><span class="pre">n1</span></tt> y <tt class="docutils literal"><span class="pre">n2</span></tt> y que devuelva la suma de todo el intervalor.</p>
+<p>Además, incluiremos un método <tt class="docutils literal"><span class="pre">main</span></tt> que ejecute la operación de suma tomando los números de la línea de comandos (es decir, se pasan como argumentos al main).</p>
+<p>El código de dicha clase podría ser algo así:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ies</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sumador</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">sumar</span><span class="o">(</span><span class="kt">int</span> <span class="n">n1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n2</span><span class="o">){</span>
+                <span class="kt">int</span> <span class="n">resultado</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">n1</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n2</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                        <span class="n">resultado</span><span class="o">=</span><span class="n">resultado</span><span class="o">+</span><span class="n">i</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="n">resultado</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+                <span class="n">Sumador</span> <span class="n">s</span><span class="o">=</span><span class="k">new</span> <span class="n">Sumador</span><span class="o">();</span>
+                <span class="kt">int</span> <span class="n">n1</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+                <span class="kt">int</span> <span class="n">n2</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+                <span class="kt">int</span> <span class="n">resultado</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="na">sumar</span><span class="o">(</span><span class="n">n1</span><span class="o">,</span> <span class="n">n2</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">resultado</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Para ejecutar este programa desde dentro de Eclipse es necesario indicar que deseamos enviar <em>argumentos</em> al programa. Por ejemplo, si deseamos sumar los números del 2 al 10, deberemos ir a la venta &#8220;Run configuration&#8221; y en la pestaña &#8220;Arguments&#8221; indicar los argumentos (que en este caso son los dos números a indicar).</p>
+<div class="figure align-center" style="width: 50%">
+<img alt="_images/configuraciones.png" src="_images/configuraciones.png" />
+<p class="caption">Modificando los argumentos del programa</p>
+</div>
+<p>Una vez hecha la prueba de la clase sumador, le quitamos el main, y crearemos una clase que sea capaz de lanzar varios procesos. La clase <tt class="docutils literal"><span class="pre">Sumador</span></tt> se quedará así:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sumador</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">sumar</span><span class="o">(</span><span class="kt">int</span> <span class="n">n1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n2</span><span class="o">){</span>
+                <span class="kt">int</span> <span class="n">resultado</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">n1</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n2</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                        <span class="n">resultado</span><span class="o">=</span><span class="n">resultado</span><span class="o">+</span><span class="n">i</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="n">resultado</span><span class="o">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Y ahora tendremos una clase que lanza procesos de esta forma:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ies</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lanzador</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">lanzarSumador</span><span class="o">(</span><span class="n">Integer</span> <span class="n">n1</span><span class="o">,</span>
+                        <span class="n">Integer</span> <span class="n">n2</span><span class="o">){</span>
+                <span class="n">String</span> <span class="n">clase</span><span class="o">=</span><span class="s">&quot;com.ies.Sumador&quot;</span><span class="o">;</span>
+                <span class="n">ProcessBuilder</span> <span class="n">pb</span><span class="o">;</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">pb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ProcessBuilder</span><span class="o">(</span>
+                                        <span class="s">&quot;java&quot;</span><span class="o">,</span><span class="n">clase</span><span class="o">,</span>
+                                        <span class="n">n1</span><span class="o">.</span><span class="na">toString</span><span class="o">(),</span>
+                                        <span class="n">n2</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+                        <span class="n">pb</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// TODO Auto-generated catch block</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+                <span class="n">Lanzador</span> <span class="n">l</span><span class="o">=</span><span class="k">new</span> <span class="n">Lanzador</span><span class="o">();</span>
+                <span class="n">l</span><span class="o">.</span><span class="na">lanzarSumador</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">51</span><span class="o">);</span>
+                <span class="n">l</span><span class="o">.</span><span class="na">lanzarSumador</span><span class="o">(</span><span class="mi">51</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Ok&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="comunicacion-entre-procesos">
 <h3>Comunicación entre procesos.<a class="headerlink" href="#comunicacion-entre-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
