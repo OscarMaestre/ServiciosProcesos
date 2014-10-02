@@ -9,12 +9,12 @@
 \contentsline {section}{\numberline {1.4}Programaci\IeC {\'o}n paralela y distribuida.}{2}{section.1.4}
 \contentsline {section}{\numberline {1.5}Creaci\IeC {\'o}n de procesos.}{2}{section.1.5}
 \contentsline {section}{\numberline {1.6}Comunicaci\IeC {\'o}n entre procesos.}{5}{section.1.6}
-\contentsline {section}{\numberline {1.7}Gesti\IeC {\'o}n de procesos.}{5}{section.1.7}
-\contentsline {section}{\numberline {1.8}Comandos para la gesti\IeC {\'o}n de procesos en sistemas libres y propietarios.}{5}{section.1.8}
-\contentsline {section}{\numberline {1.9}Sincronizaci\IeC {\'o}n entre procesos.}{5}{section.1.9}
-\contentsline {section}{\numberline {1.10}Programaci\IeC {\'o}n de aplicaciones multiproceso.}{5}{section.1.10}
-\contentsline {section}{\numberline {1.11}Documentaci\IeC {\'o}n}{5}{section.1.11}
-\contentsline {section}{\numberline {1.12}Depuraci\IeC {\'o}n.}{5}{section.1.12}
+\contentsline {section}{\numberline {1.7}Gesti\IeC {\'o}n de procesos.}{6}{section.1.7}
+\contentsline {section}{\numberline {1.8}Comandos para la gesti\IeC {\'o}n de procesos en sistemas libres y propietarios.}{6}{section.1.8}
+\contentsline {section}{\numberline {1.9}Sincronizaci\IeC {\'o}n entre procesos.}{6}{section.1.9}
+\contentsline {section}{\numberline {1.10}Programaci\IeC {\'o}n de aplicaciones multiproceso.}{6}{section.1.10}
+\contentsline {section}{\numberline {1.11}Documentaci\IeC {\'o}n}{6}{section.1.11}
+\contentsline {section}{\numberline {1.12}Depuraci\IeC {\'o}n.}{6}{section.1.12}
 \contentsline {chapter}{\numberline {2}Programaci\IeC {\'o}n multihilo}{7}{chapter.2}
 \contentsline {section}{\numberline {2.1}Recursos compartidos por los hilos.}{8}{section.2.1}
 \contentsline {section}{\numberline {2.2}Estados de un hilo. Cambios de estado.}{8}{section.2.2}

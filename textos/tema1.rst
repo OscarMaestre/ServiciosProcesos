@@ -185,21 +185,55 @@ Y ahora tendremos una clase que lanza procesos de esta forma:
 	}
 	
 
-
-
-
-
-
-
 	
 	
 	
 Comunicación entre procesos.
 ----------------------------
+Las operaciones multiproceso pueden implicar que sea necesario comunicar información entre muchos procesos, lo que obliga a la necesidad de utilizar mecanismos específicos de comunicación que ofrecerá Java o a diseñar alguno separado que evite los problemas que puedan aparecer.
 
+En el ejemplo, el segundo proceso suele sobreescribir el resultado del primero, así que modificaremos el código del lanzador para que cada proceso use su propio fichero de resultados.
 
+.. code-block:: java
+
+	public class Lanzador {
+		public void lanzarSumador(Integer n1, 
+				Integer n2, String fichResultado){
+			String clase="com.ies.Sumador";
+			ProcessBuilder pb;
+			try {
+				pb = new ProcessBuilder(
+						"java",clase, 
+						n1.toString(), 
+						n2.toString());
+				
+				pb.redirectError(new File("errores.txt"));
+				pb.redirectOutput(new File(fichResultado));
+				pb.start();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		public static void main(String[] args){
+			Lanzador l=new Lanzador();
+			l.lanzarSumador(1, 5, "result1.txt");
+			l.lanzarSumador(6,10, "result2.txt");
+			System.out.println("Ok");
+		}
+	}	
+
+	
+Cuando se lanza un programa desde Eclipse no ocurre lo mismo que cuando se lanza desde Windows. Eclipse trabaja con unos directorios predefinidos y puede ser necesario indicar a nuestro programa cual es la ruta donde hay que buscar algo.
+
+Usando el método ``.directory(new File("c:\\dir\\))`` se puede indicar a Java donde está el archivo que se desea ejecutar.
+	
 Gestión de procesos.
 --------------------
+
+La gestión de procesos se realiza de dos formas **muy distintas** en función de los dos grandes sistemas operativos: Windows y Linux.
+
+* En Windows toda la gestión de procesos se realiza desde el "Administrador de tareas" al cual se accede con Ctrl+Alt+Supr. Existen otros programas algo más sofisticados que proporcionan algo más de información sobre los procesos, como Processviewer.
 
 Comandos para la gestión de procesos en sistemas libres y propietarios.
 -----------------------------------------------------------------------

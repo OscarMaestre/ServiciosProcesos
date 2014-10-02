@@ -190,9 +190,45 @@
 </div>
 <div class="section" id="comunicacion-entre-procesos">
 <h3>Comunicación entre procesos.<a class="headerlink" href="#comunicacion-entre-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Las operaciones multiproceso pueden implicar que sea necesario comunicar información entre muchos procesos, lo que obliga a la necesidad de utilizar mecanismos específicos de comunicación que ofrecerá Java o a diseñar alguno separado que evite los problemas que puedan aparecer.</p>
+<p>En el ejemplo, el segundo proceso suele sobreescribir el resultado del primero, así que modificaremos el código del lanzador para que cada proceso use su propio fichero de resultados.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lanzador</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">lanzarSumador</span><span class="o">(</span><span class="n">Integer</span> <span class="n">n1</span><span class="o">,</span>
+                        <span class="n">Integer</span> <span class="n">n2</span><span class="o">,</span> <span class="n">String</span> <span class="n">fichResultado</span><span class="o">){</span>
+                <span class="n">String</span> <span class="n">clase</span><span class="o">=</span><span class="s">&quot;com.ies.Sumador&quot;</span><span class="o">;</span>
+                <span class="n">ProcessBuilder</span> <span class="n">pb</span><span class="o">;</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">pb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ProcessBuilder</span><span class="o">(</span>
+                                        <span class="s">&quot;java&quot;</span><span class="o">,</span><span class="n">clase</span><span class="o">,</span>
+                                        <span class="n">n1</span><span class="o">.</span><span class="na">toString</span><span class="o">(),</span>
+                                        <span class="n">n2</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+
+                        <span class="n">pb</span><span class="o">.</span><span class="na">redirectError</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;errores.txt&quot;</span><span class="o">));</span>
+                        <span class="n">pb</span><span class="o">.</span><span class="na">redirectOutput</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">fichResultado</span><span class="o">));</span>
+                        <span class="n">pb</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// TODO Auto-generated catch block</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+                <span class="n">Lanzador</span> <span class="n">l</span><span class="o">=</span><span class="k">new</span> <span class="n">Lanzador</span><span class="o">();</span>
+                <span class="n">l</span><span class="o">.</span><span class="na">lanzarSumador</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="s">&quot;result1.txt&quot;</span><span class="o">);</span>
+                <span class="n">l</span><span class="o">.</span><span class="na">lanzarSumador</span><span class="o">(</span><span class="mi">6</span><span class="o">,</span><span class="mi">10</span><span class="o">,</span> <span class="s">&quot;result2.txt&quot;</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Ok&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Cuando se lanza un programa desde Eclipse no ocurre lo mismo que cuando se lanza desde Windows. Eclipse trabaja con unos directorios predefinidos y puede ser necesario indicar a nuestro programa cual es la ruta donde hay que buscar algo.</p>
+<p>Usando el método <tt class="docutils literal"><span class="pre">.directory(new</span> <span class="pre">File(&quot;c:\\dir\\))</span></tt> se puede indicar a Java donde está el archivo que se desea ejecutar.</p>
 </div>
 <div class="section" id="gestion-de-procesos">
 <h3>Gestión de procesos.<a class="headerlink" href="#gestion-de-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>La gestión de procesos se realiza de dos formas <strong>muy distintas</strong> en función de los dos grandes sistemas operativos: Windows y Linux.</p>
+<ul class="simple">
+<li>En Windows toda la gestión de procesos se realiza desde el &#8220;Administrador de tareas&#8221; al cual se accede con Ctrl+Alt+Supr. Existen otros programas algo más sofisticados que proporcionan algo más de información sobre los procesos, como Processviewer.</li>
+</ul>
 </div>
 <div class="section" id="comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">
 <h3>Comandos para la gestión de procesos en sistemas libres y propietarios.<a class="headerlink" href="#comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios" title="Enlazar permanentemente con este título">¶</a></h3>
