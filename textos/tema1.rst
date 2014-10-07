@@ -238,6 +238,36 @@ La gestión de procesos se realiza de dos formas **muy distintas** en función d
 Comandos para la gestión de procesos en sistemas libres y propietarios.
 -----------------------------------------------------------------------
 
+En sistemas Windows, no existen apenas comandos para gestionar procesos. Puede obligarse al sistema operativo a arrancar la aplicación asociada a un archivo con el comando ``START``. Es decir, si se ejecuta lo siguiente::
+
+	START documento.pdf
+	
+se abrirá el visor de archivos PDF el cual cargará automáticamente el fichero ``documento.pdf``
+
+
+En GNU/Linux se puede utilizar un terminal de consola para la gestión de procesos, lo que implica que no solo se pueden arrancar procesos si no tambien detenerlos, reanudarlos, terminarlos y modificar su prioridad de ejecución.
+
+* Para arrancar un proceso, simplemente tenemos que escribir el nombre del comando correspondiente. Desde GNU/Linux se pueden controlar los servicios que se ejecutan con un comando llamado ``service``. Por ejemplo, se puede usar ``sudo service apache2 stop`` para parar el servidor web y ``sudo service apache2 start`` para volver a ponerlo en marcha. También se puede reiniciar un servicio (tal vez para que relea un fichero de configuración que hemos cambiado) con ``sudo service apache2 restart``.
+
+* Se puede detener y/o terminar un proceso con el comando ``kill``. Se puede usar este comando para **terminar un proceso** sin guardar nada usando ``kill -SIGKILL <numproceso>`` o ``kill -9 <numproceso>``. Se puede pausar un proceso con ``kill -SIGPAUSE <numproceso>`` y rearrancarlo con ``kill -SIGCONT``
+
+* Se puede enviar un proceso a segundo plano con comandos como ``bg`` o al arrancar el proceso escribir el nombre del comando terminado en ``&``.
+
+* Se puede devolver un proceso a primer plano con el comando ``fg``.
+
+Prioridades
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+En sistemas como GNU/Linux se puede modificar la prioridad con que se ejecuta un proceso. Esto implica dos posibilidades
+
+* Si pensamos que un programa que necesitamos ejecutar es muy importante podemos darle más prioridad para que reciba "más turnos" del planificador.
+
+* Y por el contrario, si pensamos que un programa no es muy necesario podemos quitarle prioridad y reservar "más turnos de planificador" para otros posibles procesos.
+
+El comando ``nice`` permite indicar prioridades entre -20 y 19. El -20 implica que un proceso reciba la **máxima prioridad**, y el 19 supone asignar la **mínima prioridad**
+
+
+
 Sincronización entre procesos.
 ------------------------------
 

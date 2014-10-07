@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.24)  3 OCT 2014 08:54
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.24)  7 OCT 2014 13:52
 entering extended mode
 **ServiciosProcesos.tex
 (D:\oscar\ServiciosProcesos\_build\latex\ServiciosProcesos.tex
@@ -906,9 +906,9 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <20.74> not available
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 38.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 39.
 LaTeX Font Info:    Font shape `T1/phv/bx/sc' in size <12> not available
-(Font)              Font shape `T1/phv/b/sc' tried instead on input line 38.
+(Font)              Font shape `T1/phv/b/sc' tried instead on input line 39.
  [1
 
 ])
@@ -951,53 +951,59 @@ File: configuraciones.png Graphic file (type png)
  <use configuraciones.png>
 Package pdftex.def Info: configuraciones.png used on input line 265.
 (pdftex.def)             Requested size: 452.96788pt x 359.05084pt.
- [4 <D:/oscar/ServiciosProcesos/_build/latex/configuraciones.png>] [5] [6]
-Cap\'{\i }tulo 2.
-[7
+ [4 <D:/oscar/ServiciosProcesos/_build/latex/configuraciones.png>] [5]
+Underfull \hbox (badness 6125) in paragraph at lines 371--372
+[]\T1/ptm/m/n/12 se abri-rá el vi-sor de ar-chi-vos PDF el cual car-ga-rá au-to
+-má-ti-ca-men-te el fi-che-ro
+ []
+
+[6] [7] [8
 
 ]
+Cap\'{\i }tulo 2.
+[9]
 Overfull \vbox (47.77318pt too high) has occurred while \output is active []
 
 
-[8]
+[10]
 Cap\'{\i }tulo 3.
-[9
+[11
 
 ]
 Overfull \vbox (50.64273pt too high) has occurred while \output is active []
 
 
-[10]
+[12]
 Cap\'{\i }tulo 4.
-[11
+[13
 
 ]
 Overfull \vbox (214.96373pt too high) has occurred while \output is active []
 
 
-[12]
+[14]
 Cap\'{\i }tulo 5.
 No file ServiciosProcesos.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 552.
-[13
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 591.
+[15
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 552.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 591.
  (D:\oscar\ServiciosProcesos\_build\latex\ServiciosProcesos.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 552.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 552.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 591.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 591.
 Package rerunfilecheck Info: File `ServiciosProcesos.out' has not changed.
 (rerunfilecheck)             Checksum: 592D4CF7160E67861FFDCB4DF466F30F;5465.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 552.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 591.
  ) 
 Here is how much of TeX's memory you used:
- 9424 strings out of 493921
- 133374 string characters out of 3144876
- 229158 words of memory out of 3000000
- 12374 multiletter control sequences out of 15000+200000
+ 9428 strings out of 493921
+ 133430 string characters out of 3144876
+ 229218 words of memory out of 3000000
+ 12375 multiletter control sequences out of 15000+200000
  67523 words of font info for 78 fonts, out of 3000000 for 9000
  842 hyphenation exceptions out of 8191
- 39i,12n,51p,370b,629s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,12n,51p,550b,629s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Progra
 m Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/ucrb8a.pfb><C:/Program Files (
 x86)/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files (x86)/MiKT
@@ -1006,9 +1012,9 @@ onts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
 e1/urw/helvetic/uhvbo8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/
 times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8
 a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ServiciosProcesos.pdf (17 pages, 235065 bytes).
+Output written on ServiciosProcesos.pdf (19 pages, 240850 bytes).
 PDF statistics:
- 473 PDF objects out of 1000 (max. 8388607)
- 94 named destinations out of 1000 (max. 500000)
+ 484 PDF objects out of 1000 (max. 8388607)
+ 97 named destinations out of 1000 (max. 500000)
  546 words of extra memory for PDF output out of 10000 (max. 10000000)
 

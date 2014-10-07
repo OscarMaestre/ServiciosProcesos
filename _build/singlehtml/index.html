@@ -232,6 +232,27 @@
 </div>
 <div class="section" id="comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">
 <h3>Comandos para la gestión de procesos en sistemas libres y propietarios.<a class="headerlink" href="#comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En sistemas Windows, no existen apenas comandos para gestionar procesos. Puede obligarse al sistema operativo a arrancar la aplicación asociada a un archivo con el comando <tt class="docutils literal"><span class="pre">START</span></tt>. Es decir, si se ejecuta lo siguiente:</p>
+<div class="highlight-python"><div class="highlight"><pre>START documento.pdf
+</pre></div>
+</div>
+<p>se abrirá el visor de archivos PDF el cual cargará automáticamente el fichero <tt class="docutils literal"><span class="pre">documento.pdf</span></tt></p>
+<p>En GNU/Linux se puede utilizar un terminal de consola para la gestión de procesos, lo que implica que no solo se pueden arrancar procesos si no tambien detenerlos, reanudarlos, terminarlos y modificar su prioridad de ejecución.</p>
+<ul class="simple">
+<li>Para arrancar un proceso, simplemente tenemos que escribir el nombre del comando correspondiente. Desde GNU/Linux se pueden controlar los servicios que se ejecutan con un comando llamado <tt class="docutils literal"><span class="pre">service</span></tt>. Por ejemplo, se puede usar <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">apache2</span> <span class="pre">stop</span></tt> para parar el servidor web y <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">apache2</span> <span class="pre">start</span></tt> para volver a ponerlo en marcha. También se puede reiniciar un servicio (tal vez para que relea un fichero de configuración que hemos cambiado) con <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">apache2</span> <span class="pre">restart</span></tt>.</li>
+<li>Se puede detener y/o terminar un proceso con el comando <tt class="docutils literal"><span class="pre">kill</span></tt>. Se puede usar este comando para <strong>terminar un proceso</strong> sin guardar nada usando <tt class="docutils literal"><span class="pre">kill</span> <span class="pre">-SIGKILL</span> <span class="pre">&lt;numproceso&gt;</span></tt> o <tt class="docutils literal"><span class="pre">kill</span> <span class="pre">-9</span> <span class="pre">&lt;numproceso&gt;</span></tt>. Se puede pausar un proceso con <tt class="docutils literal"><span class="pre">kill</span> <span class="pre">-SIGPAUSE</span> <span class="pre">&lt;numproceso&gt;</span></tt> y rearrancarlo con <tt class="docutils literal"><span class="pre">kill</span> <span class="pre">-SIGCONT</span></tt></li>
+<li>Se puede enviar un proceso a segundo plano con comandos como <tt class="docutils literal"><span class="pre">bg</span></tt> o al arrancar el proceso escribir el nombre del comando terminado en <tt class="docutils literal"><span class="pre">&amp;</span></tt>.</li>
+<li>Se puede devolver un proceso a primer plano con el comando <tt class="docutils literal"><span class="pre">fg</span></tt>.</li>
+</ul>
+<div class="section" id="prioridades">
+<h4>Prioridades<a class="headerlink" href="#prioridades" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>En sistemas como GNU/Linux se puede modificar la prioridad con que se ejecuta un proceso. Esto implica dos posibilidades</p>
+<ul class="simple">
+<li>Si pensamos que un programa que necesitamos ejecutar es muy importante podemos darle más prioridad para que reciba &#8220;más turnos&#8221; del planificador.</li>
+<li>Y por el contrario, si pensamos que un programa no es muy necesario podemos quitarle prioridad y reservar &#8220;más turnos de planificador&#8221; para otros posibles procesos.</li>
+</ul>
+<p>El comando <tt class="docutils literal"><span class="pre">nice</span></tt> permite indicar prioridades entre -20 y 19. El -20 implica que un proceso reciba la <strong>máxima prioridad</strong>, y el 19 supone asignar la <strong>mínima prioridad</strong></p>
+</div>
 </div>
 <div class="section" id="sincronizacion-entre-procesos">
 <h3>Sincronización entre procesos.<a class="headerlink" href="#sincronizacion-entre-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
