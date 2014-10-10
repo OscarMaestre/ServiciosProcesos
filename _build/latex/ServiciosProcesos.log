@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.24)  7 OCT 2014 13:52
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.24)  9 OCT 2014 12:57
 entering extended mode
 **ServiciosProcesos.tex
 (D:\oscar\ServiciosProcesos\_build\latex\ServiciosProcesos.tex
@@ -906,9 +906,9 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <20.74> not available
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 39.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 40.
 LaTeX Font Info:    Font shape `T1/phv/bx/sc' in size <12> not available
-(Font)              Font shape `T1/phv/b/sc' tried instead on input line 39.
+(Font)              Font shape `T1/phv/b/sc' tried instead on input line 40.
  [1
 
 ])
@@ -941,7 +941,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[2] [3] <configuraciones.png, id=376, 595.47469pt x 472.01344pt>
+[2] [3] <configuraciones.png, id=371, 595.47469pt x 472.01344pt>
 File: configuraciones.png Graphic file (type png)
 
 <use configuraciones.png>
@@ -957,11 +957,11 @@ Underfull \hbox (badness 6125) in paragraph at lines 371--372
 -má-ti-ca-men-te el fi-che-ro
  []
 
-[6] [7] [8
+[6] [7] [8]
+Cap\'{\i }tulo 2.
+[9
 
 ]
-Cap\'{\i }tulo 2.
-[9]
 Overfull \vbox (47.77318pt too high) has occurred while \output is active []
 
 
@@ -984,23 +984,23 @@ Overfull \vbox (214.96373pt too high) has occurred while \output is active []
 [14]
 Cap\'{\i }tulo 5.
 No file ServiciosProcesos.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 591.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 646.
 [15
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 591.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 646.
  (D:\oscar\ServiciosProcesos\_build\latex\ServiciosProcesos.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 591.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 591.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 646.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 646.
 Package rerunfilecheck Info: File `ServiciosProcesos.out' has not changed.
-(rerunfilecheck)             Checksum: 592D4CF7160E67861FFDCB4DF466F30F;5465.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 591.
+(rerunfilecheck)             Checksum: BED27E5473F012518226DBE7E308F4B1;5371.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 646.
  ) 
 Here is how much of TeX's memory you used:
- 9428 strings out of 493921
- 133430 string characters out of 3144876
- 229218 words of memory out of 3000000
- 12375 multiletter control sequences out of 15000+200000
+ 9427 strings out of 493921
+ 133423 string characters out of 3144876
+ 229226 words of memory out of 3000000
+ 12374 multiletter control sequences out of 15000+200000
  67523 words of font info for 78 fonts, out of 3000000 for 9000
  842 hyphenation exceptions out of 8191
  39i,12n,51p,550b,629s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1012,9 +1012,9 @@ onts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
 e1/urw/helvetic/uhvbo8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/
 times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8
 a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ServiciosProcesos.pdf (19 pages, 240850 bytes).
+Output written on ServiciosProcesos.pdf (19 pages, 243875 bytes).
 PDF statistics:
- 484 PDF objects out of 1000 (max. 8388607)
+ 480 PDF objects out of 1000 (max. 8388607)
  97 named destinations out of 1000 (max. 500000)
- 546 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 538 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -256,9 +256,48 @@
 </div>
 <div class="section" id="sincronizacion-entre-procesos">
 <h3>Sincronización entre procesos.<a class="headerlink" href="#sincronizacion-entre-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Cuando se lanza más de un proceso de una misma sección de código no se sabe qué proceso ejecutará qué instrucción en un cierto momento, lo que es muy peligroso:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kt">int</span> <span class="n">i</span><span class="o">;</span>
+<span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="o">){</span>
+        <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+        <span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span>
+<span class="o">}</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Ok&quot;</span><span class="o">);</span>
+<span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">;</span>
+<span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</pre></div>
 </div>
-<div class="section" id="programacion-de-aplicaciones-multiproceso">
-<h3>Programación de aplicaciones multiproceso.<a class="headerlink" href="#programacion-de-aplicaciones-multiproceso" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Si dos o más procesos avanzan por esta sección de código es perfectamente que unas veces nuestro programa multiproceso se ejecute bien y otras no.</p>
+<p>En todo programa multiproceso pueden encontrarse estas zonas de código &#8220;peligrosas&#8221; que deben protegerse especialmente utilizando ciertos mecanismos. El nombre global para todos los lenguajes es denominar a estos trozos &#8220;secciones críticas&#8221;.</p>
+<div class="section" id="mecanismos-para-controlar-secciones-criticas">
+<h4>Mecanismos para controlar secciones críticas<a class="headerlink" href="#mecanismos-para-controlar-secciones-criticas" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Los mecanismos más típicos son los ofrecidos por UNIX/Windows:</p>
+<ul class="simple">
+<li>Semáforos.</li>
+<li>Colas de mensajes.</li>
+<li>Tuberías (pipes)</li>
+<li>Bloques de memoria compartida.</li>
+</ul>
+<p>En realidad algunos de estos mecanismos se utilizan más para intercomunicar procesos.</p>
+<p>En Java, si el programa piensa que un trozo de código es peligroso puede ponerle la palabra clave <tt class="docutils literal"><span class="pre">synchronized</span></tt> y la máquina virtual Java protege el código automáticamente.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">synchronized</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actualizarPension</span><span class="o">(</span><span class="kt">int</span> <span class="n">nuevoValor</span><span class="o">){</span>
+        <span class="cm">/*..trozo de código largo omitido*/</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">pension</span><span class="o">=</span><span class="n">nuevoValor</span>
+<span class="o">}</span>
+
+
+<span class="cm">/* Otro ejemplo*/</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+        <span class="cm">/* Código omitido*/</span>
+        <span class="kd">synchronized</span> <span class="o">{</span>
+                <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">;</span>
+                <span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="documentacion">
 <h3>Documentación<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -459,7 +498,6 @@
 <li class="toctree-l2"><a class="reference internal" href="index.html#gestion-de-procesos">Gestión de procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">Comandos para la gestión de procesos en sistemas libres y propietarios.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#sincronizacion-entre-procesos">Sincronización entre procesos.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#programacion-de-aplicaciones-multiproceso">Programación de aplicaciones multiproceso.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#documentacion">Documentación</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#depuracion">Depuración.</a></li>
 </ul>

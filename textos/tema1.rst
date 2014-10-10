@@ -270,10 +270,77 @@ El comando ``nice`` permite indicar prioridades entre -20 y 19. El -20 implica q
 
 Sincronización entre procesos.
 ------------------------------
+Cuando se lanza más de un proceso de una misma sección de código no se sabe qué proceso ejecutará qué instrucción en un cierto momento, lo que es muy peligroso:
+
+.. code-block:: java
+
+	int i;
+	i=0;
+	if (i==0){
+		i=i+1;
+		j=j+1
+	}
+	System.out.println("Ok");
+	i=i*2;
+	j=j-1;
+	
+Si dos o más procesos avanzan por esta sección de código es perfectamente que unas veces nuestro programa multiproceso se ejecute bien y otras no.
+
+En todo programa multiproceso pueden encontrarse estas zonas de código "peligrosas" que deben protegerse especialmente utilizando ciertos mecanismos. El nombre global para todos los lenguajes es denominar a estos trozos "secciones críticas".
 
 
-Programación de aplicaciones multiproceso.
--------------------------------------------
+Mecanismos para controlar secciones críticas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Los mecanismos más típicos son los ofrecidos por UNIX/Windows:
+
+* Semáforos.
+* Colas de mensajes.
+* Tuberías (pipes)
+* Bloques de memoria compartida.
+
+En realidad algunos de estos mecanismos se utilizan más para intercomunicar procesos, aunque para los programadores Java la forma de resolver el problema de la "sección crítica" es más simple.
+
+En Java, si el programador piensa que un trozo de código es peligroso puede ponerle la palabra clave ``synchronized`` y la máquina virtual Java protege el código automáticamente.
+
+
+.. code-block:: java
+
+	/* La máquina virtual Java evitará que más de un proceso/hilo acceda a este método*/
+	synchronized
+		public void actualizarPension(int nuevoValor){
+		/*..trozo de código largo omitido*/
+		this.pension=nuevoValor
+	}
+	
+	
+	/* Otro ejemplo, ahora no hemos protegido un método entero, sino solo un pequeño trozo de código.*/
+	for (int i=0; i=i+1; i++){
+		/* Código omitido*/
+		synchronized {
+			i=i*2;
+			j=j+1;
+		}
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Documentación

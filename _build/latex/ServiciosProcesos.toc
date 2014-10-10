@@ -13,9 +13,9 @@
 \contentsline {section}{\numberline {1.8}Comandos para la gesti\IeC {\'o}n de procesos en sistemas libres y propietarios.}{6}{section.1.8}
 \contentsline {subsection}{\numberline {1.8.1}Prioridades}{7}{subsection.1.8.1}
 \contentsline {section}{\numberline {1.9}Sincronizaci\IeC {\'o}n entre procesos.}{7}{section.1.9}
-\contentsline {section}{\numberline {1.10}Programaci\IeC {\'o}n de aplicaciones multiproceso.}{7}{section.1.10}
-\contentsline {section}{\numberline {1.11}Documentaci\IeC {\'o}n}{7}{section.1.11}
-\contentsline {section}{\numberline {1.12}Depuraci\IeC {\'o}n.}{7}{section.1.12}
+\contentsline {subsection}{\numberline {1.9.1}Mecanismos para controlar secciones cr\IeC {\'\i }ticas}{8}{subsection.1.9.1}
+\contentsline {section}{\numberline {1.10}Documentaci\IeC {\'o}n}{8}{section.1.10}
+\contentsline {section}{\numberline {1.11}Depuraci\IeC {\'o}n.}{8}{section.1.11}
 \contentsline {chapter}{\numberline {2}Programaci\IeC {\'o}n multihilo}{9}{chapter.2}
 \contentsline {section}{\numberline {2.1}Recursos compartidos por los hilos.}{10}{section.2.1}
 \contentsline {section}{\numberline {2.2}Estados de un hilo. Cambios de estado.}{10}{section.2.2}
