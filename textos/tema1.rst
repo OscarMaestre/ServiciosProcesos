@@ -325,26 +325,42 @@ En Java, si el programador piensa que un trozo de código es peligroso puede pon
 		
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Documentación
 -------------
+Para hacer la documentación tradicionalmente hemos usado JavaDOC. Sin embargo, las versiones más modernas de Java incluyen las **anotaciones**.
+
+Una anotación es un texto que pueden utilizar otras herramientas (no solo el Javadoc) para comprender mejor qué hace ese código o como documentarlo.
+
+Cualquiera puede crear sus propias anotaciones simplemente definiéndolas como un interfaz Java. Sin embargo tendremos que programar nuestras propias para extraer la información que proporcionan dichas anotaciones.
 
 Depuración.
 -----------
+
+¿Como se depura un programa multiproceso/multihilo? Por desgracia puede ser muy difícil:
+
+1. No todos los depuradores son capaces.
+2. A veces cuando un depurador interviene en un proceso puede ocurrir que el resto de procesos consigan ejecutarse en el orden correcto y dar lugar a que el programa parezca que funciona bien.
+3. Un error muy típico es la ``NullPointerException``
+
+En general todos los fallos en un programa multiproceso vienen derivado de no usar ``synchronized`` de la forma correcta.
+
+
+Examen
+------------------------------------------------------
+
+
+Se realizará el 24 de octubre.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
