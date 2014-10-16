@@ -279,16 +279,17 @@
 <li>Tuberías (pipes)</li>
 <li>Bloques de memoria compartida.</li>
 </ul>
-<p>En realidad algunos de estos mecanismos se utilizan más para intercomunicar procesos.</p>
-<p>En Java, si el programa piensa que un trozo de código es peligroso puede ponerle la palabra clave <tt class="docutils literal"><span class="pre">synchronized</span></tt> y la máquina virtual Java protege el código automáticamente.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">synchronized</span>
+<p>En realidad algunos de estos mecanismos se utilizan más para intercomunicar procesos, aunque para los programadores Java la forma de resolver el problema de la &#8220;sección crítica&#8221; es más simple.</p>
+<p>En Java, si el programador piensa que un trozo de código es peligroso puede ponerle la palabra clave <tt class="docutils literal"><span class="pre">synchronized</span></tt> y la máquina virtual Java protege el código automáticamente.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="cm">/* La máquina virtual Java evitará que más de un proceso/hilo acceda a este método*/</span>
+<span class="kd">synchronized</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actualizarPension</span><span class="o">(</span><span class="kt">int</span> <span class="n">nuevoValor</span><span class="o">){</span>
         <span class="cm">/*..trozo de código largo omitido*/</span>
         <span class="k">this</span><span class="o">.</span><span class="na">pension</span><span class="o">=</span><span class="n">nuevoValor</span>
 <span class="o">}</span>
 
 
-<span class="cm">/* Otro ejemplo*/</span>
+<span class="cm">/* Otro ejemplo, ahora no hemos protegido un método entero, sino solo un pequeño trozo de código.*/</span>
 <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
         <span class="cm">/* Código omitido*/</span>
         <span class="kd">synchronized</span> <span class="o">{</span>
@@ -301,21 +302,102 @@
 </div>
 <div class="section" id="documentacion">
 <h3>Documentación<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Para hacer la documentación tradicionalmente hemos usado JavaDOC. Sin embargo, las versiones más modernas de Java incluyen las <strong>anotaciones</strong>.</p>
+<p>Una anotación es un texto que pueden utilizar otras herramientas (no solo el Javadoc) para comprender mejor qué hace ese código o como documentarlo.</p>
+<p>Cualquiera puede crear sus propias anotaciones simplemente definiéndolas como un interfaz Java. Sin embargo tendremos que programar nuestras propias para extraer la información que proporcionan dichas anotaciones.</p>
 </div>
 <div class="section" id="depuracion">
 <h3>Depuración.<a class="headerlink" href="#depuracion" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>¿Como se depura un programa multiproceso/multihilo? Por desgracia puede ser muy difícil:</p>
+<ol class="arabic simple">
+<li>No todos los depuradores son capaces.</li>
+<li>A veces cuando un depurador interviene en un proceso puede ocurrir que el resto de procesos consigan ejecutarse en el orden correcto y dar lugar a que el programa parezca que funciona bien.</li>
+<li>Un error muy típico es la <tt class="docutils literal"><span class="pre">NullPointerException</span></tt></li>
+</ol>
+<p>En general todos los fallos en un programa multiproceso vienen derivado de no usar <tt class="docutils literal"><span class="pre">synchronized</span></tt> de la forma correcta.</p>
+</div>
+<div class="section" id="examen">
+<h3>Examen<a class="headerlink" href="#examen" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Se realizará el 24 de octubre.</p>
 </div>
 </div>
 <span id="document-textos/tema2"></span><div class="section" id="programacion-multihilo">
 <h2>Programación multihilo<a class="headerlink" href="#programacion-multihilo" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="recursos-compartidos-por-los-hilos">
 <h3>Recursos compartidos por los hilos.<a class="headerlink" href="#recursos-compartidos-por-los-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Cuando creamos varios objetos de una clase, puede ocurrir que varios hilos de ejecución accedan a un objeto. Es importante recordar que <strong>todos los campos del objeto son compartidos entre todos los hilos</strong>.</p>
+<p>Supongamos una clase como esta:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nf">Empleado</span><span class="o">(){</span>
+        <span class="kt">int</span> <span class="n">numHorasTrabajadas</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="kt">int</span> <span class="nf">incrementarHoras</span><span class="o">(){</span>
+                <span class="n">numHorasTrabajadas</span><span class="o">++;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Si varios hilos ejecutan sin querer el método <tt class="docutils literal"><span class="pre">incrementar</span></tt> ocurrirá que el número se incrementará tantas veces como procesos.</p>
 </div>
 <div class="section" id="estados-de-un-hilo-cambios-de-estado">
 <h3>Estados de un hilo. Cambios de estado.<a class="headerlink" href="#estados-de-un-hilo-cambios-de-estado" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Aunque no lo vemos, un hilo cambia de estado: puede pasar de la nada a la ejecución. De la ejecución al estado &#8220;en espera&#8221;. De ahí puede volver a estar en ejecución. De cualquier estado se puede pasar al estado &#8220;finalizado&#8221;.</p>
+<p>El programador no necesita controlar esto, lo hace el sistema operativo. Sin embargo un programa multihilo mal hecho puede dar lugar problemas como los siguientes:</p>
+<ul class="simple">
+<li>Interbloqueo. Se produce cuando las peticiones y las esperas se entrelazan de forma que ningún proceso puede avanzar.</li>
+<li>Inanición. Ningún proceso consigue hacer ninguna tarea útil y por lo tanto hay que esperar a que el administrador del sistema detecte el interbloqueo y mate procesos (o hasta que alguien reinicie el equipo).</li>
+</ul>
 </div>
 <div class="section" id="elementos-relacionados-con-la-programacion-de-hilos-librerias-y-clases">
 <h3>Elementos relacionados con la programación de hilos. Librerías y clases.<a class="headerlink" href="#elementos-relacionados-con-la-programacion-de-hilos-librerias-y-clases" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Para crear programas multihilo en Java se pueden hacer dos cosas:</p>
+<ol class="arabic simple">
+<li>Heredar de la clase Thread.</li>
+<li>Implementar la interfaz Runnable.</li>
+</ol>
+<p>Los documentos de Java aconsejan el segundo. Lo único que hay que hacer es algo como esto.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">EjecutorTareaCompleja</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">nombre</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">numEjecucion</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">EjecutorTareaCompleja</span><span class="o">(</span><span class="n">String</span> <span class="n">nombre</span><span class="o">){</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">nombre</span><span class="o">=</span><span class="n">nombre</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">String</span> <span class="n">cad</span><span class="o">;</span>
+                <span class="k">while</span> <span class="o">(</span><span class="n">numEjecucion</span><span class="o">&lt;</span><span class="mi">100</span><span class="o">){</span>
+                        <span class="k">for</span> <span class="o">(</span><span class="kt">double</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mf">4999.99</span><span class="o">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mf">0.04</span><span class="o">)</span>
+                        <span class="o">{</span>
+                                <span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+                        <span class="o">}</span>
+                        <span class="n">cad</span><span class="o">=</span><span class="s">&quot;Soy el hilo &quot;</span><span class="o">+</span><span class="k">this</span><span class="o">.</span><span class="na">nombre</span><span class="o">;</span>
+                        <span class="n">cad</span><span class="o">+=</span><span class="s">&quot; y mi valor de i es &quot;</span><span class="o">+</span><span class="n">numEjecucion</span><span class="o">;</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">cad</span><span class="o">);</span>
+                        <span class="n">numEjecucion</span><span class="o">++;</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LanzaHilos</span> <span class="o">{</span>
+
+        <span class="cm">/**</span>
+<span class="cm">         * @param args</span>
+<span class="cm">         */</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">NUM_HILOS</span><span class="o">=</span><span class="mi">500</span><span class="o">;</span>
+                <span class="n">EjecutorTareaCompleja</span> <span class="n">op</span><span class="o">;</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">NUM_HILOS</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+                <span class="o">{</span>
+                        <span class="n">op</span><span class="o">=</span><span class="k">new</span> <span class="n">EjecutorTareaCompleja</span> <span class="o">(</span><span class="s">&quot;Operacion &quot;</span><span class="o">+</span><span class="n">i</span><span class="o">);</span>
+                        <span class="n">Thread</span> <span class="n">hilo</span><span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">op</span><span class="o">);</span>
+                        <span class="n">hilo</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Advertencia</p>
+<p class="last">Este código tiene un problema <strong>muy grave</strong> y es que no se controla el acceso a variables compartidas, es decir <strong>HAY UNA SECCIÓN CRÍTICA QUE NO ESTÁ PROTEGIDA</strong> por lo que el resultado de la ejecución no muestra ningún sentido aunque el programa esté bien.</p>
+</div>
 </div>
 <div class="section" id="gestion-de-hilos">
 <h3>Gestión de hilos.<a class="headerlink" href="#gestion-de-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -500,6 +582,7 @@
 <li class="toctree-l2"><a class="reference internal" href="index.html#sincronizacion-entre-procesos">Sincronización entre procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#documentacion">Documentación</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#depuracion">Depuración.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#examen">Examen</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema2">Programación multihilo</a><ul>
