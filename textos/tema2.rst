@@ -156,7 +156,48 @@ El siguiente programa ilustra el uso de estos métodos:
 	
 Ejercicio: crear un programa que lance 10 hilos de ejecución donde a cada hilo se le pasará la base y la altura de un triángulo, y cada hilo ejecutará el cálculo del área de dicho triángulo informando de qué base y qué altura recibió y cual es el área resultado.
 
+Una posibilidad (quizá incorrecta) sería esta:
 
+.. code-block:: java
+
+	package com.ies;
+
+	import java.util.Random;
+
+	class CalculadorAreas implements Runnable{
+		int base, altura;
+		public CalculadorAreas(int base, int altura){
+			this.base=base;
+			this.altura=altura;
+		}
+		@Override
+		public void run() {
+			float area=this.base*this.altura/2;
+			System.out.print("Base:"+this.base);
+			System.out.print("Altura:"+this.altura);
+			System.out.println("Area:"+area);
+		}
+		
+	}
+	public class AreasEnParalelo {
+
+		public static void main(String[] args) {
+			Random generador=new Random();
+			int numHilos=10000;
+			int baseMaxima=3;
+			int alturaMaxima=5;
+			for (int i=0; i<numHilos; i++){
+				//Sumamos 1 para evitar casos como base=0
+				int base=1+generador.nextInt(baseMaxima);
+				int altura=1+generador.nextInt(alturaMaxima);
+				CalculadorAreas ca=
+						new CalculadorAreas(base, altura);
+				Thread hiloAsociado=new Thread(ca);
+				hiloAsociado.start();
+			}
+		}
+	}
+	
 
 
 
