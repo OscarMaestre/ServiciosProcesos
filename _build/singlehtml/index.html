@@ -401,6 +401,60 @@
 </div>
 <div class="section" id="gestion-de-hilos">
 <h3>Gestión de hilos.<a class="headerlink" href="#gestion-de-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Con los hilos se pueden efectuar diversas operaciones que sean de utilidad al programador (y al administrador de sistemas a veces).</p>
+<p>Por ejemplo, un hilo puede tener un nombre. Si queremos asignar un nombre a un hilo podemos usar el método <tt class="docutils literal"><span class="pre">setName(&quot;Nombre</span> <span class="pre">que</span> <span class="pre">sea&quot;)</span></tt>. También podemos obtener un objeto que represente el hilo de ejecución con <tt class="docutils literal"><span class="pre">getCurrentThread</span></tt> que nos devolverá un objeto de la clase <tt class="docutils literal"><span class="pre">Thread</span></tt>.</p>
+<p>Otra operación de utilidad al gestionar hilos es indicar la prioridad que queremos darle a un hilo. En realidad esta prioridad es indicativa, el sistema operativo no está obligado a respetarla aunque por lo general lo hacen. Se puede indicar la prioridad con <tt class="docutils literal"><span class="pre">setPriority(10)</span></tt>. La máxima prioridad posible es <tt class="docutils literal"><span class="pre">MAX_PRIORITY</span></tt>, y la mínima es <tt class="docutils literal"><span class="pre">MIN_PRIORITY</span></tt>.</p>
+<p>Cuando lanzamos una operación también podemos usar el método <tt class="docutils literal"><span class="pre">Thread.sleep(numero)</span></tt> y poner nuestro hilo &#8220;a dormir&#8221;.</p>
+<p>Cuando se trabaja con prioridades en hilos <strong>no hay garantías de que un hilo termine cuando esperemos</strong>.</p>
+<p>Podemos terminar un hilo de ejecución llamando al método <tt class="docutils literal"><span class="pre">join</span></tt>. Este método devuelve el control al hilo principal que lanzó el hilo secundario con la posibilidad de elegir un tiempo de espera en milisegundos.</p>
+<p>El siguiente programa ilustra el uso de estos métodos:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">Calculador</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">num</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="k">while</span><span class="o">(</span><span class="n">num</span><span class="o">&lt;</span><span class="mi">5</span><span class="o">){</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Calculando...&quot;</span><span class="o">);</span>
+                        <span class="k">try</span> <span class="o">{</span>
+                                <span class="kt">long</span> <span class="n">tiempo</span><span class="o">=(</span><span class="kt">long</span><span class="o">)</span> <span class="o">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()*</span><span class="mi">10</span><span class="o">);</span>
+                                <span class="k">if</span> <span class="o">(</span><span class="n">tiempo</span><span class="o">&gt;</span><span class="mi">8000</span><span class="o">){</span>
+                                        <span class="n">Thread</span> <span class="n">hilo</span><span class="o">=</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+                                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                                        <span class="s">&quot;Terminando hilo:&quot;</span><span class="o">+</span>
+                                                                        <span class="n">hilo</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span>
+                                        <span class="o">);</span>
+                                        <span class="n">hilo</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
+                                <span class="o">}</span>
+                                <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">tiempo</span><span class="o">);</span>
+                        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                                <span class="c1">// TODO Auto-generated catch block</span>
+                                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                        <span class="o">}</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Calculado y reiniciando.&quot;</span><span class="o">);</span>
+                        <span class="n">num</span><span class="o">++;</span>
+                <span class="o">}</span>
+                <span class="n">Thread</span> <span class="n">hilo</span><span class="o">=</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+                <span class="n">String</span> <span class="n">miNombre</span><span class="o">=</span><span class="n">hilo</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Hilo terminado:&quot;</span><span class="o">+</span><span class="n">miNombre</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LanzadorHilos</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">Calculador</span> <span class="n">vHilos</span><span class="o">[]=</span><span class="k">new</span> <span class="n">Calculador</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                        <span class="n">vHilos</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="k">new</span> <span class="n">Calculador</span><span class="o">();</span>
+                        <span class="n">Thread</span> <span class="n">hilo</span><span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">vHilos</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                        <span class="n">hilo</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;Hilo &quot;</span><span class="o">+</span><span class="n">i</span><span class="o">);</span>
+                        <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="o">){</span>
+                                <span class="n">hilo</span><span class="o">.</span><span class="na">setPriority</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">MAX_PRIORITY</span><span class="o">);</span>
+                        <span class="o">}</span>
+                        <span class="n">hilo</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Ejercicio: crear un programa que lance 10 hilos de ejecución donde a cada hilo se le pasará la base y la altura de un triángulo, y cada hilo ejecutará el cálculo del área de dicho triángulo informando de qué base y qué altura recibió y cual es el área resultado.</p>
 </div>
 <div class="section" id="creacion-inicio-y-finalizacion">
 <h3>Creación, inicio y finalización.<a class="headerlink" href="#creacion-inicio-y-finalizacion" title="Enlazar permanentemente con este título">¶</a></h3>
