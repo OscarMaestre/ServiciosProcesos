@@ -198,40 +198,198 @@ Una posibilidad (quizá incorrecta) sería esta:
 		}
 	}
 	
-
-
-
-
-
-
-
-
-
-
-
+Las secciones siguientes sirven como resumen de como crear una aplicación multihilo
 
 
 Creación, inicio y finalización.
 --------------------------------------------------------------------------
 
+* Podemos heredar de Thread o implementar ``Runnable``. Usaremos el segundo recordando implementar el método ``public void run()``.
+
+* Para crear un hilo asociado a un objeto usaremos algo como:
+
+.. code-block:: java
+
+	Thread hilo=new Thread(objetoDeClase)
+	
+Lo más habitual es guardar en un vector todos los hilos que hagan algo, y no en un objeto suelto.
+
+* Cada objeto que tenga un hilo asociado debe iniciarse así:
+
+.. code-block:: java
+
+	hilo.start();
+	
+	
+* Todo programa multihilo tiene un "hilo principal", el cual deberá esperar a que terminen los hilos asociados ejecutando el método ``join()``	.
+
+
 Sincronización de hilos.
 --------------------------------------------------------------------------
 
-Información entre hilos. Intercambio.
---------------------------------------------------------------------------
+Cuando un método acceda a una variable miembro que esté compartida deberemos proteger dicha sección crítica, usando ``synchronized``. Se puede poner todo el método ``synchronized`` o marcar un trozo de código más pequeño.
+
+Información entre hilos.
+------------------------------------------------------------------------
+
+Todos los hilos comparten todo, así que obtener información es tan sencillo como consultar un miembro.
+En realidad podemos comunicar los hilos con otro mecanismo llamado ``sockets de red``, pero se ve en el tema siguiente.
+
+
 
 Prioridades de los hilos.
 --------------------------------------------------------------------------
 
+Podemos asignar distintas prioridades a los hilos usando los campos estáticos ``MAX_PRIORITY`` y ``MIN_PRIORITY``. Usando valores entre estas dos constantes podemos hacer que un hilo reciba más procesador que otro (se hace en contadas ocasiones).
+
+Para ello se usa el método ``setPriority(valor)``
+
+
 Gestión de prioridades.
 --------------------------------------------------------------------------
 
-Compartición de información entre hilos.
---------------------------------------------------------------------------
+En realidad un sistema operativo no está obligado a respetar las prioridades, sino que se lo tomará como "recomendaciones". En general hasta ahora todos respetan hasta cierto punto las prioridades que pone el programador pero no debe tomarse como algo absoluto.
+
+
+
 
 Programación de aplicaciones multihilo.
 --------------------------------------------------------------------------
 
+La estructura típica de un programa multihilo es esta:
+
+.. code-block:: java
+
+	class TareaCompleja implements Runnable{
+		@Override
+		public void run() {
+			for (int i=0; i<100;i++){
+				int a=i*3;
+			}
+			Thread hiloActual=Thread.currentThread();
+			String miNombre=hiloActual.getName();
+			System.out.println(
+					"Finalizado el hilo"+miNombre);
+		}
+	}
+	public class LanzadorHilos {
+		public static void main(String[] args) {
+			int NUM_HILOS=100;
+			Thread[] hilosAsociados;
+			
+			hilosAsociados=new Thread[NUM_HILOS];
+			for (int i=0;i<NUM_HILOS;i++){
+				TareaCompleja t=new TareaCompleja();
+				Thread hilo=new Thread(t);
+				hilo.setName("Hilo: "+i);
+				hilo.start();
+				hilosAsociados[i]=hilo;
+			}
+			
+			/* Despues de crear todo, nos aseguramos
+			 * de esperar que todos los hilos acaben. */
+			
+			for (int i=0; i<NUM_HILOS; i++){
+				Thread hilo=hilosAsociados[i];
+				try {
+					//Espera a que el hilo acabe
+					hilo.join();
+				} catch (InterruptedException e) {
+					System.out.print("Algun hilo acabó ");
+					System.out.println(" antes de tiempo!");
+				}
+			}
+			System.out.println("El principal ha terminado");
+		}
+	}
+	
+Supongamos que la tarea es más compleja y que el bucle se ejecuta un número al azar de veces. Esto significaría que nuestro bucle es algo como esto:
+
+.. code-block:: java
+
+		Random generador= new Random();
+		int numAzar=(1+generador.nextInt(5))*100;
+		for (int i=0; i<numAzar;i++){
+			int a=i*3;
+		}	
+
+¿Como podríamos modificar el programa para que podamos saber cuantas multiplicaciones se han hecho en total entre todos los hilos?
+
+Aquí entra el problema de la sincronización. Supongamos una clase contador muy simple como esta:
+
+.. code-block:: java
+
+	class Contador{
+		int cuenta;
+		public Contador(){
+			cuenta=0;
+		}
+		public void incrementar(){
+			cuenta=cuenta+1;
+		}
+		public int getCuenta(){
+			return cuenta;
+		}
+	}
+	
+**SI EL OBJETO CONTADOR SE COMPARTE ENTRE VARIOS HILOS LA CUENTA FINAL RESULTANTE ES MUY POSIBLE QUE ESTÉ MAL***
+
+Esta clase debería tener protegidas sus secciones críticas
+
+.. code-block:: java
+
+	class Contador{
+		int cuenta;
+		public Contador(){
+			cuenta=0;
+		}
+		public synchronized void incrementar(){
+			cuenta=cuenta+1;
+		}
+		public synchronized int getCuenta(){
+			return cuenta;
+		}
+	}
+	
+Se puede aprovechar todavía más rendimiento si en un método marcamos como sección crítica (o sincronizada) exclusivamente el código peligroso:
+
+.. code-block:: java
+
+	public  void incrementar(){
+		System.out.println("Otras cosas");
+		synchronized(this){
+			cuenta=cuenta+1;
+		}
+		System.out.println("Mas cosas...");
+		synchronized(this){
+			if (cuenta>300){
+				System.out.println("Este hilo trabaja mucho");
+			}
+		}	
+	}
+
+Problema
+------------------------------------------------------
+
+En una mesa hay procesos que simulan el comportamiento de unos filósofos que intentan comer de un plato. Cada filósofo tiene un cubierto a su izquierda y uno a su derecha y para poder comer tiene que conseguir los dos. Si lo consigue, mostrará un mensaje en pantalla que indique "Filosofo 2 comiendo".
+
+Despues de comer, soltará los cubiertos y esperará al azar un tiempo entre 1000 y 5000 milisegundos, indicando por pantalla "El filósofo 2 está pensando".
+
+En general todos los objetos de la clase Filósofo está en un bucle infinito dedicándose a comer y a pensar.
+
+Simular este problema en un programa Java que muestre el progreso de todos sin caer en problemas de sincronización ni de inanición.
+
+.. figure:: ../imagenes/Filosofos.png
+   :figwidth: 50%
+   :align: center
+   
+   Esquema de los filósofos
+   
+   
+
+
+	
+		
 Documentación.
 --------------------------------------------------------------------------
 

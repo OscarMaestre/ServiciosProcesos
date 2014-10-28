@@ -24,53 +24,53 @@
 \contentsline {section}{\numberline {2.4}Gesti\IeC {\'o}n de hilos.}{13}{section.2.4}
 \contentsline {section}{\numberline {2.5}Creaci\IeC {\'o}n, inicio y finalizaci\IeC {\'o}n.}{15}{section.2.5}
 \contentsline {section}{\numberline {2.6}Sincronizaci\IeC {\'o}n de hilos.}{15}{section.2.6}
-\contentsline {section}{\numberline {2.7}Informaci\IeC {\'o}n entre hilos. Intercambio.}{15}{section.2.7}
-\contentsline {section}{\numberline {2.8}Prioridades de los hilos.}{15}{section.2.8}
-\contentsline {section}{\numberline {2.9}Gesti\IeC {\'o}n de prioridades.}{15}{section.2.9}
-\contentsline {section}{\numberline {2.10}Compartici\IeC {\'o}n de informaci\IeC {\'o}n entre hilos.}{15}{section.2.10}
-\contentsline {section}{\numberline {2.11}Programaci\IeC {\'o}n de aplicaciones multihilo.}{15}{section.2.11}
-\contentsline {section}{\numberline {2.12}Documentaci\IeC {\'o}n.}{15}{section.2.12}
-\contentsline {section}{\numberline {2.13}Depuraci\IeC {\'o}n.}{15}{section.2.13}
-\contentsline {chapter}{\numberline {3}Programaci\IeC {\'o}n de comunicaciones en red}{17}{chapter.3}
-\contentsline {section}{\numberline {3.1}Comunicaci\IeC {\'o}n entre aplicaciones.}{18}{section.3.1}
-\contentsline {section}{\numberline {3.2}Roles cliente y servidor.}{18}{section.3.2}
-\contentsline {section}{\numberline {3.3}Elementos de programaci\IeC {\'o}n de aplicaciones en red. Librer\IeC {\'\i }as.}{18}{section.3.3}
-\contentsline {section}{\numberline {3.4}Funciones y objetos de las librer\IeC {\'\i }as.}{18}{section.3.4}
-\contentsline {section}{\numberline {3.5}Sockets.}{18}{section.3.5}
-\contentsline {section}{\numberline {3.6}Tipos de sockets. Caracter\IeC {\'\i }sticas.}{18}{section.3.6}
-\contentsline {section}{\numberline {3.7}Creaci\IeC {\'o}n de sockets.}{18}{section.3.7}
-\contentsline {section}{\numberline {3.8}Enlazado y establecimiento de conexiones.}{18}{section.3.8}
-\contentsline {section}{\numberline {3.9}Utilizaci\IeC {\'o}n de sockets para la transmisi\IeC {\'o}n y recepci\IeC {\'o}n de informaci\IeC {\'o}n.}{18}{section.3.9}
-\contentsline {section}{\numberline {3.10}Programaci\IeC {\'o}n de aplicaciones cliente y servidor.}{18}{section.3.10}
-\contentsline {section}{\numberline {3.11}Utilizaci\IeC {\'o}n de hilos en la programaci\IeC {\'o}n de aplicaciones en red.}{18}{section.3.11}
-\contentsline {section}{\numberline {3.12}Depuraci\IeC {\'o}n.}{18}{section.3.12}
-\contentsline {chapter}{\numberline {4}Generaci\IeC {\'o}n de servicios en red}{19}{chapter.4}
-\contentsline {section}{\numberline {4.1}Protocolos est\IeC {\'a}ndar de comunicaci\IeC {\'o}n en red a nivel de aplicaci\IeC {\'o}n}{20}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Telnet}{20}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}FTP}{20}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}HTTP}{20}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}POP3}{20}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}SMTP}{20}{subsection.4.1.5}
-\contentsline {section}{\numberline {4.2}Librer\IeC {\'\i }as de clases y componentes.}{20}{section.4.2}
-\contentsline {section}{\numberline {4.3}Utilizaci\IeC {\'o}n de objetos predefinidos.}{20}{section.4.3}
-\contentsline {section}{\numberline {4.4}Propiedades de los objetos predefinidos.}{20}{section.4.4}
-\contentsline {section}{\numberline {4.5}M\IeC {\'e}todos y eventos de los objetos predefinidos.}{20}{section.4.5}
-\contentsline {section}{\numberline {4.6}Establecimiento y finalizaci\IeC {\'o}n de conexiones.}{20}{section.4.6}
-\contentsline {section}{\numberline {4.7}Transmisi\IeC {\'o}n de informaci\IeC {\'o}n.}{20}{section.4.7}
-\contentsline {section}{\numberline {4.8}Programaci\IeC {\'o}n de aplicaciones cliente.}{20}{section.4.8}
-\contentsline {section}{\numberline {4.9}Programaci\IeC {\'o}n de servidores.}{20}{section.4.9}
-\contentsline {section}{\numberline {4.10}Implementaci\IeC {\'o}n de comunicaciones simult\IeC {\'a}neas.}{20}{section.4.10}
-\contentsline {section}{\numberline {4.11}Documentaci\IeC {\'o}n.}{20}{section.4.11}
-\contentsline {section}{\numberline {4.12}Depuraci\IeC {\'o}n.}{20}{section.4.12}
-\contentsline {section}{\numberline {4.13}Monitorizaci\IeC {\'o}n de tiempos de respuesta.}{20}{section.4.13}
-\contentsline {chapter}{\numberline {5}Utilizaci\IeC {\'o}n de t\IeC {\'e}cnicas de programaci\IeC {\'o}n segura}{21}{chapter.5}
-\contentsline {section}{\numberline {5.1}Pr\IeC {\'a}cticas de programaci\IeC {\'o}n segura.}{21}{section.5.1}
-\contentsline {section}{\numberline {5.2}Criptograf\IeC {\'\i }a de clave p\IeC {\'u}blica y clave privada.}{21}{section.5.2}
-\contentsline {section}{\numberline {5.3}Principales aplicaciones de la criptograf\IeC {\'\i }a.}{21}{section.5.3}
-\contentsline {section}{\numberline {5.4}Protocolos criptogr\IeC {\'a}ficos.}{21}{section.5.4}
-\contentsline {section}{\numberline {5.5}Pol\IeC {\'\i }tica de seguridad.}{21}{section.5.5}
-\contentsline {section}{\numberline {5.6}Programaci\IeC {\'o}n de mecanismos de control de acceso.}{21}{section.5.6}
-\contentsline {section}{\numberline {5.7}Encriptaci\IeC {\'o}n de informaci\IeC {\'o}n.}{21}{section.5.7}
-\contentsline {section}{\numberline {5.8}Protocolos seguros de comunicaciones.}{21}{section.5.8}
-\contentsline {section}{\numberline {5.9}Programaci\IeC {\'o}n de aplicaciones con comunicaciones seguras.}{21}{section.5.9}
-\contentsline {section}{\numberline {5.10}Pruebas y depuraci\IeC {\'o}n.}{21}{section.5.10}
+\contentsline {section}{\numberline {2.7}Informaci\IeC {\'o}n entre hilos.}{16}{section.2.7}
+\contentsline {section}{\numberline {2.8}Prioridades de los hilos.}{16}{section.2.8}
+\contentsline {section}{\numberline {2.9}Gesti\IeC {\'o}n de prioridades.}{16}{section.2.9}
+\contentsline {section}{\numberline {2.10}Programaci\IeC {\'o}n de aplicaciones multihilo.}{16}{section.2.10}
+\contentsline {section}{\numberline {2.11}Problema}{18}{section.2.11}
+\contentsline {section}{\numberline {2.12}Documentaci\IeC {\'o}n.}{19}{section.2.12}
+\contentsline {section}{\numberline {2.13}Depuraci\IeC {\'o}n.}{19}{section.2.13}
+\contentsline {chapter}{\numberline {3}Programaci\IeC {\'o}n de comunicaciones en red}{21}{chapter.3}
+\contentsline {section}{\numberline {3.1}Comunicaci\IeC {\'o}n entre aplicaciones.}{22}{section.3.1}
+\contentsline {section}{\numberline {3.2}Roles cliente y servidor.}{22}{section.3.2}
+\contentsline {section}{\numberline {3.3}Elementos de programaci\IeC {\'o}n de aplicaciones en red. Librer\IeC {\'\i }as.}{22}{section.3.3}
+\contentsline {section}{\numberline {3.4}Funciones y objetos de las librer\IeC {\'\i }as.}{22}{section.3.4}
+\contentsline {section}{\numberline {3.5}Sockets.}{22}{section.3.5}
+\contentsline {section}{\numberline {3.6}Tipos de sockets. Caracter\IeC {\'\i }sticas.}{22}{section.3.6}
+\contentsline {section}{\numberline {3.7}Creaci\IeC {\'o}n de sockets.}{22}{section.3.7}
+\contentsline {section}{\numberline {3.8}Enlazado y establecimiento de conexiones.}{22}{section.3.8}
+\contentsline {section}{\numberline {3.9}Utilizaci\IeC {\'o}n de sockets para la transmisi\IeC {\'o}n y recepci\IeC {\'o}n de informaci\IeC {\'o}n.}{22}{section.3.9}
+\contentsline {section}{\numberline {3.10}Programaci\IeC {\'o}n de aplicaciones cliente y servidor.}{22}{section.3.10}
+\contentsline {section}{\numberline {3.11}Utilizaci\IeC {\'o}n de hilos en la programaci\IeC {\'o}n de aplicaciones en red.}{22}{section.3.11}
+\contentsline {section}{\numberline {3.12}Depuraci\IeC {\'o}n.}{22}{section.3.12}
+\contentsline {chapter}{\numberline {4}Generaci\IeC {\'o}n de servicios en red}{23}{chapter.4}
+\contentsline {section}{\numberline {4.1}Protocolos est\IeC {\'a}ndar de comunicaci\IeC {\'o}n en red a nivel de aplicaci\IeC {\'o}n}{24}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Telnet}{24}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}FTP}{24}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}HTTP}{24}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}POP3}{24}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}SMTP}{24}{subsection.4.1.5}
+\contentsline {section}{\numberline {4.2}Librer\IeC {\'\i }as de clases y componentes.}{24}{section.4.2}
+\contentsline {section}{\numberline {4.3}Utilizaci\IeC {\'o}n de objetos predefinidos.}{24}{section.4.3}
+\contentsline {section}{\numberline {4.4}Propiedades de los objetos predefinidos.}{24}{section.4.4}
+\contentsline {section}{\numberline {4.5}M\IeC {\'e}todos y eventos de los objetos predefinidos.}{24}{section.4.5}
+\contentsline {section}{\numberline {4.6}Establecimiento y finalizaci\IeC {\'o}n de conexiones.}{24}{section.4.6}
+\contentsline {section}{\numberline {4.7}Transmisi\IeC {\'o}n de informaci\IeC {\'o}n.}{24}{section.4.7}
+\contentsline {section}{\numberline {4.8}Programaci\IeC {\'o}n de aplicaciones cliente.}{24}{section.4.8}
+\contentsline {section}{\numberline {4.9}Programaci\IeC {\'o}n de servidores.}{24}{section.4.9}
+\contentsline {section}{\numberline {4.10}Implementaci\IeC {\'o}n de comunicaciones simult\IeC {\'a}neas.}{24}{section.4.10}
+\contentsline {section}{\numberline {4.11}Documentaci\IeC {\'o}n.}{24}{section.4.11}
+\contentsline {section}{\numberline {4.12}Depuraci\IeC {\'o}n.}{24}{section.4.12}
+\contentsline {section}{\numberline {4.13}Monitorizaci\IeC {\'o}n de tiempos de respuesta.}{24}{section.4.13}
+\contentsline {chapter}{\numberline {5}Utilizaci\IeC {\'o}n de t\IeC {\'e}cnicas de programaci\IeC {\'o}n segura}{25}{chapter.5}
+\contentsline {section}{\numberline {5.1}Pr\IeC {\'a}cticas de programaci\IeC {\'o}n segura.}{25}{section.5.1}
+\contentsline {section}{\numberline {5.2}Criptograf\IeC {\'\i }a de clave p\IeC {\'u}blica y clave privada.}{25}{section.5.2}
+\contentsline {section}{\numberline {5.3}Principales aplicaciones de la criptograf\IeC {\'\i }a.}{25}{section.5.3}
+\contentsline {section}{\numberline {5.4}Protocolos criptogr\IeC {\'a}ficos.}{25}{section.5.4}
+\contentsline {section}{\numberline {5.5}Pol\IeC {\'\i }tica de seguridad.}{25}{section.5.5}
+\contentsline {section}{\numberline {5.6}Programaci\IeC {\'o}n de mecanismos de control de acceso.}{25}{section.5.6}
+\contentsline {section}{\numberline {5.7}Encriptaci\IeC {\'o}n de informaci\IeC {\'o}n.}{25}{section.5.7}
+\contentsline {section}{\numberline {5.8}Protocolos seguros de comunicaciones.}{25}{section.5.8}
+\contentsline {section}{\numberline {5.9}Programaci\IeC {\'o}n de aplicaciones con comunicaciones seguras.}{25}{section.5.9}
+\contentsline {section}{\numberline {5.10}Pruebas y depuraci\IeC {\'o}n.}{25}{section.5.10}

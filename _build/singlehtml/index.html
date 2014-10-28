@@ -495,27 +495,159 @@
 <span class="o">}</span>
 </pre></div>
 </div>
+<p>Las secciones siguientes sirven como resumen de como crear una aplicación multihilo</p>
 </div>
 <div class="section" id="creacion-inicio-y-finalizacion">
 <h3>Creación, inicio y finalización.<a class="headerlink" href="#creacion-inicio-y-finalizacion" title="Enlazar permanentemente con este título">¶</a></h3>
+<ul class="simple">
+<li>Podemos heredar de Thread o implementar <tt class="docutils literal"><span class="pre">Runnable</span></tt>. Usaremos el segundo recordando implementar el método <tt class="docutils literal"><span class="pre">public</span> <span class="pre">void</span> <span class="pre">run()</span></tt>.</li>
+<li>Para crear un hilo asociado a un objeto usaremos algo como:</li>
+</ul>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Thread</span> <span class="n">hilo</span><span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">objetoDeClase</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Lo más habitual es guardar en un vector todos los hilos que hagan algo, y no en un objeto suelto.</p>
+<ul class="simple">
+<li>Cada objeto que tenga un hilo asociado debe iniciarse así:</li>
+</ul>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">hilo</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Todo programa multihilo tiene un &#8220;hilo principal&#8221;, el cual deberá esperar a que terminen los hilos asociados ejecutando el método <tt class="docutils literal"><span class="pre">join()</span></tt>  .</li>
+</ul>
 </div>
 <div class="section" id="sincronizacion-de-hilos">
 <h3>Sincronización de hilos.<a class="headerlink" href="#sincronizacion-de-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Cuando un método acceda a una variable miembro que esté compartida deberemos proteger dicha sección crítica, usando <tt class="docutils literal"><span class="pre">synchronized</span></tt>. Se puede poner todo el método <tt class="docutils literal"><span class="pre">synchronized</span></tt> o marcar un trozo de código más pequeño.</p>
 </div>
-<div class="section" id="informacion-entre-hilos-intercambio">
-<h3>Información entre hilos. Intercambio.<a class="headerlink" href="#informacion-entre-hilos-intercambio" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="informacion-entre-hilos">
+<h3>Información entre hilos.<a class="headerlink" href="#informacion-entre-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Todos los hilos comparten todo, así que obtener información es tan sencillo como consultar un miembro.
+En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="docutils literal"><span class="pre">sockets</span> <span class="pre">de</span> <span class="pre">red</span></tt>, pero se ve en el tema siguiente.</p>
 </div>
 <div class="section" id="prioridades-de-los-hilos">
 <h3>Prioridades de los hilos.<a class="headerlink" href="#prioridades-de-los-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Podemos asignar distintas prioridades a los hilos usando los campos estáticos <tt class="docutils literal"><span class="pre">MAX_PRIORITY</span></tt> y <tt class="docutils literal"><span class="pre">MIN_PRIORITY</span></tt>. Usando valores entre estas dos constantes podemos hacer que un hilo reciba más procesador que otro (se hace en contadas ocasiones).</p>
+<p>Para ello se usa el método <tt class="docutils literal"><span class="pre">setPriority(valor)</span></tt></p>
 </div>
 <div class="section" id="gestion-de-prioridades">
 <h3>Gestión de prioridades.<a class="headerlink" href="#gestion-de-prioridades" title="Enlazar permanentemente con este título">¶</a></h3>
-</div>
-<div class="section" id="comparticion-de-informacion-entre-hilos">
-<h3>Compartición de información entre hilos.<a class="headerlink" href="#comparticion-de-informacion-entre-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En realidad un sistema operativo no está obligado a respetar las prioridades, sino que se lo tomará como &#8220;recomendaciones&#8221;. En general hasta ahora todos respetan hasta cierto punto las prioridades que pone el programador pero no debe tomarse como algo absoluto.</p>
 </div>
 <div class="section" id="programacion-de-aplicaciones-multihilo">
 <h3>Programación de aplicaciones multihilo.<a class="headerlink" href="#programacion-de-aplicaciones-multihilo" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>La estructura típica de un programa multihilo es esta:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">TareaCompleja</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                        <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="n">Thread</span> <span class="n">hiloActual</span><span class="o">=</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+                <span class="n">String</span> <span class="n">miNombre</span><span class="o">=</span><span class="n">hiloActual</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                <span class="s">&quot;Finalizado el hilo&quot;</span><span class="o">+</span><span class="n">miNombre</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LanzadorHilos</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">NUM_HILOS</span><span class="o">=</span><span class="mi">100</span><span class="o">;</span>
+                <span class="n">Thread</span><span class="o">[]</span> <span class="n">hilosAsociados</span><span class="o">;</span>
+
+                <span class="n">hilosAsociados</span><span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">[</span><span class="n">NUM_HILOS</span><span class="o">];</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">NUM_HILOS</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                        <span class="n">TareaCompleja</span> <span class="n">t</span><span class="o">=</span><span class="k">new</span> <span class="n">TareaCompleja</span><span class="o">();</span>
+                        <span class="n">Thread</span> <span class="n">hilo</span><span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
+                        <span class="n">hilo</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;Hilo: &quot;</span><span class="o">+</span><span class="n">i</span><span class="o">);</span>
+                        <span class="n">hilo</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+                        <span class="n">hilosAsociados</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="n">hilo</span><span class="o">;</span>
+                <span class="o">}</span>
+
+                <span class="cm">/* Despues de crear todo, nos aseguramos</span>
+<span class="cm">                 * de esperar que todos los hilos acaben. */</span>
+
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">NUM_HILOS</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="n">Thread</span> <span class="n">hilo</span><span class="o">=</span><span class="n">hilosAsociados</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+                        <span class="k">try</span> <span class="o">{</span>
+                                <span class="c1">//Espera a que el hilo acabe</span>
+                                <span class="n">hilo</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
+                        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;Algun hilo acabó &quot;</span><span class="o">);</span>
+                                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot; antes de tiempo!&quot;</span><span class="o">);</span>
+                        <span class="o">}</span>
+                <span class="o">}</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;El principal ha terminado&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Supongamos que la tarea es más compleja y que el bucle se ejecuta un número al azar de veces. Esto significaría que nuestro bucle es algo como esto:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Random</span> <span class="n">generador</span><span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+<span class="kt">int</span> <span class="n">numAzar</span><span class="o">=(</span><span class="mi">1</span><span class="o">+</span><span class="n">generador</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">5</span><span class="o">))*</span><span class="mi">100</span><span class="o">;</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">numAzar</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+        <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">3</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>¿Como podríamos modificar el programa para que podamos saber cuantas multiplicaciones se han hecho en total entre todos los hilos?</p>
+<p>Aquí entra el problema de la sincronización. Supongamos una clase contador muy simple como esta:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">Contador</span><span class="o">{</span>
+        <span class="kt">int</span> <span class="n">cuenta</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">Contador</span><span class="o">(){</span>
+                <span class="n">cuenta</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">incrementar</span><span class="o">(){</span>
+                <span class="n">cuenta</span><span class="o">=</span><span class="n">cuenta</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getCuenta</span><span class="o">(){</span>
+                <span class="k">return</span> <span class="n">cuenta</span><span class="o">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p><strong>SI EL OBJETO CONTADOR SE COMPARTE ENTRE VARIOS HILOS LA CUENTA FINAL RESULTANTE ES MUY POSIBLE QUE ESTÉ MAL*</strong></p>
+<p>Esta clase debería tener protegidas sus secciones críticas</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">Contador</span><span class="o">{</span>
+        <span class="kt">int</span> <span class="n">cuenta</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">Contador</span><span class="o">(){</span>
+                <span class="n">cuenta</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">incrementar</span><span class="o">(){</span>
+                <span class="n">cuenta</span><span class="o">=</span><span class="n">cuenta</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">int</span> <span class="nf">getCuenta</span><span class="o">(){</span>
+                <span class="k">return</span> <span class="n">cuenta</span><span class="o">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Se puede aprovechar todavía más rendimiento si en un método marcamos como sección crítica (o sincronizada) exclusivamente el código peligroso:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span>  <span class="kt">void</span> <span class="nf">incrementar</span><span class="o">(){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Otras cosas&quot;</span><span class="o">);</span>
+        <span class="kd">synchronized</span><span class="o">(</span><span class="k">this</span><span class="o">){</span>
+                <span class="n">cuenta</span><span class="o">=</span><span class="n">cuenta</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Mas cosas...&quot;</span><span class="o">);</span>
+        <span class="kd">synchronized</span><span class="o">(</span><span class="k">this</span><span class="o">){</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">cuenta</span><span class="o">&gt;</span><span class="mi">300</span><span class="o">){</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Este hilo trabaja mucho&quot;</span><span class="o">);</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="problema">
+<h3>Problema<a class="headerlink" href="#problema" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En una mesa hay procesos que simulan el comportamiento de unos filósofos que intentan comer de un plato. Cada filósofo tiene un cubierto a su izquierda y uno a su derecha y para poder comer tiene que conseguir los dos. Si lo consigue, mostrará un mensaje en pantalla que indique &#8220;Filosofo 2 comiendo&#8221;.</p>
+<p>Despues de comer, soltará los cubiertos y esperará al azar un tiempo entre 1000 y 5000 milisegundos, indicando por pantalla &#8220;El filósofo 2 está pensando&#8221;.</p>
+<p>En general todos los objetos de la clase Filósofo está en un bucle infinito dedicándose a comer y a pensar.</p>
+<p>Simular este problema en un programa Java que muestre el progreso de todos sin caer en problemas de sincronización ni de inanición.</p>
+<div class="figure align-center" style="width: 50%">
+<img alt="_images/Filosofos.png" src="_images/Filosofos.png" />
+<p class="caption">Esquema de los filósofos</p>
+</div>
 </div>
 <div class="section" id="documentacion">
 <h3>Documentación.<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -686,11 +818,11 @@
 <li class="toctree-l2"><a class="reference internal" href="index.html#gestion-de-hilos">Gestión de hilos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#creacion-inicio-y-finalizacion">Creación, inicio y finalización.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#sincronizacion-de-hilos">Sincronización de hilos.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#informacion-entre-hilos-intercambio">Información entre hilos. Intercambio.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#informacion-entre-hilos">Información entre hilos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#prioridades-de-los-hilos">Prioridades de los hilos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#gestion-de-prioridades">Gestión de prioridades.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#comparticion-de-informacion-entre-hilos">Compartición de información entre hilos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#programacion-de-aplicaciones-multihilo">Programación de aplicaciones multihilo.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#problema">Problema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#documentacion">Documentación.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#depuracion">Depuración.</a></li>
 </ul>
