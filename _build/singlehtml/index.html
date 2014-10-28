@@ -648,6 +648,43 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <img alt="_images/Filosofos.png" src="_images/Filosofos.png" />
 <p class="caption">Esquema de los filósofos</p>
 </div>
+<div class="section" id="boceto-de-solucion">
+<h4>Boceto de solución<a class="headerlink" href="#boceto-de-solucion" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Filosofo</span>  <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+                <span class="n">String</span> <span class="n">miNombre</span><span class="o">=</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">();</span>
+                <span class="n">Random</span> <span class="n">generador</span><span class="o">=</span><span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+                <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+                        <span class="cm">/* Comer*/</span>
+                        <span class="cm">/* Intentar coger palillos*/</span>
+                        <span class="cm">/* Si los coge:*/</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">miNombre</span><span class="o">+</span><span class="s">&quot; comiendo...&quot;</span><span class="o">);</span>
+                        <span class="kt">int</span> <span class="n">milisegs</span><span class="o">=(</span><span class="mi">1</span><span class="o">+</span><span class="n">generador</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">5</span><span class="o">))*</span><span class="mi">1000</span><span class="o">;</span>
+                        <span class="n">esperarTiempoAzar</span><span class="o">(</span><span class="n">miNombre</span><span class="o">,</span> <span class="n">milisegs</span><span class="o">);</span>
+                        <span class="cm">/* Pensando...*/</span>
+                        <span class="c1">//Recordemos soltar los palillos</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">miNombre</span><span class="o">+</span><span class="s">&quot;  pensando...&quot;</span><span class="o">);</span>
+                        <span class="n">milisegs</span><span class="o">=(</span><span class="mi">1</span><span class="o">+</span><span class="n">generador</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">5</span><span class="o">))*</span><span class="mi">1000</span><span class="o">;</span>
+                        <span class="n">esperarTiempoAzar</span><span class="o">(</span><span class="n">miNombre</span><span class="o">,</span> <span class="n">milisegs</span><span class="o">);</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">esperarTiempoAzar</span><span class="o">(</span><span class="n">String</span> <span class="n">miNombre</span><span class="o">,</span> <span class="kt">int</span> <span class="n">milisegs</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">milisegs</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                        <span class="n">miNombre</span><span class="o">+</span><span class="s">&quot; interrumpido!!. Saliendo...&quot;</span><span class="o">);</span>
+                        <span class="k">return</span> <span class="o">;</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="documentacion">
 <h3>Documentación.<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título">¶</a></h3>
