@@ -407,8 +407,7 @@ Boceto de solución
 				esperarTiempoAzar(miNombre, milisegs);
 				/* Pensando...*/
 				//Recordemos soltar los palillos
-				System.out.println(miNombre+"  pensando...");
-				milisegs=(1+generador.nextInt(5))*1000;
+				System.out.println(miNombre+"  pensando...");				milisegs=(1+generador.nextInt(5))*1000;
 				esperarTiempoAzar(miNombre, milisegs);
 			}
 		}
@@ -427,7 +426,134 @@ Boceto de solución
    
 
 
+Solución completa al problema de los filósofos
+------------------------------------------------------
+
+Gestor de recursos compartidos (palillos)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. code-block:: java
+
+	public class GestorPalillos {
+		/* False significa que no están cogidos*/
+		private boolean[] palillos;
+		public GestorPalillos(int num_filosofos){
+			palillos=new boolean[num_filosofos];
+			for (int i=0;i<palillos.length;i++){
+				palillos[i]=false;
+			}
+		}
+		public synchronized boolean 
+			sePuedenCogerAmbosPalillos(
+				int num1,int num2){
+			if ( (palillos[num1]==false) &&
+				(palillos[num2]==false) ) {
+				palillos[num1]=true;
+				palillos[num2]=true;
+				System.out.println(
+						"Alguien consiguio los palillos "+num1+" y "+num2);
+				return true;
+			}
+			return false;
+		}
+		public synchronized void soltarPalillos(int num1, int num2){
+			palillos[num1]=false;
+			palillos[num2]=false;
+			System.out.println(
+					"Alguien liberó los palillos "+num1+" y "+num2);
+		}	
+	}
 	
+Simulación de un filósofo
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. code-block:: java
+
+			
+	import java.util.Random;
+	public class Filosofo  implements Runnable{
+		int num_palillo_izq;
+		int num_palillo_der;
+		GestorPalillos gestorPalillos;
+		public Filosofo(GestorPalillos gp,
+				int p_izq, int p_der){
+			this.gestorPalillos=gp;
+			this.num_palillo_der=p_der;
+			this.num_palillo_izq=p_izq;
+		}
+		public void run(){
+			String miNombre=Thread.currentThread().getName();
+			Random generador=new Random();
+			while (true){
+				/* Comer*/		
+				/* Intentar coger palillos*/
+				while(!gestorPalillos.sePuedenCogerAmbosPalillos
+						(
+								num_palillo_izq, num_palillo_der
+						))
+				{
+					
+				}
+				/* Si los coge:*/
+				
+				int milisegs=(1+generador.nextInt(5))*1000;
+				esperarTiempoAzar(miNombre, milisegs);
+				/* Pensando...*/
+				//Recordemos soltar los palillos
+				gestorPalillos.soltarPalillos(num_palillo_izq, num_palillo_der);
+				
+				milisegs=(1+generador.nextInt(5))*1000;
+				esperarTiempoAzar(miNombre, milisegs);
+			}
+		}
+
+	private void esperarTiempoAzar(String miNombre, int milisegs) {
+			try {
+				Thread.sleep(milisegs);
+			} catch (InterruptedException e) {
+				System.out.println(
+						miNombre+" interrumpido!!. Saliendo...");
+				return ;
+			}
+		}
+	}
+
+Lanzador de hilos
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. code-block:: java
+
+	public class LanzadorFilosofos {
+		public static void main(String[] args) {
+			int MAX_FILOSOFOS=5;
+			Filosofo[] filosofos=new Filosofo[MAX_FILOSOFOS];
+			Thread[] hilosAsociados=new Thread[MAX_FILOSOFOS];
+			GestorPalillos gestorCompartido=
+					new GestorPalillos(MAX_FILOSOFOS);
+			for (int i=0; i<MAX_FILOSOFOS; i++){
+				if (i==0){
+					filosofos[i]=new Filosofo(
+							gestorCompartido, i,MAX_FILOSOFOS-1);
+				}
+				else {
+					filosofos[i]=new Filosofo(
+							gestorCompartido, i, i-1);
+				}
+				Thread hilo=new Thread(filosofos[i]);
+				hilo.setName("Filosofo "+i);
+				hilosAsociados[i]=hilo;
+				hilo.start();
+			}
+			/* Un poco inútil*/
+			for (int i=0; i<MAX_FILOSOFOS;i++){
+				try {
+					hilosAsociados[i].join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+		
 		
 Documentación.
 --------------------------------------------------------------------------
