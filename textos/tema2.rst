@@ -332,7 +332,7 @@ Aquí entra el problema de la sincronización. Supongamos una clase contador muy
 		}
 	}
 	
-**SI EL OBJETO CONTADOR SE COMPARTE ENTRE VARIOS HILOS LA CUENTA FINAL RESULTANTE ES MUY POSIBLE QUE ESTÉ MAL***
+De esta forma podríamos construir un objeto contador y pasárselo a todos los hilos para que en ese único objeto se almacene el recuento final. El problema es que en la programación multihilo **SI EL OBJETO CONTADOR SE COMPARTE ENTRE VARIOS HILOS LA CUENTA FINAL RESULTANTE ES MUY POSIBLE QUE ESTÉ MAL**
 
 Esta clase debería tener protegidas sus secciones críticas
 
@@ -417,7 +417,7 @@ Boceto de solución
 				Thread.sleep(milisegs);
 			} catch (InterruptedException e) {
 				System.out.println(
-						miNombre+" interrumpido!!. Saliendo...");
+					miNombre+" interrumpido!!. Saliendo...");
 				return ;
 			}
 		}
@@ -450,7 +450,8 @@ Gestor de recursos compartidos (palillos)
 				palillos[num1]=true;
 				palillos[num2]=true;
 				System.out.println(
-						"Alguien consiguio los palillos "+num1+" y "+num2);
+					"Alguien consiguio los palillos "
+					+num1+" y "+num2);
 				return true;
 			}
 			return false;
@@ -459,7 +460,8 @@ Gestor de recursos compartidos (palillos)
 			palillos[num1]=false;
 			palillos[num2]=false;
 			System.out.println(
-					"Alguien liberó los palillos "+num1+" y "+num2);
+				"Alguien liberó los palillos "+
+				num1+" y "+num2);
 		}	
 	}
 	
@@ -486,9 +488,10 @@ Simulación de un filósofo
 				/* Comer*/		
 				/* Intentar coger palillos*/
 				while(!gestorPalillos.sePuedenCogerAmbosPalillos
-						(
-								num_palillo_izq, num_palillo_der
-						))
+					(
+							num_palillo_izq, 
+							num_palillo_der
+					))
 				{
 					
 				}
@@ -498,7 +501,9 @@ Simulación de un filósofo
 				esperarTiempoAzar(miNombre, milisegs);
 				/* Pensando...*/
 				//Recordemos soltar los palillos
-				gestorPalillos.soltarPalillos(num_palillo_izq, num_palillo_der);
+				gestorPalillos.soltarPalillos(
+					num_palillo_izq, 
+					num_palillo_der);
 				
 				milisegs=(1+generador.nextInt(5))*1000;
 				esperarTiempoAzar(miNombre, milisegs);
@@ -510,7 +515,8 @@ Simulación de un filósofo
 				Thread.sleep(milisegs);
 			} catch (InterruptedException e) {
 				System.out.println(
-						miNombre+" interrumpido!!. Saliendo...");
+					miNombre+
+					" interrumpido!!. Saliendo...");
 				return ;
 			}
 		}
@@ -529,8 +535,10 @@ Lanzador de hilos
 					new GestorPalillos(MAX_FILOSOFOS);
 			for (int i=0; i<MAX_FILOSOFOS; i++){
 				if (i==0){
-					filosofos[i]=new Filosofo(
-							gestorCompartido, i,MAX_FILOSOFOS-1);
+					filosofos[i]=
+					new Filosofo(
+							gestorCompartido,
+							i,MAX_FILOSOFOS-1);
 				}
 				else {
 					filosofos[i]=new Filosofo(
@@ -552,6 +560,20 @@ Lanzador de hilos
 			}
 		}
 	}
+
+Problema
+------------------------------------------------------
+
+En una peluquería hay barberos y sillas para los clientes (siempre hay más sillas que clientes). Sin embargo, en esta peluquería no siempre hay trabajo por lo que los barberos duermen cuando no hay clientes a los que afeitar. Un cliente puede llegar a la barbería y encontrar alguna silla libre, en cuyo caso, el cliente se sienta y esperará que algún barbero le afeite. Puede ocurrir que el cliente llegue y no haya sillas libres, en cuyo caso se marcha. Simular el comportamiento de la barbería mediante un programa Java.
+
+.. figure:: ../imagenes/barberodormilon.png
+   :figwidth: 50%  
+   :align: center
+   :alt: Texto alternativo
+   
+   Texto de la figura
+   
+
 
 		
 		

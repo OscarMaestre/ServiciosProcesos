@@ -606,7 +606,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <span class="o">}</span>
 </pre></div>
 </div>
-<p><strong>SI EL OBJETO CONTADOR SE COMPARTE ENTRE VARIOS HILOS LA CUENTA FINAL RESULTANTE ES MUY POSIBLE QUE ESTÉ MAL*</strong></p>
+<p>De esta forma podríamos construir un objeto contador y pasárselo a todos los hilos para que en ese único objeto se almacene el recuento final. El problema es que en la programación multihilo <strong>SI EL OBJETO CONTADOR SE COMPARTE ENTRE VARIOS HILOS LA CUENTA FINAL RESULTANTE ES MUY POSIBLE QUE ESTÉ MAL</strong></p>
 <p>Esta clase debería tener protegidas sus secciones críticas</p>
 <div class="highlight-java"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">Contador</span><span class="o">{</span>
         <span class="kt">int</span> <span class="n">cuenta</span><span class="o">;</span>
@@ -676,7 +676,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                         <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">milisegs</span><span class="o">);</span>
                 <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
                         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
-                                        <span class="n">miNombre</span><span class="o">+</span><span class="s">&quot; interrumpido!!. Saliendo...&quot;</span><span class="o">);</span>
+                                <span class="n">miNombre</span><span class="o">+</span><span class="s">&quot; interrumpido!!. Saliendo...&quot;</span><span class="o">);</span>
                         <span class="k">return</span> <span class="o">;</span>
                 <span class="o">}</span>
         <span class="o">}</span>
@@ -706,7 +706,8 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                         <span class="n">palillos</span><span class="o">[</span><span class="n">num1</span><span class="o">]=</span><span class="kc">true</span><span class="o">;</span>
                         <span class="n">palillos</span><span class="o">[</span><span class="n">num2</span><span class="o">]=</span><span class="kc">true</span><span class="o">;</span>
                         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
-                                        <span class="s">&quot;Alguien consiguio los palillos &quot;</span><span class="o">+</span><span class="n">num1</span><span class="o">+</span><span class="s">&quot; y &quot;</span><span class="o">+</span><span class="n">num2</span><span class="o">);</span>
+                                <span class="s">&quot;Alguien consiguio los palillos &quot;</span>
+                                <span class="o">+</span><span class="n">num1</span><span class="o">+</span><span class="s">&quot; y &quot;</span><span class="o">+</span><span class="n">num2</span><span class="o">);</span>
                         <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
                 <span class="o">}</span>
                 <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
@@ -715,7 +716,8 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                 <span class="n">palillos</span><span class="o">[</span><span class="n">num1</span><span class="o">]=</span><span class="kc">false</span><span class="o">;</span>
                 <span class="n">palillos</span><span class="o">[</span><span class="n">num2</span><span class="o">]=</span><span class="kc">false</span><span class="o">;</span>
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
-                                <span class="s">&quot;Alguien liberó los palillos &quot;</span><span class="o">+</span><span class="n">num1</span><span class="o">+</span><span class="s">&quot; y &quot;</span><span class="o">+</span><span class="n">num2</span><span class="o">);</span>
+                        <span class="s">&quot;Alguien liberó los palillos &quot;</span><span class="o">+</span>
+                        <span class="n">num1</span><span class="o">+</span><span class="s">&quot; y &quot;</span><span class="o">+</span><span class="n">num2</span><span class="o">);</span>
         <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
@@ -741,9 +743,10 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                         <span class="cm">/* Comer*/</span>
                         <span class="cm">/* Intentar coger palillos*/</span>
                         <span class="k">while</span><span class="o">(!</span><span class="n">gestorPalillos</span><span class="o">.</span><span class="na">sePuedenCogerAmbosPalillos</span>
-                                        <span class="o">(</span>
-                                                        <span class="n">num_palillo_izq</span><span class="o">,</span> <span class="n">num_palillo_der</span>
-                                        <span class="o">))</span>
+                                <span class="o">(</span>
+                                                <span class="n">num_palillo_izq</span><span class="o">,</span>
+                                                <span class="n">num_palillo_der</span>
+                                <span class="o">))</span>
                         <span class="o">{</span>
 
                         <span class="o">}</span>
@@ -753,7 +756,9 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                         <span class="n">esperarTiempoAzar</span><span class="o">(</span><span class="n">miNombre</span><span class="o">,</span> <span class="n">milisegs</span><span class="o">);</span>
                         <span class="cm">/* Pensando...*/</span>
                         <span class="c1">//Recordemos soltar los palillos</span>
-                        <span class="n">gestorPalillos</span><span class="o">.</span><span class="na">soltarPalillos</span><span class="o">(</span><span class="n">num_palillo_izq</span><span class="o">,</span> <span class="n">num_palillo_der</span><span class="o">);</span>
+                        <span class="n">gestorPalillos</span><span class="o">.</span><span class="na">soltarPalillos</span><span class="o">(</span>
+                                <span class="n">num_palillo_izq</span><span class="o">,</span>
+                                <span class="n">num_palillo_der</span><span class="o">);</span>
 
                         <span class="n">milisegs</span><span class="o">=(</span><span class="mi">1</span><span class="o">+</span><span class="n">generador</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">5</span><span class="o">))*</span><span class="mi">1000</span><span class="o">;</span>
                         <span class="n">esperarTiempoAzar</span><span class="o">(</span><span class="n">miNombre</span><span class="o">,</span> <span class="n">milisegs</span><span class="o">);</span>
@@ -765,7 +770,8 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                         <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">milisegs</span><span class="o">);</span>
                 <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
                         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
-                                        <span class="n">miNombre</span><span class="o">+</span><span class="s">&quot; interrumpido!!. Saliendo...&quot;</span><span class="o">);</span>
+                                <span class="n">miNombre</span><span class="o">+</span>
+                                <span class="s">&quot; interrumpido!!. Saliendo...&quot;</span><span class="o">);</span>
                         <span class="k">return</span> <span class="o">;</span>
                 <span class="o">}</span>
         <span class="o">}</span>
@@ -784,8 +790,10 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                                 <span class="k">new</span> <span class="nf">GestorPalillos</span><span class="o">(</span><span class="n">MAX_FILOSOFOS</span><span class="o">);</span>
                 <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">MAX_FILOSOFOS</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
                         <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="o">){</span>
-                                <span class="n">filosofos</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="k">new</span> <span class="n">Filosofo</span><span class="o">(</span>
-                                                <span class="n">gestorCompartido</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span><span class="n">MAX_FILOSOFOS</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+                                <span class="n">filosofos</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span>
+                                <span class="k">new</span> <span class="nf">Filosofo</span><span class="o">(</span>
+                                                <span class="n">gestorCompartido</span><span class="o">,</span>
+                                                <span class="n">i</span><span class="o">,</span><span class="n">MAX_FILOSOFOS</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
                         <span class="o">}</span>
                         <span class="k">else</span> <span class="o">{</span>
                                 <span class="n">filosofos</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="k">new</span> <span class="n">Filosofo</span><span class="o">(</span>
@@ -809,6 +817,14 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <span class="o">}</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Problema<a class="headerlink" href="#id1" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En una peluquería hay barberos y sillas para los clientes (siempre hay más sillas que clientes). Sin embargo, en esta peluquería no siempre hay trabajo por lo que los barberos duermen cuando no hay clientes a los que afeitar. Un cliente puede llegar a la barbería y encontrar alguna silla libre, en cuyo caso, el cliente se sienta y esperará que algún barbero le afeite. Puede ocurrir que el cliente llegue y no haya sillas libres, en cuyo caso se marcha. Simular el comportamiento de la barbería mediante un programa Java.</p>
+<div class="figure align-center" style="width: 50%">
+<img alt="Texto alternativo" src="_images/barberodormilon.png" />
+<p class="caption">Texto de la figura</p>
 </div>
 </div>
 <div class="section" id="documentacion">
@@ -986,6 +1002,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <li class="toctree-l2"><a class="reference internal" href="index.html#programacion-de-aplicaciones-multihilo">Programación de aplicaciones multihilo.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#problema">Problema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#solucion-completa-al-problema-de-los-filosofos">Solución completa al problema de los filósofos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#id1">Problema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#documentacion">Documentación.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#depuracion">Depuración.</a></li>
 </ul>
