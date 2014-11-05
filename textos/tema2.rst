@@ -573,8 +573,211 @@ En una peluquería hay barberos y sillas para los clientes (siempre hay más sil
    
    Texto de la figura
    
+Una (mala) solución al problema de los barberos
+--------------------------------------------------
 
+Prueba la siguiente solución:
 
+Clase Barbero
+~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	public class Barbero implements Runnable {
+		private String 				nombre;
+		private GestorConcurrencia 	gc;
+		private Random				generador;
+		private int					MAX_ESPERA_SEGS=5;
+		public Barbero(GestorConcurrencia gc,String nombre){
+			this.nombre		=nombre;
+			this.gc			=gc;
+			this.generador	=new Random();
+		}
+	
+		public void esperarTiempoAzar(int max){
+			/* Se calculan unos milisegundos al azar*/
+			int msgs=(1+generador.nextInt(max))*1000;
+			try {
+				Thread.currentThread().sleep(msgs);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		public void run(){
+			while (true){
+				int num_silla=gc.atenderAlgunCliente();
+				while (num_silla==-1){
+					/* Mientras no haya nadie a quien 
+					 * atender, dormimos
+					 */
+					esperarTiempoAzar(MAX_ESPERA_SEGS);
+					num_silla=gc.atenderAlgunCliente();
+				}
+				/* Si llegamos aqui es que había algún cliente
+				 * Simulamos un tiempo de afeitado
+				 */
+				esperarTiempoAzar(MAX_ESPERA_SEGS);
+				/* Tras ese tiempo de afeitado se
+				 * libera la silla
+				 */
+				gc.liberarSilla(num_silla);
+				/* Y vuelta a empezar*/
+			}
+		}
+	}
+
+Clase Cliente
+~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	public class Cliente implements Runnable{
+		GestorConcurrencia 	gc;
+		public Cliente(GestorConcurrencia gc){
+			this.gc		=gc;
+		}
+		public void run(){
+			/* Los clientes no esperan que haya
+			 * sillas libres, no hay bucle infinito.
+			 * Si no hay sillas libres se van...
+			 */
+			gc.getSillaLibre();		
+		}
+	}
+
+Clase GestorConcurrencia
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	public class GestorConcurrencia {
+		/* Vector que indica cuantas sillas hay y
+		 * si están libres o no
+		 */
+		boolean[] sillasLibres;
+		/* Indica si el cliente sentado en esa
+		 * silla está atendido por un barbero o no
+		 */
+		boolean[] clienteEstaAtendido;
+	
+		public GestorConcurrencia(int numSillas){
+			/*Construimos los vectores...*/
+			sillasLibres		=new boolean[numSillas];
+			clienteEstaAtendido	=new boolean[numSillas];
+			/* ... los inicializamos*/
+			for (int i=0; i<numSillas;i++){
+				sillasLibres[i]			=true;
+				clienteEstaAtendido[i]	=false;
+			}
+		}
+	
+		/**
+		 * Permite obtener una silla libre, usado por la
+		 * clase Cliente para saber si puede sentarse
+		 * en algún sitio o irse
+		 * @return Devuelve el número de la primera silla
+		 * que está libre o -1 si no hay ninguna 
+		 */
+		public synchronized int getSillaLibre(){
+			for (int i=0; i<sillasLibres.length; i++){
+				/* Si está libre la silla ...*/
+				if (sillasLibres[i]) {
+					/* ...se marca como ocupada*/
+					sillasLibres[i]=false;
+					System.out.println(
+						"Cliente sentado en silla "+i
+							);
+					/*.. y devolvemos i...*/
+					return i;
+				}
+			}
+			/* Si llegamos aquí es que no había nada libre*/
+			return -1;
+		}
+	
+		/**
+		 * Nos dice qué silla tiene algun cliente
+		 * que no está atendido
+		 * @return un número de silla o -1 si no
+		 * hay clientes sin atender
+		 */
+		public synchronized int atenderAlgunCliente(){
+			for (int i=0; i<sillasLibres.length; i++){
+				/* Si una silla está ocupada (no libre, false)
+				 * y está marcado como "sin atender" (false)
+				 * entonces la marcamos como atendida
+				 */
+				if (clienteEstaAtendido[i]==false){
+					clienteEstaAtendido[i]=true;
+					System.out.println(
+							"Afeitando cliente en silla "+i);
+					return i;
+				}
+			}
+			return -1;
+		}
+	
+		/* El cliente de esa silla, se marcha, por lo
+		 * que se marca esa silla como "libre" 
+		 * y como "sin atender"
+		 */
+		public synchronized void liberarSilla(int i){
+			sillasLibres[i]			=true;
+			clienteEstaAtendido[i]	=false;
+			System.out.println(
+					"Se marcha el cliente de la silla "+i);
+		}
+	}
+
+Clase Lanzador
+~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	public class Lanzador {
+	
+		public static void main(String[] args) {
+		
+			int MAX_BARBEROS	=2;
+			int MAX_SILLAS		=MAX_BARBEROS+1;
+			int MAX_CLIENTES	=MAX_BARBEROS*10;
+			int MAX_ESPERA_SEGS	= 3;
+			GestorConcurrencia gc;
+			gc=new GestorConcurrencia(MAX_SILLAS);
+		
+			Thread[] vhBarberos	=new Thread[MAX_BARBEROS];
+			for (int i=0; i<MAX_BARBEROS;i++){
+				Barbero b=new Barbero(gc, "Barbero "+i);
+				Thread hilo=new Thread(b);
+				vhBarberos[i]=hilo;
+				hilo.start();
+			}
+		
+			/* Generamos unos cuantos clientes
+			 * a intervalos aleatorios
+			 */
+			Random generador=new Random();
+			for (int i=0; i<MAX_CLIENTES; i++){
+				Cliente c			=new Cliente(gc);
+				Thread hiloCliente	=new Thread(c);
+				hiloCliente.start();
+			
+				int msegs=generador.nextInt(3)*1000;
+				try {
+					Thread.sleep(msegs);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} /* Fin del for*/    
+		}
+	}
+
+Críticas a la solución anterior
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+¿Cual es el problema?
 		
 		
 Documentación.

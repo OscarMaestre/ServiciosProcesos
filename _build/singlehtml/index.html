@@ -827,6 +827,206 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <p class="caption">Texto de la figura</p>
 </div>
 </div>
+<div class="section" id="una-mala-solucion-al-problema-de-los-barberos">
+<h3>Una (mala) solución al problema de los barberos<a class="headerlink" href="#una-mala-solucion-al-problema-de-los-barberos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Prueba la siguiente solución:</p>
+<div class="section" id="clase-barbero">
+<h4>Clase Barbero<a class="headerlink" href="#clase-barbero" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Barbero</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">String</span>                          <span class="n">nombre</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">GestorConcurrencia</span>      <span class="n">gc</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">Random</span>                          <span class="n">generador</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="kt">int</span>                                     <span class="n">MAX_ESPERA_SEGS</span><span class="o">=</span><span class="mi">5</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">Barbero</span><span class="o">(</span><span class="n">GestorConcurrencia</span> <span class="n">gc</span><span class="o">,</span><span class="n">String</span> <span class="n">nombre</span><span class="o">){</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">nombre</span>             <span class="o">=</span><span class="n">nombre</span><span class="o">;</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">gc</span>                 <span class="o">=</span><span class="n">gc</span><span class="o">;</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">generador</span>  <span class="o">=</span><span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">esperarTiempoAzar</span><span class="o">(</span><span class="kt">int</span> <span class="n">max</span><span class="o">){</span>
+                <span class="cm">/* Se calculan unos milisegundos al azar*/</span>
+                <span class="kt">int</span> <span class="n">msgs</span><span class="o">=(</span><span class="mi">1</span><span class="o">+</span><span class="n">generador</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">max</span><span class="o">))*</span><span class="mi">1000</span><span class="o">;</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">sleep</span><span class="o">(</span><span class="n">msgs</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// TODO Auto-generated catch block</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+                <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+                        <span class="kt">int</span> <span class="n">num_silla</span><span class="o">=</span><span class="n">gc</span><span class="o">.</span><span class="na">atenderAlgunCliente</span><span class="o">();</span>
+                        <span class="k">while</span> <span class="o">(</span><span class="n">num_silla</span><span class="o">==-</span><span class="mi">1</span><span class="o">){</span>
+                                <span class="cm">/* Mientras no haya nadie a quien</span>
+<span class="cm">                                 * atender, dormimos</span>
+<span class="cm">                                 */</span>
+                                <span class="n">esperarTiempoAzar</span><span class="o">(</span><span class="n">MAX_ESPERA_SEGS</span><span class="o">);</span>
+                                <span class="n">num_silla</span><span class="o">=</span><span class="n">gc</span><span class="o">.</span><span class="na">atenderAlgunCliente</span><span class="o">();</span>
+                        <span class="o">}</span>
+                        <span class="cm">/* Si llegamos aqui es que había algún cliente</span>
+<span class="cm">                         * Simulamos un tiempo de afeitado</span>
+<span class="cm">                         */</span>
+                        <span class="n">esperarTiempoAzar</span><span class="o">(</span><span class="n">MAX_ESPERA_SEGS</span><span class="o">);</span>
+                        <span class="cm">/* Tras ese tiempo de afeitado se</span>
+<span class="cm">                         * libera la silla</span>
+<span class="cm">                         */</span>
+                        <span class="n">gc</span><span class="o">.</span><span class="na">liberarSilla</span><span class="o">(</span><span class="n">num_silla</span><span class="o">);</span>
+                        <span class="cm">/* Y vuelta a empezar*/</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="clase-cliente">
+<h4>Clase Cliente<a class="headerlink" href="#clase-cliente" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Cliente</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
+        <span class="n">GestorConcurrencia</span>      <span class="n">gc</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">Cliente</span><span class="o">(</span><span class="n">GestorConcurrencia</span> <span class="n">gc</span><span class="o">){</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">gc</span>         <span class="o">=</span><span class="n">gc</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+                <span class="cm">/* Los clientes no esperan que haya</span>
+<span class="cm">                 * sillas libres, no hay bucle infinito.</span>
+<span class="cm">                 * Si no hay sillas libres se van...</span>
+<span class="cm">                 */</span>
+                <span class="n">gc</span><span class="o">.</span><span class="na">getSillaLibre</span><span class="o">();</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="clase-gestorconcurrencia">
+<h4>Clase GestorConcurrencia<a class="headerlink" href="#clase-gestorconcurrencia" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GestorConcurrencia</span> <span class="o">{</span>
+        <span class="cm">/* Vector que indica cuantas sillas hay y</span>
+<span class="cm">         * si están libres o no</span>
+<span class="cm">         */</span>
+        <span class="kt">boolean</span><span class="o">[]</span> <span class="n">sillasLibres</span><span class="o">;</span>
+        <span class="cm">/* Indica si el cliente sentado en esa</span>
+<span class="cm">         * silla está atendido por un barbero o no</span>
+<span class="cm">         */</span>
+        <span class="kt">boolean</span><span class="o">[]</span> <span class="n">clienteEstaAtendido</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">GestorConcurrencia</span><span class="o">(</span><span class="kt">int</span> <span class="n">numSillas</span><span class="o">){</span>
+                <span class="cm">/*Construimos los vectores...*/</span>
+                <span class="n">sillasLibres</span>            <span class="o">=</span><span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">numSillas</span><span class="o">];</span>
+                <span class="n">clienteEstaAtendido</span>     <span class="o">=</span><span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">numSillas</span><span class="o">];</span>
+                <span class="cm">/* ... los inicializamos*/</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">numSillas</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                        <span class="n">sillasLibres</span><span class="o">[</span><span class="n">i</span><span class="o">]</span>                 <span class="o">=</span><span class="kc">true</span><span class="o">;</span>
+                        <span class="n">clienteEstaAtendido</span><span class="o">[</span><span class="n">i</span><span class="o">]</span>  <span class="o">=</span><span class="kc">false</span><span class="o">;</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="cm">/**</span>
+<span class="cm">         * Permite obtener una silla libre, usado por la</span>
+<span class="cm">         * clase Cliente para saber si puede sentarse</span>
+<span class="cm">         * en algún sitio o irse</span>
+<span class="cm">         * @return Devuelve el número de la primera silla</span>
+<span class="cm">         * que está libre o -1 si no hay ninguna</span>
+<span class="cm">         */</span>
+        <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">int</span> <span class="nf">getSillaLibre</span><span class="o">(){</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">sillasLibres</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="cm">/* Si está libre la silla ...*/</span>
+                        <span class="k">if</span> <span class="o">(</span><span class="n">sillasLibres</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">{</span>
+                                <span class="cm">/* ...se marca como ocupada*/</span>
+                                <span class="n">sillasLibres</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="kc">false</span><span class="o">;</span>
+                                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                        <span class="s">&quot;Cliente sentado en silla &quot;</span><span class="o">+</span><span class="n">i</span>
+                                                <span class="o">);</span>
+                                <span class="cm">/*.. y devolvemos i...*/</span>
+                                <span class="k">return</span> <span class="n">i</span><span class="o">;</span>
+                        <span class="o">}</span>
+                <span class="o">}</span>
+                <span class="cm">/* Si llegamos aquí es que no había nada libre*/</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="cm">/**</span>
+<span class="cm">         * Nos dice qué silla tiene algun cliente</span>
+<span class="cm">         * que no está atendido</span>
+<span class="cm">         * @return un número de silla o -1 si no</span>
+<span class="cm">         * hay clientes sin atender</span>
+<span class="cm">         */</span>
+        <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">int</span> <span class="nf">atenderAlgunCliente</span><span class="o">(){</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">sillasLibres</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="cm">/* Si una silla está ocupada (no libre, false)</span>
+<span class="cm">                         * y está marcado como &quot;sin atender&quot; (false)</span>
+<span class="cm">                         * entonces la marcamos como atendida</span>
+<span class="cm">                         */</span>
+                        <span class="k">if</span> <span class="o">(</span><span class="n">clienteEstaAtendido</span><span class="o">[</span><span class="n">i</span><span class="o">]==</span><span class="kc">false</span><span class="o">){</span>
+                                <span class="n">clienteEstaAtendido</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="kc">true</span><span class="o">;</span>
+                                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                                <span class="s">&quot;Afeitando cliente en silla &quot;</span><span class="o">+</span><span class="n">i</span><span class="o">);</span>
+                                <span class="k">return</span> <span class="n">i</span><span class="o">;</span>
+                        <span class="o">}</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="cm">/* El cliente de esa silla, se marcha, por lo</span>
+<span class="cm">         * que se marca esa silla como &quot;libre&quot;</span>
+<span class="cm">         * y como &quot;sin atender&quot;</span>
+<span class="cm">         */</span>
+        <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">liberarSilla</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">){</span>
+                <span class="n">sillasLibres</span><span class="o">[</span><span class="n">i</span><span class="o">]</span>                 <span class="o">=</span><span class="kc">true</span><span class="o">;</span>
+                <span class="n">clienteEstaAtendido</span><span class="o">[</span><span class="n">i</span><span class="o">]</span>  <span class="o">=</span><span class="kc">false</span><span class="o">;</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                <span class="s">&quot;Se marcha el cliente de la silla &quot;</span><span class="o">+</span><span class="n">i</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="clase-lanzador">
+<h4>Clase Lanzador<a class="headerlink" href="#clase-lanzador" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lanzador</span> <span class="o">{</span>
+
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+                <span class="kt">int</span> <span class="n">MAX_BARBEROS</span>        <span class="o">=</span><span class="mi">2</span><span class="o">;</span>
+                <span class="kt">int</span> <span class="n">MAX_SILLAS</span>          <span class="o">=</span><span class="n">MAX_BARBEROS</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+                <span class="kt">int</span> <span class="n">MAX_CLIENTES</span>        <span class="o">=</span><span class="n">MAX_BARBEROS</span><span class="o">*</span><span class="mi">10</span><span class="o">;</span>
+                <span class="kt">int</span> <span class="n">MAX_ESPERA_SEGS</span>     <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+                <span class="n">GestorConcurrencia</span> <span class="n">gc</span><span class="o">;</span>
+                <span class="n">gc</span><span class="o">=</span><span class="k">new</span> <span class="n">GestorConcurrencia</span><span class="o">(</span><span class="n">MAX_SILLAS</span><span class="o">);</span>
+
+                <span class="n">Thread</span><span class="o">[]</span> <span class="n">vhBarberos</span>     <span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">[</span><span class="n">MAX_BARBEROS</span><span class="o">];</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">MAX_BARBEROS</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                        <span class="n">Barbero</span> <span class="n">b</span><span class="o">=</span><span class="k">new</span> <span class="n">Barbero</span><span class="o">(</span><span class="n">gc</span><span class="o">,</span> <span class="s">&quot;Barbero &quot;</span><span class="o">+</span><span class="n">i</span><span class="o">);</span>
+                        <span class="n">Thread</span> <span class="n">hilo</span><span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+                        <span class="n">vhBarberos</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="n">hilo</span><span class="o">;</span>
+                        <span class="n">hilo</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+                <span class="o">}</span>
+
+                <span class="cm">/* Generamos unos cuantos clientes</span>
+<span class="cm">                 * a intervalos aleatorios</span>
+<span class="cm">                 */</span>
+                <span class="n">Random</span> <span class="n">generador</span><span class="o">=</span><span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">MAX_CLIENTES</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="n">Cliente</span> <span class="n">c</span>                       <span class="o">=</span><span class="k">new</span> <span class="n">Cliente</span><span class="o">(</span><span class="n">gc</span><span class="o">);</span>
+                        <span class="n">Thread</span> <span class="n">hiloCliente</span>      <span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+                        <span class="n">hiloCliente</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+
+                        <span class="kt">int</span> <span class="n">msegs</span><span class="o">=</span><span class="n">generador</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">3</span><span class="o">)*</span><span class="mi">1000</span><span class="o">;</span>
+                        <span class="k">try</span> <span class="o">{</span>
+                                <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">msegs</span><span class="o">);</span>
+                        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                                <span class="c1">// TODO Auto-generated catch block</span>
+                                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                        <span class="o">}</span>
+                <span class="o">}</span> <span class="cm">/* Fin del for*/</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="criticas-a-la-solucion-anterior">
+<h4>Críticas a la solución anterior<a class="headerlink" href="#criticas-a-la-solucion-anterior" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>¿Cual es el problema?</p>
+</div>
+</div>
 <div class="section" id="documentacion">
 <h3>Documentación.<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
@@ -1003,6 +1203,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <li class="toctree-l2"><a class="reference internal" href="index.html#problema">Problema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#solucion-completa-al-problema-de-los-filosofos">Solución completa al problema de los filósofos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#id1">Problema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#una-mala-solucion-al-problema-de-los-barberos">Una (mala) solución al problema de los barberos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#documentacion">Documentación.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#depuracion">Depuración.</a></li>
 </ul>

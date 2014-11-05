@@ -49,6 +49,8 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
+todo: singlehtml latexpdf
+
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
