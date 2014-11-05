@@ -190,7 +190,7 @@ latex_elements = {
 'pointsize': '12pt',
 
 # Additional stuff for the LaTeX preamble.
-#'preamble': '',
+#'preamble': '\usepackage[spanish]{babel}',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples

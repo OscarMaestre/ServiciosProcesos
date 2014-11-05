@@ -109,8 +109,6 @@ Z        \string\tymax: \the\tymax^^J}%
   \global\advance\TY@linewidth-#1\relax}
 \def\endtabulary{%
   \gdef\@halignto{}%
-  \let\TY@footnote\footnote%
-  \def\footnote{}% prevent footnotes from doing anything
   \expandafter\TY@tab\the\toks@
   \crcr\omit
   {\xdef\TY@save@row{}%
@@ -174,7 +172,6 @@ Z        \message{> tymin}%
     \TY@checkmin
     \TY@count\z@
     \let\TY@box\TY@box@v
-    \let\footnote\TY@footnote % restore footnotes
   {\expandafter\TY@final\the\toks@\endTY@final}%
   \count@\z@
   \@tempswatrue
