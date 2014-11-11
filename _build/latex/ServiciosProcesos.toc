@@ -41,8 +41,20 @@
 \contentsline {subsection}{\numberline {2.14.3}Clase GestorConcurrencia}{25}{subsection.2.14.3}
 \contentsline {subsection}{\numberline {2.14.4}Clase Lanzador}{26}{subsection.2.14.4}
 \contentsline {subsection}{\numberline {2.14.5}Cr\IeC {\'\i }ticas a la soluci\IeC {\'o}n anterior}{27}{subsection.2.14.5}
+<<<<<<< HEAD
+<<<<<<< HEAD
+\contentsline {subsection}{\numberline {2.14.6}M\IeC {\'e}todo corregido}{27}{subsection.2.14.6}
+\contentsline {section}{\numberline {2.15}Problema: productores y consumidores.}{28}{section.2.15}
+\contentsline {section}{\numberline {2.16}Documentaci\IeC {\'o}n.}{28}{section.2.16}
+\contentsline {section}{\numberline {2.17}Depuraci\IeC {\'o}n.}{28}{section.2.17}
+=======
 \contentsline {section}{\numberline {2.15}Documentaci\IeC {\'o}n.}{27}{section.2.15}
 \contentsline {section}{\numberline {2.16}Depuraci\IeC {\'o}n.}{27}{section.2.16}
+>>>>>>> parent of 3fb2933... Resuelta inanición en barberos dormilones y propuesto productores y consumidores
+=======
+\contentsline {section}{\numberline {2.15}Documentaci\IeC {\'o}n.}{27}{section.2.15}
+\contentsline {section}{\numberline {2.16}Depuraci\IeC {\'o}n.}{27}{section.2.16}
+>>>>>>> parent of 3fb2933... Resuelta inanición en barberos dormilones y propuesto productores y consumidores
 \contentsline {chapter}{\numberline {3}Programaci\IeC {\'o}n de comunicaciones en red}{29}{chapter.3}
 \contentsline {section}{\numberline {3.1}Comunicaci\IeC {\'o}n entre aplicaciones.}{30}{section.3.1}
 \contentsline {section}{\numberline {3.2}Roles cliente y servidor.}{30}{section.3.2}
