@@ -569,9 +569,8 @@ En una peluquería hay barberos y sillas para los clientes (siempre hay más sil
 .. figure:: ../imagenes/barberodormilon.png
    :figwidth: 50%  
    :align: center
-   :alt: Texto alternativo
    
-   Texto de la figura
+   Los  barberos dormilones
    
 Una (mala) solución al problema de los barberos
 --------------------------------------------------
@@ -777,8 +776,60 @@ Clase Lanzador
 Críticas a la solución anterior
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
 ¿Cual es el problema?
+
+El problema está en que la forma que tiene el gestor de concurrencia de decirle a un barbero qué silla tiene un cliente sin afeitar es incorrecta: como siempre se empieza a buscar por el principio del vector, los clientes sentados al final **nunca son atendidos*. Hay que corregir esa asignación para *evitar que los procesos sufrán de inanición*.
+
+Método corregido
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	public synchronized int atenderAlgunCliente(){
+		for (int pasos=0; 
+				pasos<clienteEstaAtendido.length; 
+				pasos++)
+		{
+			if (
+					clienteEstaAtendido
+					[numUltimaSillaExaminada]
+							== false
+							)
+			{
+				/*Atendemos a ese cliente*/
+				clienteEstaAtendido
+					[numUltimaSillaExaminada]=true;
+				System.out.println(
+						"Afeitando cliente en silla "+
+								numUltimaSillaExaminada);
+				return numUltimaSillaExaminada;
+			} else {
+				numUltimaSillaExaminada=
+						(numUltimaSillaExaminada+1)%
+						clienteEstaAtendido.length;
+			} //Fin del else
+		} //Fin del for		
+		/* Si llegamos aquí hemos dado toda
+		 * una vuelta al vector y no había nadie sin
+		 * atender devolver -1
+		 */
+		return -1;
+	} //Fin del método
 		
+
+Problema: productores y consumidores.
+------------------------------------------------------
+
+
+En un cierto programa se tienen procesos que producen números y procesos que leen esos números. Todos los números se introducen en una cola (o vector) limitada.
+
+Todo el mundo lee y escribe de/en esa cola. Cuando un productor quiere poner un número tendrá que comprobar si la cola está llena. Si está llena, espera un tiempo al azar. Si no está llena pone su número en la última posición libre.
+
+Cuando un lector quiere leer, examina si la cola está vacía. Si lo está espera un tiempo al azar, y sino coge el número que haya al principio de la cola y ese número *ya no está disponible para el siguiente*. 
+
+Crear un programa que simule el comportamiento de estos procesos evitando problemas de entrelazado e inanición.
+
 		
 Documentación.
 --------------------------------------------------------------------------
