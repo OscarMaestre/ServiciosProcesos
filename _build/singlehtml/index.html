@@ -823,16 +823,8 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <h3>Problema<a class="headerlink" href="#id1" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En una peluquería hay barberos y sillas para los clientes (siempre hay más sillas que clientes). Sin embargo, en esta peluquería no siempre hay trabajo por lo que los barberos duermen cuando no hay clientes a los que afeitar. Un cliente puede llegar a la barbería y encontrar alguna silla libre, en cuyo caso, el cliente se sienta y esperará que algún barbero le afeite. Puede ocurrir que el cliente llegue y no haya sillas libres, en cuyo caso se marcha. Simular el comportamiento de la barbería mediante un programa Java.</p>
 <div class="figure align-center" style="width: 50%">
-<<<<<<< HEAD
-<<<<<<< HEAD
 <img alt="_images/barberodormilon.png" src="_images/barberodormilon.png" />
 <p class="caption">Los  barberos dormilones</p>
-=======
-=======
->>>>>>> parent of 3fb2933... Resuelta inanición en barberos dormilones y propuesto productores y consumidores
-<img alt="Texto alternativo" src="_images/barberodormilon.png" />
-<p class="caption">Texto de la figura</p>
->>>>>>> parent of 3fb2933... Resuelta inanición en barberos dormilones y propuesto productores y consumidores
 </div>
 </div>
 <div class="section" id="una-mala-solucion-al-problema-de-los-barberos">
@@ -1033,6 +1025,250 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <div class="section" id="criticas-a-la-solucion-anterior">
 <h4>Críticas a la solución anterior<a class="headerlink" href="#criticas-a-la-solucion-anterior" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>¿Cual es el problema?</p>
+<p>El problema está en que la forma que tiene el gestor de concurrencia de decirle a un barbero qué silla tiene un cliente sin afeitar es incorrecta: como siempre se empieza a buscar por el principio del vector, los clientes sentados al final <strong>nunca son atendidos</strong>. Hay que corregir esa asignación para <em>evitar que los procesos sufrán de inanición</em>.</p>
+</div>
+<div class="section" id="metodo-corregido">
+<h4>Método corregido<a class="headerlink" href="#metodo-corregido" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">int</span> <span class="nf">atenderAlgunCliente</span><span class="o">(){</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">pasos</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                        <span class="n">pasos</span><span class="o">&lt;</span><span class="n">clienteEstaAtendido</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+                        <span class="n">pasos</span><span class="o">++)</span>
+        <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span>
+                                <span class="n">clienteEstaAtendido</span>
+                                <span class="o">[</span><span class="n">numUltimaSillaExaminada</span><span class="o">]</span>
+                                                <span class="o">==</span> <span class="kc">false</span>
+                                                <span class="o">)</span>
+                <span class="o">{</span>
+                        <span class="cm">/*Atendemos a ese cliente*/</span>
+                        <span class="n">clienteEstaAtendido</span>
+                                <span class="o">[</span><span class="n">numUltimaSillaExaminada</span><span class="o">]=</span><span class="kc">true</span><span class="o">;</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                        <span class="s">&quot;Afeitando cliente en silla &quot;</span><span class="o">+</span>
+                                                        <span class="n">numUltimaSillaExaminada</span><span class="o">);</span>
+                        <span class="k">return</span> <span class="n">numUltimaSillaExaminada</span><span class="o">;</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                        <span class="n">numUltimaSillaExaminada</span><span class="o">=</span>
+                                        <span class="o">(</span><span class="n">numUltimaSillaExaminada</span><span class="o">+</span><span class="mi">1</span><span class="o">)%</span>
+                                        <span class="n">clienteEstaAtendido</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+                <span class="o">}</span> <span class="c1">//Fin del else</span>
+        <span class="o">}</span> <span class="c1">//Fin del for</span>
+        <span class="cm">/* Si llegamos aquí hemos dado toda</span>
+<span class="cm">         * una vuelta al vector y no había nadie sin</span>
+<span class="cm">         * atender devolver -1</span>
+<span class="cm">         */</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span> <span class="c1">//Fin del método</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="problema-productores-y-consumidores">
+<h3>Problema: productores y consumidores.<a class="headerlink" href="#problema-productores-y-consumidores" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En un cierto programa se tienen procesos que producen números y procesos que leen esos números. Todos los números se introducen en una cola (o vector) limitada.</p>
+<p>Todo el mundo lee y escribe de/en esa cola. Cuando un productor quiere poner un número tendrá que comprobar si la cola está llena. Si está llena, espera un tiempo al azar. Si no está llena pone su número en la última posición libre.</p>
+<p>Cuando un lector quiere leer, examina si la cola está vacía. Si lo está espera un tiempo al azar, y sino coge el número que haya al principio de la cola y ese número <em>ya no está disponible para el siguiente</em>.</p>
+<p>Crear un programa que simule el comportamiento de estos procesos evitando problemas de entrelazado e inanición.</p>
+</div>
+<div class="section" id="solucion">
+<h3>Solución<a class="headerlink" href="#solucion" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="una-cola-limitada-en-tamano">
+<h4>Una cola limitada en tamaño<a class="headerlink" href="#una-cola-limitada-en-tamano" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ColaLimitada</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">cola</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">posParaEncolar</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">ColaLimitada</span><span class="o">(</span><span class="kt">int</span> <span class="n">numElementos</span><span class="o">){</span>
+                <span class="n">cola</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">numElementos</span><span class="o">];</span>
+                <span class="n">posParaEncolar</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ponerEnCola</span><span class="o">(</span><span class="kt">int</span> <span class="n">numero</span><span class="o">){</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">posParaEncolar</span><span class="o">==</span><span class="n">cola</span><span class="o">.</span><span class="na">length</span><span class="o">){</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                        <span class="s">&quot;Cola llena, debe Vd. esperar&quot;</span><span class="o">);</span>
+                        <span class="c1">//Cola llena.</span>
+                        <span class="k">return</span> <span class="o">;</span>
+                <span class="o">}</span>
+                <span class="c1">//Aún queda sitio</span>
+                <span class="n">cola</span><span class="o">[</span><span class="n">posParaEncolar</span><span class="o">]=</span><span class="n">numero</span><span class="o">;</span>
+                <span class="n">posParaEncolar</span><span class="o">++;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">sacarPrimero</span><span class="o">(){</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">posParaEncolar</span><span class="o">==</span><span class="mi">0</span><span class="o">){</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                        <span class="s">&quot;Warning:cola vacía, devolviendo 0&quot;</span>
+                        <span class="o">);</span>
+                        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="kt">int</span> <span class="n">elementoInicial</span><span class="o">=</span><span class="n">cola</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="cm">/*Movemos los elementos hacia delante*/</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">pos</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">pos</span><span class="o">&lt;</span><span class="n">cola</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">pos</span><span class="o">++){</span>
+                        <span class="n">cola</span><span class="o">[</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="o">]=</span><span class="n">cola</span><span class="o">[</span><span class="n">pos</span><span class="o">];</span>
+                <span class="o">}</span>
+                <span class="cm">/* Ahora la posParaEncolar ha disminuido*/</span>
+                <span class="n">posParaEncolar</span><span class="o">--;</span>
+                <span class="k">return</span> <span class="n">elementoInicial</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">(){</span>
+                <span class="n">String</span> <span class="n">cadenaCola</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="o">;</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">pos</span><span class="o">&lt;</span><span class="n">posParaEncolar</span><span class="o">;</span> <span class="n">pos</span><span class="o">++){</span>
+                        <span class="n">cadenaCola</span><span class="o">+=</span><span class="n">cola</span><span class="o">[</span><span class="n">pos</span><span class="o">]+</span><span class="s">&quot;-&quot;</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="n">cadenaCola</span><span class="o">+=</span><span class="s">&quot;FIN&quot;</span><span class="o">;</span>
+                <span class="k">return</span> <span class="n">cadenaCola</span><span class="o">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="un-gestor-de-concurrencia-para-la-cola">
+<h4>Un gestor de concurrencia para la cola<a class="headerlink" href="#un-gestor-de-concurrencia-para-la-cola" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GestorColasConcurrentes</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">ColaLimitada</span> <span class="n">colaProtegida</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">GestorColasConcurrentes</span><span class="o">(</span><span class="kt">int</span> <span class="n">numElementos</span><span class="o">){</span>
+                <span class="n">colaProtegida</span><span class="o">=</span><span class="k">new</span> <span class="n">ColaLimitada</span><span class="o">(</span><span class="n">numElementos</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">synchronized</span>
+                <span class="kt">void</span> <span class="nf">ponerEnCola</span><span class="o">(</span><span class="kt">int</span> <span class="n">elemento</span><span class="o">){</span>
+                <span class="n">colaProtegida</span><span class="o">.</span><span class="na">ponerEnCola</span><span class="o">(</span><span class="n">elemento</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">int</span> <span class="nf">sacarDeCola</span><span class="o">(){</span>
+                <span class="k">return</span> <span class="n">colaProtegida</span><span class="o">.</span><span class="na">sacarPrimero</span><span class="o">();</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="la-clase-productor">
+<h4>La clase Productor<a class="headerlink" href="#la-clase-productor" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Productor</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
+        <span class="kd">private</span> <span class="n">Random</span>                                                  <span class="n">generadorAzar</span><span class="o">;</span>
+        <span class="kd">private</span>         <span class="n">GestorColasConcurrentes</span>         <span class="n">gc</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">Productor</span><span class="o">(</span><span class="n">GestorColasConcurrentes</span> <span class="n">gc</span><span class="o">){</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">gc</span><span class="o">=</span><span class="n">gc</span><span class="o">;</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">generadorAzar</span><span class="o">=</span><span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+                <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+                        <span class="kt">int</span> <span class="n">numero</span><span class="o">=</span><span class="n">generadorAzar</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">20</span><span class="o">);</span>
+                        <span class="n">gc</span><span class="o">.</span><span class="na">ponerEnCola</span><span class="o">(</span><span class="n">numero</span><span class="o">);</span>
+                        <span class="kt">int</span> <span class="n">milisegs</span><span class="o">=</span><span class="n">generadorAzar</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+                        <span class="k">try</span> <span class="o">{</span>
+                                <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">sleep</span><span class="o">(</span><span class="n">milisegs</span><span class="o">*</span><span class="mi">1000</span><span class="o">);</span>
+                        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                                <span class="s">&quot;Productor interrumpido&quot;</span>
+                                <span class="o">);</span>
+                                <span class="k">return</span><span class="o">;</span>
+                        <span class="o">}</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="la-clase-consumidor">
+<h4>La clase consumidor<a class="headerlink" href="#la-clase-consumidor" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Consumidor</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">Random</span>                                                  <span class="n">generadorAzar</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">GestorColasConcurrentes</span>         <span class="n">gc</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">Consumidor</span><span class="o">(</span><span class="n">GestorColasConcurrentes</span> <span class="n">gc</span><span class="o">){</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">gc</span><span class="o">=</span><span class="n">gc</span><span class="o">;</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">generadorAzar</span><span class="o">=</span><span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+                <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+                        <span class="kt">int</span> <span class="n">num</span><span class="o">=</span><span class="n">gc</span><span class="o">.</span><span class="na">sacarDeCola</span><span class="o">();</span>
+                        <span class="kt">int</span> <span class="n">milisegs</span><span class="o">=</span><span class="n">generadorAzar</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+                        <span class="k">try</span> <span class="o">{</span>
+                                <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">sleep</span><span class="o">(</span><span class="n">milisegs</span><span class="o">*</span><span class="mi">1000</span><span class="o">);</span>
+                        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                                <span class="c1">// TODO Auto-generated catch block</span>
+                                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                                <span class="s">&quot;Consumidor interrumpido&quot;</span><span class="o">);</span>
+                                <span class="k">return</span> <span class="o">;</span>
+                        <span class="o">}</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="un-lanzador">
+<h4>Un lanzador<a class="headerlink" href="#un-lanzador" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lanzador</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">(){</span>
+                <span class="n">ColaLimitada</span> <span class="n">c</span><span class="o">=</span><span class="k">new</span> <span class="n">ColaLimitada</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">sacarPrimero</span><span class="o">()!=</span><span class="mi">0</span><span class="o">){</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                          <span class="s">&quot;Error, no se comprueba el caso cola vacía&quot;</span>
+                        <span class="o">);</span>
+                <span class="o">}</span>
+                <span class="n">c</span><span class="o">.</span><span class="na">ponerEnCola</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+                <span class="n">c</span><span class="o">.</span><span class="na">ponerEnCola</span><span class="o">(</span><span class="mi">20</span><span class="o">);</span>
+                <span class="n">String</span> <span class="n">cadenaCola</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+                <span class="k">if</span> <span class="o">(!</span><span class="n">cadenaCola</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;10-20-FIN&quot;</span><span class="o">)){</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Fallos al encolar&quot;</span><span class="o">);</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argumentos</span><span class="o">){</span>
+                <span class="n">Lanzador</span> <span class="n">l</span><span class="o">=</span><span class="k">new</span> <span class="n">Lanzador</span><span class="o">();</span>
+                <span class="n">GestorColasConcurrentes</span> <span class="n">gcl</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">GestorColasConcurrentes</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+
+                <span class="kt">int</span> <span class="n">NUM_PRODUCTORES</span><span class="o">=</span><span class="mi">5</span><span class="o">;</span>
+                <span class="n">Productor</span><span class="o">[]</span>     <span class="n">productores</span><span class="o">;</span>
+                <span class="n">Thread</span><span class="o">[]</span>                        <span class="n">hilosProductores</span><span class="o">;</span>
+
+                <span class="n">productores</span>             <span class="o">=</span>
+                                <span class="k">new</span> <span class="n">Productor</span><span class="o">[</span><span class="n">NUM_PRODUCTORES</span><span class="o">];</span>
+                <span class="n">hilosProductores</span>        <span class="o">=</span>
+                                <span class="k">new</span> <span class="n">Thread</span><span class="o">[</span><span class="n">NUM_PRODUCTORES</span><span class="o">];</span>
+
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">NUM_PRODUCTORES</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="n">productores</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="k">new</span> <span class="n">Productor</span><span class="o">(</span><span class="n">gcl</span><span class="o">);</span>
+                        <span class="n">hilosProductores</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span>
+                                        <span class="n">productores</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                        <span class="n">hilosProductores</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">start</span><span class="o">();</span>
+                <span class="o">}</span>
+
+                <span class="kt">int</span> <span class="n">NUM_CONSUMIDORES</span><span class="o">=</span><span class="mi">10</span><span class="o">;</span>
+                <span class="n">Consumidor</span><span class="o">[]</span>    <span class="n">consumidores</span><span class="o">;</span>
+                <span class="n">Thread</span><span class="o">[]</span>                        <span class="n">hilosConsumidores</span><span class="o">;</span>
+
+                <span class="n">consumidores</span>                    <span class="o">=</span>
+                                <span class="k">new</span> <span class="n">Consumidor</span><span class="o">[</span><span class="n">NUM_CONSUMIDORES</span><span class="o">];</span>
+                <span class="n">hilosConsumidores</span>       <span class="o">=</span>
+                                <span class="k">new</span> <span class="n">Thread</span><span class="o">[</span><span class="n">NUM_CONSUMIDORES</span><span class="o">];</span>
+
+
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">NUM_CONSUMIDORES</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="n">consumidores</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="k">new</span> <span class="n">Consumidor</span><span class="o">(</span><span class="n">gcl</span><span class="o">);</span>
+                        <span class="n">hilosConsumidores</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span>
+                                        <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="n">consumidores</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                        <span class="n">hilosConsumidores</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">start</span><span class="o">();</span>
+                <span class="o">}</span>
+
+                <span class="cm">/* Se debería esperar a que todos terminen*/</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">NUM_PRODUCTORES</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="k">try</span> <span class="o">{</span>
+                                <span class="n">hilosProductores</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">join</span><span class="o">();</span>
+                        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                        <span class="o">}</span>
+                <span class="o">}</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">NUM_CONSUMIDORES</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="k">try</span> <span class="o">{</span>
+                                <span class="n">hilosConsumidores</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">join</span><span class="o">();</span>
+                        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                                <span class="c1">// TODO Auto-generated catch block</span>
+                                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                        <span class="o">}</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="documentacion">
@@ -1212,6 +1448,8 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <li class="toctree-l2"><a class="reference internal" href="index.html#solucion-completa-al-problema-de-los-filosofos">Solución completa al problema de los filósofos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#id1">Problema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#una-mala-solucion-al-problema-de-los-barberos">Una (mala) solución al problema de los barberos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#problema-productores-y-consumidores">Problema: productores y consumidores.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#solucion">Solución</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#documentacion">Documentación.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#depuracion">Depuración.</a></li>
 </ul>
@@ -1274,7 +1512,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
     </div>
     <div class="footer">
         &copy; Copyright 2014, Oscar Gomez.
-      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

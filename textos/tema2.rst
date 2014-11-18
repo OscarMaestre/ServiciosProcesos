@@ -779,7 +779,7 @@ Críticas a la solución anterior
 
 ¿Cual es el problema?
 
-El problema está en que la forma que tiene el gestor de concurrencia de decirle a un barbero qué silla tiene un cliente sin afeitar es incorrecta: como siempre se empieza a buscar por el principio del vector, los clientes sentados al final **nunca son atendidos*. Hay que corregir esa asignación para *evitar que los procesos sufrán de inanición*.
+El problema está en que la forma que tiene el gestor de concurrencia de decirle a un barbero qué silla tiene un cliente sin afeitar es incorrecta: como siempre se empieza a buscar por el principio del vector, los clientes sentados al final **nunca son atendidos**. Hay que corregir esa asignación para *evitar que los procesos sufrán de inanición*.
 
 Método corregido
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -828,6 +828,215 @@ Todo el mundo lee y escribe de/en esa cola. Cuando un productor quiere poner un 
 Cuando un lector quiere leer, examina si la cola está vacía. Si lo está espera un tiempo al azar, y sino coge el número que haya al principio de la cola y ese número *ya no está disponible para el siguiente*. 
 
 Crear un programa que simule el comportamiento de estos procesos evitando problemas de entrelazado e inanición.
+
+Solución
+------------------------------------------------------
+
+
+Una cola limitada en tamaño
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	public class ColaLimitada {
+		int[] cola;
+		int posParaEncolar;
+		public ColaLimitada(int numElementos){
+			cola=new int[numElementos];
+			posParaEncolar=0;
+		}
+		public void ponerEnCola(int numero){
+			if (posParaEncolar==cola.length){
+				System.out.println(
+						"Cola llena, debe Vd. esperar");
+				//Cola llena.
+				return ;
+			}
+			//Aún queda sitio
+			cola[posParaEncolar]=numero;
+			posParaEncolar++;
+		}
+		public int sacarPrimero(){
+			if (posParaEncolar==0){
+				System.out.println(
+						"Warning:cola vacía, devolviendo 0"
+				);
+				return 0;
+			}
+			int elementoInicial=cola[0];
+			/*Movemos los elementos hacia delante*/
+			for (int pos=1; pos<cola.length; pos++){
+				cola[pos-1]=cola[pos];
+			}
+			/* Ahora la posParaEncolar ha disminuido*/
+			posParaEncolar--;
+			return elementoInicial;
+		}
+		public String toString(){
+			String cadenaCola="";
+			for (int pos=0; pos<posParaEncolar; pos++){
+				cadenaCola+=cola[pos]+"-";
+			}
+			cadenaCola+="FIN";
+			return cadenaCola;
+		}
+	}
+
+
+Un gestor de concurrencia para la cola
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	public class GestorColasConcurrentes {
+		private ColaLimitada colaProtegida;
+		public GestorColasConcurrentes(int numElementos){
+			colaProtegida=new ColaLimitada(numElementos);
+		}
+		public synchronized 
+			void ponerEnCola(int elemento){
+			colaProtegida.ponerEnCola(elemento);
+		}
+		public synchronized int sacarDeCola(){
+			return colaProtegida.sacarPrimero();
+		}		
+	}
+	
+La clase Productor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	public class Productor implements Runnable{
+		private	Random 							generadorAzar;
+		private 	GestorColasConcurrentes 	gc;
+		public Productor(GestorColasConcurrentes gc){
+			this.gc=gc;
+			this.generadorAzar=new Random();
+		}
+		public void run(){
+			while (true){
+				int numero=generadorAzar.nextInt(20);
+				gc.ponerEnCola(numero);
+				int milisegs=generadorAzar.nextInt(2);
+				try {
+					Thread.currentThread().sleep(milisegs*1000);
+				} catch (InterruptedException e) {
+					System.out.println(
+							"Productor interrumpido"
+					);
+					return;
+				}
+			}
+		}
+	}
+		
+La clase consumidor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	public class Consumidor implements Runnable {
+		private Random							generadorAzar;
+		private GestorColasConcurrentes 	gc;
+		
+		public Consumidor(GestorColasConcurrentes gc){
+			this.gc=gc;
+			this.generadorAzar=new Random();
+		}
+		public void run(){
+			while (true){
+				int num=gc.sacarDeCola();
+				int milisegs=generadorAzar.nextInt(2);
+				try {
+					Thread.currentThread().sleep(milisegs*1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					System.out.println(
+							"Consumidor interrumpido");
+					return ;
+				}
+			}
+		}
+	}
+		
+Un lanzador
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	public class Lanzador {
+		public void test(){
+			ColaLimitada c=new ColaLimitada(5);
+			if (c.sacarPrimero()!=0){
+				System.out.println(
+				  "Error, no se comprueba el caso cola vacía"
+				);
+			}
+			c.ponerEnCola(10);
+			c.ponerEnCola(20);
+			String cadenaCola=c.toString();
+			if (!cadenaCola.equals("10-20-FIN")){
+				System.out.println("Fallos al encolar");
+			}
+		}
+		public static void main(String[] argumentos){
+			Lanzador l=new Lanzador();
+			GestorColasConcurrentes gcl=
+					new GestorColasConcurrentes(10);
+			
+			int NUM_PRODUCTORES=5;
+			Productor[] 	productores;
+			Thread[]			hilosProductores;
+			
+			productores		= 
+					new Productor[NUM_PRODUCTORES];
+			hilosProductores	= 
+					new Thread[NUM_PRODUCTORES];
+			
+			for (int i=0; i<NUM_PRODUCTORES; i++){
+				productores[i]=new Productor(gcl);
+				hilosProductores[i]=new Thread(
+						productores[i]);
+				hilosProductores[i].start();
+			}
+			
+			int NUM_CONSUMIDORES=10;
+			Consumidor[]	consumidores;
+			Thread[]			hilosConsumidores;
+			
+			consumidores			= 
+					new Consumidor[NUM_CONSUMIDORES];
+			hilosConsumidores	= 
+					new Thread[NUM_CONSUMIDORES];
+			
+			
+			for (int i=0; i<NUM_CONSUMIDORES; i++){
+				consumidores[i]=new Consumidor(gcl);
+				hilosConsumidores[i]=
+						new Thread(consumidores[i]);
+				hilosConsumidores[i].start();
+			}
+			
+			/* Se debería esperar a que todos terminen*/
+			for (int i=0; i<NUM_PRODUCTORES; i++){
+				try {
+					hilosProductores[i].join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			for (int i=0; i<NUM_CONSUMIDORES; i++){
+				try {
+					hilosConsumidores[i].join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}	
+	}
+	
 
 		
 Documentación.
