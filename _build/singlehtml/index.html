@@ -1293,12 +1293,109 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <h2>Programación de comunicaciones en red<a class="headerlink" href="#programacion-de-comunicaciones-en-red" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="comunicacion-entre-aplicaciones">
 <h3>Comunicación entre aplicaciones.<a class="headerlink" href="#comunicacion-entre-aplicaciones" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En Java toda la comunicación vista en primer curso de DAM consiste en dos cosas</p>
+<ul class="simple">
+<li>Entrada/salida por consola: con las clases <tt class="docutils literal"><span class="pre">System.in</span></tt> o <tt class="docutils literal"><span class="pre">System.out</span></tt>.</li>
+<li>Lectura/escritura en ficheros: con las clases File y similares.</li>
+</ul>
+<p>Se puede avanzar un paso más utilizando Java para enviar datos a través de Internet a otro programa Java remoto, que es lo que haremos en este capítulo.</p>
 </div>
 <div class="section" id="roles-cliente-y-servidor">
 <h3>Roles cliente y servidor.<a class="headerlink" href="#roles-cliente-y-servidor" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Cuando se hacen programas Java que se comuniquen lo habitual es que uno o varios actúen de cliente y uno o varios actúen de servidores.</p>
+<ul class="simple">
+<li>Servidor: espera peticiones, recibe datos de entrada y devuelve respuestas.</li>
+<li>Cliente: genera peticiones, las envía a un servidor y espera respuestas.</li>
+</ul>
+<p>Un factor fundamental en los servidores es que tienen que ser capaces de procesar varias peticiones a la vez: <strong>deben ser multihilo</strong>.</p>
+<p>Su arquitectura típica es la siguiente:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+        <span class="n">peticion</span><span class="o">=</span><span class="n">esperarPeticion</span><span class="o">();</span>
+        <span class="n">hiloAsociado</span><span class="o">=</span><span class="k">new</span> <span class="n">Hilo</span><span class="o">();</span>
+        <span class="n">hiloAsociado</span><span class="o">.</span><span class="na">atender</span><span class="o">(</span><span class="n">peticion</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="recordatorio-de-los-flujos-en-java">
+<h3>Recordatorio de los flujos en Java<a class="headerlink" href="#recordatorio-de-los-flujos-en-java" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="inputstreams-y-outputstreams">
+<h4>InputStreams y OutputStreams<a class="headerlink" href="#inputstreams-y-outputstreams" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Manejan bytes a secas. Por ejemplo, si queremos leer un fichero byte a byte usaremos <tt class="docutils literal"><span class="pre">FileInputStream</span></tt> y si queremos escribir usaremos <tt class="docutils literal"><span class="pre">FileOutputStream</span></tt>.</p>
+<p>Son operaciones a muy bajo nivel que usaremos muy pocas veces (por ejemplo, solo si quisiéramos cambiar el primer byte de un archivo). En general usaremos otras clases más cómodas de usar.</p>
+</div>
+<div class="section" id="readers-y-writers">
+<h4>Readers y Writers<a class="headerlink" href="#readers-y-writers" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>En lugar de manejar <em>bytes</em> manejan <em>caracteres</em> (recordemos que hoy en día y con Unicode una letra como la <em>ñ</em> en realidad podría ocupar más de un byte).</p>
+<p>Así, cuando queramos leer letras de un archivo usaremos clases como <tt class="docutils literal"><span class="pre">FileReader</span></tt> y <tt class="docutils literal"><span class="pre">FileWriter</span></tt>.</p>
+<p>Las clases <tt class="docutils literal"><span class="pre">Readers</span></tt> y <tt class="docutils literal"><span class="pre">Writers</span></tt> en realidad se apoyan sobre las <tt class="docutils literal"><span class="pre">InputStreams</span></tt> y <tt class="docutils literal"><span class="pre">OutputStreams</span></tt>.</p>
+<p>A veces nos interesará mezclar conceptos y por ejemplo poder tener una clase que use caracteres cuando a lo mejor Java nos ha dado una clase que usa bytes. Así, por ejemplo <tt class="docutils literal"><span class="pre">InputStreamReader</span></tt> puede coger un objeto que lea bytes y nos devolverá caracteres. De la misma forma <tt class="docutils literal"><span class="pre">OutputStreamWriter</span></tt> coge letras y devuelve los bytes que la componen.</p>
+</div>
+<div class="section" id="bufferedreaders-y-printwriters">
+<h4><tt class="docutils literal"><span class="pre">BufferedReaders</span></tt> y <tt class="docutils literal"><span class="pre">PrintWriters</span></tt><a class="headerlink" href="#bufferedreaders-y-printwriters" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Cuando trabajamos con caracteres (que recordemos pueden tener varios bytes) normalmente no trabajamos de uno en uno. Es más frecuente usar <strong>líneas</strong> que se leen y escriben de una sola vez. Así por ejemplo, la clase <tt class="docutils literal"><span class="pre">PrintWriter</span></tt> tiene un método <tt class="docutils literal"><span class="pre">print(ln)</span></tt> que puede imprimir elementos complejos como <tt class="docutils literal"><span class="pre">floats</span></tt> o cadenas largas.</p>
+<p>Además, Java ofrece clases que gestionan automáticamente los <em>buffers</em> por nosotros lo que nos da más comodidad y eficiencia. Por ello es muy habitual hacer cosas como esta:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">lectorEficiente</span> <span class="o">=</span> <span class="k">new</span>
+        <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">&quot;fich1.txt&quot;</span><span class="o">));</span>
+<span class="n">escritorEficiente</span> <span class="o">=</span> <span class="k">new</span>
+        <span class="n">BufferedWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">&quot;fich2.txt&quot;</span><span class="o">));</span>
+</pre></div>
+</div>
+<p>En el primer caso creamos un objeto <tt class="docutils literal"><span class="pre">FileReader</span></tt> que es capaz de leer caracteres de <tt class="docutils literal"><span class="pre">fich1.txt</span></tt>. Como esto nos parece poco práctico creamos otro objeto a partir del primero de tipo <tt class="docutils literal"><span class="pre">BufferedReader</span></tt> que nos permitirá leer bloques enteros de texto.</p>
+<p>De hecho, si se comprueba la ayuda de la clase <tt class="docutils literal"><span class="pre">FileReader</span></tt> se verá que solo hay un método <tt class="docutils literal"><span class="pre">read</span></tt> que devuelve un <tt class="docutils literal"><span class="pre">int</span></tt>, es decir el siguiente <strong>carácter</strong> disponible, lo que hace que el método sea muy incómodo. Sin embargo <tt class="docutils literal"><span class="pre">BufferedReader</span></tt></p>
+</div>
 </div>
 <div class="section" id="elementos-de-programacion-de-aplicaciones-en-red-librerias">
 <h3>Elementos de programación de aplicaciones en red. Librerías.<a class="headerlink" href="#elementos-de-programacion-de-aplicaciones-en-red-librerias" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En Java toda la infraestructura de clases para trabajar con redes está en el paquete <tt class="docutils literal"><span class="pre">java.net</span></tt>.</p>
+<p>En muchos casos nuestros programas empezarán con la sentencia <tt class="docutils literal"><span class="pre">import</span> <span class="pre">java.net.*</span></tt> pero muchos entornos (como Eclipse) son capaces de importar automáticamente las clases necesarias.</p>
+<div class="section" id="la-clase-url">
+<h4>La clase URL<a class="headerlink" href="#la-clase-url" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>La clase URL permite gestionar accesos a URLs del tipo <tt class="docutils literal"><span class="pre">http://marca.com/fichero.html</span></tt> y descargar cosas con bastante sencillez.</p>
+<p>Al crear un objeto URL se debe capturar la excepción <tt class="docutils literal"><span class="pre">MalformedURLException</span></tt> que sucede cuando hay algún error en la URL (como escribir <tt class="docutils literal"><span class="pre">htp://marca.com</span></tt>).</p>
+<p>La clase URL nos ofrece un método <tt class="docutils literal"><span class="pre">openStream</span></tt> que nos devuelve un flujo básico de bytes. Podemos crear objetos más sofisticados para leer bloques como muestra el programa siguiente:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GestorDescargas</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">descargarArchivo</span><span class="o">(</span>
+                        <span class="n">String</span> <span class="n">url_descargar</span><span class="o">){</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Descargando &quot;</span>
+                                <span class="o">+</span><span class="n">url_descargar</span><span class="o">);</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">URL</span> <span class="n">laUrl</span><span class="o">=</span><span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">url_descargar</span><span class="o">);</span>
+                        <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">laUrl</span><span class="o">.</span><span class="na">openStream</span><span class="o">();</span>
+                        <span class="n">InputStreamReader</span> <span class="n">reader</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                        <span class="n">BufferedReader</span> <span class="n">bReader</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">reader</span><span class="o">);</span>
+                        <span class="n">String</span> <span class="n">linea</span><span class="o">;</span>
+                        <span class="k">while</span> <span class="o">((</span><span class="n">linea</span><span class="o">=</span><span class="n">bReader</span><span class="o">.</span><span class="na">readLine</span><span class="o">())!=</span><span class="kc">null</span><span class="o">){</span>
+                                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
+                        <span class="o">}</span>
+                        <span class="n">bReader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                        <span class="n">reader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                        <span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MalformedURLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;URL mal escrita!&quot;</span><span class="o">);</span>
+                        <span class="k">return</span> <span class="o">;</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                        <span class="s">&quot;Fallo en la lectura del fichero&quot;</span><span class="o">);</span>
+                        <span class="k">return</span> <span class="o">;</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span> <span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argumentos</span><span class="o">){</span>
+                <span class="n">GestorDescargas</span> <span class="n">gd</span><span class="o">=</span><span class="k">new</span> <span class="n">GestorDescargas</span><span class="o">();</span>
+                <span class="n">String</span> <span class="n">base</span><span class="o">=</span>
+                        <span class="s">&quot;http://10.13.0.20:8000&quot;</span><span class="o">+</span>
+                                        <span class="s">&quot;/ServiciosProcesos/textos/&quot;</span><span class="o">;</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="n">String</span> <span class="n">url</span><span class="o">=</span><span class="n">base</span><span class="o">+</span><span class="s">&quot;tema&quot;</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="s">&quot;.rst&quot;</span><span class="o">;</span>
+                        <span class="n">gd</span><span class="o">.</span><span class="na">descargarArchivo</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="funciones-y-objetos-de-las-librerias">
 <h3>Funciones y objetos de las librerías.<a class="headerlink" href="#funciones-y-objetos-de-las-librerias" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -1469,6 +1566,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema3">Programación de comunicaciones en red</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#comunicacion-entre-aplicaciones">Comunicación entre aplicaciones.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#roles-cliente-y-servidor">Roles cliente y servidor.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#recordatorio-de-los-flujos-en-java">Recordatorio de los flujos en Java</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#elementos-de-programacion-de-aplicaciones-en-red-librerias">Elementos de programación de aplicaciones en red. Librerías.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#funciones-y-objetos-de-las-librerias">Funciones y objetos de las librerías.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#sockets">Sockets.</a></li>
