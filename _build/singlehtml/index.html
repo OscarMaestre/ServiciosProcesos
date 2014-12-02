@@ -1356,7 +1356,8 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <p>La clase URL nos ofrece un método <tt class="docutils literal"><span class="pre">openStream</span></tt> que nos devuelve un flujo básico de bytes. Podemos crear objetos más sofisticados para leer bloques como muestra el programa siguiente:</p>
 <div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GestorDescargas</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">descargarArchivo</span><span class="o">(</span>
-                        <span class="n">String</span> <span class="n">url_descargar</span><span class="o">){</span>
+                        <span class="n">String</span> <span class="n">url_descargar</span><span class="o">,</span>
+                        <span class="n">String</span> <span class="n">nombreArchivo</span><span class="o">){</span>
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Descargando &quot;</span>
                                 <span class="o">+</span><span class="n">url_descargar</span><span class="o">);</span>
                 <span class="k">try</span> <span class="o">{</span>
@@ -1366,10 +1367,13 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                                         <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                         <span class="n">BufferedReader</span> <span class="n">bReader</span><span class="o">=</span>
                                         <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">reader</span><span class="o">);</span>
+                        <span class="n">FileWriter</span> <span class="n">escritorFichero</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">FileWriter</span><span class="o">(</span><span class="n">nombreArchivo</span><span class="o">);</span>
                         <span class="n">String</span> <span class="n">linea</span><span class="o">;</span>
                         <span class="k">while</span> <span class="o">((</span><span class="n">linea</span><span class="o">=</span><span class="n">bReader</span><span class="o">.</span><span class="na">readLine</span><span class="o">())!=</span><span class="kc">null</span><span class="o">){</span>
-                                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
+                                <span class="n">escritorFichero</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
                         <span class="o">}</span>
+                        <span class="n">escritorFichero</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
                         <span class="n">bReader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
                         <span class="n">reader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
                         <span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
@@ -1399,21 +1403,173 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 </div>
 <div class="section" id="funciones-y-objetos-de-las-librerias">
 <h3>Funciones y objetos de las librerías.<a class="headerlink" href="#funciones-y-objetos-de-las-librerias" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>La clase URL proporciona un mecanismo muy sencillo pero por desgracia completamente atado al protocolo de las URL.</p>
+<p>Java ofrece otros objetos que permiten tener un mayor control sobre lo que se envía o recibe a través de la red. Por desgracia esto implica que en muchos casos tendremos solo flujos de bajo nivel (streams).</p>
+<p>En concreto Java ofrece dos elementos fundamentales para crear programas que usen redes</p>
+<ul class="simple">
+<li>Sockets</li>
+<li>ServerSockets</li>
+</ul>
+<div class="section" id="repaso-de-redes">
+<h4>Repaso de redes<a class="headerlink" href="#repaso-de-redes" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>En redes el protocolo IP es el responsable de dos cuestiones fundamentales:</p>
+<ul class="simple">
+<li>Establecer un sistema de direcciones universal (direcciones IP)</li>
+<li>Establecer los mecanismos de enrutado.</li>
+</ul>
+<p>Como programadores el segundo no nos interesa, pero el primero será absolutamente fundamental para contactar con programas que estén en una ubicación remota.</p>
+<p>Una ubicación remota <em>siempre</em> tendrá una dirección
+IP pero <em>solo a veces tendrá un nombre DNS</em>. Para nosotros no habrá diferencia ya que si es necesario el sistema operativo traducirá de nombre DNS a IP.</p>
+<p>Otro elemento necesario en la comunicación en redes es el uso de un puerto de un cierto protocolo:</p>
+<ul class="simple">
+<li>TCP: ofrece fiabilidad a los programas.</li>
+<li>UDP: ofrece velocidad sacrificando la fiabilidad.</li>
+</ul>
+<p>A partir de ahora cuando usemos un número de puerto habrá que comprobar si ese número ya está usado.</p>
+<p>Por ejemplo, es mala idea que nuestros programas usen el puerto 80 TCP, probablemente ya esté en uso.
+Antes de usar un puerto en una aplicación comercial deberíamos consultar la lista de &#8220;IANA assigned ports&#8221;.</p>
+<p>En líneas generales se pueden usar los puertos desde 1024 TCP a 49151 TCP, pero deberíamos comprobar que el número que elegimos no sea un número usado por un puerto de alguna aplicación que haya en la empresa.</p>
+<p>En las prácticas de clase usaremos el 9876 TCP. Si se desea conectar desde el instituto con algún programa ejecutado en casa se deberá &#8220;abrir el puerto 9876 TCP&#8221;. Abrir un puerto consiste en configurar el router para que <strong>SÍ ACEPTE TRÁFICO INICIADO DESDE EL EXTERIOR</strong> cosa que no hace nunca por motivos de protección.</p>
+</div>
 </div>
 <div class="section" id="sockets">
 <h3>Sockets.<a class="headerlink" href="#sockets" title="Enlazar permanentemente con este título">¶</a></h3>
-</div>
-<div class="section" id="tipos-de-sockets-caracteristicas">
-<h3>Tipos de sockets. Características.<a class="headerlink" href="#tipos-de-sockets-caracteristicas" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Un <em>socket</em> es un objeto Java que nos permite contactar con un programa o servidor remoto. Dicho objeto nos proporcionará flujos de entrada y/o salida y podremos comunicarnos con dicho programa.</p>
+<p>Existe otro tipo de sockets, los <em>ServerSocket</em>. Se utilizan para crear programas que acepten conexiones o peticiones.</p>
+<p>Todos los objetos mencionados en este tema están en el paquete <tt class="docutils literal"><span class="pre">java.net</span></tt>.</p>
 </div>
 <div class="section" id="creacion-de-sockets">
 <h3>Creación de sockets.<a class="headerlink" href="#creacion-de-sockets" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En el siguiente código puede verse el proceso básico de creación de un socket. En los párrafos siguientes explicaremos el significado de los bloques de código.:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Conector</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">String</span> <span class="n">destino</span><span class="o">=</span>
+                                <span class="s">&quot;www.google.com&quot;</span><span class="o">;</span>
+                <span class="kt">int</span> <span class="n">puertoDestino</span><span class="o">=</span><span class="mi">80</span><span class="o">;</span>
+                <span class="n">Socket</span> <span class="n">socket</span><span class="o">=</span><span class="k">new</span> <span class="n">Socket</span><span class="o">();</span>
+                <span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span><span class="k">new</span> <span class="n">InetSocketAddress</span><span class="o">(</span>
+                                <span class="n">destino</span><span class="o">,</span> <span class="n">puertoDestino</span><span class="o">);</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">socket</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">direccion</span><span class="o">);</span>
+                        <span class="c1">//Si llegamos aquí es que la conexión</span>
+                        <span class="c1">//sí se hizo.</span>
+
+                        <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+                        <span class="n">OutputStream</span> <span class="n">os</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
+
+
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                <span class="s">&quot;No se pudo establecer la conexion &quot;</span><span class="o">+</span>
+                                <span class="s">&quot; o hubo un fallo al leer datos.&quot;</span>
+                        <span class="o">);</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Para poder crear un socket primero necesitamos una dirección con la que contactar. Toda dirección está formada por dirección IP (o DNS) y un puerto. En nuestro caso intentaremos contactar con <tt class="docutils literal"><span class="pre">www.google.com:80</span></tt>.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">String</span> <span class="n">destino</span><span class="o">=</span>
+                        <span class="s">&quot;www.google.com&quot;</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">puertoDestino</span><span class="o">=</span><span class="mi">80</span><span class="o">;</span>
+<span class="n">Socket</span> <span class="n">socket</span><span class="o">=</span><span class="k">new</span> <span class="n">Socket</span><span class="o">();</span>
+<span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span><span class="k">new</span>
+        <span class="n">InetSocketAddress</span><span class="o">(</span>
+                        <span class="n">destino</span><span class="o">,</span> <span class="n">puertoDestino</span><span class="o">);</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="enlazado-y-establecimiento-de-conexiones">
 <h3>Enlazado y establecimiento de conexiones.<a class="headerlink" href="#enlazado-y-establecimiento-de-conexiones" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El paso crítico para iniciar la comunicación es llamar al método <tt class="docutils literal"><span class="pre">connect</span></tt>. Este método puede disparar una excepción del tipo <tt class="docutils literal"><span class="pre">IOException</span></tt> que puede significar dos cosas:</p>
+<ul class="simple">
+<li>La conexión no se pudo establecer.</li>
+<li>Aunque la conexión se estableció no fue posible leer o escribir datos.</li>
+</ul>
+<p>Así, la conexión debería realizarse así:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="k">try</span> <span class="o">{</span>
+        <span class="n">socket</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">direccion</span><span class="o">);</span>
+        <span class="c1">//Si llegamos aquí es que la conexión</span>
+        <span class="c1">//sí se hizo.</span>
+
+        <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+        <span class="n">OutputStream</span> <span class="n">os</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
+
+<span class="o">}</span>  <span class="c1">//Fin del try</span>
+<span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                <span class="s">&quot;No se pudo establecer la conexion &quot;</span><span class="o">+</span>
+                <span class="s">&quot; o hubo un fallo al leer datos.&quot;</span>
+        <span class="o">);</span>
+<span class="o">}</span> <span class="c1">//Fin del catch IOException</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="utilizacion-de-sockets-para-la-transmision-y-recepcion-de-informacion">
 <h3>Utilización de sockets para la transmisión y recepción de información.<a class="headerlink" href="#utilizacion-de-sockets-para-la-transmision-y-recepcion-de-informacion" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>La clase <tt class="docutils literal"><span class="pre">Socket</span></tt> tiene dos métodos llamados <tt class="docutils literal"><span class="pre">getInputStream</span></tt> y <tt class="docutils literal"><span class="pre">getOutputSream</span></tt> que nos permiten obtener <em>flujos orientados a bytes</em>. Recordemos que es posible crear nuestros propios flujos, con más métodos que ofrecen más comodidad.</p>
+<div class="section" id="el-ejemplo-completo">
+<h4>El ejemplo completo<a class="headerlink" href="#el-ejemplo-completo" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Podemos contactar con un programa cualquiera escrito en cualquier lenguaje y enviar las peticiones de acuerdo a un protocolo. Nuestro programa podrá leer las respuestas independientemente de como fuera el servidor.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Conector</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Iniciando...&quot;</span><span class="o">);</span>
+                <span class="n">String</span> <span class="n">destino</span><span class="o">=</span>
+                                <span class="s">&quot;10.8.0.253&quot;</span><span class="o">;</span>
+                <span class="kt">int</span> <span class="n">puertoDestino</span><span class="o">=</span><span class="mi">80</span><span class="o">;</span>
+                <span class="n">Socket</span> <span class="n">socket</span><span class="o">=</span><span class="k">new</span> <span class="n">Socket</span><span class="o">();</span>
+                <span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span><span class="k">new</span> <span class="n">InetSocketAddress</span><span class="o">(</span>
+                                <span class="n">destino</span><span class="o">,</span> <span class="n">puertoDestino</span><span class="o">);</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">socket</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">direccion</span><span class="o">);</span>
+                        <span class="c1">//Si llegamos aquí es que la conexión</span>
+                        <span class="c1">//sí se hizo.</span>
+
+                        <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+                        <span class="n">OutputStream</span> <span class="n">os</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
+
+                        <span class="c1">//Flujos que manejan caracteres</span>
+                        <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                        <span class="n">OutputStreamWriter</span> <span class="n">osw</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">OutputStreamWriter</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
+
+                        <span class="c1">//Flujos de líneas</span>
+                        <span class="n">BufferedReader</span> <span class="n">bReader</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+                        <span class="n">PrintWriter</span> <span class="n">pWriter</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">PrintWriter</span><span class="o">(</span><span class="n">osw</span><span class="o">);</span>
+
+
+                        <span class="n">pWriter</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;GET /index.html&quot;</span><span class="o">);</span>
+                        <span class="n">pWriter</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+                        <span class="n">String</span> <span class="n">linea</span><span class="o">;</span>
+                        <span class="n">FileWriter</span> <span class="n">escritorArchivo</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">FileWriter</span><span class="o">(</span><span class="s">&quot;resultado.txt&quot;</span><span class="o">);</span>
+                        <span class="k">while</span> <span class="o">((</span><span class="n">linea</span><span class="o">=</span><span class="n">bReader</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">){</span>
+                                <span class="n">escritorArchivo</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
+                        <span class="o">}</span>
+                        <span class="n">escritorArchivo</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                        <span class="n">pWriter</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                        <span class="n">bReader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                        <span class="n">isr</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                        <span class="n">osw</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                        <span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                        <span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+
+
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                <span class="s">&quot;No se pudo establecer la conexion &quot;</span><span class="o">+</span>
+                                <span class="s">&quot; o hubo un fallo al leer datos.&quot;</span>
+                        <span class="o">);</span>
+                <span class="o">}</span> <span class="c1">//Fin del catch</span>
+        <span class="o">}</span> <span class="c1">//Fin del main</span>
+<span class="o">}</span> <span class="c1">//Fin de la clase Conector</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="programacion-de-aplicaciones-cliente-y-servidor">
 <h3>Programación de aplicaciones cliente y servidor.<a class="headerlink" href="#programacion-de-aplicaciones-cliente-y-servidor" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -1570,7 +1726,6 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 <li class="toctree-l2"><a class="reference internal" href="index.html#elementos-de-programacion-de-aplicaciones-en-red-librerias">Elementos de programación de aplicaciones en red. Librerías.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#funciones-y-objetos-de-las-librerias">Funciones y objetos de las librerías.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#sockets">Sockets.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#tipos-de-sockets-caracteristicas">Tipos de sockets. Características.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#creacion-de-sockets">Creación de sockets.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#enlazado-y-establecimiento-de-conexiones">Enlazado y establecimiento de conexiones.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#utilizacion-de-sockets-para-la-transmision-y-recepcion-de-informacion">Utilización de sockets para la transmisión y recepción de información.</a></li>

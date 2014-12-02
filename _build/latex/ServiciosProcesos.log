@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.24)  27 NOV 2014 12:56
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.24)  2 DEC 2014 13:56
 entering extended mode
 **ServiciosProcesos.tex
 (D:\oscar\ServiciosProcesos\_build\latex\ServiciosProcesos.tex
@@ -941,7 +941,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[2] [3] <configuraciones.png, id=411, 595.47469pt x 472.01344pt>
+[2] [3] <configuraciones.png, id=406, 595.47469pt x 472.01344pt>
 File: configuraciones.png Graphic file (type png)
 
 <use configuraciones.png>
@@ -972,7 +972,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 603--604
 é-to-do
  []
 
-[13] [14] [15] [16] [17] <Filosofos.png, id=478, 397.485pt x 289.08pt>
+[13] [14] [15] [16] [17] <Filosofos.png, id=473, 397.485pt x 289.08pt>
 File: Filosofos.png Graphic file (type png)
 
 <use Filosofos.png>
@@ -987,7 +987,7 @@ Underfull \vbox (badness 2065) detected at line 925
  []
 
 [19 <D:/oscar/ServiciosProcesos/_build/latex/Filosofos.png>] [20] [21]
-<barberodormilon.png, id=500, 397.485pt x 289.08pt>
+<barberodormilon.png, id=495, 397.485pt x 289.08pt>
 File: barberodormilon.png Graphic file (type png)
  <use barberodormilon.png>
 Package pdftex.def Info: barberodormilon.png used on input line 1072.
@@ -1011,34 +1011,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 1653--1654
 
  []
 
-[37] [38]
+[37] [38] [39] [40] [41] [42]
 Cap\'{\i }tulo 4.
-[39
+[43
 
 ]
 Overfull \vbox (214.96373pt too high) has occurred while \output is active []
 
 
-[40]
+[44]
 Cap\'{\i }tulo 5.
 No file ServiciosProcesos.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1822.
-[41
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2018.
+[45
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1822.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2018.
  (D:\oscar\ServiciosProcesos\_build\latex\ServiciosProcesos.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1822.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1822.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2018.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2018.
 
 Package rerunfilecheck Info: File `ServiciosProcesos.out' has not changed.
-(rerunfilecheck)             Checksum: 0013D7D131DD772941C3CCF592CAB630;5921.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1822.
+(rerunfilecheck)             Checksum: D4B26D82ABD54780CC8795B7EC7BD24D;5835.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2018.
  ) 
 Here is how much of TeX's memory you used:
- 9538 strings out of 493921
- 135403 string characters out of 3144876
- 233725 words of memory out of 3000000
+ 9543 strings out of 493921
+ 135454 string characters out of 3144876
+ 233765 words of memory out of 3000000
  12419 multiletter control sequences out of 15000+200000
  68144 words of font info for 80 fonts, out of 3000000 for 9000
  842 hyphenation exceptions out of 8191
@@ -1051,9 +1051,9 @@ onts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
 e1/urw/helvetic/uhvbo8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/
 times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8
 a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ServiciosProcesos.pdf (45 pages, 337139 bytes).
+Output written on ServiciosProcesos.pdf (49 pages, 348815 bytes).
 PDF statistics:
- 672 PDF objects out of 1000 (max. 8388607)
- 159 named destinations out of 1000 (max. 500000)
- 612 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 687 PDF objects out of 1000 (max. 8388607)
+ 164 named destinations out of 1000 (max. 500000)
+ 604 words of extra memory for PDF output out of 10000 (max. 10000000)
 

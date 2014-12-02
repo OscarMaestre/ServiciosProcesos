@@ -98,7 +98,8 @@ La clase URL nos ofrece un método ``openStream`` que nos devuelve un flujo bás
 
 	public class GestorDescargas {
 		public void descargarArchivo(
-				String url_descargar){
+				String url_descargar,
+				String nombreArchivo){
 			System.out.println("Descargando "
 					+url_descargar);
 			try {
@@ -108,10 +109,13 @@ La clase URL nos ofrece un método ``openStream`` que nos devuelve un flujo bás
 						new InputStreamReader(is);
 				BufferedReader bReader=
 						new BufferedReader(reader);
+				FileWriter escritorFichero=
+					new FileWriter(nombreArchivo);
 				String linea;
 				while ((linea=bReader.readLine())!=null){
-					System.out.println(linea);
+					escritorFichero.write(linea);
 				}
+				escritorFichero.close();
 				bReader.close();
 				reader.close();
 				is.close();
@@ -140,22 +144,214 @@ La clase URL nos ofrece un método ``openStream`` que nos devuelve un flujo bás
 
 Funciones y objetos de las librerías.
 -----------------------------------------------------------------------
+La clase URL proporciona un mecanismo muy sencillo pero por desgracia completamente atado al protocolo de las URL.
+
+Java ofrece otros objetos que permiten tener un mayor control sobre lo que se envía o recibe a través de la red. Por desgracia esto implica que en muchos casos tendremos solo flujos de bajo nivel (streams).
+
+En concreto Java ofrece dos elementos fundamentales para crear programas que usen redes
+
+* Sockets
+* ServerSockets
+
+
+Repaso de redes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+En redes el protocolo IP es el responsable de dos cuestiones fundamentales:
+
+* Establecer un sistema de direcciones universal (direcciones IP)
+* Establecer los mecanismos de enrutado.
+
+Como programadores el segundo no nos interesa, pero el primero será absolutamente fundamental para contactar con programas que estén en una ubicación remota.
+
+
+Una ubicación remota *siempre* tendrá una dirección
+IP pero *solo a veces tendrá un nombre DNS*. Para nosotros no habrá diferencia ya que si es necesario el sistema operativo traducirá de nombre DNS a IP.
+
+Otro elemento necesario en la comunicación en redes es el uso de un puerto de un cierto protocolo:
+
+
+* TCP: ofrece fiabilidad a los programas.
+* UDP: ofrece velocidad sacrificando la fiabilidad.
+
+A partir de ahora cuando usemos un número de puerto habrá que comprobar si ese número ya está usado.
+
+Por ejemplo, es mala idea que nuestros programas usen el puerto 80 TCP, probablemente ya esté en uso.
+Antes de usar un puerto en una aplicación comercial deberíamos consultar la lista de "IANA assigned ports".
+
+En líneas generales se pueden usar los puertos desde 1024 TCP a 49151 TCP, pero deberíamos comprobar que el número que elegimos no sea un número usado por un puerto de alguna aplicación que haya en la empresa.
+
+
+En las prácticas de clase usaremos el 9876 TCP. Si se desea conectar desde el instituto con algún programa ejecutado en casa se deberá "abrir el puerto 9876 TCP". Abrir un puerto consiste en configurar el router para que **SÍ ACEPTE TRÁFICO INICIADO DESDE EL EXTERIOR** cosa que no hace nunca por motivos de protección.
+
 
 Sockets.
 -----------------------------------------------------------------------
 
-Tipos de sockets. Características.
------------------------------------------------------------------------
+Un *socket* es un objeto Java que nos permite contactar con un programa o servidor remoto. Dicho objeto nos proporcionará flujos de entrada y/o salida y podremos comunicarnos con dicho programa.
+
+Existe otro tipo de sockets, los *ServerSocket*. Se utilizan para crear programas que acepten conexiones o peticiones.
+
+Todos los objetos mencionados en este tema están en el paquete ``java.net``.
+
+
+
+
+
 
 Creación de sockets.
 -----------------------------------------------------------------------
 
+
+En el siguiente código puede verse el proceso básico de creación de un socket. En los párrafos siguientes explicaremos el significado de los bloques de código.:
+
+
+.. code-block:: java
+
+	public class Conector {
+		public static void main(String[] args) {
+			String destino=
+					"www.google.com";
+			int puertoDestino=80;
+			Socket socket=new Socket();
+			InetSocketAddress direccion=new InetSocketAddress(
+					destino, puertoDestino);
+			try {
+				socket.connect(direccion);
+				//Si llegamos aquí es que la conexión
+				//sí se hizo.
+				
+				InputStream is=socket.getInputStream();
+				OutputStream os=socket.getOutputStream();
+				
+				
+			} catch (IOException e) {
+				System.out.println(
+					"No se pudo establecer la conexion "+
+					" o hubo un fallo al leer datos."
+				);
+			}	
+		}
+	}
+
+	
+Para poder crear un socket primero necesitamos una dirección con la que contactar. Toda dirección está formada por dirección IP (o DNS) y un puerto. En nuestro caso intentaremos contactar con ``www.google.com:80``.
+
+.. code-block:: java
+
+	String destino=
+				"www.google.com";
+		int puertoDestino=80;
+	Socket socket=new Socket();
+	InetSocketAddress direccion=new 
+		InetSocketAddress(
+				destino, puertoDestino);
+	
+
+
+
 Enlazado y establecimiento de conexiones.
 -----------------------------------------------------------------------
+
+El paso crítico para iniciar la comunicación es llamar al método ``connect``. Este método puede disparar una excepción del tipo ``IOException`` que puede significar dos cosas:
+
+* La conexión no se pudo establecer.
+* Aunque la conexión se estableció no fue posible leer o escribir datos.
+
+Así, la conexión debería realizarse así:
+
+.. code-block:: java
+
+	try {
+		socket.connect(direccion);
+		//Si llegamos aquí es que la conexión
+		//sí se hizo.
+			
+		InputStream is=socket.getInputStream();
+		OutputStream os=socket.getOutputStream();	
+			
+	}  //Fin del try
+	catch (IOException e) {
+		System.out.println(
+			"No se pudo establecer la conexion "+
+			" o hubo un fallo al leer datos."
+		);
+	} //Fin del catch IOException
+
+
 
 Utilización de sockets para la transmisión y recepción de información.
 -----------------------------------------------------------------------
 
+La clase ``Socket`` tiene dos métodos llamados ``getInputStream`` y ``getOutputSream`` que nos permiten obtener *flujos orientados a bytes*. Recordemos que es posible crear nuestros propios flujos, con más métodos que ofrecen más comodidad.
+
+
+El ejemplo completo
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Podemos contactar con un programa cualquiera escrito en cualquier lenguaje y enviar las peticiones de acuerdo a un protocolo. Nuestro programa podrá leer las respuestas independientemente de como fuera el servidor.
+
+
+.. code-block:: java
+
+	public class Conector {
+		public static void main(String[] args) {
+			System.out.println("Iniciando...");
+			String destino=
+					"10.8.0.253";
+			int puertoDestino=80;
+			Socket socket=new Socket();
+			InetSocketAddress direccion=new InetSocketAddress(
+					destino, puertoDestino);
+			try {
+				socket.connect(direccion);
+				//Si llegamos aquí es que la conexión
+				//sí se hizo.
+				
+				InputStream is=socket.getInputStream();
+				OutputStream os=socket.getOutputStream();
+				
+				//Flujos que manejan caracteres
+				InputStreamReader isr=
+						new InputStreamReader(is);
+				OutputStreamWriter osw=
+						new OutputStreamWriter(os);
+
+				//Flujos de líneas
+				BufferedReader bReader=
+						new BufferedReader(isr);
+				PrintWriter pWriter=
+						new PrintWriter(osw);
+				
+				
+				pWriter.println("GET /index.html");
+				pWriter.flush();
+				String linea;
+				FileWriter escritorArchivo=
+						new FileWriter("resultado.txt");
+				while ((linea=bReader.readLine()) != null ){
+					escritorArchivo.write(linea);
+				}
+				escritorArchivo.close();
+				pWriter.close();
+				bReader.close();
+				isr.close();
+				osw.close();
+				is.close();
+				os.close();
+				
+				
+				
+			} catch (IOException e) {
+				System.out.println(
+					"No se pudo establecer la conexion "+
+					" o hubo un fallo al leer datos."
+				);
+			} //Fin del catch		
+		} //Fin del main
+	} //Fin de la clase Conector
+
+	
 Programación de aplicaciones cliente y servidor.
 -----------------------------------------------------------------------
 
