@@ -35,10 +35,12 @@ class GestorConexion(socketserver.BaseRequestHandler):
         
         resultado=self.calcular_resultado(num1, operacion, num2)
         print ("Devolviendo a " + direccion+" el resultado "+str(resultado))
+        bytes_resultado=bytearray(str(resultado), "utf-8");
+        self.request.send(bytes_resultado)
         
         
 
 
-servidor=socketserver.TCPServer(("localhost", 9876), GestorConexion)
+servidor=socketserver.TCPServer(("10.13.0.20", 9876), GestorConexion)
 print ("Servidor en marcha.")
 servidor.serve_forever()

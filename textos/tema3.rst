@@ -352,8 +352,111 @@ Podemos contactar con un programa cualquiera escrito en cualquier lenguaje y env
 	} //Fin de la clase Conector
 
 	
+	
 Programación de aplicaciones cliente y servidor.
 -----------------------------------------------------------------------
+
+Al crear aplicaciones cliente y servidor puede ocurrir que tengamos que implementar varias operaciones:
+
+* Si tenemos que programar el servidor **deberemos definir un protocolo** de acceso a ese servidor.
+
+* Si tenemos que programar solo el cliente **necesitaremos conocer el protocolo de acceso** a ese servidor.
+
+* Si tenemos que programar los dos tendremos que empezar por **definir el protocolo de comunicación entre ambos**.
+
+En el ejemplo siguiente puede verse un ejemplo para Python 3 que implementa un servidor de cálculo. El servidor tiene un protocolo muy rígido (demasiado) que consiste en lo siguiente:
+
+1. El servidor espera que primero envíen la operación que puede ser ``+`` o ``-``. La operación debe terminar con un fin de línea UNIX (``\n``)
+2. Despues acepta un número de dos cifras (ni una ni tres) terminado en un fín de línea UNIX.
+3. Despues acepta un segundo número de dos cifras terminado en un fin de línea UNIX.
+
+.. code-block:: python
+	import socketserver
+
+
+	TAM_MAXIMO_PARAMETROS=64
+	PUERTO=9876
+
+	class GestorConexion(
+		socketserver.BaseRequestHandler):
+		
+		def leer_cadena(self, LONGITUD):
+			cadena=self.request.recv(LONGITUD)
+			return cadena.strip()
+		
+		def convertir_a_cadena(self, bytes):
+			return bytes.decode("utf-8")
+		
+		def calcular_resultado(
+			self, n1, op, n2):
+			n1=int(n1)
+			n2=int(n2)
+			
+			op=self.convertir_a_cadena(op)
+			if (op=="+"):
+				return n1+n2
+			if (op=="-"):
+				return n1-n2
+			return 0
+		"""Controlador de evento 'NuevaConexion"""
+		def handle(self):
+			direccion=self.client_address[0]
+			operacion   =   self.leer_cadena(2)
+			num1        =   self.leer_cadena(3)
+			num2        =   self.leer_cadena(3)
+			print (direccion+" pregunta:"+str(num1)+" "+str(operacion)+" "+str(num2))
+			
+			resultado=self.calcular_resultado(num1, operacion, num2)
+			print ("Devolviendo a " + direccion+" el resultado "+str(resultado))
+			bytes_resultado=bytearray(str(resultado), "utf-8");
+			self.request.send(bytes_resultado)
+			
+			
+
+
+	servidor=socketserver.TCPServer(("10.13.0.20", 9876), GestorConexion)
+	print ("Servidor en marcha.")
+	servidor.serve_forever()
+
+La comunicación Java con el servidor sería algo así:
+
+.. code-block:: java
+
+	byte[] bSuma="+\n".getBytes();
+	byte[] bOp1="42\n".getBytes();
+	byte[] bOp2="34\n".getBytes();
+				
+	os.write(bSuma);
+	os.write(bOp1);
+	os.write(bOp2);
+	os.flush();
+				
+	InputStreamReader isr=
+		new InputStreamReader(is);
+	BufferedReader br=
+		new BufferedReader(isr);
+	String cadenaRecibida=br.readLine();
+	System.out.println("Recibido:"+
+			cadenaRecibida);
+							
+	is.close();
+	os.close();
+	socket.close();
+
+	
+Ejemplo de servidor Java
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Supongamos que se nos pide crear un servidor de operaciones de cálculo que sea menos estricto que el anterior:
+
+* Cualquier parámetro que envíe el usuario debe ir terminado en un fin de línea UNIX ("\n").
+* El usuario enviará primero un símbolo "+", "-", "*" o "/". 
+* Despues se puede enviar un positivo de 1 a 8 cifras. El usuario podría equivocarse y enviar en vez de "3762" algo como "37a62". En ese caso se asume que el parámetro es 0.
+* Despues se envía un segundo positivo de 1 a 8 cifras igual que el anterior.
+* Cuando se haya procesado todo el servidor contestará al cliente con un positivo de 1 a 12 cifras.
+
+Antes de empezar crear el código que permita procesar estos parámetros complejos.
+
 
 Utilización de hilos en la programación de aplicaciones en red.
 -----------------------------------------------------------------------

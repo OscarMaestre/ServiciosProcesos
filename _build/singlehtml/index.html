@@ -1573,6 +1573,53 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 <div class="section" id="programacion-de-aplicaciones-cliente-y-servidor">
 <h3>Programación de aplicaciones cliente y servidor.<a class="headerlink" href="#programacion-de-aplicaciones-cliente-y-servidor" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Al crear aplicaciones cliente y servidor puede ocurrir que tengamos que implementar varias operaciones:</p>
+<ul class="simple">
+<li>Si tenemos que programar el servidor <strong>deberemos definir un protocolo</strong> de acceso a ese servidor.</li>
+<li>Si tenemos que programar solo el cliente <strong>necesitaremos conocer el protocolo de acceso</strong> a ese servidor.</li>
+<li>Si tenemos que programar los dos tendremos que empezar por <strong>definir el protocolo de comunicación entre ambos</strong>.</li>
+</ul>
+<p>En el ejemplo siguiente puede verse un ejemplo para Python 3 que implementa un servidor de cálculo. El servidor tiene un protocolo muy rígido (demasiado) que consiste en lo siguiente:</p>
+<ol class="arabic simple">
+<li>El servidor espera que primero envíen la operación que puede ser <tt class="docutils literal"><span class="pre">+</span></tt> o <tt class="docutils literal"><span class="pre">-</span></tt>. La operación debe terminar con un fin de línea UNIX (<tt class="docutils literal"><span class="pre">\n</span></tt>)</li>
+<li>Despues acepta un número de dos cifras (ni una ni tres) terminado en un fín de línea UNIX.</li>
+<li>Despues acepta un segundo número de dos cifras terminado en un fin de línea UNIX.</li>
+</ol>
+<p>La comunicación Java con el servidor sería algo así:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kt">byte</span><span class="o">[]</span> <span class="n">bSuma</span><span class="o">=</span><span class="s">&quot;+\n&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">();</span>
+<span class="kt">byte</span><span class="o">[]</span> <span class="n">bOp1</span><span class="o">=</span><span class="s">&quot;42\n&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">();</span>
+<span class="kt">byte</span><span class="o">[]</span> <span class="n">bOp2</span><span class="o">=</span><span class="s">&quot;34\n&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">();</span>
+
+<span class="n">os</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">bSuma</span><span class="o">);</span>
+<span class="n">os</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">bOp1</span><span class="o">);</span>
+<span class="n">os</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">bOp2</span><span class="o">);</span>
+<span class="n">os</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+
+<span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
+        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+<span class="n">BufferedReader</span> <span class="n">br</span><span class="o">=</span>
+        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+<span class="n">String</span> <span class="n">cadenaRecibida</span><span class="o">=</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Recibido:&quot;</span><span class="o">+</span>
+                <span class="n">cadenaRecibida</span><span class="o">);</span>
+
+<span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="n">socket</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</pre></div>
+</div>
+<div class="section" id="ejemplo-de-servidor-java">
+<h4>Ejemplo de servidor Java<a class="headerlink" href="#ejemplo-de-servidor-java" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Supongamos que se nos pide crear un servidor de operaciones de cálculo que sea menos estricto que el anterior:</p>
+<ul class="simple">
+<li>Cualquier parámetro que envíe el usuario debe ir terminado en un fin de línea UNIX (&#8220;n&#8221;).</li>
+<li>El usuario enviará primero un símbolo &#8220;+&#8221;, &#8220;-&#8221;, &#8220;*&#8221; o &#8220;/&#8221;.</li>
+<li>Despues se puede enviar un positivo de 1 a 8 cifras. El usuario podría equivocarse y enviar en vez de &#8220;3762&#8221; algo como &#8220;37a62&#8221;. En ese caso se asume que el parámetro es 0.</li>
+<li>Despues se envía un segundo positivo de 1 a 8 cifras igual que el anterior.</li>
+<li>Cuando se haya procesado todo el servidor contestará al cliente con un positivo de 1 a 12 cifras.</li>
+</ul>
+<p>Antes de empezar crear el código que permita procesar estos parámetros complejos.</p>
+</div>
 </div>
 <div class="section" id="utilizacion-de-hilos-en-la-programacion-de-aplicaciones-en-red">
 <h3>Utilización de hilos en la programación de aplicaciones en red.<a class="headerlink" href="#utilizacion-de-hilos-en-la-programacion-de-aplicaciones-en-red" title="Enlazar permanentemente con este título">¶</a></h3>
