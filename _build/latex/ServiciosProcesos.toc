@@ -70,8 +70,8 @@
 \contentsline {subsection}{\numberline {3.9.1}El ejemplo completo}{41}{subsection.3.9.1}
 \contentsline {section}{\numberline {3.10}Programaci\IeC {\'o}n de aplicaciones cliente y servidor.}{42}{section.3.10}
 \contentsline {subsection}{\numberline {3.10.1}Ejemplo de servidor Java}{43}{subsection.3.10.1}
-\contentsline {section}{\numberline {3.11}Utilizaci\IeC {\'o}n de hilos en la programaci\IeC {\'o}n de aplicaciones en red.}{43}{section.3.11}
-\contentsline {section}{\numberline {3.12}Depuraci\IeC {\'o}n.}{43}{section.3.12}
+\contentsline {section}{\numberline {3.11}Utilizaci\IeC {\'o}n de hilos en la programaci\IeC {\'o}n de aplicaciones en red.}{44}{section.3.11}
+\contentsline {section}{\numberline {3.12}Depuraci\IeC {\'o}n.}{44}{section.3.12}
 \contentsline {chapter}{\numberline {4}Generaci\IeC {\'o}n de servicios en red}{45}{chapter.4}
 \contentsline {section}{\numberline {4.1}Protocolos est\IeC {\'a}ndar de comunicaci\IeC {\'o}n en red a nivel de aplicaci\IeC {\'o}n}{46}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Telnet}{46}{subsection.4.1.1}

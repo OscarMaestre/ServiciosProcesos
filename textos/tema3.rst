@@ -1,5 +1,7 @@
 ﻿Programación de comunicaciones en red
 =======================================
+
+
 Comunicación entre aplicaciones.
 -----------------------------------------------------------------------
 
@@ -457,6 +459,40 @@ Supongamos que se nos pide crear un servidor de operaciones de cálculo que sea 
 
 Antes de empezar crear el código que permita procesar estos parámetros complejos.
 
+
+.. code-block:: java
+
+	public class ServidorCalculo {
+		public int extraerNumero(String linea){
+			/* 1. Comprobar si es un número
+			 * 2. Ver si el número es correcto (32a75)
+			 * 3. Ver si tiene de 1 a 8 cifras
+			 */
+			int numero;
+			try{
+				numero=Integer.parseInt(linea);
+			}
+			catch (NumberFormatException e){
+				numero=0;
+			}
+			/* Si el número es mayor de 100 millones no
+			 * es válido tampoco
+			 */
+			if (numero>=100000000){
+				numero=0;
+			}
+			return numero;
+			
+		}
+		public void escuchar(){
+			System.out.println("Arrancado el servidor");
+			
+			while (true){
+				
+			}
+		}
+	}
+	
 
 Utilización de hilos en la programación de aplicaciones en red.
 -----------------------------------------------------------------------

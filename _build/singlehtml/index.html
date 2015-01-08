@@ -1619,6 +1619,38 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <li>Cuando se haya procesado todo el servidor contestará al cliente con un positivo de 1 a 12 cifras.</li>
 </ul>
 <p>Antes de empezar crear el código que permita procesar estos parámetros complejos.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServidorCalculo</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">extraerNumero</span><span class="o">(</span><span class="n">String</span> <span class="n">linea</span><span class="o">){</span>
+                <span class="cm">/* 1. Comprobar si es un número</span>
+<span class="cm">                 * 2. Ver si el número es correcto (32a75)</span>
+<span class="cm">                 * 3. Ver si tiene de 1 a 8 cifras</span>
+<span class="cm">                 */</span>
+                <span class="kt">int</span> <span class="n">numero</span><span class="o">;</span>
+                <span class="k">try</span><span class="o">{</span>
+                        <span class="n">numero</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="k">catch</span> <span class="o">(</span><span class="n">NumberFormatException</span> <span class="n">e</span><span class="o">){</span>
+                        <span class="n">numero</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="cm">/* Si el número es mayor de 100 millones no</span>
+<span class="cm">                 * es válido tampoco</span>
+<span class="cm">                 */</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">numero</span><span class="o">&gt;=</span><span class="mi">100000000</span><span class="o">){</span>
+                        <span class="n">numero</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="n">numero</span><span class="o">;</span>
+
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">escuchar</span><span class="o">(){</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Arrancado el servidor&quot;</span><span class="o">);</span>
+
+                <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="utilizacion-de-hilos-en-la-programacion-de-aplicaciones-en-red">
