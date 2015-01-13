@@ -1651,10 +1651,198 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <span class="o">}</span>
 </pre></div>
 </div>
+<p>Así, el código completo del servidor sería:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServidorCalculo</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">extraerNumero</span><span class="o">(</span><span class="n">String</span> <span class="n">linea</span><span class="o">){</span>
+                <span class="cm">/* 1. Comprobar si es un número</span>
+<span class="cm">                 * 2. Ver si el número es correcto (32a75)</span>
+<span class="cm">                 * 3. Ver si tiene de 1 a 8 cifras</span>
+<span class="cm">                 */</span>
+                <span class="kt">int</span> <span class="n">numero</span><span class="o">;</span>
+                <span class="k">try</span><span class="o">{</span>
+                        <span class="n">numero</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="k">catch</span> <span class="o">(</span><span class="n">NumberFormatException</span> <span class="n">e</span><span class="o">){</span>
+                        <span class="n">numero</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="cm">/* Si el número es mayor de 100 millones no</span>
+<span class="cm">                 * es válido tampoco</span>
+<span class="cm">                 */</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">numero</span><span class="o">&gt;=</span><span class="mi">100000000</span><span class="o">){</span>
+                        <span class="n">numero</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="n">numero</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">calcular</span><span class="o">(</span><span class="n">String</span> <span class="n">op</span><span class="o">,</span> <span class="n">String</span> <span class="n">n1</span><span class="o">,</span> <span class="n">String</span> <span class="n">n2</span><span class="o">){</span>
+                <span class="kt">int</span> <span class="n">resultado</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="kt">char</span> <span class="n">simbolo</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+                <span class="kt">int</span> <span class="n">num1</span><span class="o">=</span><span class="k">this</span><span class="o">.</span><span class="na">extraerNumero</span><span class="o">(</span><span class="n">n1</span><span class="o">);</span>
+                <span class="kt">int</span> <span class="n">num2</span><span class="o">=</span><span class="k">this</span><span class="o">.</span><span class="na">extraerNumero</span><span class="o">(</span><span class="n">n2</span><span class="o">);</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">simbolo</span><span class="o">==</span><span class="sc">&#39;+&#39;</span><span class="o">){</span>
+                        <span class="n">resultado</span><span class="o">=</span><span class="n">num1</span><span class="o">+</span><span class="n">num2</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="n">resultado</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">escuchar</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Arrancado el servidor&quot;</span><span class="o">);</span>
+                <span class="n">ServerSocket</span> <span class="n">socketEscucha</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">socketEscucha</span><span class="o">=</span><span class="k">new</span> <span class="n">ServerSocket</span><span class="o">(</span><span class="mi">9876</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                        <span class="s">&quot;No se pudo poner un socket &quot;</span><span class="o">+</span>
+                                        <span class="s">&quot;a escuchar en TCP 9876&quot;</span><span class="o">);</span>
+                        <span class="k">return</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+                        <span class="n">Socket</span> <span class="n">conexion</span><span class="o">=</span><span class="n">socketEscucha</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Conexion recibida!&quot;</span><span class="o">);</span>
+                        <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">conexion</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+                        <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                        <span class="n">BufferedReader</span> <span class="n">bf</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+                        <span class="n">String</span> <span class="n">linea</span><span class="o">=</span><span class="n">bf</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                        <span class="n">String</span> <span class="n">num1</span><span class="o">=</span><span class="n">bf</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                        <span class="n">String</span> <span class="n">num2</span><span class="o">=</span><span class="n">bf</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                        <span class="cm">/* Calculamos el resultado*/</span>
+                        <span class="n">Integer</span> <span class="n">result</span><span class="o">=</span><span class="k">this</span><span class="o">.</span><span class="na">calcular</span><span class="o">(</span><span class="n">linea</span><span class="o">,</span> <span class="n">num1</span><span class="o">,</span> <span class="n">num2</span><span class="o">);</span>
+                        <span class="n">OutputStream</span> <span class="n">os</span><span class="o">=</span><span class="n">conexion</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
+                        <span class="n">PrintWriter</span> <span class="n">pw</span><span class="o">=</span><span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
+                        <span class="n">pw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">toString</span><span class="o">()+</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+                        <span class="n">pw</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Y el cliente sería:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClienteCalculo</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="n">BufferedReader</span> <span class="nf">getFlujo</span><span class="o">(</span><span class="n">InputStream</span> <span class="n">is</span><span class="o">){</span>
+                <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                <span class="n">BufferedReader</span> <span class="n">bfr</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+                <span class="k">return</span> <span class="n">bfr</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="cm">/**</span>
+<span class="cm">         * @param args</span>
+<span class="cm">         * @throws IOException</span>
+<span class="cm">         */</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+                <span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span><span class="k">new</span>
+                                <span class="n">InetSocketAddress</span><span class="o">(</span><span class="s">&quot;10.13.0.20&quot;</span><span class="o">,</span> <span class="mi">9876</span><span class="o">);</span>
+                <span class="n">Socket</span> <span class="n">socket</span><span class="o">=</span><span class="k">new</span> <span class="n">Socket</span><span class="o">();</span>
+                <span class="n">socket</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">direccion</span><span class="o">);</span>
+                <span class="n">BufferedReader</span> <span class="n">bfr</span><span class="o">=</span>
+                                <span class="n">ClienteCalculo</span><span class="o">.</span><span class="na">getFlujo</span><span class="o">(</span>
+                                                <span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
+                <span class="n">PrintWriter</span> <span class="n">pw</span><span class="o">=</span><span class="k">new</span>
+                                <span class="n">PrintWriter</span><span class="o">(</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+                <span class="n">pw</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;+\n&quot;</span><span class="o">);</span>
+                <span class="n">pw</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;42\n&quot;</span><span class="o">);</span>
+                <span class="n">pw</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;84\n&quot;</span><span class="o">);</span>
+                <span class="n">pw</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+                <span class="n">String</span> <span class="n">resultado</span><span class="o">=</span><span class="n">bfr</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span>
+                        <span class="o">(</span><span class="s">&quot;El resultado fue:&quot;</span><span class="o">+</span><span class="n">resultado</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ejercicio">
+<h4>Ejercicio<a class="headerlink" href="#ejercicio" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Crear una arquitectura cliente servidor que permita a un cliente, enviar dos cadenas a un servidor para saber cual de ellas va antes que otra:</p>
+<ul class="simple">
+<li>Un cliente puede enviar las cadenas &#8220;hola&#8221;, &#8220;mundo&#8221;. El servidor comprobará que en el diccionario la primera va antes que la segunda, por lo cual contestará &#8220;hola&#8221;, &#8220;mundo&#8221;.</li>
+<li>Si el cliente enviase &#8220;mundo&#8221;, &#8220;hola&#8221; el servidor debe devolver la respuesta &#8220;hola&#8221;, &#8220;mundo&#8221;.</li>
+</ul>
+<p>Debido a posibles mejoras futuras, se espera que el servidor sea capaz de saber qué versión del protocolo se maneja. Esto es debido a que en el futuro se espera lanzar una versión 2 del protocolo en la que se puedan enviar varias cadenas seguidas.</p>
+<p>Crear el protocolo, el código Java del cliente y el código Java del servidor con capacidad para procesar muchas peticiones a la vez (multihilo).</p>
+<p>Se debe aceptar que un cliente que ya tenga un socket abierto envíe todas las parejas de cadenas que desee.</p>
 </div>
 </div>
 <div class="section" id="utilizacion-de-hilos-en-la-programacion-de-aplicaciones-en-red">
 <h3>Utilización de hilos en la programación de aplicaciones en red.<a class="headerlink" href="#utilizacion-de-hilos-en-la-programacion-de-aplicaciones-en-red" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En el caso de aplicaciones que necesiten aceptar varias conexiones <strong>habrá que mover todo el código de gestión de peticiones a una clase que implemente Runnable</strong></p>
+<p>Ahora el servidor será así:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+        <span class="n">Socket</span> <span class="n">conexion</span><span class="o">=</span><span class="n">socketEscucha</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Conexion recibida&quot;</span><span class="o">);</span>
+        <span class="n">Peticion</span> <span class="n">p</span><span class="o">=</span><span class="k">new</span> <span class="n">Peticion</span><span class="o">(</span><span class="n">conexion</span><span class="o">);</span>
+        <span class="n">Thread</span> <span class="n">hilo</span><span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+        <span class="n">hilo</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Pero ahora tendremos una clase Petición como esta:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Peticion</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
+        <span class="n">BufferedReader</span> <span class="n">bfr</span><span class="o">;</span>
+        <span class="n">PrintWriter</span> <span class="n">pw</span><span class="o">;</span>
+        <span class="n">Socket</span> <span class="n">socket</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">Peticion</span><span class="o">(</span><span class="n">Socket</span> <span class="n">socket</span><span class="o">){</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">socket</span><span class="o">=</span><span class="n">socket</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">extraerNumero</span><span class="o">(</span><span class="n">String</span> <span class="n">linea</span><span class="o">){</span>
+                <span class="cm">/* 1. Comprobar si es un número</span>
+<span class="cm">                 * 2. Ver si el número es correcto (32a75)</span>
+<span class="cm">                 * 3. Ver si tiene de 1 a 8 cifras</span>
+<span class="cm">                 */</span>
+                <span class="kt">int</span> <span class="n">numero</span><span class="o">;</span>
+                <span class="k">try</span><span class="o">{</span>
+                        <span class="n">numero</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="k">catch</span> <span class="o">(</span><span class="n">NumberFormatException</span> <span class="n">e</span><span class="o">){</span>
+                        <span class="n">numero</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="cm">/* Si el número es mayor de 100 millones no</span>
+<span class="cm">                 * es válido tampoco</span>
+<span class="cm">                 */</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">numero</span><span class="o">&gt;=</span><span class="mi">100000000</span><span class="o">){</span>
+                        <span class="n">numero</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="n">numero</span><span class="o">;</span>
+
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">calcular</span><span class="o">(</span><span class="n">String</span> <span class="n">op</span><span class="o">,</span> <span class="n">String</span> <span class="n">n1</span><span class="o">,</span> <span class="n">String</span> <span class="n">n2</span><span class="o">){</span>
+                <span class="kt">int</span> <span class="n">resultado</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="kt">char</span> <span class="n">simbolo</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+                <span class="kt">int</span> <span class="n">num1</span><span class="o">=</span><span class="k">this</span><span class="o">.</span><span class="na">extraerNumero</span><span class="o">(</span><span class="n">n1</span><span class="o">);</span>
+                <span class="kt">int</span> <span class="n">num2</span><span class="o">=</span><span class="k">this</span><span class="o">.</span><span class="na">extraerNumero</span><span class="o">(</span><span class="n">n2</span><span class="o">);</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">simbolo</span><span class="o">==</span><span class="sc">&#39;+&#39;</span><span class="o">){</span>
+                        <span class="n">resultado</span><span class="o">=</span><span class="n">num1</span><span class="o">+</span><span class="n">num2</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="n">resultado</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+                        <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                        <span class="n">bfr</span><span class="o">=</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+                        <span class="n">OutputStream</span> <span class="n">os</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
+                        <span class="n">pw</span><span class="o">=</span><span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
+                        <span class="n">String</span> <span class="n">linea</span><span class="o">;</span>
+                        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+                                <span class="n">linea</span> <span class="o">=</span> <span class="n">bfr</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                                <span class="n">String</span> <span class="n">num1</span><span class="o">=</span><span class="n">bfr</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                                <span class="n">String</span> <span class="n">num2</span><span class="o">=</span><span class="n">bfr</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                                <span class="cm">/* Calculamos el resultado*/</span>
+                                <span class="n">Integer</span> <span class="n">result</span><span class="o">=</span><span class="k">this</span><span class="o">.</span><span class="na">calcular</span><span class="o">(</span><span class="n">linea</span><span class="o">,</span> <span class="n">num1</span><span class="o">,</span> <span class="n">num2</span><span class="o">);</span>
+                                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;El servidor dio resultado:&quot;</span><span class="o">+</span><span class="n">result</span><span class="o">);</span>
+                                <span class="n">pw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">toString</span><span class="o">()+</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+                                <span class="n">pw</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+                        <span class="o">}</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="depuracion">
 <h3>Depuración.<a class="headerlink" href="#depuracion" title="Enlazar permanentemente con este título">¶</a></h3>

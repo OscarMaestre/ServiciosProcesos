@@ -493,9 +493,212 @@ Antes de empezar crear el código que permita procesar estos parámetros complej
 		}
 	}
 	
+Así, el código completo del servidor sería:
 
+.. code-block:: java
+
+	public class ServidorCalculo {
+		public int extraerNumero(String linea){
+			/* 1. Comprobar si es un número
+			 * 2. Ver si el número es correcto (32a75)
+			 * 3. Ver si tiene de 1 a 8 cifras
+			 */
+			int numero;
+			try{
+				numero=Integer.parseInt(linea);
+			}
+			catch (NumberFormatException e){
+				numero=0;
+			}
+			/* Si el número es mayor de 100 millones no
+			 * es válido tampoco
+			 */
+			if (numero>=100000000){
+				numero=0;
+			}
+			return numero;
+		}
+		
+		public int calcular(String op, String n1, String n2){
+			int resultado=0;
+			char simbolo=op.charAt(0);
+			int num1=this.extraerNumero(n1);
+			int num2=this.extraerNumero(n2);
+			if (simbolo=='+'){
+				resultado=num1+num2;
+			}
+			return resultado;
+		}
+		
+		public void escuchar() throws IOException{
+			System.out.println("Arrancado el servidor");
+			ServerSocket socketEscucha=null;
+			try {
+				socketEscucha=new ServerSocket(9876);
+			} catch (IOException e) {
+				System.out.println(
+						"No se pudo poner un socket "+
+						"a escuchar en TCP 9876");
+				return;
+			}
+			while (true){
+				Socket conexion=socketEscucha.accept();
+				System.out.println("Conexion recibida!");
+				InputStream is=conexion.getInputStream();
+				InputStreamReader isr=
+						new InputStreamReader(is);
+				BufferedReader bf=
+						new BufferedReader(isr);
+				String linea=bf.readLine();
+				String num1=bf.readLine();
+				String num2=bf.readLine();
+				/* Calculamos el resultado*/
+				Integer result=this.calcular(linea, num1, num2);
+				OutputStream os=conexion.getOutputStream();
+				PrintWriter pw=new PrintWriter(os);
+				pw.write(result.toString()+"\n");
+				pw.flush();
+			}
+		}
+	}
+
+Y el cliente sería:
+
+.. code-block:: java
+
+	public class ClienteCalculo {
+		public static BufferedReader getFlujo(InputStream is){
+			InputStreamReader isr=
+					new InputStreamReader(is);
+			BufferedReader bfr=
+					new BufferedReader(isr);
+			return bfr;
+		}
+		/**
+		 * @param args
+		 * @throws IOException 
+		 */
+		public static void main(String[] args) throws IOException {
+			InetSocketAddress direccion=new
+					InetSocketAddress("10.13.0.20", 9876);
+			Socket socket=new Socket();
+			socket.connect(direccion);
+			BufferedReader bfr=
+					ClienteCalculo.getFlujo(
+							socket.getInputStream());
+			PrintWriter pw=new 
+					PrintWriter(socket.getOutputStream());
+			pw.print("+\n");
+			pw.print("42\n");
+			pw.print("84\n");
+			pw.flush();
+			String resultado=bfr.readLine();
+			System.out.println
+				("El resultado fue:"+resultado);
+		}
+	}
+	
+
+Ejercicio
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Crear una arquitectura cliente servidor que permita a un cliente, enviar dos cadenas a un servidor para saber cual de ellas va antes que otra:
+
+* Un cliente puede enviar las cadenas "hola", "mundo". El servidor comprobará que en el diccionario la primera va antes que la segunda, por lo cual contestará "hola", "mundo".
+
+* Si el cliente enviase "mundo", "hola" el servidor debe devolver la respuesta "hola", "mundo".
+
+Debido a posibles mejoras futuras, se espera que el servidor sea capaz de saber qué versión del protocolo se maneja. Esto es debido a que en el futuro se espera lanzar una versión 2 del protocolo en la que se puedan enviar varias cadenas seguidas.
+
+Crear el protocolo, el código Java del cliente y el código Java del servidor con capacidad para procesar muchas peticiones a la vez (multihilo).	
+
+Se debe aceptar que un cliente que ya tenga un socket abierto envíe todas las parejas de cadenas que desee.
+
+	
+	
 Utilización de hilos en la programación de aplicaciones en red.
 -----------------------------------------------------------------------
+
+En el caso de aplicaciones que necesiten aceptar varias conexiones **habrá que mover todo el código de gestión de peticiones a una clase que implemente Runnable**
+
+Ahora el servidor será así:
+
+.. code-block:: java
+
+	while (true){
+		Socket conexion=socketEscucha.accept();
+		System.out.println("Conexion recibida");
+		Peticion p=new Peticion(conexion);
+		Thread hilo=new Thread(p);
+		hilo.start();
+	}
+	
+Pero ahora tendremos una clase Petición como esta:
+
+.. code-block:: java
+
+	public class Peticion implements Runnable{
+		BufferedReader bfr;
+		PrintWriter pw;
+		Socket socket;
+		public Peticion(Socket socket){
+			this.socket=socket;
+		}
+		public int extraerNumero(String linea){
+			/* 1. Comprobar si es un número
+			 * 2. Ver si el número es correcto (32a75)
+			 * 3. Ver si tiene de 1 a 8 cifras
+			 */
+			int numero;
+			try{
+				numero=Integer.parseInt(linea);
+			}
+			catch (NumberFormatException e){
+				numero=0;
+			}
+			/* Si el número es mayor de 100 millones no
+			 * es válido tampoco
+			 */
+			if (numero>=100000000){
+				numero=0;
+			}
+			return numero;
+			
+		}
+		
+		public int calcular(String op, String n1, String n2){
+			int resultado=0;
+			char simbolo=op.charAt(0);
+			int num1=this.extraerNumero(n1);
+			int num2=this.extraerNumero(n2);
+			if (simbolo=='+'){
+				resultado=num1+num2;
+			}
+			return resultado;
+		}
+		public void run(){
+			try {
+				InputStream is=socket.getInputStream();
+				InputStreamReader isr=
+						new InputStreamReader(is);
+				bfr=new BufferedReader(isr);
+				OutputStream os=socket.getOutputStream();
+				pw=new PrintWriter(os);
+				String linea;
+				while (true){
+					linea = bfr.readLine();
+					String num1=bfr.readLine();
+					String num2=bfr.readLine();
+					/* Calculamos el resultado*/
+					Integer result=this.calcular(linea, num1, num2);
+					System.out.println("El servidor dio resultado:"+result);
+					pw.write(result.toString()+"\n");
+					pw.flush();
+				}
+			} catch (IOException e) {
+			}	
+		}
+	}
+	
 
 Depuración.
 -----------------------------------------------------------------------
