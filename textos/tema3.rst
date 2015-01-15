@@ -597,21 +597,6 @@ Y el cliente sería:
 				("El resultado fue:"+resultado);
 		}
 	}
-	
-
-Ejercicio
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Crear una arquitectura cliente servidor que permita a un cliente, enviar dos cadenas a un servidor para saber cual de ellas va antes que otra:
-
-* Un cliente puede enviar las cadenas "hola", "mundo". El servidor comprobará que en el diccionario la primera va antes que la segunda, por lo cual contestará "hola", "mundo".
-
-* Si el cliente enviase "mundo", "hola" el servidor debe devolver la respuesta "hola", "mundo".
-
-Debido a posibles mejoras futuras, se espera que el servidor sea capaz de saber qué versión del protocolo se maneja. Esto es debido a que en el futuro se espera lanzar una versión 2 del protocolo en la que se puedan enviar varias cadenas seguidas.
-
-Crear el protocolo, el código Java del cliente y el código Java del servidor con capacidad para procesar muchas peticiones a la vez (multihilo).	
-
-Se debe aceptar que un cliente que ya tenga un socket abierto envíe todas las parejas de cadenas que desee.
 
 	
 	
@@ -698,7 +683,74 @@ Pero ahora tendremos una clase Petición como esta:
 			}	
 		}
 	}
+
+
+Ejercicio: servicio de ordenación
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Crear una arquitectura cliente/servidor que permita a un cliente, enviar dos cadenas a un servidor para saber cual de ellas va antes que otra:
+
+* Un cliente puede enviar las cadenas "hola", "mundo". El servidor comprobará que en el diccionario la primera va antes que la segunda, por lo cual contestará "hola", "mundo".
+
+* Si el cliente enviase "mundo", "hola" el servidor debe devolver la respuesta "hola", "mundo".
+
+Debido a posibles mejoras futuras, se espera que el servidor sea capaz de saber qué versión del protocolo se maneja. Esto es debido a que en el futuro se espera lanzar una versión 2 del protocolo en la que se puedan enviar varias cadenas seguidas.
+
+Crear el protocolo, el código Java del cliente y el código Java del servidor con capacidad para procesar muchas peticiones a la vez (multihilo).	
+
+Se debe aceptar que un cliente que ya tenga un socket abierto envíe todas las parejas de cadenas que desee.
+
+Una clase Protocolo
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Dado que los protocolos pueden ser variables puede ser útil encapsular el comportamiento del protocolo en una pequeña clase separada:
+
+.. code-block:: java
+
+	public class Protocolo {
+		private final String terminador="\n";
+		public String getMensajeVersion(int version){
+			Integer i=version;
+			return i.toString()+terminador;
+		}	
+		public int getNumVersion(String mensaje){
+			Integer num=Integer.parseInt(mensaje);
+			return num;
+		}
+		public String getMensaje(String cadena){
+			return cadena+terminador;
+		}	
+	}
 	
+Una clase con funciones de utilidad
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Algunas operaciones son muy sencillas, pero muy engorrosas. Alargan el código innecesariamente y lo hacen más difícil de entender. Si además se realizan a menudo puede ser interesante empaquetar toda la funcionalidad en una clase.
+
+.. code-block:: java
+
+	public class Utilidades {
+		/* Obtiene un flujo de escritura
+		a partir de un socket*/
+		public PrintWriter 
+			getFlujoEscritura(Socket s) 
+					throws IOException{
+			OutputStream os=s.getOutputStream();
+			PrintWriter pw=new PrintWriter(os);
+			return pw;		
+		}
+		/* Obtiene un flujo de lectura
+		a partir de un socket*/
+		public BufferedReader 
+			getFlujoLectura(Socket s) 
+					throws IOException{
+			InputStream is=s.getInputStream();
+			InputStreamReader isr=
+					new InputStreamReader(is);
+			BufferedReader bfr=new BufferedReader(isr);
+			return bfr;
+		}
+	}
+
 
 Depuración.
 -----------------------------------------------------------------------

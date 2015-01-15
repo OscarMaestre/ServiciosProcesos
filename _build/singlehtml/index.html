@@ -1753,17 +1753,6 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </pre></div>
 </div>
 </div>
-<div class="section" id="ejercicio">
-<h4>Ejercicio<a class="headerlink" href="#ejercicio" title="Enlazar permanentemente con este título">¶</a></h4>
-<p>Crear una arquitectura cliente servidor que permita a un cliente, enviar dos cadenas a un servidor para saber cual de ellas va antes que otra:</p>
-<ul class="simple">
-<li>Un cliente puede enviar las cadenas &#8220;hola&#8221;, &#8220;mundo&#8221;. El servidor comprobará que en el diccionario la primera va antes que la segunda, por lo cual contestará &#8220;hola&#8221;, &#8220;mundo&#8221;.</li>
-<li>Si el cliente enviase &#8220;mundo&#8221;, &#8220;hola&#8221; el servidor debe devolver la respuesta &#8220;hola&#8221;, &#8220;mundo&#8221;.</li>
-</ul>
-<p>Debido a posibles mejoras futuras, se espera que el servidor sea capaz de saber qué versión del protocolo se maneja. Esto es debido a que en el futuro se espera lanzar una versión 2 del protocolo en la que se puedan enviar varias cadenas seguidas.</p>
-<p>Crear el protocolo, el código Java del cliente y el código Java del servidor con capacidad para procesar muchas peticiones a la vez (multihilo).</p>
-<p>Se debe aceptar que un cliente que ya tenga un socket abierto envíe todas las parejas de cadenas que desee.</p>
-</div>
 </div>
 <div class="section" id="utilizacion-de-hilos-en-la-programacion-de-aplicaciones-en-red">
 <h3>Utilización de hilos en la programación de aplicaciones en red.<a class="headerlink" href="#utilizacion-de-hilos-en-la-programacion-de-aplicaciones-en-red" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -1842,6 +1831,65 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
         <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
+</div>
+<div class="section" id="ejercicio-servicio-de-ordenacion">
+<h4>Ejercicio: servicio de ordenación<a class="headerlink" href="#ejercicio-servicio-de-ordenacion" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Crear una arquitectura cliente/servidor que permita a un cliente, enviar dos cadenas a un servidor para saber cual de ellas va antes que otra:</p>
+<ul class="simple">
+<li>Un cliente puede enviar las cadenas &#8220;hola&#8221;, &#8220;mundo&#8221;. El servidor comprobará que en el diccionario la primera va antes que la segunda, por lo cual contestará &#8220;hola&#8221;, &#8220;mundo&#8221;.</li>
+<li>Si el cliente enviase &#8220;mundo&#8221;, &#8220;hola&#8221; el servidor debe devolver la respuesta &#8220;hola&#8221;, &#8220;mundo&#8221;.</li>
+</ul>
+<p>Debido a posibles mejoras futuras, se espera que el servidor sea capaz de saber qué versión del protocolo se maneja. Esto es debido a que en el futuro se espera lanzar una versión 2 del protocolo en la que se puedan enviar varias cadenas seguidas.</p>
+<p>Crear el protocolo, el código Java del cliente y el código Java del servidor con capacidad para procesar muchas peticiones a la vez (multihilo).</p>
+<p>Se debe aceptar que un cliente que ya tenga un socket abierto envíe todas las parejas de cadenas que desee.</p>
+</div>
+<div class="section" id="una-clase-protocolo">
+<h4>Una clase Protocolo<a class="headerlink" href="#una-clase-protocolo" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Dado que los protocolos pueden ser variables puede ser útil encapsular el comportamiento del protocolo en una pequeña clase separada:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Protocolo</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">terminador</span><span class="o">=</span><span class="s">&quot;\n&quot;</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">getMensajeVersion</span><span class="o">(</span><span class="kt">int</span> <span class="n">version</span><span class="o">){</span>
+                <span class="n">Integer</span> <span class="n">i</span><span class="o">=</span><span class="n">version</span><span class="o">;</span>
+                <span class="k">return</span> <span class="n">i</span><span class="o">.</span><span class="na">toString</span><span class="o">()+</span><span class="n">terminador</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getNumVersion</span><span class="o">(</span><span class="n">String</span> <span class="n">mensaje</span><span class="o">){</span>
+                <span class="n">Integer</span> <span class="n">num</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">mensaje</span><span class="o">);</span>
+                <span class="k">return</span> <span class="n">num</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">getMensaje</span><span class="o">(</span><span class="n">String</span> <span class="n">cadena</span><span class="o">){</span>
+                <span class="k">return</span> <span class="n">cadena</span><span class="o">+</span><span class="n">terminador</span><span class="o">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="una-clase-con-funciones-de-utilidad">
+<h4>Una clase con funciones de utilidad<a class="headerlink" href="#una-clase-con-funciones-de-utilidad" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Algunas operaciones son muy sencillas, pero muy engorrosas. Alargan el código innecesariamente y lo hacen más difícil de entender. Si además se realizan a menudo puede ser interesante empaquetar toda la funcionalidad en una clase.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Utilidades</span> <span class="o">{</span>
+        <span class="cm">/* Obtiene un flujo de escritura</span>
+<span class="cm">        a partir de un socket*/</span>
+        <span class="kd">public</span> <span class="n">PrintWriter</span>
+                <span class="nf">getFlujoEscritura</span><span class="o">(</span><span class="n">Socket</span> <span class="n">s</span><span class="o">)</span>
+                                <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
+                <span class="n">OutputStream</span> <span class="n">os</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
+                <span class="n">PrintWriter</span> <span class="n">pw</span><span class="o">=</span><span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
+                <span class="k">return</span> <span class="n">pw</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="cm">/* Obtiene un flujo de lectura</span>
+<span class="cm">        a partir de un socket*/</span>
+        <span class="kd">public</span> <span class="n">BufferedReader</span>
+                <span class="nf">getFlujoLectura</span><span class="o">(</span><span class="n">Socket</span> <span class="n">s</span><span class="o">)</span>
+                                <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
+                <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+                <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                <span class="n">BufferedReader</span> <span class="n">bfr</span><span class="o">=</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+                <span class="k">return</span> <span class="n">bfr</span><span class="o">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="depuracion">
