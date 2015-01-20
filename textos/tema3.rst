@@ -880,6 +880,25 @@ La clase Cliente
 			} //Fin del catch
 		} //Fin del main
 	} //Fin de la clase
-		
+
+Ampliación
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Finalmente la empresa va a necesitar una versión mejorada del servidor que permita a otros cliente enviar un número de palabras y luego las palabras. Se desea hacer todo sin romper la compatibilidad con los clientes viejos. Mostrar el código Java del servidor y del cliente.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 Depuración.
 -----------------------------------------------------------------------
