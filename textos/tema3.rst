@@ -212,8 +212,7 @@ En el siguiente código puede verse el proceso básico de creación de un socket
 
 	public class Conector {
 		public static void main(String[] args) {
-			String destino=
-					"www.google.com";
+			String destino="www.google.com";
 			int puertoDestino=80;
 			Socket socket=new Socket();
 			InetSocketAddress direccion=new InetSocketAddress(
@@ -241,9 +240,8 @@ Para poder crear un socket primero necesitamos una dirección con la que contact
 
 .. code-block:: java
 
-	String destino=
-				"www.google.com";
-		int puertoDestino=80;
+	String destino="www.google.com";
+	int puertoDestino=80;
 	Socket socket=new Socket();
 	InetSocketAddress direccion=new 
 		InetSocketAddress(
@@ -299,8 +297,7 @@ Podemos contactar con un programa cualquiera escrito en cualquier lenguaje y env
 	public class Conector {
 		public static void main(String[] args) {
 			System.out.println("Iniciando...");
-			String destino=
-					"10.8.0.253";
+			String destino="10.8.0.253";
 			int puertoDestino=80;
 			Socket socket=new Socket();
 			InetSocketAddress direccion=new InetSocketAddress(
@@ -341,9 +338,6 @@ Podemos contactar con un programa cualquiera escrito en cualquier lenguaje y env
 				osw.close();
 				is.close();
 				os.close();
-				
-				
-				
 			} catch (IOException e) {
 				System.out.println(
 					"No se pudo establecer la conexion "+
@@ -731,9 +725,8 @@ Algunas operaciones son muy sencillas, pero muy engorrosas. Alargan el código i
 	public class Utilidades {
 		/* Obtiene un flujo de escritura
 		a partir de un socket*/
-		public PrintWriter 
-			getFlujoEscritura(Socket s) 
-					throws IOException{
+		public PrintWriter getFlujoEscritura
+			(Socket s) throws IOException{
 			OutputStream os=s.getOutputStream();
 			PrintWriter pw=new PrintWriter(os);
 			return pw;		
@@ -765,7 +758,6 @@ La clase Petición
 		@Override
 		public void run() {
 			try{
-				
 				PrintWriter flujoEscritura=
 					Utilidades.getFlujoEscritura(
 							this.conexionParaAtender
@@ -782,8 +774,9 @@ La clase Petición
 							flujoLectura.readLine();
 					String linea2=
 							flujoLectura.readLine();
-					if (linea1.compareTo(linea2)>1){
-						//Linea 1 va despues en el dicc
+					//Linea 1 va despues en el
+					if (linea1.compareTo(linea2)>0){
+						 dicc
 						flujoEscritura.println(linea2);
 						flujoEscritura.println(linea1);
 						flujoEscritura.flush();

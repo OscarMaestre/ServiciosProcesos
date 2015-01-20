@@ -1443,8 +1443,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <p>En el siguiente código puede verse el proceso básico de creación de un socket. En los párrafos siguientes explicaremos el significado de los bloques de código.:</p>
 <div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Conector</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">String</span> <span class="n">destino</span><span class="o">=</span>
-                                <span class="s">&quot;www.google.com&quot;</span><span class="o">;</span>
+                <span class="n">String</span> <span class="n">destino</span><span class="o">=</span><span class="s">&quot;www.google.com&quot;</span><span class="o">;</span>
                 <span class="kt">int</span> <span class="n">puertoDestino</span><span class="o">=</span><span class="mi">80</span><span class="o">;</span>
                 <span class="n">Socket</span> <span class="n">socket</span><span class="o">=</span><span class="k">new</span> <span class="n">Socket</span><span class="o">();</span>
                 <span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span><span class="k">new</span> <span class="n">InetSocketAddress</span><span class="o">(</span>
@@ -1469,9 +1468,8 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </pre></div>
 </div>
 <p>Para poder crear un socket primero necesitamos una dirección con la que contactar. Toda dirección está formada por dirección IP (o DNS) y un puerto. En nuestro caso intentaremos contactar con <tt class="docutils literal"><span class="pre">www.google.com:80</span></tt>.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">String</span> <span class="n">destino</span><span class="o">=</span>
-                        <span class="s">&quot;www.google.com&quot;</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">puertoDestino</span><span class="o">=</span><span class="mi">80</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">String</span> <span class="n">destino</span><span class="o">=</span><span class="s">&quot;www.google.com&quot;</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">puertoDestino</span><span class="o">=</span><span class="mi">80</span><span class="o">;</span>
 <span class="n">Socket</span> <span class="n">socket</span><span class="o">=</span><span class="k">new</span> <span class="n">Socket</span><span class="o">();</span>
 <span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span><span class="k">new</span>
         <span class="n">InetSocketAddress</span><span class="o">(</span>
@@ -1514,8 +1512,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Conector</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Iniciando...&quot;</span><span class="o">);</span>
-                <span class="n">String</span> <span class="n">destino</span><span class="o">=</span>
-                                <span class="s">&quot;10.8.0.253&quot;</span><span class="o">;</span>
+                <span class="n">String</span> <span class="n">destino</span><span class="o">=</span><span class="s">&quot;10.8.0.253&quot;</span><span class="o">;</span>
                 <span class="kt">int</span> <span class="n">puertoDestino</span><span class="o">=</span><span class="mi">80</span><span class="o">;</span>
                 <span class="n">Socket</span> <span class="n">socket</span><span class="o">=</span><span class="k">new</span> <span class="n">Socket</span><span class="o">();</span>
                 <span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span><span class="k">new</span> <span class="n">InetSocketAddress</span><span class="o">(</span>
@@ -1556,9 +1553,6 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
                         <span class="n">osw</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
                         <span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
                         <span class="n">os</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-
-
-
                 <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
                         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
                                 <span class="s">&quot;No se pudo establecer la conexion &quot;</span><span class="o">+</span>
@@ -1869,9 +1863,8 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Utilidades</span> <span class="o">{</span>
         <span class="cm">/* Obtiene un flujo de escritura</span>
 <span class="cm">        a partir de un socket*/</span>
-        <span class="kd">public</span> <span class="n">PrintWriter</span>
-                <span class="nf">getFlujoEscritura</span><span class="o">(</span><span class="n">Socket</span> <span class="n">s</span><span class="o">)</span>
-                                <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
+        <span class="kd">public</span> <span class="n">PrintWriter</span> <span class="nf">getFlujoEscritura</span>
+                <span class="o">(</span><span class="n">Socket</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
                 <span class="n">OutputStream</span> <span class="n">os</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
                 <span class="n">PrintWriter</span> <span class="n">pw</span><span class="o">=</span><span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
                 <span class="k">return</span> <span class="n">pw</span><span class="o">;</span>
@@ -1902,7 +1895,6 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
                 <span class="k">try</span><span class="o">{</span>
-
                         <span class="n">PrintWriter</span> <span class="n">flujoEscritura</span><span class="o">=</span>
                                 <span class="n">Utilidades</span><span class="o">.</span><span class="na">getFlujoEscritura</span><span class="o">(</span>
                                                 <span class="k">this</span><span class="o">.</span><span class="na">conexionParaAtender</span>
@@ -1919,8 +1911,9 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
                                                 <span class="n">flujoLectura</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
                                 <span class="n">String</span> <span class="n">linea2</span><span class="o">=</span>
                                                 <span class="n">flujoLectura</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
-                                <span class="k">if</span> <span class="o">(</span><span class="n">linea1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">linea2</span><span class="o">)&gt;</span><span class="mi">1</span><span class="o">){</span>
-                                        <span class="c1">//Linea 1 va despues en el dicc</span>
+                                <span class="c1">//Linea 1 va despues en el</span>
+                                <span class="k">if</span> <span class="o">(</span><span class="n">linea1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">linea2</span><span class="o">)&gt;</span><span class="mi">0</span><span class="o">){</span>
+                                         <span class="n">dicc</span>
                                         <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">linea2</span><span class="o">);</span>
                                         <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">linea1</span><span class="o">);</span>
                                         <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
