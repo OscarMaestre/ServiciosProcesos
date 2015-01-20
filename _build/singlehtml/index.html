@@ -1891,6 +1891,139 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </pre></div>
 </div>
 </div>
+<div class="section" id="la-clase-peticion">
+<h4>La clase Petición<a class="headerlink" href="#la-clase-peticion" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Peticion</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+        <span class="n">Socket</span> <span class="n">conexionParaAtender</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">Peticion</span> <span class="o">(</span> <span class="n">Socket</span> <span class="n">s</span> <span class="o">){</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">conexionParaAtender</span><span class="o">=</span><span class="n">s</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="k">try</span><span class="o">{</span>
+
+                        <span class="n">PrintWriter</span> <span class="n">flujoEscritura</span><span class="o">=</span>
+                                <span class="n">Utilidades</span><span class="o">.</span><span class="na">getFlujoEscritura</span><span class="o">(</span>
+                                                <span class="k">this</span><span class="o">.</span><span class="na">conexionParaAtender</span>
+                                                <span class="o">);</span>
+                        <span class="n">BufferedReader</span> <span class="n">flujoLectura</span><span class="o">=</span>
+                                <span class="n">Utilidades</span><span class="o">.</span><span class="na">getFlujoLectura</span><span class="o">(</span>
+                                                <span class="n">conexionParaAtender</span><span class="o">);</span>
+                        <span class="n">String</span> <span class="n">protocolo</span><span class="o">=</span>
+                                        <span class="n">flujoLectura</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                        <span class="kt">int</span> <span class="n">numVersion</span><span class="o">=</span>
+                                        <span class="n">Protocolo</span><span class="o">.</span><span class="na">getNumVersion</span><span class="o">(</span><span class="n">protocolo</span><span class="o">);</span>
+                        <span class="k">if</span> <span class="o">(</span><span class="n">numVersion</span><span class="o">==</span><span class="mi">1</span><span class="o">){</span>
+                                <span class="n">String</span> <span class="n">linea1</span><span class="o">=</span>
+                                                <span class="n">flujoLectura</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                                <span class="n">String</span> <span class="n">linea2</span><span class="o">=</span>
+                                                <span class="n">flujoLectura</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                                <span class="k">if</span> <span class="o">(</span><span class="n">linea1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">linea2</span><span class="o">)&gt;</span><span class="mi">1</span><span class="o">){</span>
+                                        <span class="c1">//Linea 1 va despues en el dicc</span>
+                                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">linea2</span><span class="o">);</span>
+                                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">linea1</span><span class="o">);</span>
+                                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+                                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">linea1</span><span class="o">);</span>
+                                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">linea2</span><span class="o">);</span>
+                                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+                                <span class="o">}</span>
+                        <span class="o">}</span>
+                <span class="o">}</span>
+                <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">){</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                        <span class="s">&quot;No se pudo crear algún flujo&quot;</span><span class="o">);</span>
+                        <span class="k">return</span> <span class="o">;</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="la-clase-servidor">
+<h4>La clase Servidor<a class="headerlink" href="#la-clase-servidor" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServidorOrdenacion</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">escuchar</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
+                <span class="n">ServerSocket</span> <span class="n">socket</span><span class="o">;</span>
+                <span class="k">try</span><span class="o">{</span>
+                        <span class="n">socket</span><span class="o">=</span><span class="k">new</span> <span class="n">ServerSocket</span><span class="o">(</span><span class="mi">9876</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;No se pudo arrancar&quot;</span><span class="o">);</span>
+                        <span class="k">return</span> <span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Servidor esperando&quot;</span><span class="o">);</span>
+                        <span class="n">Socket</span> <span class="n">conexionCliente</span><span class="o">=</span>
+                                        <span class="n">socket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Alguien conectó&quot;</span><span class="o">);</span>
+                        <span class="n">Peticion</span> <span class="n">p</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">Peticion</span><span class="o">(</span><span class="n">conexionCliente</span><span class="o">);</span>
+                        <span class="n">Thread</span> <span class="n">hiloAsociado</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+                        <span class="n">hiloAsociado</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+                <span class="o">}</span>
+        <span class="o">}</span> <span class="c1">// Fin del método escuchar</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span>  <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argumentos</span><span class="o">){</span>
+                <span class="n">ServidorOrdenacion</span> <span class="n">s</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">ServidorOrdenacion</span><span class="o">();</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">s</span><span class="o">.</span><span class="na">escuchar</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;No se pudo arrancar&quot;</span><span class="o">);</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot; el cliente o el serv&quot;</span><span class="o">);</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="la-clase-cliente">
+<h4>La clase Cliente<a class="headerlink" href="#la-clase-cliente" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Cliente</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ordenar</span><span class="o">(</span><span class="n">String</span> <span class="n">s1</span><span class="o">,</span> <span class="n">String</span> <span class="n">s2</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
+                <span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">InetSocketAddress</span><span class="o">(</span><span class="s">&quot;10.13.0.20&quot;</span><span class="o">,</span> <span class="mi">9876</span><span class="o">);</span>
+                <span class="n">Socket</span> <span class="n">conexion</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">Socket</span><span class="o">();</span>
+                <span class="n">conexion</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">direccion</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Conexion establecida&quot;</span><span class="o">);</span>
+                <span class="cm">/* Ahora hay que crear flujos de salida, enviar</span>
+<span class="cm">                 * cadenas por allí y esperar los resultados.</span>
+<span class="cm">                 */</span>
+                <span class="k">try</span><span class="o">{</span>
+
+                        <span class="n">BufferedReader</span> <span class="n">flujoLectura</span><span class="o">=</span>
+                                <span class="n">Utilidades</span><span class="o">.</span><span class="na">getFlujoLectura</span><span class="o">(</span><span class="n">conexion</span><span class="o">);</span>
+                        <span class="n">PrintWriter</span> <span class="n">flujoEscritura</span><span class="o">=</span>
+                                <span class="n">Utilidades</span><span class="o">.</span><span class="na">getFlujoEscritura</span><span class="o">(</span><span class="n">conexion</span><span class="o">);</span>
+
+                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;1&quot;</span><span class="o">);</span>
+                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s1</span><span class="o">);</span>
+                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s2</span><span class="o">);</span>
+                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+                        <span class="n">String</span> <span class="n">linea1</span><span class="o">=</span><span class="n">flujoLectura</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                        <span class="n">String</span> <span class="n">linea2</span><span class="o">=</span><span class="n">flujoLectura</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;El servidor devolvió &quot;</span><span class="o">+</span>
+                                        <span class="n">linea1</span> <span class="o">+</span> <span class="s">&quot; y &quot;</span><span class="o">+</span><span class="n">linea2</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">){</span>
+
+                <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">Cliente</span> <span class="n">c</span><span class="o">=</span><span class="k">new</span> <span class="n">Cliente</span><span class="o">();</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">c</span><span class="o">.</span><span class="na">ordenar</span><span class="o">(</span><span class="s">&quot;aaa&quot;</span><span class="o">,</span> <span class="s">&quot;bbb&quot;</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Fallo la conexion o &quot;</span><span class="o">);</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;los flujos&quot;</span><span class="o">);</span>
+                <span class="o">}</span> <span class="c1">//Fin del catch</span>
+        <span class="o">}</span> <span class="c1">//Fin del main</span>
+<span class="o">}</span> <span class="c1">//Fin de la clase</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="depuracion">
 <h3>Depuración.<a class="headerlink" href="#depuracion" title="Enlazar permanentemente con este título">¶</a></h3>

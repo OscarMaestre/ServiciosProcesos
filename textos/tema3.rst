@@ -751,6 +751,142 @@ Algunas operaciones son muy sencillas, pero muy engorrosas. Alargan el código i
 		}
 	}
 
+La clase Petición
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. code-block:: java
+
+	public class Peticion implements Runnable {
+		Socket conexionParaAtender;
+		
+		public Peticion ( Socket s ){
+			this.conexionParaAtender=s;
+		}
+		@Override
+		public void run() {
+			try{
+				
+				PrintWriter flujoEscritura=
+					Utilidades.getFlujoEscritura(
+							this.conexionParaAtender
+							);
+				BufferedReader flujoLectura=
+					Utilidades.getFlujoLectura(
+							conexionParaAtender);
+				String protocolo=
+						flujoLectura.readLine();
+				int numVersion=
+						Protocolo.getNumVersion(protocolo);
+				if (numVersion==1){
+					String linea1=
+							flujoLectura.readLine();
+					String linea2=
+							flujoLectura.readLine();
+					if (linea1.compareTo(linea2)>1){
+						//Linea 1 va despues en el dicc
+						flujoEscritura.println(linea2);
+						flujoEscritura.println(linea1);
+						flujoEscritura.flush();
+					} else {
+						flujoEscritura.println(linea1);
+						flujoEscritura.println(linea2);
+						flujoEscritura.flush();
+					}
+				}
+			}
+			catch (IOException e){
+				System.out.println(
+						"No se pudo crear algún flujo");
+				return ;
+			}	
+		}	
+	}
+	
+La clase Servidor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	public class ServidorOrdenacion {
+		public void escuchar() throws IOException{
+			ServerSocket socket;
+			try{
+				socket=new ServerSocket(9876);
+			}
+			catch(Exception e){
+				System.out.println("No se pudo arrancar");
+				return ;
+			}
+			while (true){
+				System.out.println("Servidor esperando");
+				Socket conexionCliente=
+						socket.accept();
+				System.out.println("Alguien conectó");
+				Peticion p=
+						new Peticion(conexionCliente);
+				Thread hiloAsociado=
+						new Thread(p);
+				hiloAsociado.start();
+			}
+		} // Fin del método escuchar
+		public static void  main(String[] argumentos){
+			ServidorOrdenacion s=
+					new ServidorOrdenacion();		
+			try {
+				s.escuchar();
+			} catch (Exception e){
+				System.out.println("No se pudo arrancar");
+				System.out.println(" el cliente o el serv");
+			}
+		}
+	}
+
+
+La clase Cliente
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	public class Cliente {
+		public void ordenar(String s1, String s2) throws IOException{
+			InetSocketAddress direccion=
+					new InetSocketAddress("10.13.0.20", 9876);
+			Socket conexion=
+					new Socket();
+			conexion.connect(direccion);
+			System.out.println("Conexion establecida");
+			/* Ahora hay que crear flujos de salida, enviar
+			 * cadenas por allí y esperar los resultados.
+			 */
+			try{
+				
+				BufferedReader flujoLectura=
+					Utilidades.getFlujoLectura(conexion);
+				PrintWriter flujoEscritura=
+					Utilidades.getFlujoEscritura(conexion);
+				
+				flujoEscritura.println("1");
+				flujoEscritura.println(s1);
+				flujoEscritura.println(s2);
+				flujoEscritura.flush();
+				String linea1=flujoLectura.readLine();
+				String linea2=flujoLectura.readLine();
+				System.out.println("El servidor devolvió "+
+						linea1 + " y "+linea2);
+			} catch (IOException e){
+				
+			}
+		}
+		public static void main(String[] args) {
+			Cliente c=new Cliente();
+			try {
+				c.ordenar("aaa", "bbb");
+			} catch (IOException e) {
+				System.out.println("Fallo la conexion o ");
+				System.out.println("los flujos");
+			} //Fin del catch
+		} //Fin del main
+	} //Fin de la clase
+		
 Depuración.
 -----------------------------------------------------------------------
