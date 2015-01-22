@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.24)  20 JAN 2015 13:14
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.24)  22 JAN 2015 12:59
 entering extended mode
 **ServiciosProcesos.tex
 (D:\oscar\ServiciosProcesos\_build\latex\ServiciosProcesos.tex
@@ -1031,25 +1031,26 @@ Overfull \vbox (214.96373pt too high) has occurred while \output is active []
 
 [54]
 Cap\'{\i }tulo 5.
-No file ServiciosProcesos.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2512.
 [55
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2512.
+No file ServiciosProcesos.ind.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2621.
+[56] [57]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2621.
  (D:\oscar\ServiciosProcesos\_build\latex\ServiciosProcesos.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2512.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2512.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2621.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2621.
 
 Package rerunfilecheck Info: File `ServiciosProcesos.out' has not changed.
-(rerunfilecheck)             Checksum: D4B26D82ABD54780CC8795B7EC7BD24D;5835.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2512.
+(rerunfilecheck)             Checksum: D9AC8042078D4A6A9A9D270EF8C7CFCC;5836.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2621.
  ) 
 Here is how much of TeX's memory you used:
- 9594 strings out of 493921
- 136280 string characters out of 3144876
- 235187 words of memory out of 3000000
- 12444 multiletter control sequences out of 15000+200000
+ 9600 strings out of 493921
+ 136381 string characters out of 3144876
+ 235286 words of memory out of 3000000
+ 12446 multiletter control sequences out of 15000+200000
  68437 words of font info for 81 fonts, out of 3000000 for 9000
  842 hyphenation exceptions out of 8191
  36i,12n,48p,563b,634s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1061,9 +1062,9 @@ onts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
 e1/urw/helvetic/uhvbo8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/
 times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8
 a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ServiciosProcesos.pdf (59 pages, 374226 bytes).
+Output written on ServiciosProcesos.pdf (61 pages, 382574 bytes).
 PDF statistics:
- 742 PDF objects out of 1000 (max. 8388607)
- 184 named destinations out of 1000 (max. 500000)
+ 754 PDF objects out of 1000 (max. 8388607)
+ 188 named destinations out of 1000 (max. 500000)
  604 words of extra memory for PDF output out of 10000 (max. 10000000)
 

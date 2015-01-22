@@ -886,19 +886,32 @@ Ampliación
 
 Finalmente la empresa va a necesitar una versión mejorada del servidor que permita a otros cliente enviar un número de palabras y luego las palabras. Se desea hacer todo sin romper la compatibilidad con los clientes viejos. Mostrar el código Java del servidor y del cliente.
 
+En el servidor se añade este código extra a la hora de comprobar el protocolo:
 
-
-
-
-
-
-
-
-
-
-
-
+.. code-block:: java
 
 	
-Depuración.
------------------------------------------------------------------------
+	
+	if (numVersion==2){
+		System.out.println("Llegó un v2");
+		String lineaCantidadPalabras=
+		flujoLectura.readLine();
+		int numPalabras=
+			Integer.parseInt 
+			(lineaCantidadPalabras);
+		String[] palabras=
+					new String[numPalabras];
+		for (int i=0;i<numPalabras;i++){
+			palabras[i]=
+				flujoLectura.readLine();
+		}
+		palabras=this.ordenar(palabras);
+		for (int i=0; i<palabras.length; i++){
+			flujoEscritura.println(palabras[i]);
+		}
+		flujoEscritura.flush();
+	}
+
+Y finalmente solo habría que implementar un método en la petición que reciba un vector de ``String`` (las palabras) y devuelva el mismo vector pero ordenado.
+
+

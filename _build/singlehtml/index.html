@@ -2017,9 +2017,33 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </pre></div>
 </div>
 </div>
+<div class="section" id="ampliacion">
+<h4>Ampliación<a class="headerlink" href="#ampliacion" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Finalmente la empresa va a necesitar una versión mejorada del servidor que permita a otros cliente enviar un número de palabras y luego las palabras. Se desea hacer todo sin romper la compatibilidad con los clientes viejos. Mostrar el código Java del servidor y del cliente.</p>
+<p>En el servidor se añade este código extra a la hora de comprobar el protocolo:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="k">if</span> <span class="o">(</span><span class="n">numVersion</span><span class="o">==</span><span class="mi">2</span><span class="o">){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Llegó un v2&quot;</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">lineaCantidadPalabras</span><span class="o">=</span>
+        <span class="n">flujoLectura</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">numPalabras</span><span class="o">=</span>
+                <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span>
+                <span class="o">(</span><span class="n">lineaCantidadPalabras</span><span class="o">);</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">palabras</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="n">numPalabras</span><span class="o">];</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">numPalabras</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                <span class="n">palabras</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span>
+                        <span class="n">flujoLectura</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">palabras</span><span class="o">=</span><span class="k">this</span><span class="o">.</span><span class="na">ordenar</span><span class="o">(</span><span class="n">palabras</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">palabras</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">palabras</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+        <span class="o">}</span>
+        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
 </div>
-<div class="section" id="depuracion">
-<h3>Depuración.<a class="headerlink" href="#depuracion" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Y finalmente solo habría que implementar un método en la petición que reciba un vector de <tt class="docutils literal"><span class="pre">String</span></tt> (las palabras) y devuelva el mismo vector pero ordenado.</p>
+</div>
 </div>
 </div>
 <span id="document-textos/tema4"></span><div class="section" id="generacion-de-servicios-en-red">
@@ -2081,8 +2105,76 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 <span id="document-textos/tema5"></span><div class="section" id="utilizacion-de-tecnicas-de-programacion-segura">
 <h2>Utilización de técnicas de programación segura<a class="headerlink" href="#utilizacion-de-tecnicas-de-programacion-segura" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="introduccion">
+<h3>Introducción<a class="headerlink" href="#introduccion" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En general, cuando se envía algo a través de sockets se envía como &#8220;texto plano&#8221;, es decir, no sabemos si hay alguien usando un sniffer en la red y por tanto no sabemos si alguien está capturando los datos.</p>
+<p>En general, cualquier sistema que pretenda ser seguro necesitará usar cifrado.</p>
+</div>
 <div class="section" id="practicas-de-programacion-segura">
 <h3>Prácticas de programación segura.<a class="headerlink" href="#practicas-de-programacion-segura" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Para enviar mensajes cifrados se necesita algún mecanismo o algoritmo para convertir un texto normal en uno más difícil de comprender.</p>
+<p>El esquema general de todos los métodos es tener código como el siguiente:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="n">String</span> <span class="nf">cifrar</span> <span class="o">(</span><span class="n">String</span> <span class="n">texto</span><span class="o">,</span> <span class="n">String</span> <span class="n">clave</span><span class="o">)</span>
+<span class="o">{</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">descifrar</span><span class="o">(</span><span class="n">String</span> <span class="n">texto</span><span class="o">,</span><span class="n">String</span> <span class="n">clave</span><span class="o">)</span>
+<span class="o">{</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="section" id="metodo-cesar">
+<h4>Método César<a class="headerlink" href="#metodo-cesar" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Si el alfabeto es el siguiente:</p>
+<p><a href="#id1"><span class="problematic" id="id2">ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789_</span></a>
+BCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789_A</p>
+<p>El mensaje HOLA MUNDO, con clave 1 sería así</p>
+<blockquote>
+<div>HOLAMUNDO
+IPMBNVÑEP</div></blockquote>
+<p>El descifrado simplemente implicaría el método inverso. Si el desplazamiento es un valor distinto de 1, lo único que hay que hacer es construir el alfabeto rotado tantas veces como el desplazamiento</p>
+<p>Esta clase implementa un sistema de rotado básico para poder efectuar</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Cifrador</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">alfabeto</span><span class="o">=</span>
+                        <span class="s">&quot;ABCDEFGHIJKLMNÑOPQRSTUVWXYZ&quot;</span><span class="o">+</span>
+                        <span class="s">&quot;0123456789 &quot;</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">alfabetoCifrado</span><span class="o">;</span>
+        <span class="cm">/* Dada una cadena como</span>
+<span class="cm">         * &quot;ABC&quot; y un número (p.ej 2)</span>
+<span class="cm">         * devuelve la cadena rotada a la izq</span>
+<span class="cm">         * tantas veces como indique el numero,</span>
+<span class="cm">         * en este caso &quot;CAB&quot;</span>
+<span class="cm">         */</span>
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">rotar</span><span class="o">(</span><span class="n">String</span> <span class="n">cad</span><span class="o">,</span><span class="kt">int</span> <span class="n">numVeces</span><span class="o">){</span>
+                <span class="kt">char</span><span class="o">[]</span> <span class="n">resultado</span><span class="o">=</span><span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">cad</span><span class="o">.</span><span class="na">length</span><span class="o">()];</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cad</span><span class="o">.</span><span class="na">length</span><span class="o">();</span><span class="n">i</span><span class="o">++){</span>
+                        <span class="kt">int</span> <span class="n">posParaExtraer</span><span class="o">=(</span><span class="n">i</span><span class="o">+</span><span class="n">numVeces</span><span class="o">)%</span><span class="n">cad</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+                        <span class="n">resultado</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="n">cad</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">posParaExtraer</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="n">String</span> <span class="n">cadResultado</span><span class="o">=</span><span class="n">String</span><span class="o">.</span><span class="na">copyValueOf</span><span class="o">(</span><span class="n">resultado</span><span class="o">);</span>
+                <span class="k">return</span> <span class="n">cadResultado</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">cifrar</span>
+                <span class="o">(</span><span class="n">String</span> <span class="n">mensaje</span><span class="o">,</span> <span class="n">String</span> <span class="n">clave</span><span class="o">){</span>
+                <span class="n">String</span> <span class="n">mensajeCifrado</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="o">;</span>
+
+                <span class="k">return</span> <span class="n">mensajeCifrado</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">descifrar</span>
+                <span class="o">(</span><span class="n">String</span> <span class="n">mensajeCifrado</span><span class="o">,</span> <span class="n">String</span> <span class="n">clave</span><span class="o">){</span>
+                <span class="n">String</span> <span class="n">mensajeDescifrado</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="o">;</span>
+
+                <span class="k">return</span> <span class="n">mensajeDescifrado</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+                <span class="n">Cifrador</span> <span class="n">c</span><span class="o">=</span><span class="k">new</span> <span class="n">Cifrador</span><span class="o">();</span>
+                <span class="n">String</span> <span class="n">cad</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="na">rotar</span><span class="o">(</span><span class="s">&quot;ABCDEFG&quot;</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">cad</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="criptografia-de-clave-publica-y-clave-privada">
 <h3>Criptografía de clave pública y clave privada.<a class="headerlink" href="#criptografia-de-clave-publica-y-clave-privada" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -2172,7 +2264,6 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <li class="toctree-l2"><a class="reference internal" href="index.html#utilizacion-de-sockets-para-la-transmision-y-recepcion-de-informacion">Utilización de sockets para la transmisión y recepción de información.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#programacion-de-aplicaciones-cliente-y-servidor">Programación de aplicaciones cliente y servidor.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#utilizacion-de-hilos-en-la-programacion-de-aplicaciones-en-red">Utilización de hilos en la programación de aplicaciones en red.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#depuracion">Depuración.</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema4">Generación de servicios en red</a><ul>
@@ -2192,6 +2283,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema5">Utilización de técnicas de programación segura</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#introduccion">Introducción</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#practicas-de-programacion-segura">Prácticas de programación segura.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#criptografia-de-clave-publica-y-clave-privada">Criptografía de clave pública y clave privada.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#principales-aplicaciones-de-la-criptografia">Principales aplicaciones de la criptografía.</a></li>

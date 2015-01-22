@@ -77,7 +77,7 @@
 \contentsline {subsection}{\numberline {3.11.4}La clase Petici\IeC {\'o}n}{49}{subsection.3.11.4}
 \contentsline {subsection}{\numberline {3.11.5}La clase Servidor}{50}{subsection.3.11.5}
 \contentsline {subsection}{\numberline {3.11.6}La clase Cliente}{51}{subsection.3.11.6}
-\contentsline {section}{\numberline {3.12}Depuraci\IeC {\'o}n.}{52}{section.3.12}
+\contentsline {subsection}{\numberline {3.11.7}Ampliaci\IeC {\'o}n}{52}{subsection.3.11.7}
 \contentsline {chapter}{\numberline {4}Generaci\IeC {\'o}n de servicios en red}{53}{chapter.4}
 \contentsline {section}{\numberline {4.1}Protocolos est\IeC {\'a}ndar de comunicaci\IeC {\'o}n en red a nivel de aplicaci\IeC {\'o}n}{54}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Telnet}{54}{subsection.4.1.1}
@@ -98,13 +98,15 @@
 \contentsline {section}{\numberline {4.12}Depuraci\IeC {\'o}n.}{54}{section.4.12}
 \contentsline {section}{\numberline {4.13}Monitorizaci\IeC {\'o}n de tiempos de respuesta.}{54}{section.4.13}
 \contentsline {chapter}{\numberline {5}Utilizaci\IeC {\'o}n de t\IeC {\'e}cnicas de programaci\IeC {\'o}n segura}{55}{chapter.5}
-\contentsline {section}{\numberline {5.1}Pr\IeC {\'a}cticas de programaci\IeC {\'o}n segura.}{55}{section.5.1}
-\contentsline {section}{\numberline {5.2}Criptograf\IeC {\'\i }a de clave p\IeC {\'u}blica y clave privada.}{55}{section.5.2}
-\contentsline {section}{\numberline {5.3}Principales aplicaciones de la criptograf\IeC {\'\i }a.}{55}{section.5.3}
-\contentsline {section}{\numberline {5.4}Protocolos criptogr\IeC {\'a}ficos.}{55}{section.5.4}
-\contentsline {section}{\numberline {5.5}Pol\IeC {\'\i }tica de seguridad.}{55}{section.5.5}
-\contentsline {section}{\numberline {5.6}Programaci\IeC {\'o}n de mecanismos de control de acceso.}{55}{section.5.6}
-\contentsline {section}{\numberline {5.7}Encriptaci\IeC {\'o}n de informaci\IeC {\'o}n.}{55}{section.5.7}
-\contentsline {section}{\numberline {5.8}Protocolos seguros de comunicaciones.}{55}{section.5.8}
-\contentsline {section}{\numberline {5.9}Programaci\IeC {\'o}n de aplicaciones con comunicaciones seguras.}{55}{section.5.9}
-\contentsline {section}{\numberline {5.10}Pruebas y depuraci\IeC {\'o}n.}{55}{section.5.10}
+\contentsline {section}{\numberline {5.1}Introducci\IeC {\'o}n}{55}{section.5.1}
+\contentsline {section}{\numberline {5.2}Pr\IeC {\'a}cticas de programaci\IeC {\'o}n segura.}{55}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}M\IeC {\'e}todo C\IeC {\'e}sar}{55}{subsection.5.2.1}
+\contentsline {section}{\numberline {5.3}Criptograf\IeC {\'\i }a de clave p\IeC {\'u}blica y clave privada.}{57}{section.5.3}
+\contentsline {section}{\numberline {5.4}Principales aplicaciones de la criptograf\IeC {\'\i }a.}{57}{section.5.4}
+\contentsline {section}{\numberline {5.5}Protocolos criptogr\IeC {\'a}ficos.}{57}{section.5.5}
+\contentsline {section}{\numberline {5.6}Pol\IeC {\'\i }tica de seguridad.}{57}{section.5.6}
+\contentsline {section}{\numberline {5.7}Programaci\IeC {\'o}n de mecanismos de control de acceso.}{57}{section.5.7}
+\contentsline {section}{\numberline {5.8}Encriptaci\IeC {\'o}n de informaci\IeC {\'o}n.}{57}{section.5.8}
+\contentsline {section}{\numberline {5.9}Protocolos seguros de comunicaciones.}{57}{section.5.9}
+\contentsline {section}{\numberline {5.10}Programaci\IeC {\'o}n de aplicaciones con comunicaciones seguras.}{57}{section.5.10}
+\contentsline {section}{\numberline {5.11}Pruebas y depuraci\IeC {\'o}n.}{57}{section.5.11}
