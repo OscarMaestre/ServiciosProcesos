@@ -2178,27 +2178,142 @@ IPMBNVÑEP</div></blockquote>
 </div>
 <div class="section" id="criptografia-de-clave-publica-y-clave-privada">
 <h3>Criptografía de clave pública y clave privada.<a class="headerlink" href="#criptografia-de-clave-publica-y-clave-privada" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Los principales sistemas modernos de seguridad utilizan dos claves ,una para cifrar y otra para descifrar. Esto se puede usar de diversas formas.</p>
 </div>
 <div class="section" id="principales-aplicaciones-de-la-criptografia">
 <h3>Principales aplicaciones de la criptografía.<a class="headerlink" href="#principales-aplicaciones-de-la-criptografia" title="Enlazar permanentemente con este título">¶</a></h3>
+<ul class="simple">
+<li>Mensajería segura: todo el mundo da su clave de cifrado pero conserva la de descifrado. Si queremos enviar un mensaje a alguien cogemos su clave de cifrado y ciframos el mensaje que le enviamos. Solo él podrá descifrarlo.</li>
+<li>Firma digital: pilar del comercio electrónico. Permite verificar que un archivo no ha sido modificado.</li>
+<li>Mensajería segura: en este tipo de mensajería se intenta evitar que un atacante (quizá con un <em>sniffer</em>) consiga descifrar nuestros mensajes.</li>
+<li>Autenticación: los sistemas de autenticación intentan resolver una cuestión clave en la informática: <strong>verificar que una máquina es quien dice ser</strong></li>
+</ul>
 </div>
 <div class="section" id="protocolos-criptograficos">
 <h3>Protocolos criptográficos.<a class="headerlink" href="#protocolos-criptograficos" title="Enlazar permanentemente con este título">¶</a></h3>
-</div>
-<div class="section" id="politica-de-seguridad">
-<h3>Política de seguridad.<a class="headerlink" href="#politica-de-seguridad" title="Enlazar permanentemente con este título">¶</a></h3>
-</div>
-<div class="section" id="programacion-de-mecanismos-de-control-de-acceso">
-<h3>Programación de mecanismos de control de acceso.<a class="headerlink" href="#programacion-de-mecanismos-de-control-de-acceso" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En realidad protocolos criptográficos hay muchos, y suelen dividirse en sistemas simétricos o asimétricos.</p>
+<ul class="simple">
+<li>Los sistemas simétricos son aquellos basados en una función que convierte un mensaje en otro mensaje cifrado. Si se desea descifrar algo se aplica el proceso inverso con la misma clave que se usó.</li>
+<li>Los sistemas asimétricos utilizan una clave de cifrado y otra de descifrado. Aunque se tenga una clave es matemáticamente imposible averiguar la otra clave por lo que se puede dar a todo el mundo una de las claves (llamada habitualmente <strong>clave pública</strong>) y conservar la otra (llamada <strong>clave privada</strong>). Además, podemos usar las claves para lo que queramos y por ejemplo en unos casos cifraremos con la clave pública y en otros tal vez cifremos con la clave privada.</li>
+</ul>
+<p>Hoy por hoy, las mayores garantías las ofrecen los asimétricos, de los cuales hay varios sistemas. El inconveniente que pueden tener los asimétricos es que son más lentos computacionalmente.</p>
+<p>En este curso usaremos el cifrado asimétrico RSA.</p>
 </div>
 <div class="section" id="encriptacion-de-informacion">
 <h3>Encriptación de información.<a class="headerlink" href="#encriptacion-de-informacion" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El siguiente código muestra como crear una clase que permita cifrar y descifrar textos.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GestorCifrado</span> <span class="o">{</span>
+        <span class="n">KeyPair</span> <span class="n">claves</span><span class="o">;</span>
+        <span class="n">KeyPairGenerator</span> <span class="n">generadorClaves</span><span class="o">;</span>
+        <span class="n">Cipher</span> <span class="n">cifrador</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">GestorCifrado</span><span class="o">()</span>
+                        <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span>
+                        <span class="n">NoSuchPaddingException</span><span class="o">{</span>
+                <span class="n">generadorClaves</span><span class="o">=</span>
+                                <span class="n">KeyPairGenerator</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;RSA&quot;</span><span class="o">);</span>
+                <span class="cm">/*Usaremos una longitud de clave</span>
+<span class="cm">                 * de 1024 bits */</span>
+                <span class="n">generadorClaves</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="mi">1024</span><span class="o">);</span>
+                <span class="n">claves</span><span class="o">=</span><span class="n">generadorClaves</span><span class="o">.</span><span class="na">generateKeyPair</span><span class="o">();</span>
+                <span class="n">cifrador</span><span class="o">=</span><span class="n">Cipher</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;RSA&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">PublicKey</span> <span class="nf">getPublica</span><span class="o">(){</span>
+                <span class="k">return</span> <span class="n">claves</span><span class="o">.</span><span class="na">getPublic</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">PrivateKey</span> <span class="nf">getPrivada</span><span class="o">(){</span>
+                <span class="k">return</span> <span class="n">claves</span><span class="o">.</span><span class="na">getPrivate</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">cifrar</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">paraCifrar</span><span class="o">,</span>
+                        <span class="n">Key</span> <span class="n">claveCifrado</span>
+                        <span class="o">)</span> <span class="kd">throws</span> <span class="n">InvalidKeyException</span><span class="o">,</span>
+                        <span class="n">IllegalBlockSizeException</span><span class="o">,</span>
+                        <span class="n">BadPaddingException</span><span class="o">{</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">resultado</span><span class="o">;</span>
+                <span class="cm">/* Se pone el cifrador en modo cifrado*/</span>
+                <span class="n">cifrador</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">Cipher</span><span class="o">.</span><span class="na">ENCRYPT_MODE</span><span class="o">,</span>
+                                <span class="n">claveCifrado</span><span class="o">);</span>
+                <span class="n">resultado</span><span class="o">=</span><span class="n">cifrador</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">paraCifrar</span><span class="o">);</span>
+                <span class="k">return</span> <span class="n">resultado</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">descifrar</span><span class="o">(</span>
+                        <span class="kt">byte</span><span class="o">[]</span> <span class="n">paraDescifrar</span><span class="o">,</span>
+                        <span class="n">Key</span> <span class="n">claveDescifrado</span><span class="o">)</span>
+                                        <span class="kd">throws</span> <span class="n">InvalidKeyException</span><span class="o">,</span>
+                                        <span class="n">IllegalBlockSizeException</span><span class="o">,</span>
+                                        <span class="n">BadPaddingException</span><span class="o">{</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">resultado</span><span class="o">;</span>
+                <span class="cm">/* Se pone el cifrador en modo descifrado*/</span>
+                <span class="n">cifrador</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">Cipher</span><span class="o">.</span><span class="na">DECRYPT_MODE</span><span class="o">,</span>
+                                <span class="n">claveDescifrado</span><span class="o">);</span>
+                <span class="n">resultado</span><span class="o">=</span><span class="n">cifrador</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">paraDescifrar</span><span class="o">);</span>
+                <span class="k">return</span> <span class="n">resultado</span><span class="o">;</span>
+        <span class="o">}</span>
+
+
+
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>
+                        <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span>
+                        <span class="n">NoSuchPaddingException</span><span class="o">,</span>
+                        <span class="n">InvalidKeyException</span><span class="o">,</span>
+                        <span class="n">IllegalBlockSizeException</span><span class="o">,</span>
+                        <span class="n">BadPaddingException</span><span class="o">,</span>
+                        <span class="n">UnsupportedEncodingException</span>
+        <span class="o">{</span>
+                <span class="n">GestorCifrado</span> <span class="n">gestorCifrado</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">GestorCifrado</span><span class="o">();</span>
+                <span class="n">String</span> <span class="n">mensajeOriginal</span><span class="o">=</span><span class="s">&quot;Hola mundo&quot;</span><span class="o">;</span>
+                <span class="n">Key</span> <span class="n">clavePublica</span><span class="o">=</span><span class="n">gestorCifrado</span><span class="o">.</span><span class="na">getPublica</span><span class="o">();</span>
+
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">mensajeCifrado</span><span class="o">=</span>
+                                <span class="n">gestorCifrado</span><span class="o">.</span><span class="na">cifrar</span><span class="o">(</span>
+                                                <span class="n">mensajeOriginal</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(),</span>
+                                                <span class="n">clavePublica</span>
+                <span class="o">);</span>
+                <span class="n">String</span> <span class="n">cadCifrada</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">mensajeCifrado</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">);</span>
+
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span>
+                        <span class="o">(</span><span class="s">&quot;Cadena original:&quot;</span><span class="o">+</span><span class="n">mensajeOriginal</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span>
+                        <span class="o">(</span><span class="s">&quot;Cadena cifrada:&quot;</span><span class="o">+</span><span class="n">cadCifrada</span><span class="o">);</span>
+
+                <span class="cm">/* Cogemos la cadCifrada y la desciframos</span>
+<span class="cm">                 * con la otra clave</span>
+<span class="cm">                 */</span>
+                <span class="n">Key</span> <span class="n">clavePrivada</span><span class="o">;</span>
+                <span class="n">clavePrivada</span><span class="o">=</span><span class="n">gestorCifrado</span><span class="o">.</span><span class="na">getPrivada</span><span class="o">();</span>
+                <span class="kt">byte</span><span class="o">[]</span> <span class="n">descifrada</span><span class="o">=</span>
+                                <span class="n">gestorCifrado</span><span class="o">.</span><span class="na">descifrar</span><span class="o">(</span>
+                                                <span class="n">mensajeCifrado</span><span class="o">,</span><span class="n">clavePrivada</span><span class="o">);</span>
+                <span class="n">String</span> <span class="n">mensajeDescifrado</span><span class="o">;</span>
+                <span class="n">mensajeDescifrado</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">descifrada</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                <span class="s">&quot;El mensaje descifrado es:&quot;</span><span class="o">+</span>
+                                                <span class="n">mensajeDescifrado</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Advertencia</p>
+<p class="last">Los objetos que cifran y descifran en Java utilizan estrictamente objetos <tt class="docutils literal"><span class="pre">byte[]</span></tt>, que
+son los que debemos manejar siempre. Las conversiones a <tt class="docutils literal"><span class="pre">String</span></tt> las hacemos nosotros para poder visualizar resultados.</p>
+</div>
 </div>
 <div class="section" id="protocolos-seguros-de-comunicaciones">
 <h3>Protocolos seguros de comunicaciones.<a class="headerlink" href="#protocolos-seguros-de-comunicaciones" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="programacion-de-aplicaciones-con-comunicaciones-seguras">
 <h3>Programación de aplicaciones con comunicaciones seguras.<a class="headerlink" href="#programacion-de-aplicaciones-con-comunicaciones-seguras" title="Enlazar permanentemente con este título">¶</a></h3>
+</div>
+<div class="section" id="politica-de-seguridad">
+<h3>Política de seguridad.<a class="headerlink" href="#politica-de-seguridad" title="Enlazar permanentemente con este título">¶</a></h3>
+</div>
+<div class="section" id="programacion-de-mecanismos-de-control-de-acceso">
+<h3>Programación de mecanismos de control de acceso.<a class="headerlink" href="#programacion-de-mecanismos-de-control-de-acceso" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="pruebas-y-depuracion">
 <h3>Pruebas y depuración.<a class="headerlink" href="#pruebas-y-depuracion" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -2288,11 +2403,11 @@ IPMBNVÑEP</div></blockquote>
 <li class="toctree-l2"><a class="reference internal" href="index.html#criptografia-de-clave-publica-y-clave-privada">Criptografía de clave pública y clave privada.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#principales-aplicaciones-de-la-criptografia">Principales aplicaciones de la criptografía.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#protocolos-criptograficos">Protocolos criptográficos.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#politica-de-seguridad">Política de seguridad.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#programacion-de-mecanismos-de-control-de-acceso">Programación de mecanismos de control de acceso.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#encriptacion-de-informacion">Encriptación de información.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#protocolos-seguros-de-comunicaciones">Protocolos seguros de comunicaciones.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#programacion-de-aplicaciones-con-comunicaciones-seguras">Programación de aplicaciones con comunicaciones seguras.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#politica-de-seguridad">Política de seguridad.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#programacion-de-mecanismos-de-control-de-acceso">Programación de mecanismos de control de acceso.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#pruebas-y-depuracion">Pruebas y depuración.</a></li>
 </ul>
 </li>

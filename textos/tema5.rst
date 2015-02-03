@@ -97,26 +97,153 @@ Esta clase implementa un sistema de rotado básico para poder efectuar
 Criptografía de clave pública y clave privada.
 ----------------------------------------------------
 
+Los principales sistemas modernos de seguridad utilizan dos claves ,una para cifrar y otra para descifrar. Esto se puede usar de diversas formas.
+
+
 Principales aplicaciones de la criptografía.
 ----------------------------------------------------
 
+* Mensajería segura: todo el mundo da su clave de cifrado pero conserva la de descifrado. Si queremos enviar un mensaje a alguien cogemos su clave de cifrado y ciframos el mensaje que le enviamos. Solo él podrá descifrarlo.
+
+
+* Firma digital: pilar del comercio electrónico. Permite verificar que un archivo no ha sido modificado.
+* Mensajería segura: en este tipo de mensajería se intenta evitar que un atacante (quizá con un *sniffer*) consiga descifrar nuestros mensajes.
+* Autenticación: los sistemas de autenticación intentan resolver una cuestión clave en la informática: **verificar que una máquina es quien dice ser**
+
+
+
 Protocolos criptográficos.
 ----------------------------------------------------
+
+En realidad protocolos criptográficos hay muchos, y suelen dividirse en sistemas simétricos o asimétricos.
+
+* Los sistemas simétricos son aquellos basados en una función que convierte un mensaje en otro mensaje cifrado. Si se desea descifrar algo se aplica el proceso inverso con la misma clave que se usó.
+
+* Los sistemas asimétricos utilizan una clave de cifrado y otra de descifrado. Aunque se tenga una clave es matemáticamente imposible averiguar la otra clave por lo que se puede dar a todo el mundo una de las claves (llamada habitualmente **clave pública**) y conservar la otra (llamada **clave privada**). Además, podemos usar las claves para lo que queramos y por ejemplo en unos casos cifraremos con la clave pública y en otros tal vez cifremos con la clave privada.
+
+Hoy por hoy, las mayores garantías las ofrecen los asimétricos, de los cuales hay varios sistemas. El inconveniente que pueden tener los asimétricos es que son más lentos computacionalmente.
+
+En este curso usaremos el cifrado asimétrico RSA.
+
+
+Encriptación de información.
+------------------------------------------------------------
+
+El siguiente código muestra como crear una clase que permita cifrar y descifrar textos.
+
+.. code-block:: java
+
+	public class GestorCifrado {
+		KeyPair claves;
+		KeyPairGenerator generadorClaves;
+		Cipher cifrador;
+		public GestorCifrado() 
+				throws NoSuchAlgorithmException, 
+				NoSuchPaddingException{
+			generadorClaves=
+					KeyPairGenerator.getInstance("RSA");
+			/*Usaremos una longitud de clave 
+			 * de 1024 bits */
+			generadorClaves.initialize(1024);
+			claves=generadorClaves.generateKeyPair();
+			cifrador=Cipher.getInstance("RSA");
+		}
+		public PublicKey getPublica(){
+			return claves.getPublic();
+		}
+		public PrivateKey getPrivada(){
+			return claves.getPrivate();
+		}
+		
+		public byte[] cifrar(byte[] paraCifrar,
+				Key claveCifrado
+				) throws InvalidKeyException, 
+				IllegalBlockSizeException, 
+				BadPaddingException{
+			byte[] resultado;
+			/* Se pone el cifrador en modo cifrado*/
+			cifrador.init(Cipher.ENCRYPT_MODE, 
+					claveCifrado);
+			resultado=cifrador.doFinal(paraCifrar);
+			return resultado;	
+		}
+		
+		public byte[] descifrar(
+				byte[] paraDescifrar,
+				Key claveDescifrado) 
+						throws InvalidKeyException,
+						IllegalBlockSizeException, 
+						BadPaddingException{
+			byte[] resultado;
+			/* Se pone el cifrador en modo descifrado*/
+			cifrador.init(Cipher.DECRYPT_MODE,
+					claveDescifrado);
+			resultado=cifrador.doFinal(paraDescifrar);
+			return resultado;
+		}
+		
+		
+		
+		public static void main(String[] args) 
+				throws NoSuchAlgorithmException,
+				NoSuchPaddingException,
+				InvalidKeyException,
+				IllegalBlockSizeException,
+				BadPaddingException,
+				UnsupportedEncodingException 
+		{
+			GestorCifrado gestorCifrado=
+					new GestorCifrado();
+			String mensajeOriginal="Hola mundo";
+			Key clavePublica=gestorCifrado.getPublica();
+			
+			byte[] mensajeCifrado=
+					gestorCifrado.cifrar(
+							mensajeOriginal.getBytes(),
+							clavePublica
+			);
+			String cadCifrada=
+					new String(mensajeCifrado, "UTF-8");
+			
+			System.out.println
+				("Cadena original:"+mensajeOriginal);
+			System.out.println
+				("Cadena cifrada:"+cadCifrada);
+			
+			/* Cogemos la cadCifrada y la desciframos
+			 * con la otra clave
+			 */
+			Key clavePrivada;
+			clavePrivada=gestorCifrado.getPrivada();
+			byte[] descifrada=
+					gestorCifrado.descifrar(
+							mensajeCifrado,clavePrivada);
+			String mensajeDescifrado;
+			mensajeDescifrado=
+					new String(descifrada, "UTF-8");
+			System.out.println(
+					"El mensaje descifrado es:"+
+							mensajeDescifrado);
+		}
+	}
+
+
+.. WARNING::
+   Los objetos que cifran y descifran en Java utilizan estrictamente objetos ``byte[]``, que
+   son los que debemos manejar siempre. Las conversiones a ``String`` las hacemos nosotros para poder visualizar resultados.
+
+Protocolos seguros de comunicaciones.
+------------------------------------------------------------
+
+Programación de aplicaciones con comunicaciones seguras.
+------------------------------------------------------------
+
 
 Política de seguridad.
 ------------------------------------------------------------
 
 
 Programación de mecanismos de control de acceso.
-------------------------------------------------------------
-
-Encriptación de información.
-------------------------------------------------------------
-
-Protocolos seguros de comunicaciones.
-------------------------------------------------------------
-
-Programación de aplicaciones con comunicaciones seguras.
 ------------------------------------------------------------
 
 Pruebas y depuración.
