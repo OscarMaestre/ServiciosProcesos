@@ -2305,6 +2305,17 @@ son los que debemos manejar siempre. Las conversiones a <tt class="docutils lite
 </div>
 <div class="section" id="protocolos-seguros-de-comunicaciones">
 <h3>Protocolos seguros de comunicaciones.<a class="headerlink" href="#protocolos-seguros-de-comunicaciones" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En general, ahora que ya conocemos sockets, el uso de servidores y clientes y el uso de la criptografía de clave asimétrica ya es posible crear aplicaciones que se comuniquen de forma muy segura.</p>
+<p>En general, todo protocolo que queramos implementar dará estos pasos.</p>
+<ol class="arabic simple">
+<li>Todo cliente genera su pareja de claves.</li>
+<li>Todo servidor genera su pareja de claves.</li>
+<li>Cuando un cliente se conecte a un servidor, le envía su clave de cifrado y conserva la de descifrado.</li>
+<li>Cuando un servidor recibe la conexión de un cliente recibe la clave de cifrado de dicho cliente.</li>
+<li>El servidor envía su clave pública al cliente.</li>
+<li>Ahora cliente y servidor pueden enviar mensajes al otro con la garantía de que solo servidor y cliente respectivamente pueden descifrar.</li>
+</ol>
+<p>En realidad se puede asegurar más el proceso haciendo que en el paso 5 el servidor cifre su propia clave pública con la clave pública del cliente. De esta forma, incluso aunque alguien robara la clave privada del cliente tampoco tendría demasiado, ya que tendría que robar la clave privada del servidor.</p>
 </div>
 <div class="section" id="programacion-de-aplicaciones-con-comunicaciones-seguras">
 <h3>Programación de aplicaciones con comunicaciones seguras.<a class="headerlink" href="#programacion-de-aplicaciones-con-comunicaciones-seguras" title="Enlazar permanentemente con este título">¶</a></h3>

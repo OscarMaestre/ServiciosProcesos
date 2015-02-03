@@ -235,6 +235,19 @@ El siguiente código muestra como crear una clase que permita cifrar y descifrar
 Protocolos seguros de comunicaciones.
 ------------------------------------------------------------
 
+En general, ahora que ya conocemos sockets, el uso de servidores y clientes y el uso de la criptografía de clave asimétrica ya es posible crear aplicaciones que se comuniquen de forma muy segura.
+
+En general, todo protocolo que queramos implementar dará estos pasos.
+
+1. Todo cliente genera su pareja de claves.
+2. Todo servidor genera su pareja de claves.
+3. Cuando un cliente se conecte a un servidor, le envía su clave de cifrado y conserva la de descifrado.
+4. Cuando un servidor recibe la conexión de un cliente recibe la clave de cifrado de dicho cliente.
+5. El servidor envía su clave pública al cliente.
+6. Ahora cliente y servidor pueden enviar mensajes al otro con la garantía de que solo servidor y cliente respectivamente pueden descifrar.
+
+En realidad se puede asegurar más el proceso haciendo que en el paso 5 el servidor cifre su propia clave pública con la clave pública del cliente. De esta forma, incluso aunque alguien robara la clave privada del cliente tampoco tendría demasiado, ya que tendría que robar la clave privada del servidor.
+
 Programación de aplicaciones con comunicaciones seguras.
 ------------------------------------------------------------
 
