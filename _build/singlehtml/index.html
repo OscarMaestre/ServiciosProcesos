@@ -2319,6 +2319,179 @@ son los que debemos manejar siempre. Las conversiones a <tt class="docutils lite
 </div>
 <div class="section" id="programacion-de-aplicaciones-con-comunicaciones-seguras">
 <h3>Programación de aplicaciones con comunicaciones seguras.<a class="headerlink" href="#programacion-de-aplicaciones-con-comunicaciones-seguras" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El protocolo básico ya se ha comentado en el paso anterior. Ya se dispone de una clase (<tt class="docutils literal"><span class="pre">GestorCifrado</span></tt>) que permite manipular el cifrado de forma básica, sin embargo ahora cliente y servidor deben enviar sus claves públicas respectivas, es decir</p>
+<ul class="simple">
+<li>El servidor recibirá la clave pública del cliente.</li>
+<li>El cliente recibirá la clave pública del servidor (puede la clave pública del servidor se envíe cifrada con la clave pública del servidor).</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Advertencia</p>
+<p class="last">Enviar una clave pública como String <strong>ES MUY PELIGROSO</strong>. La clase String podría construir una cadena que contenga finales de línea que podrían estropear un protocolo que se base en enviar mensajes que se supone que solo tienen una línea.</p>
+</div>
+<p>El proceso para el cliente es más o menos así:</p>
+<ol class="arabic simple">
+<li>Conectar</li>
+<li>Obtener flujos para poder leer y escribir cosas de y hacia el servidor.</li>
+<li>Convertir su clave pública en una lista de bytes</li>
+<li>Enviar un mensaje al servidor diciéndole la longitud de la clave que se va a enviar (es decir, cuantos bytes se van a enviar).</li>
+<li>Enviar los bytes de la clave pública y hacer flush.</li>
+</ol>
+<p>Esto puede implicar que en unos casos usemos unas clases de flujos u otros (para enviar líneas podemos usar los <tt class="docutils literal"><span class="pre">PrintWriter</span></tt> pero para enviar bytes usaremos <tt class="docutils literal"><span class="pre">OutputStream</span></tt>)</p>
+<p>Por desgracia enviar una clave pública en forma de bytes implica luego tener que volver a convertirla en un objeto Java. Para ello necesitaremos usar clases como <tt class="docutils literal"><span class="pre">KeyStore</span></tt> y <tt class="docutils literal"><span class="pre">X509EncodedKeySpec</span></tt>. Por ejemplo, podemos añadir este método a nuestra clase <tt class="docutils literal"><span class="pre">GestorCifrado</span></tt>.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="n">PublicKey</span> <span class="nf">convertirDesdeBytes</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">bytesClave</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span> <span class="n">InvalidKeySpecException</span><span class="o">{</span>
+        <span class="n">KeyFactory</span> <span class="n">fabricaClaves</span><span class="o">=</span>
+                <span class="n">KeyFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;RSA&quot;</span><span class="o">);</span>
+        <span class="n">X509EncodedKeySpec</span> <span class="n">claveCodificada</span><span class="o">=</span>
+                        <span class="k">new</span> <span class="nf">X509EncodedKeySpec</span><span class="o">(</span><span class="n">bytesClave</span><span class="o">);</span>
+        <span class="n">PublicKey</span> <span class="n">clave</span><span class="o">=</span>
+                <span class="n">fabricaClaves</span><span class="o">.</span><span class="na">generatePublic</span><span class="o">(</span>
+                        <span class="n">claveCodificada</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">clave</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Aparte de enviar nuestras claves públicas como secuencias de bytes, también se podría utilizar la serialización Java para enviar un objeto a través de la red.</p>
+<div class="section" id="la-clase-servidor">
+<h4>La clase Servidor<a class="headerlink" href="#la-clase-servidor" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Servidor</span> <span class="o">{</span>
+        <span class="n">ServerSocket</span> <span class="n">socketServidor</span><span class="o">;</span>
+
+        <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">PUERTO</span><span class="o">=</span><span class="mi">9876</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">escuchar</span><span class="o">(){</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">socketServidor</span><span class="o">=</span><span class="k">new</span> <span class="n">ServerSocket</span><span class="o">(</span><span class="n">PUERTO</span><span class="o">);</span>
+                        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+                        <span class="o">{</span>
+                                <span class="n">Socket</span> <span class="n">conexion</span><span class="o">=</span><span class="n">socketServidor</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+                                <span class="n">Peticion</span> <span class="n">p</span><span class="o">=</span><span class="k">new</span> <span class="n">Peticion</span><span class="o">(</span><span class="n">conexion</span><span class="o">);</span>
+                                <span class="n">Thread</span> <span class="n">hiloAsociado</span><span class="o">=</span>
+                                                <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+                                <span class="n">hiloAsociado</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+                        <span class="o">}</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="o">|</span> <span class="n">NoSuchAlgorithmException</span> <span class="o">|</span> <span class="n">NoSuchPaddingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// TODO Auto-generated catch block</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+                <span class="n">Servidor</span> <span class="n">s</span><span class="o">=</span><span class="k">new</span> <span class="n">Servidor</span><span class="o">();</span>
+                <span class="n">s</span><span class="o">.</span><span class="na">escuchar</span><span class="o">();</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="la-clase-peticion">
+<h4>La clase Peticion<a class="headerlink" href="#la-clase-peticion" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Peticion</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
+        <span class="n">Socket</span> <span class="n">conexion</span><span class="o">;</span>
+        <span class="n">GestorCifrado</span> <span class="n">gestorCifrado</span><span class="o">;</span>
+        <span class="n">Cipher</span> <span class="n">cifradorMensajesParaCliente</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">Peticion</span> <span class="o">(</span><span class="n">Socket</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span> <span class="n">NoSuchPaddingException</span><span class="o">{</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">conexion</span><span class="o">=</span><span class="n">s</span><span class="o">;</span>
+                <span class="n">gestorCifrado</span><span class="o">=</span><span class="k">new</span> <span class="n">GestorCifrado</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="cm">/*Todo servidor empieza esperando</span>
+<span class="cm">                 * que el cliente le envíe la clave pública</span>
+<span class="cm">                 */</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Llego una conexion!&quot;</span><span class="o">);</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">InputStream</span> <span class="n">flujoLectura</span><span class="o">=</span>
+                                        <span class="n">conexion</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+                        <span class="n">OutputStream</span> <span class="n">flujoEscritura</span><span class="o">=</span>
+                                        <span class="n">conexion</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
+                        <span class="n">BufferedReader</span> <span class="n">lector</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span>
+                                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span>
+                                                                        <span class="n">flujoLectura</span>
+                                                                <span class="o">)</span>
+                        <span class="o">);</span>
+
+                        <span class="n">PrintWriter</span> <span class="n">escritor</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">PrintWriter</span><span class="o">(</span>
+                                                        <span class="n">flujoEscritura</span>
+                        <span class="o">);</span>
+                        <span class="cm">/* Primero llega una línea con la longitud.</span>
+<span class="cm">                         * Esa línea no puede tener más de 6</span>
+<span class="cm">                         * caracteres</span>
+<span class="cm">                         */</span>
+                        <span class="n">String</span> <span class="n">linea</span><span class="o">=</span><span class="n">lector</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Longitud clave:&quot;</span><span class="o">+</span><span class="n">linea</span><span class="o">);</span>
+                        <span class="kt">int</span> <span class="n">longitudClave</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
+                        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytesClave</span><span class="o">=</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">longitudClave</span><span class="o">];</span>
+                        <span class="n">flujoLectura</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">bytesClave</span><span class="o">);</span>
+
+
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// TODO Auto-generated catch block</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+
+
+        <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="la-clase-cliente">
+<h4>La clase Cliente<a class="headerlink" href="#la-clase-cliente" title="Enlazar permanentemente con este título">¶</a></h4>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Cliente</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">ipServidor</span><span class="o">=</span><span class="s">&quot;10.13.0.20&quot;</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="n">puerto</span><span class="o">=</span><span class="mi">9876</span><span class="o">;</span>
+        <span class="n">Cipher</span> <span class="n">cifradorMensajesParaServidor</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">enviarMensaje</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span> <span class="n">NoSuchPaddingException</span><span class="o">{</span>
+                <span class="n">Socket</span> <span class="n">conexion</span><span class="o">;</span>
+                <span class="n">GestorCifrado</span> <span class="n">gestorCifrado</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">GestorCifrado</span><span class="o">();</span>
+                <span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span>
+                                <span class="k">new</span> <span class="nf">InetSocketAddress</span><span class="o">(</span><span class="n">ipServidor</span><span class="o">,</span> <span class="n">puerto</span><span class="o">);</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">conexion</span><span class="o">=</span><span class="k">new</span> <span class="n">Socket</span><span class="o">();</span>
+                        <span class="n">conexion</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">direccion</span><span class="o">);</span>
+                        <span class="cm">/* Para enviar y recibir necesitaremos flujos*/</span>
+                        <span class="n">InputStream</span> <span class="n">flujoLectura</span><span class="o">=</span>
+                                        <span class="n">conexion</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+                        <span class="n">OutputStream</span> <span class="n">flujoEscritura</span><span class="o">=</span>
+                                        <span class="n">conexion</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
+                        <span class="n">PrintWriter</span> <span class="n">escritor</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="nf">PrintWriter</span><span class="o">(</span><span class="n">flujoEscritura</span><span class="o">);</span>
+                        <span class="n">PublicKey</span> <span class="n">clavePublicaCliente</span><span class="o">=</span>
+                                        <span class="n">gestorCifrado</span><span class="o">.</span><span class="na">getPublica</span><span class="o">();</span>
+                        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytesClavePublicaCliente</span><span class="o">=</span>
+                                        <span class="n">clavePublicaCliente</span><span class="o">.</span><span class="na">getEncoded</span><span class="o">();</span>
+                        <span class="kt">int</span> <span class="n">longitudClave</span><span class="o">=</span>
+                                        <span class="n">bytesClavePublicaCliente</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                        <span class="s">&quot;La clave del cliente tiene &quot;</span><span class="o">+</span>
+                                        <span class="n">longitudClave</span><span class="o">+</span><span class="s">&quot; bytes.&quot;</span>
+                        <span class="o">);</span>
+                        <span class="n">escritor</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">longitudClave</span><span class="o">);</span>
+                        <span class="n">escritor</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">bytesClavePublicaCliente</span><span class="o">);</span>
+                        <span class="k">try</span> <span class="o">{</span>
+                                <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">sleep</span><span class="o">(</span><span class="mi">5000</span><span class="o">);</span>
+                        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                                <span class="c1">// TODO Auto-generated catch block</span>
+                                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                        <span class="o">}</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// TODO Auto-generated catch block</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+
+        <span class="o">}</span> <span class="cm">/*Fin del método enviarMensaje*/</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argumentos</span><span class="o">)</span>
+                        <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span> <span class="n">NoSuchPaddingException</span><span class="o">{</span>
+                <span class="n">Cliente</span> <span class="n">c</span><span class="o">=</span><span class="k">new</span> <span class="n">Cliente</span><span class="o">();</span>
+                <span class="n">c</span><span class="o">.</span><span class="na">enviarMensaje</span><span class="o">(</span><span class="s">&quot;Hola servidor&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="politica-de-seguridad">
 <h3>Política de seguridad.<a class="headerlink" href="#politica-de-seguridad" title="Enlazar permanentemente con este título">¶</a></h3>
