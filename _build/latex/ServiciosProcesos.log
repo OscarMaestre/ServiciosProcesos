@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.24)  10 FEB 2015 13:56
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.24)  11 FEB 2015 12:22
 entering extended mode
 **ServiciosProcesos.tex
 (D:\oscar\ServiciosProcesos\_build\latex\ServiciosProcesos.tex
@@ -1053,16 +1053,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 2777--2780
 
 [60] [61] [62] [63]
 No file ServiciosProcesos.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2976.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2977.
 [64]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2976.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2977.
  (D:\oscar\ServiciosProcesos\_build\latex\ServiciosProcesos.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2976.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2976.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2977.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2977.
 
 Package rerunfilecheck Info: File `ServiciosProcesos.out' has not changed.
 (rerunfilecheck)             Checksum: 659FF7C711F0D69CD2E8A0761ACD1B12;5836.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2976.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2977.
  ) 
 Here is how much of TeX's memory you used:
  9624 strings out of 493921
@@ -1080,7 +1080,7 @@ onts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
 e1/urw/helvetic/uhvbo8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/
 times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8
 a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ServiciosProcesos.pdf (68 pages, 401370 bytes).
+Output written on ServiciosProcesos.pdf (68 pages, 401423 bytes).
 PDF statistics:
  800 PDF objects out of 1000 (max. 8388607)
  209 named destinations out of 1000 (max. 500000)

@@ -2471,6 +2471,7 @@ son los que debemos manejar siempre. Las conversiones a <tt class="docutils lite
                         <span class="n">escritor</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">longitudClave</span><span class="o">);</span>
                         <span class="n">escritor</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
                         <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">bytesClavePublicaCliente</span><span class="o">);</span>
+                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
                         <span class="k">try</span> <span class="o">{</span>
                                 <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">sleep</span><span class="o">(</span><span class="mi">5000</span><span class="o">);</span>
                         <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>

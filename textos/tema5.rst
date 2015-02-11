@@ -415,6 +415,7 @@ La clase Cliente
 				escritor.println(longitudClave);
 				escritor.flush();
 				flujoEscritura.write(bytesClavePublicaCliente);
+				flujoEscritura.flush();
 				try {
 					Thread.currentThread().sleep(5000);
 				} catch (InterruptedException e) {
