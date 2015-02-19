@@ -250,191 +250,23 @@ En realidad se puede asegurar más el proceso haciendo que en el paso 5 el servi
 
 Programación de aplicaciones con comunicaciones seguras.
 ------------------------------------------------------------
+Por fortuna Java dispone de clases ya prefabricadas que facilitan enormemente el que dos aplicaciones intercambios datos de forma segura a través de una red. Se deben considerar los siguientes puntos:
 
-El protocolo básico ya se ha comentado en el paso anterior. Ya se dispone de una clase (``GestorCifrado``) que permite manipular el cifrado de forma básica, sin embargo ahora cliente y servidor deben enviar sus claves públicas respectivas, es decir
-
-* El servidor recibirá la clave pública del cliente.
-* El cliente recibirá la clave pública del servidor (puede la clave pública del servidor se envíe cifrada con la clave pública del servidor).
-
-.. WARNING::
-   Enviar una clave pública como String **ES MUY PELIGROSO**. La clase String podría construir una cadena que contenga finales de línea que podrían estropear un protocolo que se base en enviar mensajes que se supone que solo tienen una línea.
-
-El proceso para el cliente es más o menos así:
-
-1. Conectar
-2. Obtener flujos para poder leer y escribir cosas de y hacia el servidor.
-3. Convertir su clave pública en una lista de bytes
-4. Enviar un mensaje al servidor diciéndole la longitud de la clave que se va a enviar (es decir, cuantos bytes se van a enviar).
-5. Enviar los bytes de la clave pública y hacer flush.
-
-
-
-Esto puede implicar que en unos casos usemos unas clases de flujos u otros (para enviar líneas podemos usar los ``PrintWriter`` pero para enviar bytes usaremos ``OutputStream``)
-
-Por desgracia enviar una clave pública en forma de bytes implica luego tener que volver a convertirla en un objeto Java. Para ello necesitaremos usar clases como ``KeyStore`` y ``X509EncodedKeySpec``. Por ejemplo, podemos añadir este método a nuestra clase ``GestorCifrado``.
+* El servidor debe tener su propio certificado. Si no lo tenemos, se puede generar primero una pareja de claves con la herramienta ``keytool'', como se muestra en la figura adjunta. La herramienta guardará la pareja de claves en un almacén (el cual tiene su propia clave). Despues generaremos un certificado a partir de esa pareja con ``keytool -export -file certificadoservidor.cer -keystore almacenclaves``.
+* El código del servidor necesitará indicar el fichero donde se almacenan las claves y la clave para acceder a ese almacén.
+* El cliente necesita su propia pareja de claves, y despues necesitará el certificado del servidor.
 
 .. code-block:: java
 
-	public PublicKey convertirDesdeBytes(byte[] bytesClave) throws NoSuchAlgorithmException, InvalidKeySpecException{
-		KeyFactory fabricaClaves=
-			KeyFactory.getInstance("RSA");
-		X509EncodedKeySpec claveCodificada=
-				new X509EncodedKeySpec(bytesClave);
-		PublicKey clave=
-			fabricaClaves.generatePublic(
-				claveCodificada);
-		return clave;
-	}	
+    System.setProperty("javax.net.ssl.trustStore","almacenClaves");
+    System.setProperty("javax.net.ssl.trustStorePassword","123456");
 
-Aparte de enviar nuestras claves públicas como secuencias de bytes, también se podría utilizar la serialización Java para enviar un objeto a través de la red.
-
-
-La clase Servidor
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: java
-
-	public class Servidor {
-		ServerSocket socketServidor;
-		
-		private final int PUERTO=9876;
-		public void escuchar(){
-			try {
-				socketServidor=new ServerSocket(PUERTO);
-				while (true)
-				{
-					Socket conexion=socketServidor.accept();
-					Peticion p=new Peticion(conexion);
-					Thread hiloAsociado=
-							new Thread(p);
-					hiloAsociado.start();
-				}
-			} catch (IOException | NoSuchAlgorithmException | NoSuchPaddingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		public static void main(String[] args){
-			Servidor s=new Servidor();
-			s.escuchar();
-		}
-	}
-	
-
-La clase Peticion
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: java
-
-	public class Peticion implements Runnable{
-		Socket conexion;
-		GestorCifrado gestorCifrado;
-		Cipher cifradorMensajesParaCliente;
-		public Peticion (Socket s) throws NoSuchAlgorithmException, NoSuchPaddingException{
-			this.conexion=s;
-			gestorCifrado=new GestorCifrado();
-		}
-		@Override
-		public void run() {
-			/*Todo servidor empieza esperando
-			 * que el cliente le envíe la clave pública
-			 */
-			System.out.println("Llego una conexion!");
-			try {
-				InputStream flujoLectura=
-						conexion.getInputStream();
-				OutputStream flujoEscritura=
-						conexion.getOutputStream();
-				BufferedReader lector=
-						new BufferedReader(
-								new InputStreamReader(
-										flujoLectura
-									)
-				);
-				
-				PrintWriter escritor=
-						new PrintWriter(
-								flujoEscritura
-				);
-				/* Primero llega una línea con la longitud.
-				 * Esa línea no puede tener más de 6
-				 * caracteres 
-				 */
-				String linea=lector.readLine();
-				System.out.println("Longitud clave:"+linea);
-				int longitudClave=Integer.parseInt(linea);
-				byte[] bytesClave=new byte[longitudClave];
-				flujoLectura.read(bytesClave);
-							
-				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-		}
-
-	}
-	
-La clase Cliente
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: java
-
-	public final class Cliente {
-		private String ipServidor="10.13.0.20";
-		private int puerto=9876;
-		Cipher cifradorMensajesParaServidor;
-		public void enviarMensaje(String msg) throws NoSuchAlgorithmException, NoSuchPaddingException{
-			Socket conexion;
-			GestorCifrado gestorCifrado=
-					new GestorCifrado();
-			InetSocketAddress direccion=
-					new InetSocketAddress(ipServidor, puerto);
-			try {
-				conexion=new Socket();
-				conexion.connect(direccion);
-				/* Para enviar y recibir necesitaremos flujos*/
-				InputStream flujoLectura=
-						conexion.getInputStream();
-				OutputStream flujoEscritura=
-						conexion.getOutputStream();
-				PrintWriter escritor=
-						new PrintWriter(flujoEscritura);
-				PublicKey clavePublicaCliente=
-						gestorCifrado.getPublica();
-				byte[] bytesClavePublicaCliente=
-						clavePublicaCliente.getEncoded();
-				int longitudClave=
-						bytesClavePublicaCliente.length;
-				System.out.println(
-						"La clave del cliente tiene "+
-						longitudClave+" bytes."
-				);
-				escritor.println(longitudClave);
-				escritor.flush();
-				flujoEscritura.write(bytesClavePublicaCliente);
-				flujoEscritura.flush();
-				try {
-					Thread.currentThread().sleep(5000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		} /*Fin del método enviarMensaje*/
-		public static void main(String[] argumentos) 
-				throws NoSuchAlgorithmException, NoSuchPaddingException{
-			Cliente c=new Cliente();
-			c.enviarMensaje("Hola servidor");
-		}
-	}
-	
+    
+.. figure:: ../imagenes/generacion_clave.png
+   :figwidth: 50%
+   :align: center
+   
+   Generando la pareja de claves del servidor.
 
 Política de seguridad.
 ------------------------------------------------------------
