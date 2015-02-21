@@ -254,19 +254,118 @@ Por fortuna Java dispone de clases ya prefabricadas que facilitan enormemente el
 
 * El servidor debe tener su propio certificado. Si no lo tenemos, se puede generar primero una pareja de claves con la herramienta ``keytool'', como se muestra en la figura adjunta. La herramienta guardará la pareja de claves en un almacén (el cual tiene su propia clave). Despues generaremos un certificado a partir de esa pareja con ``keytool -export -file certificadoservidor.cer -keystore almacenclaves``.
 * El código del servidor necesitará indicar el fichero donde se almacenan las claves y la clave para acceder a ese almacén.
-* El cliente necesita su propia pareja de claves, y despues necesitará el certificado del servidor.
-
-.. code-block:: java
-
-    System.setProperty("javax.net.ssl.trustStore","almacenClaves");
-    System.setProperty("javax.net.ssl.trustStorePassword","123456");
-
+* El cliente necesita indicar que confía en el certificado del servidor. Dicho certificado del servidor puede estar guardado (por ejemplo) en el almacén de claves del cliente.
+* Aunque no suele hacerse también podría hacerse a la inversa y obligar al cliente a tener un certificado que el servidor pudiera importar, lo que aumentaría la seguridad.
     
 .. figure:: ../imagenes/generacion_clave.png
    :figwidth: 50%
    :align: center
    
    Generando la pareja de claves del servidor.
+   
+   
+Los pasos desglosados implican ejecutar estos comandos en el servidor::
+
+    # El servidor genera una pareja de claves que se almacena en un
+    #fichero llamado "clavesservidor". Dentro del fichero se indica
+    #un alias para poder referirnos a esa clave fácilmente
+    keytool -genkeypair -keyalg RSA -alias servidor -keystore clavesservidor
+    
+    #El servidor genera su "certificado", es decir un fichero que
+    #de alguna forma indica quien es él. El certificado se almacena
+    #en un fichero llamado clavesservidor y a partir de él queremos
+    #generar el certificado de un alias que tiene que haber llamado servidor
+    keytool --exportcert -alias servidor -file servidor.cer -keystore clavesservidor
+
+
+En el cliente daremos estos pasos::
+
+    #Se genera una pareja de claves (en realidad no nos hace falta solo
+    #queremos tener un almacén de claves.
+    keytool -genkeypair -keyalg RSA -alias cliente -keystore clavescliente
+    
+    #Se importa el certificado del servidor indicando que pertenece a
+    #la lista de certificados confiables.
+    keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore clavescliente
+    
+Una vez creados los ficheros iniciales se deben dar los siguientes pasos en Java (servidor y cliente van por separado):
+
+1. El servidor debe cargar su almacén de claves (el fichero ``clavesservidor``)
+2. Ese almacén (cargado en un objeto Java llamado ``KeyStore``), se usará para crear un gestor de claves (objeto ``KeyManager``), el cual se obtiene a partir de una "fábrica" llamada ``KeyManagerFactory``.
+3. Se creará un contexto SSL (objeto ``SSLContext``) a partir de la fábrica comentada.
+4. El objeto ``SSLContext`` permitirá crear una fábrica de sockets que será la que finalmente nos permita tener un ``SSLServerSocket``, es decir un socket de servidor que usará cifrado.
+    
+    
+El código Java del servidor sería algo así:
+
+.. code-block:: java
+
+    public OtroServidor (String rutaAlmacen, String claveAlmacen){
+		this.rutaAlmacen=rutaAlmacen;
+		this.claveAlmacen=claveAlmacen;
+	}
+	
+	public SSLServerSocket getServerSocketSeguro() 
+			throws KeyStoreException, NoSuchAlgorithmException, 
+			CertificateException, IOException, 
+			KeyManagementException, UnrecoverableKeyException
+	{
+		SSLServerSocket serverSocket=null;
+		/* Paso 1, se carga el almacén de claves*/
+		FileInputStream fichAlmacen=
+				new FileInputStream(this.rutaAlmacen);
+		/* Paso 1.1, se crea un almacén del tipo por defecto 
+		 * que es un JKS (Java Key Store), a día de hoy*/
+		KeyStore almacen=KeyStore.getInstance(KeyStore.getDefaultType());
+		almacen.load(fichAlmacen, claveAlmacen.toCharArray());
+		/* Paso 2: obtener una fábrica de KeyManagers que ofrezcan
+		 * soporte al algoritmo por defecto*/
+		KeyManagerFactory fabrica=
+				KeyManagerFactory.getInstance(
+						KeyManagerFactory.getDefaultAlgorithm());
+		fabrica.init(almacen, claveAlmacen.toCharArray());
+		/* Paso 3:Intentamos obtener un contexto SSL
+		 * que ofrezca soporte a TLS (el sistema más 
+		 * seguro hoy día) */
+		SSLContext contextoSSL=SSLContext.getInstance("TLS");
+		contextoSSL.init(fabrica.getKeyManagers(), null, null);
+		/* Paso 4: Se obtiene una fábrica de sockets que permita
+		 * obtener un SSLServerSocket */
+		SSLServerSocketFactory fabricaSockets=
+				contextoSSL.getServerSocketFactory();
+		serverSocket=
+				(SSLServerSocket) 
+					fabricaSockets.createServerSocket(puerto);
+		return serverSocket;
+	}
+	public void escuchar() 
+			throws KeyManagementException, UnrecoverableKeyException, 
+			KeyStoreException, NoSuchAlgorithmException, 
+			CertificateException, IOException
+	{
+		SSLServerSocket socketServidor=this.getServerSocketSeguro();
+		BufferedReader entrada;
+		PrintWriter salida;
+		while (true){
+			Socket connRecibida=socketServidor.accept();
+			System.out.println("Conexion segura recibida");
+			entrada=new BufferedReader(new InputStreamReader(connRecibida.getInputStream()));
+			salida=new PrintWriter(new OutputStreamWriter(connRecibida.getOutputStream()));
+			String linea=entrada.readLine();
+			salida.println(linea.length());
+			salida.flush();
+		}
+	}
+
+En el cliente se tienen que dar algunos pasos parecidos:
+
+1. En primer lugar se carga el almacén de claves del cliente (que contiene el certificado del servidor y que es la clave para poder "autenticar" el servidor)
+2. El almacén del cliente se usará para crear un "gestor de confianza" (``TrustManager``) que Java usará para determinar si puede confiar o no en una conexión. Usaremos un ``TrustManagerFactory`` que usará el almacén del cliente para crear objetos que puedan gestionar la confianza.
+3. Se creará un contexto SSL (``SSLContext``) que se basará en los ``TrustManager`` que pueda crear la fábrica.
+4. A partir del contexto SSL el cliente ya puede crear un socket seguro (``SSLSocket``) que puede usar para conectar con el servidor de forma segura.
+
+
+
 
 Política de seguridad.
 ------------------------------------------------------------
