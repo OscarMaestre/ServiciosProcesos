@@ -1,5 +1,4 @@
-﻿===============================
-Generación de servicios en red
+﻿Generación de servicios en red
 ===============================
 
 Protocolos estándar de comunicación en red a nivel de aplicación 

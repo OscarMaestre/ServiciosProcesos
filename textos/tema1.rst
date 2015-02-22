@@ -1,5 +1,4 @@
-﻿=========================
-Programación multiproceso
+﻿Programación multiproceso
 =========================
 
 

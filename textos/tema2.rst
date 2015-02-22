@@ -1,5 +1,4 @@
-﻿==========================
-Programación multihilo
+﻿Programación multihilo
 ==========================
 
 Recursos compartidos por los hilos.

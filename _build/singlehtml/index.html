@@ -39,11 +39,17 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="programacion-de-servicios-y-procesos">
-<h1>Programación de servicios y procesos<a class="headerlink" href="#programacion-de-servicios-y-procesos" title="Enlazar permanentemente con este título">¶</a></h1>
+  <dl class="docutils">
+<dt>﻿.. ServiciosProcesos documentation master file, created by</dt>
+<dd>sphinx-quickstart on Sun Sep  7 15:20:33 2014.
+You can adapt this file completely to your liking, but it should at least
+contain the root <cite>toctree</cite> directive.</dd>
+</dl>
+<div class="section" id="programacion-de-servicios-y-procesos">
+<h1>Programacion de servicios y procesos<a class="headerlink" href="#programacion-de-servicios-y-procesos" title="Enlazar permanentemente con este título">¶</a></h1>
 <div class="toctree-wrapper compound">
 <span id="document-textos/tema1"></span><div class="section" id="programacion-multiproceso">
-<h2>Programación multiproceso<a class="headerlink" href="#programacion-multiproceso" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>﻿Programación multiproceso<a class="headerlink" href="#programacion-multiproceso" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="ejecutables-procesos-servicios">
 <h3>Ejecutables. Procesos. Servicios.<a class="headerlink" href="#ejecutables-procesos-servicios" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="section" id="ejecutables">
@@ -122,7 +128,7 @@
 <p>Para resolverlo crearemos una clase <tt class="docutils literal"><span class="pre">Sumador</span></tt> que tenga un método que acepte dos números <tt class="docutils literal"><span class="pre">n1</span></tt> y <tt class="docutils literal"><span class="pre">n2</span></tt> y que devuelva la suma de todo el intervalor.</p>
 <p>Además, incluiremos un método <tt class="docutils literal"><span class="pre">main</span></tt> que ejecute la operación de suma tomando los números de la línea de comandos (es decir, se pasan como argumentos al main).</p>
 <p>El código de dicha clase podría ser algo así:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ies</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="nn">com.ies</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sumador</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">int</span> <span class="nf">sumar</span><span class="o">(</span><span class="kt">int</span> <span class="n">n1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n2</span><span class="o">){</span>
@@ -160,7 +166,7 @@
 </pre></div>
 </div>
 <p>Y ahora tendremos una clase que lanza procesos de esta forma:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ies</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="nn">com.ies</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lanzador</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">lanzarSumador</span><span class="o">(</span><span class="n">Integer</span> <span class="n">n1</span><span class="o">,</span>
@@ -322,7 +328,7 @@
 </div>
 </div>
 <span id="document-textos/tema2"></span><div class="section" id="programacion-multihilo">
-<h2>Programación multihilo<a class="headerlink" href="#programacion-multihilo" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>﻿Programación multihilo<a class="headerlink" href="#programacion-multihilo" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="recursos-compartidos-por-los-hilos">
 <h3>Recursos compartidos por los hilos.<a class="headerlink" href="#recursos-compartidos-por-los-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Cuando creamos varios objetos de una clase, puede ocurrir que varios hilos de ejecución accedan a un objeto. Es importante recordar que <strong>todos los campos del objeto son compartidos entre todos los hilos</strong>.</p>
@@ -456,7 +462,7 @@
 </div>
 <p>Ejercicio: crear un programa que lance 10 hilos de ejecución donde a cada hilo se le pasará la base y la altura de un triángulo, y cada hilo ejecutará el cálculo del área de dicho triángulo informando de qué base y qué altura recibió y cual es el área resultado.</p>
 <p>Una posibilidad (quizá incorrecta) sería esta:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ies</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="nn">com.ies</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
 
@@ -487,7 +493,7 @@
                         <span class="kt">int</span> <span class="n">base</span><span class="o">=</span><span class="mi">1</span><span class="o">+</span><span class="n">generador</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">baseMaxima</span><span class="o">);</span>
                         <span class="kt">int</span> <span class="n">altura</span><span class="o">=</span><span class="mi">1</span><span class="o">+</span><span class="n">generador</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">alturaMaxima</span><span class="o">);</span>
                         <span class="n">CalculadorAreas</span> <span class="n">ca</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">CalculadorAreas</span><span class="o">(</span><span class="n">base</span><span class="o">,</span> <span class="n">altura</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">CalculadorAreas</span><span class="o">(</span><span class="n">base</span><span class="o">,</span> <span class="n">altura</span><span class="o">);</span>
                         <span class="n">Thread</span> <span class="n">hiloAsociado</span><span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">ca</span><span class="o">);</span>
                         <span class="n">hiloAsociado</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
                 <span class="o">}</span>
@@ -787,11 +793,11 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                 <span class="n">Filosofo</span><span class="o">[]</span> <span class="n">filosofos</span><span class="o">=</span><span class="k">new</span> <span class="n">Filosofo</span><span class="o">[</span><span class="n">MAX_FILOSOFOS</span><span class="o">];</span>
                 <span class="n">Thread</span><span class="o">[]</span> <span class="n">hilosAsociados</span><span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">[</span><span class="n">MAX_FILOSOFOS</span><span class="o">];</span>
                 <span class="n">GestorPalillos</span> <span class="n">gestorCompartido</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">GestorPalillos</span><span class="o">(</span><span class="n">MAX_FILOSOFOS</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="n">GestorPalillos</span><span class="o">(</span><span class="n">MAX_FILOSOFOS</span><span class="o">);</span>
                 <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">MAX_FILOSOFOS</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
                         <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="o">){</span>
                                 <span class="n">filosofos</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span>
-                                <span class="k">new</span> <span class="nf">Filosofo</span><span class="o">(</span>
+                                <span class="k">new</span> <span class="n">Filosofo</span><span class="o">(</span>
                                                 <span class="n">gestorCompartido</span><span class="o">,</span>
                                                 <span class="n">i</span><span class="o">,</span><span class="n">MAX_FILOSOFOS</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
                         <span class="o">}</span>
@@ -1214,7 +1220,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
         <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argumentos</span><span class="o">){</span>
                 <span class="n">Lanzador</span> <span class="n">l</span><span class="o">=</span><span class="k">new</span> <span class="n">Lanzador</span><span class="o">();</span>
                 <span class="n">GestorColasConcurrentes</span> <span class="n">gcl</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">GestorColasConcurrentes</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="n">GestorColasConcurrentes</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
 
                 <span class="kt">int</span> <span class="n">NUM_PRODUCTORES</span><span class="o">=</span><span class="mi">5</span><span class="o">;</span>
                 <span class="n">Productor</span><span class="o">[]</span>     <span class="n">productores</span><span class="o">;</span>
@@ -1245,7 +1251,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                 <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">NUM_CONSUMIDORES</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
                         <span class="n">consumidores</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="k">new</span> <span class="n">Consumidor</span><span class="o">(</span><span class="n">gcl</span><span class="o">);</span>
                         <span class="n">hilosConsumidores</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span>
-                                        <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="n">consumidores</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                                        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">consumidores</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
                         <span class="n">hilosConsumidores</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">start</span><span class="o">();</span>
                 <span class="o">}</span>
 
@@ -1290,7 +1296,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
 </div>
 </div>
 <span id="document-textos/tema3"></span><div class="section" id="programacion-de-comunicaciones-en-red">
-<h2>Programación de comunicaciones en red<a class="headerlink" href="#programacion-de-comunicaciones-en-red" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>﻿Programación de comunicaciones en red<a class="headerlink" href="#programacion-de-comunicaciones-en-red" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="comunicacion-entre-aplicaciones">
 <h3>Comunicación entre aplicaciones.<a class="headerlink" href="#comunicacion-entre-aplicaciones" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En Java toda la comunicación vista en primer curso de DAM consiste en dos cosas</p>
@@ -1364,11 +1370,11 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                         <span class="n">URL</span> <span class="n">laUrl</span><span class="o">=</span><span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">url_descargar</span><span class="o">);</span>
                         <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">laUrl</span><span class="o">.</span><span class="na">openStream</span><span class="o">();</span>
                         <span class="n">InputStreamReader</span> <span class="n">reader</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                         <span class="n">BufferedReader</span> <span class="n">bReader</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">reader</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">reader</span><span class="o">);</span>
                         <span class="n">FileWriter</span> <span class="n">escritorFichero</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">FileWriter</span><span class="o">(</span><span class="n">nombreArchivo</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="n">nombreArchivo</span><span class="o">);</span>
                         <span class="n">String</span> <span class="n">linea</span><span class="o">;</span>
                         <span class="k">while</span> <span class="o">((</span><span class="n">linea</span><span class="o">=</span><span class="n">bReader</span><span class="o">.</span><span class="na">readLine</span><span class="o">())!=</span><span class="kc">null</span><span class="o">){</span>
                                 <span class="n">escritorFichero</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
@@ -1527,22 +1533,22 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 
                         <span class="c1">//Flujos que manejan caracteres</span>
                         <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                         <span class="n">OutputStreamWriter</span> <span class="n">osw</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">OutputStreamWriter</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">OutputStreamWriter</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
 
                         <span class="c1">//Flujos de líneas</span>
                         <span class="n">BufferedReader</span> <span class="n">bReader</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
                         <span class="n">PrintWriter</span> <span class="n">pWriter</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">PrintWriter</span><span class="o">(</span><span class="n">osw</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">osw</span><span class="o">);</span>
 
 
                         <span class="n">pWriter</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;GET /index.html&quot;</span><span class="o">);</span>
                         <span class="n">pWriter</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
                         <span class="n">String</span> <span class="n">linea</span><span class="o">;</span>
                         <span class="n">FileWriter</span> <span class="n">escritorArchivo</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">FileWriter</span><span class="o">(</span><span class="s">&quot;resultado.txt&quot;</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">&quot;resultado.txt&quot;</span><span class="o">);</span>
                         <span class="k">while</span> <span class="o">((</span><span class="n">linea</span><span class="o">=</span><span class="n">bReader</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">){</span>
                                 <span class="n">escritorArchivo</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
                         <span class="o">}</span>
@@ -1579,6 +1585,47 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <li>Despues acepta un número de dos cifras (ni una ni tres) terminado en un fín de línea UNIX.</li>
 <li>Despues acepta un segundo número de dos cifras terminado en un fin de línea UNIX.</li>
 </ol>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">socketserver</span>
+<span class="n">TAM_MAXIMO_PARAMETROS</span><span class="o">=</span><span class="mi">64</span>
+<span class="n">PUERTO</span><span class="o">=</span><span class="mi">9876</span>
+<span class="k">class</span> <span class="nc">GestorConexion</span><span class="p">(</span>
+        <span class="n">socketserver</span><span class="o">.</span><span class="n">BaseRequestHandler</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">leer_cadena</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">LONGITUD</span><span class="p">):</span>
+                <span class="n">cadena</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">LONGITUD</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">cadena</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">convertir_a_cadena</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+                <span class="k">return</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">calcular_resultado</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">n2</span><span class="p">):</span>
+                <span class="n">n1</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+                <span class="n">n2</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+
+                <span class="n">op</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">convertir_a_cadena</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">op</span><span class="o">==</span><span class="s">&quot;+&quot;</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">n1</span><span class="o">+</span><span class="n">n2</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">op</span><span class="o">==</span><span class="s">&quot;-&quot;</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">n1</span><span class="o">-</span><span class="n">n2</span>
+                <span class="k">return</span> <span class="mi">0</span>
+        <span class="sd">&quot;&quot;&quot;Controlador de evento &#39;NuevaConexion&quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">direccion</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client_address</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">operacion</span>   <span class="o">=</span>   <span class="bp">self</span><span class="o">.</span><span class="n">leer_cadena</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">num1</span>        <span class="o">=</span>   <span class="bp">self</span><span class="o">.</span><span class="n">leer_cadena</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+                <span class="n">num2</span>        <span class="o">=</span>   <span class="bp">self</span><span class="o">.</span><span class="n">leer_cadena</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+                <span class="k">print</span> <span class="p">(</span><span class="n">direccion</span><span class="o">+</span><span class="s">&quot; pregunta:&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">num1</span><span class="p">)</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">operacion</span><span class="p">)</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">num2</span><span class="p">))</span>
+
+                <span class="n">resultado</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">calcular_resultado</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span> <span class="n">operacion</span><span class="p">,</span> <span class="n">num2</span><span class="p">)</span>
+                <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Devolviendo a &quot;</span> <span class="o">+</span> <span class="n">direccion</span><span class="o">+</span><span class="s">&quot; el resultado &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">resultado</span><span class="p">))</span>
+                <span class="n">bytes_resultado</span><span class="o">=</span><span class="nb">bytearray</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">resultado</span><span class="p">),</span> <span class="s">&quot;utf-8&quot;</span><span class="p">);</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">bytes_resultado</span><span class="p">)</span>
+<span class="n">servidor</span><span class="o">=</span><span class="n">socketserver</span><span class="o">.</span><span class="n">TCPServer</span><span class="p">((</span><span class="s">&quot;10.13.0.20&quot;</span><span class="p">,</span> <span class="mi">9876</span><span class="p">),</span> <span class="n">GestorConexion</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">&quot;Servidor en marcha.&quot;</span><span class="p">)</span>
+<span class="n">servidor</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</pre></div>
+</div>
 <p>La comunicación Java con el servidor sería algo así:</p>
 <div class="highlight-java"><div class="highlight"><pre><span class="kt">byte</span><span class="o">[]</span> <span class="n">bSuma</span><span class="o">=</span><span class="s">&quot;+\n&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">();</span>
 <span class="kt">byte</span><span class="o">[]</span> <span class="n">bOp1</span><span class="o">=</span><span class="s">&quot;42\n&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">();</span>
@@ -1590,9 +1637,9 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <span class="n">os</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
 
 <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
-        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
 <span class="n">BufferedReader</span> <span class="n">br</span><span class="o">=</span>
-        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+        <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
 <span class="n">String</span> <span class="n">cadenaRecibida</span><span class="o">=</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Recibido:&quot;</span><span class="o">+</span>
                 <span class="n">cadenaRecibida</span><span class="o">);</span>
@@ -1695,9 +1742,9 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
                         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Conexion recibida!&quot;</span><span class="o">);</span>
                         <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">conexion</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
                         <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                         <span class="n">BufferedReader</span> <span class="n">bf</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
                         <span class="n">String</span> <span class="n">linea</span><span class="o">=</span><span class="n">bf</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
                         <span class="n">String</span> <span class="n">num1</span><span class="o">=</span><span class="n">bf</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
                         <span class="n">String</span> <span class="n">num2</span><span class="o">=</span><span class="n">bf</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
@@ -1716,9 +1763,9 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClienteCalculo</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kd">static</span> <span class="n">BufferedReader</span> <span class="nf">getFlujo</span><span class="o">(</span><span class="n">InputStream</span> <span class="n">is</span><span class="o">){</span>
                 <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                 <span class="n">BufferedReader</span> <span class="n">bfr</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
                 <span class="k">return</span> <span class="n">bfr</span><span class="o">;</span>
         <span class="o">}</span>
         <span class="cm">/**</span>
@@ -1805,7 +1852,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
                 <span class="k">try</span> <span class="o">{</span>
                         <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
                         <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                         <span class="n">bfr</span><span class="o">=</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
                         <span class="n">OutputStream</span> <span class="n">os</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
                         <span class="n">pw</span><span class="o">=</span><span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
@@ -1876,7 +1923,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
                                 <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
                 <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
                 <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                 <span class="n">BufferedReader</span> <span class="n">bfr</span><span class="o">=</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
                 <span class="k">return</span> <span class="n">bfr</span><span class="o">;</span>
         <span class="o">}</span>
@@ -1952,15 +1999,15 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
                                         <span class="n">socket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
                         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Alguien conectó&quot;</span><span class="o">);</span>
                         <span class="n">Peticion</span> <span class="n">p</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">Peticion</span><span class="o">(</span><span class="n">conexionCliente</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">Peticion</span><span class="o">(</span><span class="n">conexionCliente</span><span class="o">);</span>
                         <span class="n">Thread</span> <span class="n">hiloAsociado</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
                         <span class="n">hiloAsociado</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
                 <span class="o">}</span>
         <span class="o">}</span> <span class="c1">// Fin del método escuchar</span>
         <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span>  <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argumentos</span><span class="o">){</span>
                 <span class="n">ServidorOrdenacion</span> <span class="n">s</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">ServidorOrdenacion</span><span class="o">();</span>
+                                <span class="k">new</span> <span class="n">ServidorOrdenacion</span><span class="o">();</span>
                 <span class="k">try</span> <span class="o">{</span>
                         <span class="n">s</span><span class="o">.</span><span class="na">escuchar</span><span class="o">();</span>
                 <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
@@ -1977,9 +2024,9 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Cliente</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ordenar</span><span class="o">(</span><span class="n">String</span> <span class="n">s1</span><span class="o">,</span> <span class="n">String</span> <span class="n">s2</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
                 <span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">InetSocketAddress</span><span class="o">(</span><span class="s">&quot;10.13.0.20&quot;</span><span class="o">,</span> <span class="mi">9876</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="n">InetSocketAddress</span><span class="o">(</span><span class="s">&quot;10.13.0.20&quot;</span><span class="o">,</span> <span class="mi">9876</span><span class="o">);</span>
                 <span class="n">Socket</span> <span class="n">conexion</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">Socket</span><span class="o">();</span>
+                                <span class="k">new</span> <span class="n">Socket</span><span class="o">();</span>
                 <span class="n">conexion</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">direccion</span><span class="o">);</span>
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Conexion establecida&quot;</span><span class="o">);</span>
                 <span class="cm">/* Ahora hay que crear flujos de salida, enviar</span>
@@ -2047,7 +2094,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <span id="document-textos/tema4"></span><div class="section" id="generacion-de-servicios-en-red">
-<h2>Generación de servicios en red<a class="headerlink" href="#generacion-de-servicios-en-red" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>﻿Generación de servicios en red<a class="headerlink" href="#generacion-de-servicios-en-red" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="protocolos-estandar-de-comunicacion-en-red-a-nivel-de-aplicacion">
 <h3>Protocolos estándar de comunicación en red a nivel de aplicación<a class="headerlink" href="#protocolos-estandar-de-comunicacion-en-red-a-nivel-de-aplicacion" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="section" id="telnet">
@@ -2104,7 +2151,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <span id="document-textos/tema5"></span><div class="section" id="utilizacion-de-tecnicas-de-programacion-segura">
-<h2>Utilización de técnicas de programación segura<a class="headerlink" href="#utilizacion-de-tecnicas-de-programacion-segura" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2>﻿Utilización de técnicas de programación segura<a class="headerlink" href="#utilizacion-de-tecnicas-de-programacion-segura" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="introduccion">
 <h3>Introducción<a class="headerlink" href="#introduccion" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En general, cuando se envía algo a través de sockets se envía como &#8220;texto plano&#8221;, es decir, no sabemos si hay alguien usando un sniffer en la red y por tanto no sabemos si alguien está capturando los datos.</p>
@@ -2126,8 +2173,8 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <div class="section" id="metodo-cesar">
 <h4>Método César<a class="headerlink" href="#metodo-cesar" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Si el alfabeto es el siguiente:</p>
-<p><a href="#id1"><span class="problematic" id="id2">ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789_</span></a>
-BCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789_A</p>
+<p>ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789-
+BCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789-A</p>
 <p>El mensaje HOLA MUNDO, con clave 1 sería así</p>
 <blockquote>
 <div>HOLAMUNDO
@@ -2262,7 +2309,7 @@ IPMBNVÑEP</div></blockquote>
                         <span class="n">UnsupportedEncodingException</span>
         <span class="o">{</span>
                 <span class="n">GestorCifrado</span> <span class="n">gestorCifrado</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">GestorCifrado</span><span class="o">();</span>
+                                <span class="k">new</span> <span class="n">GestorCifrado</span><span class="o">();</span>
                 <span class="n">String</span> <span class="n">mensajeOriginal</span><span class="o">=</span><span class="s">&quot;Hola mundo&quot;</span><span class="o">;</span>
                 <span class="n">Key</span> <span class="n">clavePublica</span><span class="o">=</span><span class="n">gestorCifrado</span><span class="o">.</span><span class="na">getPublica</span><span class="o">();</span>
 
@@ -2272,7 +2319,7 @@ IPMBNVÑEP</div></blockquote>
                                                 <span class="n">clavePublica</span>
                 <span class="o">);</span>
                 <span class="n">String</span> <span class="n">cadCifrada</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">mensajeCifrado</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">mensajeCifrado</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">);</span>
 
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span>
                         <span class="o">(</span><span class="s">&quot;Cadena original:&quot;</span><span class="o">+</span><span class="n">mensajeOriginal</span><span class="o">);</span>
@@ -2289,7 +2336,7 @@ IPMBNVÑEP</div></blockquote>
                                                 <span class="n">mensajeCifrado</span><span class="o">,</span><span class="n">clavePrivada</span><span class="o">);</span>
                 <span class="n">String</span> <span class="n">mensajeDescifrado</span><span class="o">;</span>
                 <span class="n">mensajeDescifrado</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">descifrada</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">descifrada</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">);</span>
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
                                 <span class="s">&quot;El mensaje descifrado es:&quot;</span><span class="o">+</span>
                                                 <span class="n">mensajeDescifrado</span><span class="o">);</span>
@@ -2319,179 +2366,188 @@ son los que debemos manejar siempre. Las conversiones a <tt class="docutils lite
 </div>
 <div class="section" id="programacion-de-aplicaciones-con-comunicaciones-seguras">
 <h3>Programación de aplicaciones con comunicaciones seguras.<a class="headerlink" href="#programacion-de-aplicaciones-con-comunicaciones-seguras" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>El protocolo básico ya se ha comentado en el paso anterior. Ya se dispone de una clase (<tt class="docutils literal"><span class="pre">GestorCifrado</span></tt>) que permite manipular el cifrado de forma básica, sin embargo ahora cliente y servidor deben enviar sus claves públicas respectivas, es decir</p>
+<p>Por fortuna Java dispone de clases ya prefabricadas que facilitan enormemente el que dos aplicaciones intercambios datos de forma segura a través de una red. Se deben considerar los siguientes puntos:</p>
 <ul class="simple">
-<li>El servidor recibirá la clave pública del cliente.</li>
-<li>El cliente recibirá la clave pública del servidor (puede la clave pública del servidor se envíe cifrada con la clave pública del servidor).</li>
+<li>El servidor debe tener su propio certificado. Si no lo tenemos, se puede generar primero una pareja de claves con la herramienta <tt class="docutils literal"><span class="pre">keytool</span></tt>, como se muestra en la figura adjunta. La herramienta guardará la pareja de claves en un almacén (el cual tiene su propia clave). Despues generaremos un certificado a partir de esa pareja con <tt class="docutils literal"><span class="pre">keytool</span> <span class="pre">-export</span> <span class="pre">-file</span> <span class="pre">certificadoservidor.cer</span> <span class="pre">-keystore</span> <span class="pre">almacenclaves</span></tt>.</li>
+<li>El código del servidor necesitará indicar el fichero donde se almacenan las claves y la clave para acceder a ese almacén.</li>
+<li>El cliente necesita indicar que confía en el certificado del servidor. Dicho certificado del servidor puede estar guardado (por ejemplo) en el almacén de claves del cliente.</li>
+<li>Aunque no suele hacerse también podría hacerse a la inversa y obligar al cliente a tener un certificado que el servidor pudiera importar, lo que aumentaría la seguridad.</li>
 </ul>
-<div class="admonition warning">
-<p class="first admonition-title">Advertencia</p>
-<p class="last">Enviar una clave pública como String <strong>ES MUY PELIGROSO</strong>. La clase String podría construir una cadena que contenga finales de línea que podrían estropear un protocolo que se base en enviar mensajes que se supone que solo tienen una línea.</p>
+<div class="figure align-center" style="width: 50%">
+<img alt="_images/generacion_clave.png" src="_images/generacion_clave.png" />
+<p class="caption">Generando la pareja de claves del servidor.</p>
 </div>
-<p>El proceso para el cliente es más o menos así:</p>
+<p>Los pasos desglosados implican ejecutar estos comandos en el servidor:</p>
+<div class="highlight-python"><div class="highlight"><pre># El servidor genera una pareja de claves que se almacena en un
+#fichero llamado &quot;clavesservidor&quot;. Dentro del fichero se indica
+#un alias para poder referirnos a esa clave fácilmente
+keytool -genkeypair -keyalg RSA
+     -alias servidor -keystore clavesservidor
+
+#El servidor genera su &quot;certificado&quot;, es decir un fichero que
+#de alguna forma indica quien es él. El certificado se almacena
+#en un fichero llamado clavesservidor y a partir de él queremos
+#generar el certificado de un alias que tiene que haber llamado servidor
+keytool --exportcert -alias servidor
+     -file servidor.cer -keystore clavesservidor
+</pre></div>
+</div>
+<p>En el cliente daremos estos pasos:</p>
+<div class="highlight-python"><div class="highlight"><pre>#Se genera una pareja de claves (en realidad no nos hace falta solo
+#queremos tener un almacén de claves.
+keytool -genkeypair -keyalg RSA -alias cliente -keystore clavescliente
+
+#Se importa el certificado del servidor indicando que pertenece a
+#la lista de certificados confiables.
+keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore clavescliente
+</pre></div>
+</div>
+<p>Una vez creados los ficheros iniciales se deben dar los siguientes pasos en Java (servidor y cliente van por separado):</p>
 <ol class="arabic simple">
-<li>Conectar</li>
-<li>Obtener flujos para poder leer y escribir cosas de y hacia el servidor.</li>
-<li>Convertir su clave pública en una lista de bytes</li>
-<li>Enviar un mensaje al servidor diciéndole la longitud de la clave que se va a enviar (es decir, cuantos bytes se van a enviar).</li>
-<li>Enviar los bytes de la clave pública y hacer flush.</li>
+<li>El servidor debe cargar su almacén de claves (el fichero <tt class="docutils literal"><span class="pre">clavesservidor</span></tt>)</li>
+<li>Ese almacén (cargado en un objeto Java llamado <tt class="docutils literal"><span class="pre">KeyStore</span></tt>), se usará para crear un gestor de claves (objeto <tt class="docutils literal"><span class="pre">KeyManager</span></tt>), el cual se obtiene a partir de una &#8220;fábrica&#8221; llamada <tt class="docutils literal"><span class="pre">KeyManagerFactory</span></tt>.</li>
+<li>Se creará un contexto SSL (objeto <tt class="docutils literal"><span class="pre">SSLContext</span></tt>) a partir de la fábrica comentada.</li>
+<li>El objeto <tt class="docutils literal"><span class="pre">SSLContext</span></tt> permitirá crear una fábrica de sockets que será la que finalmente nos permita tener un <tt class="docutils literal"><span class="pre">SSLServerSocket</span></tt>, es decir un socket de servidor que usará cifrado.</li>
 </ol>
-<p>Esto puede implicar que en unos casos usemos unas clases de flujos u otros (para enviar líneas podemos usar los <tt class="docutils literal"><span class="pre">PrintWriter</span></tt> pero para enviar bytes usaremos <tt class="docutils literal"><span class="pre">OutputStream</span></tt>)</p>
-<p>Por desgracia enviar una clave pública en forma de bytes implica luego tener que volver a convertirla en un objeto Java. Para ello necesitaremos usar clases como <tt class="docutils literal"><span class="pre">KeyStore</span></tt> y <tt class="docutils literal"><span class="pre">X509EncodedKeySpec</span></tt>. Por ejemplo, podemos añadir este método a nuestra clase <tt class="docutils literal"><span class="pre">GestorCifrado</span></tt>.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="n">PublicKey</span> <span class="nf">convertirDesdeBytes</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">bytesClave</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span> <span class="n">InvalidKeySpecException</span><span class="o">{</span>
-        <span class="n">KeyFactory</span> <span class="n">fabricaClaves</span><span class="o">=</span>
-                <span class="n">KeyFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;RSA&quot;</span><span class="o">);</span>
-        <span class="n">X509EncodedKeySpec</span> <span class="n">claveCodificada</span><span class="o">=</span>
-                        <span class="k">new</span> <span class="nf">X509EncodedKeySpec</span><span class="o">(</span><span class="n">bytesClave</span><span class="o">);</span>
-        <span class="n">PublicKey</span> <span class="n">clave</span><span class="o">=</span>
-                <span class="n">fabricaClaves</span><span class="o">.</span><span class="na">generatePublic</span><span class="o">(</span>
-                        <span class="n">claveCodificada</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">clave</span><span class="o">;</span>
-<span class="o">}</span>
+<p>El código Java del servidor sería algo así:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="nf">OtroServidor</span> <span class="o">(</span><span class="n">String</span> <span class="n">rutaAlmacen</span><span class="o">,</span> <span class="n">String</span> <span class="n">claveAlmacen</span><span class="o">){</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">rutaAlmacen</span><span class="o">=</span><span class="n">rutaAlmacen</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">claveAlmacen</span><span class="o">=</span><span class="n">claveAlmacen</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">SSLServerSocket</span> <span class="nf">getServerSocketSeguro</span><span class="o">()</span>
+                    <span class="kd">throws</span> <span class="n">KeyStoreException</span><span class="o">,</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span>
+                    <span class="n">CertificateException</span><span class="o">,</span> <span class="n">IOException</span><span class="o">,</span>
+                    <span class="n">KeyManagementException</span><span class="o">,</span> <span class="n">UnrecoverableKeyException</span>
+    <span class="o">{</span>
+            <span class="n">SSLServerSocket</span> <span class="n">serverSocket</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+            <span class="cm">/* Paso 1, se carga el almacén de claves*/</span>
+            <span class="n">FileInputStream</span> <span class="n">fichAlmacen</span><span class="o">=</span>
+                            <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">rutaAlmacen</span><span class="o">);</span>
+            <span class="cm">/* Paso 1.1, se crea un almacén del tipo por defecto</span>
+<span class="cm">             * que es un JKS (Java Key Store), a día de hoy*/</span>
+            <span class="n">KeyStore</span> <span class="n">almacen</span><span class="o">=</span><span class="n">KeyStore</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">KeyStore</span><span class="o">.</span><span class="na">getDefaultType</span><span class="o">());</span>
+            <span class="n">almacen</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">fichAlmacen</span><span class="o">,</span> <span class="n">claveAlmacen</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">());</span>
+            <span class="cm">/* Paso 2: obtener una fábrica de KeyManagers que ofrezcan</span>
+<span class="cm">             * soporte al algoritmo por defecto*/</span>
+            <span class="n">KeyManagerFactory</span> <span class="n">fabrica</span><span class="o">=</span>
+                            <span class="n">KeyManagerFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span>
+                                <span class="n">KeyManagerFactory</span><span class="o">.</span><span class="na">getDefaultAlgorithm</span><span class="o">());</span>
+            <span class="n">fabrica</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">almacen</span><span class="o">,</span> <span class="n">claveAlmacen</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">());</span>
+            <span class="cm">/* Paso 3:Intentamos obtener un contexto SSL</span>
+<span class="cm">             * que ofrezca soporte a TLS (el sistema más</span>
+<span class="cm">             * seguro hoy día) */</span>
+            <span class="n">SSLContext</span> <span class="n">contextoSSL</span><span class="o">=</span><span class="n">SSLContext</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;TLS&quot;</span><span class="o">);</span>
+            <span class="n">contextoSSL</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">fabrica</span><span class="o">.</span><span class="na">getKeyManagers</span><span class="o">(),</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+            <span class="cm">/* Paso 4: Se obtiene una fábrica de sockets que permita</span>
+<span class="cm">             * obtener un SSLServerSocket */</span>
+            <span class="n">SSLServerSocketFactory</span> <span class="n">fabricaSockets</span><span class="o">=</span>
+                            <span class="n">contextoSSL</span><span class="o">.</span><span class="na">getServerSocketFactory</span><span class="o">();</span>
+            <span class="n">serverSocket</span><span class="o">=</span>
+                    <span class="o">(</span><span class="n">SSLServerSocket</span><span class="o">)</span>
+                            <span class="n">fabricaSockets</span><span class="o">.</span><span class="na">createServerSocket</span><span class="o">(</span><span class="n">puerto</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">serverSocket</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">escuchar</span><span class="o">()</span>
+        <span class="kd">throws</span> <span class="n">KeyManagementException</span><span class="o">,</span> <span class="n">UnrecoverableKeyException</span><span class="o">,</span>
+            <span class="n">KeyStoreException</span><span class="o">,</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span>
+            <span class="n">CertificateException</span><span class="o">,</span> <span class="n">IOException</span>
+    <span class="o">{</span>
+            <span class="n">SSLServerSocket</span> <span class="n">socketServidor</span><span class="o">=</span><span class="k">this</span><span class="o">.</span><span class="na">getServerSocketSeguro</span><span class="o">();</span>
+            <span class="n">BufferedReader</span> <span class="n">entrada</span><span class="o">;</span>
+            <span class="n">PrintWriter</span> <span class="n">salida</span><span class="o">;</span>
+            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+                    <span class="n">Socket</span> <span class="n">connRecibida</span><span class="o">=</span><span class="n">socketServidor</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Conexion segura recibida&quot;</span><span class="o">);</span>
+                    <span class="n">entrada</span><span class="o">=</span>
+                        <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
+                        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">connRecibida</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+                    <span class="n">salida</span><span class="o">=</span>
+                        <span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span>
+                            <span class="k">new</span> <span class="n">OutputStreamWriter</span><span class="o">(</span>
+                            <span class="n">connRecibida</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">()));</span>
+                    <span class="n">String</span> <span class="n">linea</span><span class="o">=</span><span class="n">entrada</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                    <span class="n">salida</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">linea</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+                    <span class="n">salida</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+            <span class="o">}</span>
+    <span class="o">}</span>
 </pre></div>
 </div>
-<p>Aparte de enviar nuestras claves públicas como secuencias de bytes, también se podría utilizar la serialización Java para enviar un objeto a través de la red.</p>
-<div class="section" id="la-clase-servidor">
-<h4>La clase Servidor<a class="headerlink" href="#la-clase-servidor" title="Enlazar permanentemente con este título">¶</a></h4>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Servidor</span> <span class="o">{</span>
-        <span class="n">ServerSocket</span> <span class="n">socketServidor</span><span class="o">;</span>
+<p>En el cliente se tienen que dar algunos pasos parecidos:</p>
+<ol class="arabic simple">
+<li>En primer lugar se carga el almacén de claves del cliente (que contiene el certificado del servidor y que es la clave para poder &#8220;autenticar&#8221; el servidor)</li>
+<li>El almacén del cliente se usará para crear un &#8220;gestor de confianza&#8221; (<tt class="docutils literal"><span class="pre">TrustManager</span></tt>) que Java usará para determinar si puede confiar o no en una conexión. Usaremos un <tt class="docutils literal"><span class="pre">TrustManagerFactory</span></tt> que usará el almacén del cliente para crear objetos que puedan gestionar la confianza.</li>
+<li>Se creará un contexto SSL (<tt class="docutils literal"><span class="pre">SSLContext</span></tt>) que se basará en los <tt class="docutils literal"><span class="pre">TrustManager</span></tt> que pueda crear la fábrica.</li>
+<li>A partir del contexto SSL el cliente ya puede crear un socket seguro (<tt class="docutils literal"><span class="pre">SSLSocket</span></tt>) que puede usar para conectar con el servidor de forma segura.</li>
+</ol>
+<p>El código del cliente sería algo así:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OtroCliente</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">almacen</span><span class="o">=</span><span class="s">&quot;/home/usuario/clavescliente&quot;</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">clave</span><span class="o">=</span><span class="s">&quot;abcdabcd&quot;</span><span class="o">;</span>
+    <span class="n">SSLSocket</span> <span class="n">conexion</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">OtroCliente</span><span class="o">(</span><span class="n">String</span> <span class="n">ip</span><span class="o">,</span> <span class="kt">int</span> <span class="n">puerto</span><span class="o">)</span>
+                    <span class="kd">throws</span> <span class="n">UnknownHostException</span><span class="o">,</span> <span class="n">IOException</span><span class="o">,</span>
+                    <span class="n">KeyManagementException</span><span class="o">,</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span>
+                    <span class="n">KeyStoreException</span><span class="o">,</span> <span class="n">CertificateException</span><span class="o">{</span>
 
-        <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">PUERTO</span><span class="o">=</span><span class="mi">9876</span><span class="o">;</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">escuchar</span><span class="o">(){</span>
-                <span class="k">try</span> <span class="o">{</span>
-                        <span class="n">socketServidor</span><span class="o">=</span><span class="k">new</span> <span class="n">ServerSocket</span><span class="o">(</span><span class="n">PUERTO</span><span class="o">);</span>
-                        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span>
-                        <span class="o">{</span>
-                                <span class="n">Socket</span> <span class="n">conexion</span><span class="o">=</span><span class="n">socketServidor</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
-                                <span class="n">Peticion</span> <span class="n">p</span><span class="o">=</span><span class="k">new</span> <span class="n">Peticion</span><span class="o">(</span><span class="n">conexion</span><span class="o">);</span>
-                                <span class="n">Thread</span> <span class="n">hiloAsociado</span><span class="o">=</span>
-                                                <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
-                                <span class="n">hiloAsociado</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-                        <span class="o">}</span>
-                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="o">|</span> <span class="n">NoSuchAlgorithmException</span> <span class="o">|</span> <span class="n">NoSuchPaddingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="c1">// TODO Auto-generated catch block</span>
-                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-                <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
-                <span class="n">Servidor</span> <span class="n">s</span><span class="o">=</span><span class="k">new</span> <span class="n">Servidor</span><span class="o">();</span>
-                <span class="n">s</span><span class="o">.</span><span class="na">escuchar</span><span class="o">();</span>
-        <span class="o">}</span>
+            <span class="n">conexion</span><span class="o">=</span><span class="k">this</span><span class="o">.</span><span class="na">obtenerSocket</span><span class="o">(</span><span class="n">ip</span><span class="o">,</span><span class="n">puerto</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="cm">/* Envía un mensaje de prueba para verificar que la conexión</span>
+<span class="cm">     * SSL es correcta */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">conectar</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Iniciando..&quot;</span><span class="o">);</span>
+            <span class="n">BufferedReader</span> <span class="n">entrada</span><span class="o">;</span>
+            <span class="n">PrintWriter</span> <span class="n">salida</span><span class="o">;</span>
+            <span class="n">entrada</span><span class="o">=</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">conexion</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+            <span class="n">salida</span><span class="o">=</span><span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">OutputStreamWriter</span><span class="o">(</span><span class="n">conexion</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">()));</span>
+            <span class="cm">/* De esta linea se intenta averiguar la longitud*/</span>
+            <span class="n">salida</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;1234567890&quot;</span><span class="o">);</span>
+            <span class="n">salida</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+            <span class="cm">/* Si todo va bien, el servidor nos contesta el numero*/</span>
+            <span class="n">String</span> <span class="n">num</span><span class="o">=</span><span class="n">entrada</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+            <span class="kt">int</span> <span class="n">longitud</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;La longitud devuelta es:&quot;</span><span class="o">+</span><span class="n">longitud</span><span class="o">);</span>
+
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">SSLSocket</span> <span class="nf">obtenerSocket</span><span class="o">(</span><span class="n">String</span> <span class="n">ip</span><span class="o">,</span> <span class="kt">int</span> <span class="n">puerto</span><span class="o">)</span>
+                    <span class="kd">throws</span> <span class="n">KeyStoreException</span><span class="o">,</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span>
+                    <span class="n">CertificateException</span><span class="o">,</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">KeyManagementException</span>
+    <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Obteniendo socket&quot;</span><span class="o">);</span>
+            <span class="n">SSLSocket</span> <span class="n">socket</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+            <span class="cm">/* Paso 1: se carga al almacén de claves</span>
+<span class="cm">             * (que recordemos debe contener el</span>
+<span class="cm">             * certificado del servidor)*/</span>
+            <span class="n">KeyStore</span> <span class="n">almacenCliente</span><span class="o">=</span><span class="n">KeyStore</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">KeyStore</span><span class="o">.</span><span class="na">getDefaultType</span><span class="o">());</span>
+            <span class="n">FileInputStream</span> <span class="n">ficheroAlmacenClaves</span><span class="o">=</span>
+                            <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span> <span class="k">this</span><span class="o">.</span><span class="na">almacen</span> <span class="o">);</span>
+            <span class="n">almacenCliente</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">ficheroAlmacenClaves</span><span class="o">,</span> <span class="n">clave</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">());</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Almacen cargado&quot;</span><span class="o">);</span>
+            <span class="cm">/* Paso 2, crearemos una fabrica de gestores de confianza</span>
+<span class="cm">             * que use el almacén cargado antes (que contiene el</span>
+<span class="cm">             * certificado del servidor)</span>
+<span class="cm">             */</span>
+            <span class="n">TrustManagerFactory</span> <span class="n">fabricaGestoresConfianza</span><span class="o">=</span>
+                            <span class="n">TrustManagerFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span>
+                                            <span class="n">TrustManagerFactory</span><span class="o">.</span><span class="na">getDefaultAlgorithm</span><span class="o">());</span>
+            <span class="n">fabricaGestoresConfianza</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">almacenCliente</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Fabrica Trust creada&quot;</span><span class="o">);</span>
+            <span class="cm">/*Paso 3: se crea el contexto SSL, que ofrezca</span>
+<span class="cm">             * soporte al algoritmo TLS*/</span>
+            <span class="n">SSLContext</span> <span class="n">contexto</span><span class="o">=</span><span class="n">SSLContext</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;TLS&quot;</span><span class="o">);</span>
+            <span class="n">contexto</span><span class="o">.</span><span class="na">init</span><span class="o">(</span>
+                            <span class="kc">null</span><span class="o">,</span> <span class="n">fabricaGestoresConfianza</span><span class="o">.</span><span class="na">getTrustManagers</span><span class="o">(),</span> <span class="kc">null</span><span class="o">);</span>
+            <span class="cm">/* Paso 4: Se crea un socket que conecte con el servidor*/</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Contexto creado&quot;</span><span class="o">);</span>
+            <span class="n">SSLSocketFactory</span> <span class="n">fabricaSockets</span><span class="o">=</span>
+                            <span class="n">contexto</span><span class="o">.</span><span class="na">getSocketFactory</span><span class="o">();</span>
+            <span class="n">socket</span><span class="o">=(</span><span class="n">SSLSocket</span><span class="o">)</span> <span class="n">fabricaSockets</span><span class="o">.</span><span class="na">createSocket</span><span class="o">(</span><span class="n">ip</span><span class="o">,</span> <span class="n">puerto</span><span class="o">);</span>
+            <span class="cm">/* Y devolvemos el socket*/</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Socket creado&quot;</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">socket</span><span class="o">;</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-</div>
-</div>
-<div class="section" id="la-clase-peticion">
-<h4>La clase Peticion<a class="headerlink" href="#la-clase-peticion" title="Enlazar permanentemente con este título">¶</a></h4>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Peticion</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
-        <span class="n">Socket</span> <span class="n">conexion</span><span class="o">;</span>
-        <span class="n">GestorCifrado</span> <span class="n">gestorCifrado</span><span class="o">;</span>
-        <span class="n">Cipher</span> <span class="n">cifradorMensajesParaCliente</span><span class="o">;</span>
-        <span class="kd">public</span> <span class="nf">Peticion</span> <span class="o">(</span><span class="n">Socket</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span> <span class="n">NoSuchPaddingException</span><span class="o">{</span>
-                <span class="k">this</span><span class="o">.</span><span class="na">conexion</span><span class="o">=</span><span class="n">s</span><span class="o">;</span>
-                <span class="n">gestorCifrado</span><span class="o">=</span><span class="k">new</span> <span class="n">GestorCifrado</span><span class="o">();</span>
-        <span class="o">}</span>
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="cm">/*Todo servidor empieza esperando</span>
-<span class="cm">                 * que el cliente le envíe la clave pública</span>
-<span class="cm">                 */</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Llego una conexion!&quot;</span><span class="o">);</span>
-                <span class="k">try</span> <span class="o">{</span>
-                        <span class="n">InputStream</span> <span class="n">flujoLectura</span><span class="o">=</span>
-                                        <span class="n">conexion</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
-                        <span class="n">OutputStream</span> <span class="n">flujoEscritura</span><span class="o">=</span>
-                                        <span class="n">conexion</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
-                        <span class="n">BufferedReader</span> <span class="n">lector</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span>
-                                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span>
-                                                                        <span class="n">flujoLectura</span>
-                                                                <span class="o">)</span>
-                        <span class="o">);</span>
-
-                        <span class="n">PrintWriter</span> <span class="n">escritor</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">PrintWriter</span><span class="o">(</span>
-                                                        <span class="n">flujoEscritura</span>
-                        <span class="o">);</span>
-                        <span class="cm">/* Primero llega una línea con la longitud.</span>
-<span class="cm">                         * Esa línea no puede tener más de 6</span>
-<span class="cm">                         * caracteres</span>
-<span class="cm">                         */</span>
-                        <span class="n">String</span> <span class="n">linea</span><span class="o">=</span><span class="n">lector</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
-                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Longitud clave:&quot;</span><span class="o">+</span><span class="n">linea</span><span class="o">);</span>
-                        <span class="kt">int</span> <span class="n">longitudClave</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
-                        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytesClave</span><span class="o">=</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">longitudClave</span><span class="o">];</span>
-                        <span class="n">flujoLectura</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">bytesClave</span><span class="o">);</span>
-
-
-                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="c1">// TODO Auto-generated catch block</span>
-                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-                <span class="o">}</span>
-
-
-        <span class="o">}</span>
-
-<span class="o">}</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="la-clase-cliente">
-<h4>La clase Cliente<a class="headerlink" href="#la-clase-cliente" title="Enlazar permanentemente con este título">¶</a></h4>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Cliente</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="n">String</span> <span class="n">ipServidor</span><span class="o">=</span><span class="s">&quot;10.13.0.20&quot;</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="kt">int</span> <span class="n">puerto</span><span class="o">=</span><span class="mi">9876</span><span class="o">;</span>
-        <span class="n">Cipher</span> <span class="n">cifradorMensajesParaServidor</span><span class="o">;</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">enviarMensaje</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span> <span class="n">NoSuchPaddingException</span><span class="o">{</span>
-                <span class="n">Socket</span> <span class="n">conexion</span><span class="o">;</span>
-                <span class="n">GestorCifrado</span> <span class="n">gestorCifrado</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">GestorCifrado</span><span class="o">();</span>
-                <span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="nf">InetSocketAddress</span><span class="o">(</span><span class="n">ipServidor</span><span class="o">,</span> <span class="n">puerto</span><span class="o">);</span>
-                <span class="k">try</span> <span class="o">{</span>
-                        <span class="n">conexion</span><span class="o">=</span><span class="k">new</span> <span class="n">Socket</span><span class="o">();</span>
-                        <span class="n">conexion</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">direccion</span><span class="o">);</span>
-                        <span class="cm">/* Para enviar y recibir necesitaremos flujos*/</span>
-                        <span class="n">InputStream</span> <span class="n">flujoLectura</span><span class="o">=</span>
-                                        <span class="n">conexion</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
-                        <span class="n">OutputStream</span> <span class="n">flujoEscritura</span><span class="o">=</span>
-                                        <span class="n">conexion</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
-                        <span class="n">PrintWriter</span> <span class="n">escritor</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="nf">PrintWriter</span><span class="o">(</span><span class="n">flujoEscritura</span><span class="o">);</span>
-                        <span class="n">PublicKey</span> <span class="n">clavePublicaCliente</span><span class="o">=</span>
-                                        <span class="n">gestorCifrado</span><span class="o">.</span><span class="na">getPublica</span><span class="o">();</span>
-                        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytesClavePublicaCliente</span><span class="o">=</span>
-                                        <span class="n">clavePublicaCliente</span><span class="o">.</span><span class="na">getEncoded</span><span class="o">();</span>
-                        <span class="kt">int</span> <span class="n">longitudClave</span><span class="o">=</span>
-                                        <span class="n">bytesClavePublicaCliente</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
-                                        <span class="s">&quot;La clave del cliente tiene &quot;</span><span class="o">+</span>
-                                        <span class="n">longitudClave</span><span class="o">+</span><span class="s">&quot; bytes.&quot;</span>
-                        <span class="o">);</span>
-                        <span class="n">escritor</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">longitudClave</span><span class="o">);</span>
-                        <span class="n">escritor</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
-                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">bytesClavePublicaCliente</span><span class="o">);</span>
-                        <span class="n">flujoEscritura</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
-                        <span class="k">try</span> <span class="o">{</span>
-                                <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">sleep</span><span class="o">(</span><span class="mi">5000</span><span class="o">);</span>
-                        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                                <span class="c1">// TODO Auto-generated catch block</span>
-                                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-                        <span class="o">}</span>
-                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="c1">// TODO Auto-generated catch block</span>
-                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-                <span class="o">}</span>
-
-        <span class="o">}</span> <span class="cm">/*Fin del método enviarMensaje*/</span>
-        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argumentos</span><span class="o">)</span>
-                        <span class="kd">throws</span> <span class="n">NoSuchAlgorithmException</span><span class="o">,</span> <span class="n">NoSuchPaddingException</span><span class="o">{</span>
-                <span class="n">Cliente</span> <span class="n">c</span><span class="o">=</span><span class="k">new</span> <span class="n">Cliente</span><span class="o">();</span>
-                <span class="n">c</span><span class="o">.</span><span class="na">enviarMensaje</span><span class="o">(</span><span class="s">&quot;Hola servidor&quot;</span><span class="o">);</span>
-        <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="politica-de-seguridad">
@@ -2515,7 +2571,7 @@ son los que debemos manejar siempre. Las conversiones a <tt class="docutils lite
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html#document-index">Tabla de Contenidos</a></h3>
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema1">Programación multiproceso</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema1">﻿Programación multiproceso</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#ejecutables-procesos-servicios">Ejecutables. Procesos. Servicios.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#hilos">Hilos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#programacion-concurrente">Programación concurrente.</a></li>
@@ -2530,7 +2586,7 @@ son los que debemos manejar siempre. Las conversiones a <tt class="docutils lite
 <li class="toctree-l2"><a class="reference internal" href="index.html#examen">Examen</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema2">Programación multihilo</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema2">﻿Programación multihilo</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#recursos-compartidos-por-los-hilos">Recursos compartidos por los hilos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#estados-de-un-hilo-cambios-de-estado">Estados de un hilo. Cambios de estado.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#elementos-relacionados-con-la-programacion-de-hilos-librerias-y-clases">Elementos relacionados con la programación de hilos. Librerías y clases.</a></li>
@@ -2552,7 +2608,7 @@ son los que debemos manejar siempre. Las conversiones a <tt class="docutils lite
 <li class="toctree-l2"><a class="reference internal" href="index.html#depuracion">Depuración.</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema3">Programación de comunicaciones en red</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema3">﻿Programación de comunicaciones en red</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#comunicacion-entre-aplicaciones">Comunicación entre aplicaciones.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#roles-cliente-y-servidor">Roles cliente y servidor.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#recordatorio-de-los-flujos-en-java">Recordatorio de los flujos en Java</a></li>
@@ -2566,7 +2622,7 @@ son los que debemos manejar siempre. Las conversiones a <tt class="docutils lite
 <li class="toctree-l2"><a class="reference internal" href="index.html#utilizacion-de-hilos-en-la-programacion-de-aplicaciones-en-red">Utilización de hilos en la programación de aplicaciones en red.</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema4">Generación de servicios en red</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema4">﻿Generación de servicios en red</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#protocolos-estandar-de-comunicacion-en-red-a-nivel-de-aplicacion">Protocolos estándar de comunicación en red a nivel de aplicación</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#librerias-de-clases-y-componentes">Librerías de clases y componentes.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#utilizacion-de-objetos-predefinidos">Utilización de objetos predefinidos.</a></li>
@@ -2582,7 +2638,7 @@ son los que debemos manejar siempre. Las conversiones a <tt class="docutils lite
 <li class="toctree-l2"><a class="reference internal" href="index.html#monitorizacion-de-tiempos-de-respuesta">Monitorización de tiempos de respuesta.</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema5">Utilización de técnicas de programación segura</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/tema5">﻿Utilización de técnicas de programación segura</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#introduccion">Introducción</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#practicas-de-programacion-segura">Prácticas de programación segura.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#criptografia-de-clave-publica-y-clave-privada">Criptografía de clave pública y clave privada.</a></li>

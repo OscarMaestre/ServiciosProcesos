@@ -1,9 +1,8 @@
-﻿================================================
-Utilización de técnicas de programación segura
+﻿Utilización de técnicas de programación segura
 ================================================
 
 Introducción
-------------------------------------------------------
+-----------------------------------------------------
 En general, cuando se envía algo a través de sockets se envía como "texto plano", es decir, no sabemos si hay alguien usando un sniffer en la red y por tanto no sabemos si alguien está capturando los datos.
 
 En general, cualquier sistema que pretenda ser seguro necesitará usar cifrado.
@@ -31,8 +30,8 @@ Método César
 
 Si el alfabeto es el siguiente:
 
-ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789_
-BCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789_A
+ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789-
+BCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789-A
 
 
 El mensaje HOLA MUNDO, con clave 1 sería así
@@ -252,7 +251,7 @@ Programación de aplicaciones con comunicaciones seguras.
 ------------------------------------------------------------
 Por fortuna Java dispone de clases ya prefabricadas que facilitan enormemente el que dos aplicaciones intercambios datos de forma segura a través de una red. Se deben considerar los siguientes puntos:
 
-* El servidor debe tener su propio certificado. Si no lo tenemos, se puede generar primero una pareja de claves con la herramienta ``keytool'', como se muestra en la figura adjunta. La herramienta guardará la pareja de claves en un almacén (el cual tiene su propia clave). Despues generaremos un certificado a partir de esa pareja con ``keytool -export -file certificadoservidor.cer -keystore almacenclaves``.
+* El servidor debe tener su propio certificado. Si no lo tenemos, se puede generar primero una pareja de claves con la herramienta ``keytool``, como se muestra en la figura adjunta. La herramienta guardará la pareja de claves en un almacén (el cual tiene su propia clave). Despues generaremos un certificado a partir de esa pareja con ``keytool -export -file certificadoservidor.cer -keystore almacenclaves``.
 * El código del servidor necesitará indicar el fichero donde se almacenan las claves y la clave para acceder a ese almacén.
 * El cliente necesita indicar que confía en el certificado del servidor. Dicho certificado del servidor puede estar guardado (por ejemplo) en el almacén de claves del cliente.
 * Aunque no suele hacerse también podría hacerse a la inversa y obligar al cliente a tener un certificado que el servidor pudiera importar, lo que aumentaría la seguridad.
@@ -269,13 +268,15 @@ Los pasos desglosados implican ejecutar estos comandos en el servidor::
     # El servidor genera una pareja de claves que se almacena en un
     #fichero llamado "clavesservidor". Dentro del fichero se indica
     #un alias para poder referirnos a esa clave fácilmente
-    keytool -genkeypair -keyalg RSA -alias servidor -keystore clavesservidor
+    keytool -genkeypair -keyalg RSA
+         -alias servidor -keystore clavesservidor
     
     #El servidor genera su "certificado", es decir un fichero que
     #de alguna forma indica quien es él. El certificado se almacena
     #en un fichero llamado clavesservidor y a partir de él queremos
     #generar el certificado de un alias que tiene que haber llamado servidor
-    keytool --exportcert -alias servidor -file servidor.cer -keystore clavesservidor
+    keytool --exportcert -alias servidor
+         -file servidor.cer -keystore clavesservidor
 
 
 En el cliente daremos estos pasos::
@@ -322,7 +323,7 @@ El código Java del servidor sería algo así:
 		 * soporte al algoritmo por defecto*/
 		KeyManagerFactory fabrica=
 				KeyManagerFactory.getInstance(
-						KeyManagerFactory.getDefaultAlgorithm());
+				    KeyManagerFactory.getDefaultAlgorithm());
 		fabrica.init(almacen, claveAlmacen.toCharArray());
 		/* Paso 3:Intentamos obtener un contexto SSL
 		 * que ofrezca soporte a TLS (el sistema más 
@@ -334,14 +335,14 @@ El código Java del servidor sería algo así:
 		SSLServerSocketFactory fabricaSockets=
 				contextoSSL.getServerSocketFactory();
 		serverSocket=
-				(SSLServerSocket) 
-					fabricaSockets.createServerSocket(puerto);
+			(SSLServerSocket) 
+				fabricaSockets.createServerSocket(puerto);
 		return serverSocket;
 	}
 	public void escuchar() 
-			throws KeyManagementException, UnrecoverableKeyException, 
-			KeyStoreException, NoSuchAlgorithmException, 
-			CertificateException, IOException
+	    throws KeyManagementException, UnrecoverableKeyException, 
+                KeyStoreException, NoSuchAlgorithmException, 
+		CertificateException, IOException
 	{
 		SSLServerSocket socketServidor=this.getServerSocketSeguro();
 		BufferedReader entrada;
@@ -349,8 +350,13 @@ El código Java del servidor sería algo así:
 		while (true){
 			Socket connRecibida=socketServidor.accept();
 			System.out.println("Conexion segura recibida");
-			entrada=new BufferedReader(new InputStreamReader(connRecibida.getInputStream()));
-			salida=new PrintWriter(new OutputStreamWriter(connRecibida.getOutputStream()));
+			entrada=
+                            new BufferedReader(
+                            new InputStreamReader(connRecibida.getInputStream()));
+			salida=
+                            new PrintWriter(
+                                new OutputStreamWriter(
+                                connRecibida.getOutputStream()));
 			String linea=entrada.readLine();
 			salida.println(linea.length());
 			salida.flush();
@@ -364,6 +370,76 @@ En el cliente se tienen que dar algunos pasos parecidos:
 3. Se creará un contexto SSL (``SSLContext``) que se basará en los ``TrustManager`` que pueda crear la fábrica.
 4. A partir del contexto SSL el cliente ya puede crear un socket seguro (``SSLSocket``) que puede usar para conectar con el servidor de forma segura.
 
+El código del cliente sería algo así:
+
+.. code-block:: java
+
+    public class OtroCliente {
+	String almacen="/home/usuario/clavescliente";
+	String clave="abcdabcd";
+	SSLSocket conexion;
+	public OtroCliente(String ip, int puerto) 
+			throws UnknownHostException, IOException,
+			KeyManagementException, NoSuchAlgorithmException, 
+			KeyStoreException, CertificateException{
+		
+		conexion=this.obtenerSocket(ip,puerto);
+	}
+	/* Envía un mensaje de prueba para verificar que la conexión
+	 * SSL es correcta */
+	public void conectar() throws IOException{
+		System.out.println("Iniciando..");
+		BufferedReader entrada;
+		PrintWriter salida;
+		entrada=new BufferedReader(new InputStreamReader(conexion.getInputStream()));
+		salida=new PrintWriter(new OutputStreamWriter(conexion.getOutputStream()));
+		/* De esta linea se intenta averiguar la longitud*/
+		salida.println("1234567890");
+		salida.flush();
+		/* Si todo va bien, el servidor nos contesta el numero*/
+		String num=entrada.readLine();
+		int longitud=Integer.parseInt(num);
+		System.out.println("La longitud devuelta es:"+longitud);
+		
+	}
+	public SSLSocket obtenerSocket(String ip, int puerto) 
+			throws KeyStoreException, NoSuchAlgorithmException, 
+			CertificateException, IOException, KeyManagementException
+	{
+		System.out.println("Obteniendo socket");
+		SSLSocket socket=null;
+		/* Paso 1: se carga al almacén de claves 
+		 * (que recordemos debe contener el 
+		 * certificado del servidor)*/
+		KeyStore almacenCliente=KeyStore.getInstance(KeyStore.getDefaultType());
+		FileInputStream ficheroAlmacenClaves=
+				new FileInputStream( this.almacen );
+		almacenCliente.load(ficheroAlmacenClaves, clave.toCharArray());
+		System.out.println("Almacen cargado");
+		/* Paso 2, crearemos una fabrica de gestores de confianza
+		 * que use el almacén cargado antes (que contiene el
+		 * certificado del servidor)
+		 */
+		TrustManagerFactory fabricaGestoresConfianza=
+				TrustManagerFactory.getInstance(
+						TrustManagerFactory.getDefaultAlgorithm());
+		fabricaGestoresConfianza.init(almacenCliente);
+		System.out.println("Fabrica Trust creada");
+		/*Paso 3: se crea el contexto SSL, que ofrezca
+		 * soporte al algoritmo TLS*/
+		SSLContext contexto=SSLContext.getInstance("TLS");
+		contexto.init(
+				null, fabricaGestoresConfianza.getTrustManagers(), null);
+		/* Paso 4: Se crea un socket que conecte con el servidor*/
+		System.out.println("Contexto creado");
+		SSLSocketFactory fabricaSockets=
+				contexto.getSocketFactory();
+		socket=(SSLSocket) fabricaSockets.createSocket(ip, puerto);
+		/* Y devolvemos el socket*/
+		System.out.println("Socket creado");
+		return socket;
+	}
+    }
 
 
 

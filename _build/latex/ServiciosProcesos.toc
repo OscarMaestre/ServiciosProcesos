@@ -1,115 +1,112 @@
 \select@language {spanish}
-\contentsline {chapter}{\numberline {1}Programaci\IeC {\'o}n multiproceso}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Ejecutables. Procesos. Servicios.}{1}{section.1.1}
-\contentsline {subsection}{\numberline {1.1.1}Ejecutables}{1}{subsection.1.1.1}
-\contentsline {subsection}{\numberline {1.1.2}Procesos}{1}{subsection.1.1.2}
-\contentsline {subsection}{\numberline {1.1.3}Servicios}{2}{subsection.1.1.3}
-\contentsline {section}{\numberline {1.2}Hilos.}{2}{section.1.2}
-\contentsline {section}{\numberline {1.3}Programaci\IeC {\'o}n concurrente.}{2}{section.1.3}
-\contentsline {section}{\numberline {1.4}Programaci\IeC {\'o}n paralela y distribuida.}{2}{section.1.4}
-\contentsline {section}{\numberline {1.5}Creaci\IeC {\'o}n de procesos.}{2}{section.1.5}
-\contentsline {section}{\numberline {1.6}Comunicaci\IeC {\'o}n entre procesos.}{5}{section.1.6}
-\contentsline {section}{\numberline {1.7}Gesti\IeC {\'o}n de procesos.}{6}{section.1.7}
-\contentsline {section}{\numberline {1.8}Comandos para la gesti\IeC {\'o}n de procesos en sistemas libres y propietarios.}{6}{section.1.8}
-\contentsline {subsection}{\numberline {1.8.1}Prioridades}{7}{subsection.1.8.1}
-\contentsline {section}{\numberline {1.9}Sincronizaci\IeC {\'o}n entre procesos.}{7}{section.1.9}
-\contentsline {subsection}{\numberline {1.9.1}Mecanismos para controlar secciones cr\IeC {\'\i }ticas}{8}{subsection.1.9.1}
-\contentsline {section}{\numberline {1.10}Documentaci\IeC {\'o}n}{8}{section.1.10}
-\contentsline {section}{\numberline {1.11}Depuraci\IeC {\'o}n.}{9}{section.1.11}
-\contentsline {section}{\numberline {1.12}Examen}{9}{section.1.12}
-\contentsline {chapter}{\numberline {2}Programaci\IeC {\'o}n multihilo}{11}{chapter.2}
-\contentsline {section}{\numberline {2.1}Recursos compartidos por los hilos.}{11}{section.2.1}
-\contentsline {section}{\numberline {2.2}Estados de un hilo. Cambios de estado.}{11}{section.2.2}
-\contentsline {section}{\numberline {2.3}Elementos relacionados con la programaci\IeC {\'o}n de hilos. Librer\IeC {\'\i }as y clases.}{12}{section.2.3}
-\contentsline {section}{\numberline {2.4}Gesti\IeC {\'o}n de hilos.}{13}{section.2.4}
-\contentsline {section}{\numberline {2.5}Creaci\IeC {\'o}n, inicio y finalizaci\IeC {\'o}n.}{15}{section.2.5}
-\contentsline {section}{\numberline {2.6}Sincronizaci\IeC {\'o}n de hilos.}{15}{section.2.6}
-\contentsline {section}{\numberline {2.7}Informaci\IeC {\'o}n entre hilos.}{16}{section.2.7}
-\contentsline {section}{\numberline {2.8}Prioridades de los hilos.}{16}{section.2.8}
-\contentsline {section}{\numberline {2.9}Gesti\IeC {\'o}n de prioridades.}{16}{section.2.9}
-\contentsline {section}{\numberline {2.10}Programaci\IeC {\'o}n de aplicaciones multihilo.}{16}{section.2.10}
-\contentsline {section}{\numberline {2.11}Problema}{18}{section.2.11}
-\contentsline {subsection}{\numberline {2.11.1}Boceto de soluci\IeC {\'o}n}{19}{subsection.2.11.1}
-\contentsline {section}{\numberline {2.12}Soluci\IeC {\'o}n completa al problema de los fil\IeC {\'o}sofos}{20}{section.2.12}
-\contentsline {subsection}{\numberline {2.12.1}Gestor de recursos compartidos (palillos)}{20}{subsection.2.12.1}
-\contentsline {subsection}{\numberline {2.12.2}Simulaci\IeC {\'o}n de un fil\IeC {\'o}sofo}{21}{subsection.2.12.2}
-\contentsline {subsection}{\numberline {2.12.3}Lanzador de hilos}{22}{subsection.2.12.3}
-\contentsline {section}{\numberline {2.13}Problema}{22}{section.2.13}
-\contentsline {section}{\numberline {2.14}Una (mala) soluci\IeC {\'o}n al problema de los barberos}{23}{section.2.14}
-\contentsline {subsection}{\numberline {2.14.1}Clase Barbero}{23}{subsection.2.14.1}
-\contentsline {subsection}{\numberline {2.14.2}Clase Cliente}{24}{subsection.2.14.2}
-\contentsline {subsection}{\numberline {2.14.3}Clase GestorConcurrencia}{25}{subsection.2.14.3}
-\contentsline {subsection}{\numberline {2.14.4}Clase Lanzador}{26}{subsection.2.14.4}
-\contentsline {subsection}{\numberline {2.14.5}Cr\IeC {\'\i }ticas a la soluci\IeC {\'o}n anterior}{27}{subsection.2.14.5}
-\contentsline {subsection}{\numberline {2.14.6}M\IeC {\'e}todo corregido}{27}{subsection.2.14.6}
-\contentsline {section}{\numberline {2.15}Problema: productores y consumidores.}{28}{section.2.15}
-\contentsline {section}{\numberline {2.16}Soluci\IeC {\'o}n}{28}{section.2.16}
-\contentsline {subsection}{\numberline {2.16.1}Una cola limitada en tama\IeC {\~n}o}{28}{subsection.2.16.1}
-\contentsline {subsection}{\numberline {2.16.2}Un gestor de concurrencia para la cola}{29}{subsection.2.16.2}
-\contentsline {subsection}{\numberline {2.16.3}La clase Productor}{30}{subsection.2.16.3}
-\contentsline {subsection}{\numberline {2.16.4}La clase consumidor}{30}{subsection.2.16.4}
-\contentsline {subsection}{\numberline {2.16.5}Un lanzador}{31}{subsection.2.16.5}
-\contentsline {section}{\numberline {2.17}Ejercicio}{32}{section.2.17}
-\contentsline {section}{\numberline {2.18}Documentaci\IeC {\'o}n.}{33}{section.2.18}
-\contentsline {section}{\numberline {2.19}Depuraci\IeC {\'o}n.}{33}{section.2.19}
-\contentsline {chapter}{\numberline {3}Programaci\IeC {\'o}n de comunicaciones en red}{35}{chapter.3}
-\contentsline {section}{\numberline {3.1}Comunicaci\IeC {\'o}n entre aplicaciones.}{35}{section.3.1}
-\contentsline {section}{\numberline {3.2}Roles cliente y servidor.}{35}{section.3.2}
-\contentsline {section}{\numberline {3.3}Recordatorio de los flujos en Java}{36}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}InputStreams y OutputStreams}{36}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Readers y Writers}{36}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}\texttt {BufferedReaders} y \texttt {PrintWriters}}{36}{subsection.3.3.3}
-\contentsline {section}{\numberline {3.4}Elementos de programaci\IeC {\'o}n de aplicaciones en red. Librer\IeC {\'\i }as.}{37}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}La clase URL}{37}{subsection.3.4.1}
-\contentsline {section}{\numberline {3.5}Funciones y objetos de las librer\IeC {\'\i }as.}{38}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Repaso de redes}{38}{subsection.3.5.1}
-\contentsline {section}{\numberline {3.6}Sockets.}{39}{section.3.6}
-\contentsline {section}{\numberline {3.7}Creaci\IeC {\'o}n de sockets.}{39}{section.3.7}
-\contentsline {section}{\numberline {3.8}Enlazado y establecimiento de conexiones.}{40}{section.3.8}
-\contentsline {section}{\numberline {3.9}Utilizaci\IeC {\'o}n de sockets para la transmisi\IeC {\'o}n y recepci\IeC {\'o}n de informaci\IeC {\'o}n.}{41}{section.3.9}
-\contentsline {subsection}{\numberline {3.9.1}El ejemplo completo}{41}{subsection.3.9.1}
-\contentsline {section}{\numberline {3.10}Programaci\IeC {\'o}n de aplicaciones cliente y servidor.}{42}{section.3.10}
-\contentsline {subsection}{\numberline {3.10.1}Ejemplo de servidor Java}{43}{subsection.3.10.1}
-\contentsline {section}{\numberline {3.11}Utilizaci\IeC {\'o}n de hilos en la programaci\IeC {\'o}n de aplicaciones en red.}{46}{section.3.11}
-\contentsline {subsection}{\numberline {3.11.1}Ejercicio: servicio de ordenaci\IeC {\'o}n}{48}{subsection.3.11.1}
-\contentsline {subsection}{\numberline {3.11.2}Una clase Protocolo}{48}{subsection.3.11.2}
-\contentsline {subsection}{\numberline {3.11.3}Una clase con funciones de utilidad}{48}{subsection.3.11.3}
-\contentsline {subsection}{\numberline {3.11.4}La clase Petici\IeC {\'o}n}{49}{subsection.3.11.4}
-\contentsline {subsection}{\numberline {3.11.5}La clase Servidor}{50}{subsection.3.11.5}
-\contentsline {subsection}{\numberline {3.11.6}La clase Cliente}{51}{subsection.3.11.6}
-\contentsline {subsection}{\numberline {3.11.7}Ampliaci\IeC {\'o}n}{52}{subsection.3.11.7}
-\contentsline {chapter}{\numberline {4}Generaci\IeC {\'o}n de servicios en red}{53}{chapter.4}
-\contentsline {section}{\numberline {4.1}Protocolos est\IeC {\'a}ndar de comunicaci\IeC {\'o}n en red a nivel de aplicaci\IeC {\'o}n}{54}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Telnet}{54}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}FTP}{54}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}HTTP}{54}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}POP3}{54}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}SMTP}{54}{subsection.4.1.5}
-\contentsline {section}{\numberline {4.2}Librer\IeC {\'\i }as de clases y componentes.}{54}{section.4.2}
-\contentsline {section}{\numberline {4.3}Utilizaci\IeC {\'o}n de objetos predefinidos.}{54}{section.4.3}
-\contentsline {section}{\numberline {4.4}Propiedades de los objetos predefinidos.}{54}{section.4.4}
-\contentsline {section}{\numberline {4.5}M\IeC {\'e}todos y eventos de los objetos predefinidos.}{54}{section.4.5}
-\contentsline {section}{\numberline {4.6}Establecimiento y finalizaci\IeC {\'o}n de conexiones.}{54}{section.4.6}
-\contentsline {section}{\numberline {4.7}Transmisi\IeC {\'o}n de informaci\IeC {\'o}n.}{54}{section.4.7}
-\contentsline {section}{\numberline {4.8}Programaci\IeC {\'o}n de aplicaciones cliente.}{54}{section.4.8}
-\contentsline {section}{\numberline {4.9}Programaci\IeC {\'o}n de servidores.}{54}{section.4.9}
-\contentsline {section}{\numberline {4.10}Implementaci\IeC {\'o}n de comunicaciones simult\IeC {\'a}neas.}{54}{section.4.10}
-\contentsline {section}{\numberline {4.11}Documentaci\IeC {\'o}n.}{54}{section.4.11}
-\contentsline {section}{\numberline {4.12}Depuraci\IeC {\'o}n.}{54}{section.4.12}
-\contentsline {section}{\numberline {4.13}Monitorizaci\IeC {\'o}n de tiempos de respuesta.}{54}{section.4.13}
-\contentsline {chapter}{\numberline {5}Utilizaci\IeC {\'o}n de t\IeC {\'e}cnicas de programaci\IeC {\'o}n segura}{55}{chapter.5}
-\contentsline {section}{\numberline {5.1}Introducci\IeC {\'o}n}{55}{section.5.1}
-\contentsline {section}{\numberline {5.2}Pr\IeC {\'a}cticas de programaci\IeC {\'o}n segura.}{55}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}M\IeC {\'e}todo C\IeC {\'e}sar}{55}{subsection.5.2.1}
-\contentsline {section}{\numberline {5.3}Criptograf\IeC {\'\i }a de clave p\IeC {\'u}blica y clave privada.}{56}{section.5.3}
-\contentsline {section}{\numberline {5.4}Principales aplicaciones de la criptograf\IeC {\'\i }a.}{57}{section.5.4}
-\contentsline {section}{\numberline {5.5}Protocolos criptogr\IeC {\'a}ficos.}{57}{section.5.5}
-\contentsline {section}{\numberline {5.6}Encriptaci\IeC {\'o}n de informaci\IeC {\'o}n.}{57}{section.5.6}
-\contentsline {section}{\numberline {5.7}Protocolos seguros de comunicaciones.}{59}{section.5.7}
-\contentsline {section}{\numberline {5.8}Programaci\IeC {\'o}n de aplicaciones con comunicaciones seguras.}{60}{section.5.8}
-\contentsline {subsection}{\numberline {5.8.1}La clase Servidor}{61}{subsection.5.8.1}
-\contentsline {subsection}{\numberline {5.8.2}La clase Peticion}{62}{subsection.5.8.2}
-\contentsline {subsection}{\numberline {5.8.3}La clase Cliente}{63}{subsection.5.8.3}
-\contentsline {section}{\numberline {5.9}Pol\IeC {\'\i }tica de seguridad.}{64}{section.5.9}
-\contentsline {section}{\numberline {5.10}Programaci\IeC {\'o}n de mecanismos de control de acceso.}{64}{section.5.10}
-\contentsline {section}{\numberline {5.11}Pruebas y depuraci\IeC {\'o}n.}{64}{section.5.11}
+\contentsline {chapter}{\numberline {1}{}Programaci\IeC {\'o}n multiproceso}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Ejecutables. Procesos. Servicios.}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Ejecutables}{3}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Procesos}{3}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}Servicios}{4}{subsection.1.1.3}
+\contentsline {section}{\numberline {1.2}Hilos.}{4}{section.1.2}
+\contentsline {section}{\numberline {1.3}Programaci\IeC {\'o}n concurrente.}{4}{section.1.3}
+\contentsline {section}{\numberline {1.4}Programaci\IeC {\'o}n paralela y distribuida.}{4}{section.1.4}
+\contentsline {section}{\numberline {1.5}Creaci\IeC {\'o}n de procesos.}{4}{section.1.5}
+\contentsline {section}{\numberline {1.6}Comunicaci\IeC {\'o}n entre procesos.}{7}{section.1.6}
+\contentsline {section}{\numberline {1.7}Gesti\IeC {\'o}n de procesos.}{8}{section.1.7}
+\contentsline {section}{\numberline {1.8}Comandos para la gesti\IeC {\'o}n de procesos en sistemas libres y propietarios.}{8}{section.1.8}
+\contentsline {subsection}{\numberline {1.8.1}Prioridades}{9}{subsection.1.8.1}
+\contentsline {section}{\numberline {1.9}Sincronizaci\IeC {\'o}n entre procesos.}{9}{section.1.9}
+\contentsline {subsection}{\numberline {1.9.1}Mecanismos para controlar secciones cr\IeC {\'\i }ticas}{10}{subsection.1.9.1}
+\contentsline {section}{\numberline {1.10}Documentaci\IeC {\'o}n}{10}{section.1.10}
+\contentsline {section}{\numberline {1.11}Depuraci\IeC {\'o}n.}{11}{section.1.11}
+\contentsline {section}{\numberline {1.12}Examen}{11}{section.1.12}
+\contentsline {chapter}{\numberline {2}{}Programaci\IeC {\'o}n multihilo}{13}{chapter.2}
+\contentsline {section}{\numberline {2.1}Recursos compartidos por los hilos.}{13}{section.2.1}
+\contentsline {section}{\numberline {2.2}Estados de un hilo. Cambios de estado.}{13}{section.2.2}
+\contentsline {section}{\numberline {2.3}Elementos relacionados con la programaci\IeC {\'o}n de hilos. Librer\IeC {\'\i }as y clases.}{14}{section.2.3}
+\contentsline {section}{\numberline {2.4}Gesti\IeC {\'o}n de hilos.}{15}{section.2.4}
+\contentsline {section}{\numberline {2.5}Creaci\IeC {\'o}n, inicio y finalizaci\IeC {\'o}n.}{17}{section.2.5}
+\contentsline {section}{\numberline {2.6}Sincronizaci\IeC {\'o}n de hilos.}{17}{section.2.6}
+\contentsline {section}{\numberline {2.7}Informaci\IeC {\'o}n entre hilos.}{18}{section.2.7}
+\contentsline {section}{\numberline {2.8}Prioridades de los hilos.}{18}{section.2.8}
+\contentsline {section}{\numberline {2.9}Gesti\IeC {\'o}n de prioridades.}{18}{section.2.9}
+\contentsline {section}{\numberline {2.10}Programaci\IeC {\'o}n de aplicaciones multihilo.}{18}{section.2.10}
+\contentsline {section}{\numberline {2.11}Problema}{20}{section.2.11}
+\contentsline {subsection}{\numberline {2.11.1}Boceto de soluci\IeC {\'o}n}{21}{subsection.2.11.1}
+\contentsline {section}{\numberline {2.12}Soluci\IeC {\'o}n completa al problema de los fil\IeC {\'o}sofos}{22}{section.2.12}
+\contentsline {subsection}{\numberline {2.12.1}Gestor de recursos compartidos (palillos)}{22}{subsection.2.12.1}
+\contentsline {subsection}{\numberline {2.12.2}Simulaci\IeC {\'o}n de un fil\IeC {\'o}sofo}{23}{subsection.2.12.2}
+\contentsline {subsection}{\numberline {2.12.3}Lanzador de hilos}{24}{subsection.2.12.3}
+\contentsline {section}{\numberline {2.13}Problema}{24}{section.2.13}
+\contentsline {section}{\numberline {2.14}Una (mala) soluci\IeC {\'o}n al problema de los barberos}{25}{section.2.14}
+\contentsline {subsection}{\numberline {2.14.1}Clase Barbero}{25}{subsection.2.14.1}
+\contentsline {subsection}{\numberline {2.14.2}Clase Cliente}{26}{subsection.2.14.2}
+\contentsline {subsection}{\numberline {2.14.3}Clase GestorConcurrencia}{27}{subsection.2.14.3}
+\contentsline {subsection}{\numberline {2.14.4}Clase Lanzador}{28}{subsection.2.14.4}
+\contentsline {subsection}{\numberline {2.14.5}Cr\IeC {\'\i }ticas a la soluci\IeC {\'o}n anterior}{29}{subsection.2.14.5}
+\contentsline {subsection}{\numberline {2.14.6}M\IeC {\'e}todo corregido}{29}{subsection.2.14.6}
+\contentsline {section}{\numberline {2.15}Problema: productores y consumidores.}{30}{section.2.15}
+\contentsline {section}{\numberline {2.16}Soluci\IeC {\'o}n}{30}{section.2.16}
+\contentsline {subsection}{\numberline {2.16.1}Una cola limitada en tama\IeC {\~n}o}{30}{subsection.2.16.1}
+\contentsline {subsection}{\numberline {2.16.2}Un gestor de concurrencia para la cola}{31}{subsection.2.16.2}
+\contentsline {subsection}{\numberline {2.16.3}La clase Productor}{32}{subsection.2.16.3}
+\contentsline {subsection}{\numberline {2.16.4}La clase consumidor}{32}{subsection.2.16.4}
+\contentsline {subsection}{\numberline {2.16.5}Un lanzador}{33}{subsection.2.16.5}
+\contentsline {section}{\numberline {2.17}Ejercicio}{34}{section.2.17}
+\contentsline {section}{\numberline {2.18}Documentaci\IeC {\'o}n.}{35}{section.2.18}
+\contentsline {section}{\numberline {2.19}Depuraci\IeC {\'o}n.}{35}{section.2.19}
+\contentsline {chapter}{\numberline {3}{}Programaci\IeC {\'o}n de comunicaciones en red}{37}{chapter.3}
+\contentsline {section}{\numberline {3.1}Comunicaci\IeC {\'o}n entre aplicaciones.}{37}{section.3.1}
+\contentsline {section}{\numberline {3.2}Roles cliente y servidor.}{37}{section.3.2}
+\contentsline {section}{\numberline {3.3}Recordatorio de los flujos en Java}{38}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}InputStreams y OutputStreams}{38}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Readers y Writers}{38}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}\texttt {BufferedReaders} y \texttt {PrintWriters}}{38}{subsection.3.3.3}
+\contentsline {section}{\numberline {3.4}Elementos de programaci\IeC {\'o}n de aplicaciones en red. Librer\IeC {\'\i }as.}{39}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}La clase URL}{39}{subsection.3.4.1}
+\contentsline {section}{\numberline {3.5}Funciones y objetos de las librer\IeC {\'\i }as.}{40}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Repaso de redes}{40}{subsection.3.5.1}
+\contentsline {section}{\numberline {3.6}Sockets.}{41}{section.3.6}
+\contentsline {section}{\numberline {3.7}Creaci\IeC {\'o}n de sockets.}{41}{section.3.7}
+\contentsline {section}{\numberline {3.8}Enlazado y establecimiento de conexiones.}{42}{section.3.8}
+\contentsline {section}{\numberline {3.9}Utilizaci\IeC {\'o}n de sockets para la transmisi\IeC {\'o}n y recepci\IeC {\'o}n de informaci\IeC {\'o}n.}{43}{section.3.9}
+\contentsline {subsection}{\numberline {3.9.1}El ejemplo completo}{43}{subsection.3.9.1}
+\contentsline {section}{\numberline {3.10}Programaci\IeC {\'o}n de aplicaciones cliente y servidor.}{44}{section.3.10}
+\contentsline {subsection}{\numberline {3.10.1}Ejemplo de servidor Java}{46}{subsection.3.10.1}
+\contentsline {section}{\numberline {3.11}Utilizaci\IeC {\'o}n de hilos en la programaci\IeC {\'o}n de aplicaciones en red.}{49}{section.3.11}
+\contentsline {subsection}{\numberline {3.11.1}Ejercicio: servicio de ordenaci\IeC {\'o}n}{50}{subsection.3.11.1}
+\contentsline {subsection}{\numberline {3.11.2}Una clase Protocolo}{51}{subsection.3.11.2}
+\contentsline {subsection}{\numberline {3.11.3}Una clase con funciones de utilidad}{51}{subsection.3.11.3}
+\contentsline {subsection}{\numberline {3.11.4}La clase Petici\IeC {\'o}n}{52}{subsection.3.11.4}
+\contentsline {subsection}{\numberline {3.11.5}La clase Servidor}{53}{subsection.3.11.5}
+\contentsline {subsection}{\numberline {3.11.6}La clase Cliente}{53}{subsection.3.11.6}
+\contentsline {subsection}{\numberline {3.11.7}Ampliaci\IeC {\'o}n}{54}{subsection.3.11.7}
+\contentsline {chapter}{\numberline {4}{}Generaci\IeC {\'o}n de servicios en red}{57}{chapter.4}
+\contentsline {section}{\numberline {4.1}Protocolos est\IeC {\'a}ndar de comunicaci\IeC {\'o}n en red a nivel de aplicaci\IeC {\'o}n}{58}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Telnet}{58}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}FTP}{58}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}HTTP}{58}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}POP3}{58}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}SMTP}{58}{subsection.4.1.5}
+\contentsline {section}{\numberline {4.2}Librer\IeC {\'\i }as de clases y componentes.}{58}{section.4.2}
+\contentsline {section}{\numberline {4.3}Utilizaci\IeC {\'o}n de objetos predefinidos.}{58}{section.4.3}
+\contentsline {section}{\numberline {4.4}Propiedades de los objetos predefinidos.}{58}{section.4.4}
+\contentsline {section}{\numberline {4.5}M\IeC {\'e}todos y eventos de los objetos predefinidos.}{58}{section.4.5}
+\contentsline {section}{\numberline {4.6}Establecimiento y finalizaci\IeC {\'o}n de conexiones.}{58}{section.4.6}
+\contentsline {section}{\numberline {4.7}Transmisi\IeC {\'o}n de informaci\IeC {\'o}n.}{58}{section.4.7}
+\contentsline {section}{\numberline {4.8}Programaci\IeC {\'o}n de aplicaciones cliente.}{58}{section.4.8}
+\contentsline {section}{\numberline {4.9}Programaci\IeC {\'o}n de servidores.}{58}{section.4.9}
+\contentsline {section}{\numberline {4.10}Implementaci\IeC {\'o}n de comunicaciones simult\IeC {\'a}neas.}{58}{section.4.10}
+\contentsline {section}{\numberline {4.11}Documentaci\IeC {\'o}n.}{58}{section.4.11}
+\contentsline {section}{\numberline {4.12}Depuraci\IeC {\'o}n.}{58}{section.4.12}
+\contentsline {section}{\numberline {4.13}Monitorizaci\IeC {\'o}n de tiempos de respuesta.}{58}{section.4.13}
+\contentsline {chapter}{\numberline {5}{}Utilizaci\IeC {\'o}n de t\IeC {\'e}cnicas de programaci\IeC {\'o}n segura}{59}{chapter.5}
+\contentsline {section}{\numberline {5.1}Introducci\IeC {\'o}n}{59}{section.5.1}
+\contentsline {section}{\numberline {5.2}Pr\IeC {\'a}cticas de programaci\IeC {\'o}n segura.}{59}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}M\IeC {\'e}todo C\IeC {\'e}sar}{59}{subsection.5.2.1}
+\contentsline {section}{\numberline {5.3}Criptograf\IeC {\'\i }a de clave p\IeC {\'u}blica y clave privada.}{60}{section.5.3}
+\contentsline {section}{\numberline {5.4}Principales aplicaciones de la criptograf\IeC {\'\i }a.}{61}{section.5.4}
+\contentsline {section}{\numberline {5.5}Protocolos criptogr\IeC {\'a}ficos.}{61}{section.5.5}
+\contentsline {section}{\numberline {5.6}Encriptaci\IeC {\'o}n de informaci\IeC {\'o}n.}{61}{section.5.6}
+\contentsline {section}{\numberline {5.7}Protocolos seguros de comunicaciones.}{63}{section.5.7}
+\contentsline {section}{\numberline {5.8}Programaci\IeC {\'o}n de aplicaciones con comunicaciones seguras.}{64}{section.5.8}
+\contentsline {section}{\numberline {5.9}Pol\IeC {\'\i }tica de seguridad.}{68}{section.5.9}
+\contentsline {section}{\numberline {5.10}Programaci\IeC {\'o}n de mecanismos de control de acceso.}{68}{section.5.10}
+\contentsline {section}{\numberline {5.11}Pruebas y depuraci\IeC {\'o}n.}{68}{section.5.11}

@@ -367,12 +367,10 @@ En el ejemplo siguiente puede verse un ejemplo para Python 3 que implementa un s
 3. Despues acepta un segundo número de dos cifras terminado en un fin de línea UNIX.
 
 .. code-block:: python
+
 	import socketserver
-
-
 	TAM_MAXIMO_PARAMETROS=64
 	PUERTO=9876
-
 	class GestorConexion(
 		socketserver.BaseRequestHandler):
 		
@@ -406,10 +404,6 @@ En el ejemplo siguiente puede verse un ejemplo para Python 3 que implementa un s
 			print ("Devolviendo a " + direccion+" el resultado "+str(resultado))
 			bytes_resultado=bytearray(str(resultado), "utf-8");
 			self.request.send(bytes_resultado)
-			
-			
-
-
 	servidor=socketserver.TCPServer(("10.13.0.20", 9876), GestorConexion)
 	print ("Servidor en marcha.")
 	servidor.serve_forever()
