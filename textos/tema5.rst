@@ -88,11 +88,6 @@ Esta clase implementa un sistema de rotado básico para poder efectuar
 	
 
 
-
-
-
-
-
 Criptografía de clave pública y clave privada.
 ----------------------------------------------------
 
