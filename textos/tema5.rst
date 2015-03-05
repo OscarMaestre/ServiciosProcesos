@@ -436,6 +436,43 @@ El código del cliente sería algo así:
 	}
     }
 
+Firmado de aplicaciones
+-----------------------------
+
+Utilizando la criptografía de clave pública es posible "firmar" aplicaciones. El firmado es un mecanismo que permite al usuario de una aplicación el verificar que la aplicación no ha sido alterada desde que el programador la creó (virus o programas malignos, personal descontento con la empresa, etc...). 
+
+Antes de efectuar el firmado se debe disponer de un par de claves generadas con la herramienta ``keytool`` mencionada anteriormente. Supongamos que el almacén de claves está creado y que en él hay uno o varios *alias* creados. El proceso de firmado es el siguiente:
+
+1. Crear la aplicación, que puede estar formada por un conjunto de clases pero que en última instancia tendrá un ``main``.
+2. Empaquetar la aplicación con ``jar cfe Aplicacion.jar com.ies.Aplicacion DirectorioPaquete``. Este comando crea un fichero (``f``) JAR en el cual el punto de entrada (``e``) es la clase ``com.ies.Aplicacion`` (que es la que tendrá el ``main``).
+3. Puede comprobarse que la aplicación dentro del JAR se ejecuta correctamente con ``java -jar Aplicacion.jar``.
+4. Ahora se puede ejecutar ``jarsigner Aplicacion.jar <alias>``.
+
+Con estos pasos se tiene un aplicación firmada que el usuario puede verificar si así lo desea. De hecho, si se extrae el contenido del JAR con ``jar -xf Aplicacion.jar`` se extraen los archivos ``.class`` y un fichero ``META-INF/Manifest`` que se puede abrir con un editor para ver que realmente está firmado.
+
+Para que otras personas puedan comprobar que nuestra aplicacion es correcta los programadores deberemos exportar un certificado que los usuarios puedan importar para hacer el verificado. Recordemos que el comando es::
+
+	keytool -exportcert -keystore ..\Almacen.store -file Programador.cer -alias Programador
+
+Verificado de aplicaciones
+--------------------------------
+
+Si ahora otro usuario desea ejecutar nuestra aplicación deberá importar nuestro certificado. El proceso de verificado es simple:
+
+1. El usuario importa el certificado.
+2. Ahora que tiene el certificado puede comprobar la aplicación con ``jarsigner -verify Aplicacion.jar <alias_del_programador>``
+
+El comando deberá responder con algo como ``jar verified``. Sin embargo si no tenemos un certificado firmado por alguna autoridad de certificación (CA) la herramienta se quejará de que algunos criterios de seguridad no se cumplen.
+
+
+Ejercicio
+-----------------
+Intenta extraer el archivo JAR y reemplaza el ``.class`` por alguna otra clase. Vuelve a crear el archivo .JAR y vuelve a intentar verificarlo, ¿qué ocurre?
+
+Recordatorio
+---------------
+
+Hemos hecho el proceso de firmado y verificado con **certificados autofirmados**, lo cual es útil para practicar pero **completamente inútil desde el punto de vista de la seguridad**. Para que un certificado sea seguro debemos hacer que previamente alguna autoridad de certificación nos lo firme primero (para lo cual suele ser habitual el tener que pagar). 
 
 
 Política de seguridad.
