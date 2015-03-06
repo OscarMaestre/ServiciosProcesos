@@ -128,7 +128,7 @@ contain the root <cite>toctree</cite> directive.</dd>
 <p>Para resolverlo crearemos una clase <tt class="docutils literal"><span class="pre">Sumador</span></tt> que tenga un método que acepte dos números <tt class="docutils literal"><span class="pre">n1</span></tt> y <tt class="docutils literal"><span class="pre">n2</span></tt> y que devuelva la suma de todo el intervalor.</p>
 <p>Además, incluiremos un método <tt class="docutils literal"><span class="pre">main</span></tt> que ejecute la operación de suma tomando los números de la línea de comandos (es decir, se pasan como argumentos al main).</p>
 <p>El código de dicha clase podría ser algo así:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="nn">com.ies</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ies</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sumador</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">int</span> <span class="nf">sumar</span><span class="o">(</span><span class="kt">int</span> <span class="n">n1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n2</span><span class="o">){</span>
@@ -166,7 +166,7 @@ contain the root <cite>toctree</cite> directive.</dd>
 </pre></div>
 </div>
 <p>Y ahora tendremos una clase que lanza procesos de esta forma:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="nn">com.ies</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ies</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lanzador</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">lanzarSumador</span><span class="o">(</span><span class="n">Integer</span> <span class="n">n1</span><span class="o">,</span>
@@ -462,7 +462,7 @@ contain the root <cite>toctree</cite> directive.</dd>
 </div>
 <p>Ejercicio: crear un programa que lance 10 hilos de ejecución donde a cada hilo se le pasará la base y la altura de un triángulo, y cada hilo ejecutará el cálculo del área de dicho triángulo informando de qué base y qué altura recibió y cual es el área resultado.</p>
 <p>Una posibilidad (quizá incorrecta) sería esta:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="nn">com.ies</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ies</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
 
@@ -493,7 +493,7 @@ contain the root <cite>toctree</cite> directive.</dd>
                         <span class="kt">int</span> <span class="n">base</span><span class="o">=</span><span class="mi">1</span><span class="o">+</span><span class="n">generador</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">baseMaxima</span><span class="o">);</span>
                         <span class="kt">int</span> <span class="n">altura</span><span class="o">=</span><span class="mi">1</span><span class="o">+</span><span class="n">generador</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">alturaMaxima</span><span class="o">);</span>
                         <span class="n">CalculadorAreas</span> <span class="n">ca</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">CalculadorAreas</span><span class="o">(</span><span class="n">base</span><span class="o">,</span> <span class="n">altura</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">CalculadorAreas</span><span class="o">(</span><span class="n">base</span><span class="o">,</span> <span class="n">altura</span><span class="o">);</span>
                         <span class="n">Thread</span> <span class="n">hiloAsociado</span><span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">ca</span><span class="o">);</span>
                         <span class="n">hiloAsociado</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
                 <span class="o">}</span>
@@ -793,11 +793,11 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                 <span class="n">Filosofo</span><span class="o">[]</span> <span class="n">filosofos</span><span class="o">=</span><span class="k">new</span> <span class="n">Filosofo</span><span class="o">[</span><span class="n">MAX_FILOSOFOS</span><span class="o">];</span>
                 <span class="n">Thread</span><span class="o">[]</span> <span class="n">hilosAsociados</span><span class="o">=</span><span class="k">new</span> <span class="n">Thread</span><span class="o">[</span><span class="n">MAX_FILOSOFOS</span><span class="o">];</span>
                 <span class="n">GestorPalillos</span> <span class="n">gestorCompartido</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="n">GestorPalillos</span><span class="o">(</span><span class="n">MAX_FILOSOFOS</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="nf">GestorPalillos</span><span class="o">(</span><span class="n">MAX_FILOSOFOS</span><span class="o">);</span>
                 <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">MAX_FILOSOFOS</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
                         <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="o">){</span>
                                 <span class="n">filosofos</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span>
-                                <span class="k">new</span> <span class="n">Filosofo</span><span class="o">(</span>
+                                <span class="k">new</span> <span class="nf">Filosofo</span><span class="o">(</span>
                                                 <span class="n">gestorCompartido</span><span class="o">,</span>
                                                 <span class="n">i</span><span class="o">,</span><span class="n">MAX_FILOSOFOS</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
                         <span class="o">}</span>
@@ -1220,7 +1220,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
         <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argumentos</span><span class="o">){</span>
                 <span class="n">Lanzador</span> <span class="n">l</span><span class="o">=</span><span class="k">new</span> <span class="n">Lanzador</span><span class="o">();</span>
                 <span class="n">GestorColasConcurrentes</span> <span class="n">gcl</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="n">GestorColasConcurrentes</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="nf">GestorColasConcurrentes</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
 
                 <span class="kt">int</span> <span class="n">NUM_PRODUCTORES</span><span class="o">=</span><span class="mi">5</span><span class="o">;</span>
                 <span class="n">Productor</span><span class="o">[]</span>     <span class="n">productores</span><span class="o">;</span>
@@ -1251,7 +1251,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                 <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">NUM_CONSUMIDORES</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
                         <span class="n">consumidores</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="k">new</span> <span class="n">Consumidor</span><span class="o">(</span><span class="n">gcl</span><span class="o">);</span>
                         <span class="n">hilosConsumidores</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span>
-                                        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">consumidores</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                                        <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="n">consumidores</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
                         <span class="n">hilosConsumidores</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">start</span><span class="o">();</span>
                 <span class="o">}</span>
 
@@ -1370,11 +1370,11 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <tt class="do
                         <span class="n">URL</span> <span class="n">laUrl</span><span class="o">=</span><span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">url_descargar</span><span class="o">);</span>
                         <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">laUrl</span><span class="o">.</span><span class="na">openStream</span><span class="o">();</span>
                         <span class="n">InputStreamReader</span> <span class="n">reader</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                         <span class="n">BufferedReader</span> <span class="n">bReader</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">reader</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">reader</span><span class="o">);</span>
                         <span class="n">FileWriter</span> <span class="n">escritorFichero</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="n">nombreArchivo</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="nf">FileWriter</span><span class="o">(</span><span class="n">nombreArchivo</span><span class="o">);</span>
                         <span class="n">String</span> <span class="n">linea</span><span class="o">;</span>
                         <span class="k">while</span> <span class="o">((</span><span class="n">linea</span><span class="o">=</span><span class="n">bReader</span><span class="o">.</span><span class="na">readLine</span><span class="o">())!=</span><span class="kc">null</span><span class="o">){</span>
                                 <span class="n">escritorFichero</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
@@ -1533,22 +1533,22 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 
                         <span class="c1">//Flujos que manejan caracteres</span>
                         <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                         <span class="n">OutputStreamWriter</span> <span class="n">osw</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">OutputStreamWriter</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">OutputStreamWriter</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
 
                         <span class="c1">//Flujos de líneas</span>
                         <span class="n">BufferedReader</span> <span class="n">bReader</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
                         <span class="n">PrintWriter</span> <span class="n">pWriter</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">osw</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">PrintWriter</span><span class="o">(</span><span class="n">osw</span><span class="o">);</span>
 
 
                         <span class="n">pWriter</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;GET /index.html&quot;</span><span class="o">);</span>
                         <span class="n">pWriter</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
                         <span class="n">String</span> <span class="n">linea</span><span class="o">;</span>
                         <span class="n">FileWriter</span> <span class="n">escritorArchivo</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">&quot;resultado.txt&quot;</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">FileWriter</span><span class="o">(</span><span class="s">&quot;resultado.txt&quot;</span><span class="o">);</span>
                         <span class="k">while</span> <span class="o">((</span><span class="n">linea</span><span class="o">=</span><span class="n">bReader</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">){</span>
                                 <span class="n">escritorArchivo</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
                         <span class="o">}</span>
@@ -1637,9 +1637,9 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <span class="n">os</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
 
 <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
-        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
 <span class="n">BufferedReader</span> <span class="n">br</span><span class="o">=</span>
-        <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
 <span class="n">String</span> <span class="n">cadenaRecibida</span><span class="o">=</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Recibido:&quot;</span><span class="o">+</span>
                 <span class="n">cadenaRecibida</span><span class="o">);</span>
@@ -1742,9 +1742,9 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
                         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Conexion recibida!&quot;</span><span class="o">);</span>
                         <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">conexion</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
                         <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                         <span class="n">BufferedReader</span> <span class="n">bf</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
                         <span class="n">String</span> <span class="n">linea</span><span class="o">=</span><span class="n">bf</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
                         <span class="n">String</span> <span class="n">num1</span><span class="o">=</span><span class="n">bf</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
                         <span class="n">String</span> <span class="n">num2</span><span class="o">=</span><span class="n">bf</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
@@ -1763,9 +1763,9 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClienteCalculo</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kd">static</span> <span class="n">BufferedReader</span> <span class="nf">getFlujo</span><span class="o">(</span><span class="n">InputStream</span> <span class="n">is</span><span class="o">){</span>
                 <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                 <span class="n">BufferedReader</span> <span class="n">bfr</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
                 <span class="k">return</span> <span class="n">bfr</span><span class="o">;</span>
         <span class="o">}</span>
         <span class="cm">/**</span>
@@ -1852,7 +1852,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
                 <span class="k">try</span> <span class="o">{</span>
                         <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
                         <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                         <span class="n">bfr</span><span class="o">=</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
                         <span class="n">OutputStream</span> <span class="n">os</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
                         <span class="n">pw</span><span class="o">=</span><span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
@@ -1923,7 +1923,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
                                 <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
                 <span class="n">InputStream</span> <span class="n">is</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
                 <span class="n">InputStreamReader</span> <span class="n">isr</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
                 <span class="n">BufferedReader</span> <span class="n">bfr</span><span class="o">=</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">isr</span><span class="o">);</span>
                 <span class="k">return</span> <span class="n">bfr</span><span class="o">;</span>
         <span class="o">}</span>
@@ -1999,15 +1999,15 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
                                         <span class="n">socket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
                         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Alguien conectó&quot;</span><span class="o">);</span>
                         <span class="n">Peticion</span> <span class="n">p</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">Peticion</span><span class="o">(</span><span class="n">conexionCliente</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">Peticion</span><span class="o">(</span><span class="n">conexionCliente</span><span class="o">);</span>
                         <span class="n">Thread</span> <span class="n">hiloAsociado</span><span class="o">=</span>
-                                        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+                                        <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
                         <span class="n">hiloAsociado</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
                 <span class="o">}</span>
         <span class="o">}</span> <span class="c1">// Fin del método escuchar</span>
         <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span>  <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argumentos</span><span class="o">){</span>
                 <span class="n">ServidorOrdenacion</span> <span class="n">s</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="n">ServidorOrdenacion</span><span class="o">();</span>
+                                <span class="k">new</span> <span class="nf">ServidorOrdenacion</span><span class="o">();</span>
                 <span class="k">try</span> <span class="o">{</span>
                         <span class="n">s</span><span class="o">.</span><span class="na">escuchar</span><span class="o">();</span>
                 <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
@@ -2024,9 +2024,9 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Cliente</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ordenar</span><span class="o">(</span><span class="n">String</span> <span class="n">s1</span><span class="o">,</span> <span class="n">String</span> <span class="n">s2</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
                 <span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="n">InetSocketAddress</span><span class="o">(</span><span class="s">&quot;10.13.0.20&quot;</span><span class="o">,</span> <span class="mi">9876</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="nf">InetSocketAddress</span><span class="o">(</span><span class="s">&quot;10.13.0.20&quot;</span><span class="o">,</span> <span class="mi">9876</span><span class="o">);</span>
                 <span class="n">Socket</span> <span class="n">conexion</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="n">Socket</span><span class="o">();</span>
+                                <span class="k">new</span> <span class="nf">Socket</span><span class="o">();</span>
                 <span class="n">conexion</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">direccion</span><span class="o">);</span>
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Conexion establecida&quot;</span><span class="o">);</span>
                 <span class="cm">/* Ahora hay que crear flujos de salida, enviar</span>
@@ -2309,7 +2309,7 @@ IPMBNVÑEP</div></blockquote>
                         <span class="n">UnsupportedEncodingException</span>
         <span class="o">{</span>
                 <span class="n">GestorCifrado</span> <span class="n">gestorCifrado</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="n">GestorCifrado</span><span class="o">();</span>
+                                <span class="k">new</span> <span class="nf">GestorCifrado</span><span class="o">();</span>
                 <span class="n">String</span> <span class="n">mensajeOriginal</span><span class="o">=</span><span class="s">&quot;Hola mundo&quot;</span><span class="o">;</span>
                 <span class="n">Key</span> <span class="n">clavePublica</span><span class="o">=</span><span class="n">gestorCifrado</span><span class="o">.</span><span class="na">getPublica</span><span class="o">();</span>
 
@@ -2319,7 +2319,7 @@ IPMBNVÑEP</div></blockquote>
                                                 <span class="n">clavePublica</span>
                 <span class="o">);</span>
                 <span class="n">String</span> <span class="n">cadCifrada</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">mensajeCifrado</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">mensajeCifrado</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">);</span>
 
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span>
                         <span class="o">(</span><span class="s">&quot;Cadena original:&quot;</span><span class="o">+</span><span class="n">mensajeOriginal</span><span class="o">);</span>
@@ -2336,7 +2336,7 @@ IPMBNVÑEP</div></blockquote>
                                                 <span class="n">mensajeCifrado</span><span class="o">,</span><span class="n">clavePrivada</span><span class="o">);</span>
                 <span class="n">String</span> <span class="n">mensajeDescifrado</span><span class="o">;</span>
                 <span class="n">mensajeDescifrado</span><span class="o">=</span>
-                                <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">descifrada</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">);</span>
+                                <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">descifrada</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">);</span>
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
                                 <span class="s">&quot;El mensaje descifrado es:&quot;</span><span class="o">+</span>
                                                 <span class="n">mensajeDescifrado</span><span class="o">);</span>
@@ -2423,7 +2423,7 @@ keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore c
             <span class="n">SSLServerSocket</span> <span class="n">serverSocket</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
             <span class="cm">/* Paso 1, se carga el almacén de claves*/</span>
             <span class="n">FileInputStream</span> <span class="n">fichAlmacen</span><span class="o">=</span>
-                            <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">rutaAlmacen</span><span class="o">);</span>
+                            <span class="k">new</span> <span class="nf">FileInputStream</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">rutaAlmacen</span><span class="o">);</span>
             <span class="cm">/* Paso 1.1, se crea un almacén del tipo por defecto</span>
 <span class="cm">             * que es un JKS (Java Key Store), a día de hoy*/</span>
             <span class="n">KeyStore</span> <span class="n">almacen</span><span class="o">=</span><span class="n">KeyStore</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">KeyStore</span><span class="o">.</span><span class="na">getDefaultType</span><span class="o">());</span>
@@ -2460,11 +2460,11 @@ keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore c
                     <span class="n">Socket</span> <span class="n">connRecibida</span><span class="o">=</span><span class="n">socketServidor</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
                     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Conexion segura recibida&quot;</span><span class="o">);</span>
                     <span class="n">entrada</span><span class="o">=</span>
-                        <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
-                        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">connRecibida</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+                        <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span>
+                        <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">connRecibida</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
                     <span class="n">salida</span><span class="o">=</span>
-                        <span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span>
-                            <span class="k">new</span> <span class="n">OutputStreamWriter</span><span class="o">(</span>
+                        <span class="k">new</span> <span class="nf">PrintWriter</span><span class="o">(</span>
+                            <span class="k">new</span> <span class="nf">OutputStreamWriter</span><span class="o">(</span>
                             <span class="n">connRecibida</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">()));</span>
                     <span class="n">String</span> <span class="n">linea</span><span class="o">=</span><span class="n">entrada</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
                     <span class="n">salida</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">linea</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
@@ -2520,7 +2520,7 @@ keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore c
 <span class="cm">             * certificado del servidor)*/</span>
             <span class="n">KeyStore</span> <span class="n">almacenCliente</span><span class="o">=</span><span class="n">KeyStore</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">KeyStore</span><span class="o">.</span><span class="na">getDefaultType</span><span class="o">());</span>
             <span class="n">FileInputStream</span> <span class="n">ficheroAlmacenClaves</span><span class="o">=</span>
-                            <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span> <span class="k">this</span><span class="o">.</span><span class="na">almacen</span> <span class="o">);</span>
+                            <span class="k">new</span> <span class="nf">FileInputStream</span><span class="o">(</span> <span class="k">this</span><span class="o">.</span><span class="na">almacen</span> <span class="o">);</span>
             <span class="n">almacenCliente</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">ficheroAlmacenClaves</span><span class="o">,</span> <span class="n">clave</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">());</span>
             <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Almacen cargado&quot;</span><span class="o">);</span>
             <span class="cm">/* Paso 2, crearemos una fabrica de gestores de confianza</span>
@@ -2549,6 +2549,39 @@ keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore c
 <span class="o">}</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="firmado-de-aplicaciones">
+<h3>Firmado de aplicaciones<a class="headerlink" href="#firmado-de-aplicaciones" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Utilizando la criptografía de clave pública es posible &#8220;firmar&#8221; aplicaciones. El firmado es un mecanismo que permite al usuario de una aplicación el verificar que la aplicación no ha sido alterada desde que el programador la creó (virus o programas malignos, personal descontento con la empresa, etc...).</p>
+<p>Antes de efectuar el firmado se debe disponer de un par de claves generadas con la herramienta <tt class="docutils literal"><span class="pre">keytool</span></tt> mencionada anteriormente. Supongamos que el almacén de claves está creado y que en él hay uno o varios <em>alias</em> creados. El proceso de firmado es el siguiente:</p>
+<ol class="arabic simple">
+<li>Crear la aplicación, que puede estar formada por un conjunto de clases pero que en última instancia tendrá un <tt class="docutils literal"><span class="pre">main</span></tt>.</li>
+<li>Empaquetar la aplicación con <tt class="docutils literal"><span class="pre">jar</span> <span class="pre">cfe</span> <span class="pre">Aplicacion.jar</span> <span class="pre">com.ies.Aplicacion</span> <span class="pre">DirectorioPaquete</span></tt>. Este comando crea un fichero (<tt class="docutils literal"><span class="pre">f</span></tt>) JAR en el cual el punto de entrada (<tt class="docutils literal"><span class="pre">e</span></tt>) es la clase <tt class="docutils literal"><span class="pre">com.ies.Aplicacion</span></tt> (que es la que tendrá el <tt class="docutils literal"><span class="pre">main</span></tt>).</li>
+<li>Puede comprobarse que la aplicación dentro del JAR se ejecuta correctamente con <tt class="docutils literal"><span class="pre">java</span> <span class="pre">-jar</span> <span class="pre">Aplicacion.jar</span></tt>.</li>
+<li>Ahora se puede ejecutar <tt class="docutils literal"><span class="pre">jarsigner</span> <span class="pre">Aplicacion.jar</span> <span class="pre">&lt;alias&gt;</span></tt>.</li>
+</ol>
+<p>Con estos pasos se tiene un aplicación firmada que el usuario puede verificar si así lo desea. De hecho, si se extrae el contenido del JAR con <tt class="docutils literal"><span class="pre">jar</span> <span class="pre">-xf</span> <span class="pre">Aplicacion.jar</span></tt> se extraen los archivos <tt class="docutils literal"><span class="pre">.class</span></tt> y un fichero <tt class="docutils literal"><span class="pre">META-INF/Manifest</span></tt> que se puede abrir con un editor para ver que realmente está firmado.</p>
+<p>Para que otras personas puedan comprobar que nuestra aplicacion es correcta los programadores deberemos exportar un certificado que los usuarios puedan importar para hacer el verificado. Recordemos que el comando es:</p>
+<div class="highlight-python"><div class="highlight"><pre>keytool -exportcert -keystore ..\Almacen.store -file Programador.cer -alias Programador
+</pre></div>
+</div>
+</div>
+<div class="section" id="verificado-de-aplicaciones">
+<h3>Verificado de aplicaciones<a class="headerlink" href="#verificado-de-aplicaciones" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Si ahora otro usuario desea ejecutar nuestra aplicación deberá importar nuestro certificado. El proceso de verificado es simple:</p>
+<ol class="arabic simple">
+<li>El usuario importa el certificado.</li>
+<li>Ahora que tiene el certificado puede comprobar la aplicación con <tt class="docutils literal"><span class="pre">jarsigner</span> <span class="pre">-verify</span> <span class="pre">Aplicacion.jar</span> <span class="pre">&lt;alias_del_programador&gt;</span></tt></li>
+</ol>
+<p>El comando deberá responder con algo como <tt class="docutils literal"><span class="pre">jar</span> <span class="pre">verified</span></tt>. Sin embargo si no tenemos un certificado firmado por alguna autoridad de certificación (CA) la herramienta se quejará de que algunos criterios de seguridad no se cumplen.</p>
+</div>
+<div class="section" id="ejercicio">
+<h3>Ejercicio<a class="headerlink" href="#ejercicio" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Intenta extraer el archivo JAR y reemplaza el <tt class="docutils literal"><span class="pre">.class</span></tt> por alguna otra clase. Vuelve a crear el archivo .JAR y vuelve a intentar verificarlo, ¿qué ocurre?</p>
+</div>
+<div class="section" id="recordatorio">
+<h3>Recordatorio<a class="headerlink" href="#recordatorio" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Hemos hecho el proceso de firmado y verificado con <strong>certificados autofirmados</strong>, lo cual es útil para practicar pero <strong>completamente inútil desde el punto de vista de la seguridad</strong>. Para que un certificado sea seguro debemos hacer que previamente alguna autoridad de certificación nos lo firme primero (para lo cual suele ser habitual el tener que pagar).</p>
 </div>
 <div class="section" id="politica-de-seguridad">
 <h3>Política de seguridad.<a class="headerlink" href="#politica-de-seguridad" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -2647,6 +2680,10 @@ keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore c
 <li class="toctree-l2"><a class="reference internal" href="index.html#encriptacion-de-informacion">Encriptación de información.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#protocolos-seguros-de-comunicaciones">Protocolos seguros de comunicaciones.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#programacion-de-aplicaciones-con-comunicaciones-seguras">Programación de aplicaciones con comunicaciones seguras.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#firmado-de-aplicaciones">Firmado de aplicaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#verificado-de-aplicaciones">Verificado de aplicaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio">Ejercicio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#recordatorio">Recordatorio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#politica-de-seguridad">Política de seguridad.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#programacion-de-mecanismos-de-control-de-acceso">Programación de mecanismos de control de acceso.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#pruebas-y-depuracion">Pruebas y depuración.</a></li>

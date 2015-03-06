@@ -107,6 +107,10 @@
 \contentsline {section}{\numberline {5.6}Encriptaci\IeC {\'o}n de informaci\IeC {\'o}n.}{61}{section.5.6}
 \contentsline {section}{\numberline {5.7}Protocolos seguros de comunicaciones.}{63}{section.5.7}
 \contentsline {section}{\numberline {5.8}Programaci\IeC {\'o}n de aplicaciones con comunicaciones seguras.}{64}{section.5.8}
-\contentsline {section}{\numberline {5.9}Pol\IeC {\'\i }tica de seguridad.}{68}{section.5.9}
-\contentsline {section}{\numberline {5.10}Programaci\IeC {\'o}n de mecanismos de control de acceso.}{68}{section.5.10}
-\contentsline {section}{\numberline {5.11}Pruebas y depuraci\IeC {\'o}n.}{68}{section.5.11}
+\contentsline {section}{\numberline {5.9}Firmado de aplicaciones}{68}{section.5.9}
+\contentsline {section}{\numberline {5.10}Verificado de aplicaciones}{69}{section.5.10}
+\contentsline {section}{\numberline {5.11}Ejercicio}{69}{section.5.11}
+\contentsline {section}{\numberline {5.12}Recordatorio}{69}{section.5.12}
+\contentsline {section}{\numberline {5.13}Pol\IeC {\'\i }tica de seguridad.}{70}{section.5.13}
+\contentsline {section}{\numberline {5.14}Programaci\IeC {\'o}n de mecanismos de control de acceso.}{70}{section.5.14}
+\contentsline {section}{\numberline {5.15}Pruebas y depuraci\IeC {\'o}n.}{70}{section.5.15}
