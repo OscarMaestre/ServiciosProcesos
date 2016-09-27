@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
@@ -30,7 +30,7 @@
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navegación</h3>
       <ul>
-        <li class="nav-item nav-item-0"><a href="index.html#document-index">documentación de ServiciosProcesos - 1.0</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html#document-index">documentación de ServiciosProcesos - 1.0</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -239,7 +239,7 @@ contain the root <cite>toctree</cite> directive.</dd>
 <div class="section" id="comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">
 <h3>Comandos para la gestión de procesos en sistemas libres y propietarios.<a class="headerlink" href="#comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En sistemas Windows, no existen apenas comandos para gestionar procesos. Puede obligarse al sistema operativo a arrancar la aplicación asociada a un archivo con el comando <code class="docutils literal"><span class="pre">START</span></code>. Es decir, si se ejecuta lo siguiente:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">START</span> <span class="n">documento</span><span class="o">.</span><span class="n">pdf</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span>START documento.pdf
 </pre></div>
 </div>
 <p>se abrirá el visor de archivos PDF el cual cargará automáticamente el fichero <code class="docutils literal"><span class="pre">documento.pdf</span></code></p>
@@ -2378,28 +2378,28 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 <p class="caption"><span class="caption-text">Generando la pareja de claves del servidor.</span></p>
 </div>
 <p>Los pasos desglosados implican ejecutar estos comandos en el servidor:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># El servidor genera una pareja de claves que se almacena en un</span>
-<span class="c1">#fichero llamado &quot;clavesservidor&quot;. Dentro del fichero se indica</span>
-<span class="c1">#un alias para poder referirnos a esa clave fácilmente</span>
-<span class="n">keytool</span> <span class="o">-</span><span class="n">genkeypair</span> <span class="o">-</span><span class="n">keyalg</span> <span class="n">RSA</span>
-     <span class="o">-</span><span class="n">alias</span> <span class="n">servidor</span> <span class="o">-</span><span class="n">keystore</span> <span class="n">clavesservidor</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span># El servidor genera una pareja de claves que se almacena en un
+#fichero llamado &quot;clavesservidor&quot;. Dentro del fichero se indica
+#un alias para poder referirnos a esa clave fácilmente
+keytool -genkeypair -keyalg RSA
+     -alias servidor -keystore clavesservidor
 
-<span class="c1">#El servidor genera su &quot;certificado&quot;, es decir un fichero que</span>
-<span class="c1">#de alguna forma indica quien es él. El certificado se almacena</span>
-<span class="c1">#en un fichero llamado clavesservidor y a partir de él queremos</span>
-<span class="c1">#generar el certificado de un alias que tiene que haber llamado servidor</span>
-<span class="n">keytool</span> <span class="o">--</span><span class="n">exportcert</span> <span class="o">-</span><span class="n">alias</span> <span class="n">servidor</span>
-     <span class="o">-</span><span class="n">file</span> <span class="n">servidor</span><span class="o">.</span><span class="n">cer</span> <span class="o">-</span><span class="n">keystore</span> <span class="n">clavesservidor</span>
+#El servidor genera su &quot;certificado&quot;, es decir un fichero que
+#de alguna forma indica quien es él. El certificado se almacena
+#en un fichero llamado clavesservidor y a partir de él queremos
+#generar el certificado de un alias que tiene que haber llamado servidor
+keytool --exportcert -alias servidor
+     -file servidor.cer -keystore clavesservidor
 </pre></div>
 </div>
 <p>En el cliente daremos estos pasos:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Se genera una pareja de claves (en realidad no nos hace falta solo</span>
-<span class="c1">#queremos tener un almacén de claves.</span>
-<span class="n">keytool</span> <span class="o">-</span><span class="n">genkeypair</span> <span class="o">-</span><span class="n">keyalg</span> <span class="n">RSA</span> <span class="o">-</span><span class="n">alias</span> <span class="n">cliente</span> <span class="o">-</span><span class="n">keystore</span> <span class="n">clavescliente</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span>#Se genera una pareja de claves (en realidad no nos hace falta solo
+#queremos tener un almacén de claves.
+keytool -genkeypair -keyalg RSA -alias cliente -keystore clavescliente
 
-<span class="c1">#Se importa el certificado del servidor indicando que pertenece a</span>
-<span class="c1">#la lista de certificados confiables.</span>
-<span class="n">keytool</span> <span class="o">-</span><span class="n">importcert</span> <span class="o">-</span><span class="n">trustcacerts</span> <span class="o">-</span><span class="n">alias</span> <span class="n">servidor</span> <span class="o">-</span><span class="n">file</span> <span class="n">servidor</span><span class="o">.</span><span class="n">cer</span> <span class="o">-</span><span class="n">keystore</span> <span class="n">clavescliente</span>
+#Se importa el certificado del servidor indicando que pertenece a
+#la lista de certificados confiables.
+keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore clavescliente
 </pre></div>
 </div>
 <p>Una vez creados los ficheros iniciales se deben dar los siguientes pasos en Java (servidor y cliente van por separado):</p>
@@ -2562,7 +2562,7 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 </ol>
 <p>Con estos pasos se tiene un aplicación firmada que el usuario puede verificar si así lo desea. De hecho, si se extrae el contenido del JAR con <code class="docutils literal"><span class="pre">jar</span> <span class="pre">-xf</span> <span class="pre">Aplicacion.jar</span></code> se extraen los archivos <code class="docutils literal"><span class="pre">.class</span></code> y un fichero <code class="docutils literal"><span class="pre">META-INF/Manifest</span></code> que se puede abrir con un editor para ver que realmente está firmado.</p>
 <p>Para que otras personas puedan comprobar que nuestra aplicacion es correcta los programadores deberemos exportar un certificado que los usuarios puedan importar para hacer el verificado. Recordemos que el comando es:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">keytool</span> <span class="o">-</span><span class="n">exportcert</span> <span class="o">-</span><span class="n">keystore</span> <span class="o">..</span>\<span class="n">Almacen</span><span class="o">.</span><span class="n">store</span> <span class="o">-</span><span class="n">file</span> <span class="n">Programador</span><span class="o">.</span><span class="n">cer</span> <span class="o">-</span><span class="n">alias</span> <span class="n">Programador</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span>keytool -exportcert -keystore ..\Almacen.store -file Programador.cer -alias Programador
 </pre></div>
 </div>
 </div>
@@ -2698,12 +2698,12 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navegación</h3>
       <ul>
-        <li class="nav-item nav-item-0"><a href="index.html#document-index">documentación de ServiciosProcesos - 1.0</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html#document-index">documentación de ServiciosProcesos - 1.0</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014, Oscar Gomez.
-      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+        &copy; Copyright 2014, Oscar Gomez.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>
