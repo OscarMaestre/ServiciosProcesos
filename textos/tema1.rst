@@ -10,9 +10,15 @@ Ejecutables
 
 Un ejecutable es un archivo con la estructura necesaria para que el sistema operativo pueda poner en marcha el programa que hay dentro. En Windows, los ejecutables suelen ser archivos con la extension .EXE.
 
+Se pueden utilizar "desensambladores" para averiguar la secuencia de instrucciones que hay en un EXE. Incluso existen desensambladores en línea como http://onlinedisassembler.com
+
 Sin embargo, Java genera ficheros .JAR o .CLASS. Estos ficheros *no son ejecutables* sino que son archivos que el intérprete de JAVA (el archivo ``java.exe``) leerá y ejecutará.
 
 El intérprete toma el programa y lo traduce a instrucciones del microprocesador en el que estemos, que puede ser x86 o un x64 o lo que sea. Ese proceso se hace "al instante" o JIT (Just-In-Time).
+
+Un archivo .CLASS puede desensamblarse utilizando el comando ``javap -c <archivo.class>`` . Cuando se hace así, se obtiene un listado de "instrucciones" que no se corresponden con las instrucciones del microprocesador, sino con "instrucciones virtuales de Java". El intérprte Java (el archivo ``java.exe``) traducirá en el momento del arranque dichas instrucciones virtuales Java a instrucciones reales del microprocesador.
+
+Este último aspecto es el esgrimido por Java para defender que su ejecución puede ser más rápida que la de un EXE, ya que Java puede averiguar en qué microprocesador se está ejecutando y así generar el código más óptimo posible.
 
 
 Un EXE puede que no contenga las instrucciones de los microprocesadores más modernos. Como todos son compatibles no es un gran problema, sin embargo, puede que no aprovechemos al 100% la capacidad de nuestro micro.

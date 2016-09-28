@@ -50,8 +50,11 @@ Programacion de servicios y procesos
 <div class="section" id="ejecutables">
 <h3>Ejecutables<a class="headerlink" href="#ejecutables" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Un ejecutable es un archivo con la estructura necesaria para que el sistema operativo pueda poner en marcha el programa que hay dentro. En Windows, los ejecutables suelen ser archivos con la extension .EXE.</p>
+<p>Se pueden utilizar &#8220;desensambladores&#8221; para averiguar la secuencia de instrucciones que hay en un EXE. Incluso existen desensambladores en línea como <a class="reference external" href="http://onlinedisassembler.com">http://onlinedisassembler.com</a></p>
 <p>Sin embargo, Java genera ficheros .JAR o .CLASS. Estos ficheros <em>no son ejecutables</em> sino que son archivos que el intérprete de JAVA (el archivo <code class="docutils literal"><span class="pre">java.exe</span></code>) leerá y ejecutará.</p>
 <p>El intérprete toma el programa y lo traduce a instrucciones del microprocesador en el que estemos, que puede ser x86 o un x64 o lo que sea. Ese proceso se hace &#8220;al instante&#8221; o JIT (Just-In-Time).</p>
+<p>Un archivo .CLASS puede desensamblarse utilizando el comando <code class="docutils literal"><span class="pre">javap</span> <span class="pre">-c</span> <span class="pre">&lt;archivo.class&gt;</span></code> . Cuando se hace así, se obtiene un listado de &#8220;instrucciones&#8221; que no se corresponden con las instrucciones del microprocesador, sino con &#8220;instrucciones virtuales de Java&#8221;. El intérprte Java (el archivo <code class="docutils literal"><span class="pre">java.exe</span></code>) traducirá en el momento del arranque dichas instrucciones virtuales Java a instrucciones reales del microprocesador.</p>
+<p>Este último aspecto es el esgrimido por Java para defender que su ejecución puede ser más rápida que la de un EXE, ya que Java puede averiguar en qué microprocesador se está ejecutando y así generar el código más óptimo posible.</p>
 <p>Un EXE puede que no contenga las instrucciones de los microprocesadores más modernos. Como todos son compatibles no es un gran problema, sin embargo, puede que no aprovechemos al 100% la capacidad de nuestro micro.</p>
 </div>
 <div class="section" id="procesos">
