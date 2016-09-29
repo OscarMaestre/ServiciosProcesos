@@ -289,7 +289,7 @@ Cuando se lanza más de un proceso de una misma sección de código no se sabe q
 	i=i*2;
 	j=j-1;
 	
-Si dos o más procesos avanzan por esta sección de código es perfectamente que unas veces nuestro programa multiproceso se ejecute bien y otras no.
+Si dos o más procesos avanzan por esta sección de código es perfectamente posible que unas veces nuestro programa multiproceso se ejecute bien y otras no.
 
 En todo programa multiproceso pueden encontrarse estas zonas de código "peligrosas" que deben protegerse especialmente utilizando ciertos mecanismos. El nombre global para todos los lenguajes es denominar a estos trozos "secciones críticas".
 
@@ -320,7 +320,8 @@ En Java, si el programador piensa que un trozo de código es peligroso puede pon
 	}
 	
 	
-	/* Otro ejemplo, ahora no hemos protegido un método entero, sino solo un pequeño trozo de código.*/
+	/* Otro ejemplo, ahora no hemos protegido un método entero,
+    sino solo un pequeño trozo de código.*/
 	for (int i=0; i=i+1; i++){
 		/* Código omitido*/
 		synchronized {
@@ -336,7 +337,7 @@ Para hacer la documentación tradicionalmente hemos usado JavaDOC. Sin embargo, 
 
 Una anotación es un texto que pueden utilizar otras herramientas (no solo el Javadoc) para comprender mejor qué hace ese código o como documentarlo.
 
-Cualquiera puede crear sus propias anotaciones simplemente definiéndolas como un interfaz Java. Sin embargo tendremos que programar nuestras propias para extraer la información que proporcionan dichas anotaciones.
+Cualquiera puede crear sus propias anotaciones simplemente definiéndolas como un interfaz Java. Sin embargo tendremos que programar nuestras propias clases para extraer la información que proporcionan dichas anotaciones.
 
 Depuración.
 -----------
@@ -345,7 +346,7 @@ Depuración.
 
 1. No todos los depuradores son capaces.
 2. A veces cuando un depurador interviene en un proceso puede ocurrir que el resto de procesos consigan ejecutarse en el orden correcto y dar lugar a que el programa parezca que funciona bien.
-3. Un error muy típico es la ``NullPointerException``
+3. Un error muy típico es la ``NullPointerException``, que en muchos casos se deben a la utilización de referencias Java no inicializadas o incluso a la devolución de valores NULL que luego no se comprueban en alguna parte del código.
 
 En general todos los fallos en un programa multiproceso vienen derivado de no usar ``synchronized`` de la forma correcta.
 
