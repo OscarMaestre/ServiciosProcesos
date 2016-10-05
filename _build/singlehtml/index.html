@@ -272,7 +272,7 @@ Programacion de servicios y procesos
 <span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
 </pre></div>
 </div>
-<p>Si dos o más procesos avanzan por esta sección de código es perfectamente que unas veces nuestro programa multiproceso se ejecute bien y otras no.</p>
+<p>Si dos o más procesos avanzan por esta sección de código es perfectamente posible que unas veces nuestro programa multiproceso se ejecute bien y otras no.</p>
 <p>En todo programa multiproceso pueden encontrarse estas zonas de código &#8220;peligrosas&#8221; que deben protegerse especialmente utilizando ciertos mecanismos. El nombre global para todos los lenguajes es denominar a estos trozos &#8220;secciones críticas&#8221;.</p>
 <div class="section" id="mecanismos-para-controlar-secciones-criticas">
 <h3>Mecanismos para controlar secciones críticas<a class="headerlink" href="#mecanismos-para-controlar-secciones-criticas" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -285,21 +285,22 @@ Programacion de servicios y procesos
 </ul>
 <p>En realidad algunos de estos mecanismos se utilizan más para intercomunicar procesos, aunque para los programadores Java la forma de resolver el problema de la &#8220;sección crítica&#8221; es más simple.</p>
 <p>En Java, si el programador piensa que un trozo de código es peligroso puede ponerle la palabra clave <code class="docutils literal"><span class="pre">synchronized</span></code> y la máquina virtual Java protege el código automáticamente.</p>
-<div class="highlight-java"><div class="highlight"><pre><span></span><span class="cm">/* La máquina virtual Java evitará que más de un proceso/hilo acceda a este método*/</span>
-<span class="kd">synchronized</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actualizarPension</span><span class="o">(</span><span class="kt">int</span> <span class="n">nuevoValor</span><span class="o">){</span>
-        <span class="cm">/*..trozo de código largo omitido*/</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">pension</span><span class="o">=</span><span class="n">nuevoValor</span>
-<span class="o">}</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span>    <span class="cm">/* La máquina virtual Java evitará que más de un proceso/hilo acceda a este método*/</span>
+    <span class="kd">synchronized</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actualizarPension</span><span class="o">(</span><span class="kt">int</span> <span class="n">nuevoValor</span><span class="o">){</span>
+            <span class="cm">/*..trozo de código largo omitido*/</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">pension</span><span class="o">=</span><span class="n">nuevoValor</span>
+    <span class="o">}</span>
 
 
-<span class="cm">/* Otro ejemplo, ahora no hemos protegido un método entero, sino solo un pequeño trozo de código.*/</span>
-<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
-        <span class="cm">/* Código omitido*/</span>
-        <span class="kd">synchronized</span> <span class="o">{</span>
-                <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">;</span>
-                <span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
-        <span class="o">}</span>
+    <span class="cm">/* Otro ejemplo, ahora no hemos protegido un método entero,</span>
+<span class="cm">sino solo un pequeño trozo de código.*/</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="cm">/* Código omitido*/</span>
+            <span class="kd">synchronized</span> <span class="o">{</span>
+                    <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">;</span>
+                    <span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -308,7 +309,7 @@ Programacion de servicios y procesos
 <h2>Documentación<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Para hacer la documentación tradicionalmente hemos usado JavaDOC. Sin embargo, las versiones más modernas de Java incluyen las <strong>anotaciones</strong>.</p>
 <p>Una anotación es un texto que pueden utilizar otras herramientas (no solo el Javadoc) para comprender mejor qué hace ese código o como documentarlo.</p>
-<p>Cualquiera puede crear sus propias anotaciones simplemente definiéndolas como un interfaz Java. Sin embargo tendremos que programar nuestras propias para extraer la información que proporcionan dichas anotaciones.</p>
+<p>Cualquiera puede crear sus propias anotaciones simplemente definiéndolas como un interfaz Java. Sin embargo tendremos que programar nuestras propias clases para extraer la información que proporcionan dichas anotaciones.</p>
 </div>
 <div class="section" id="depuracion">
 <h2>Depuración.<a class="headerlink" href="#depuracion" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -316,7 +317,7 @@ Programacion de servicios y procesos
 <ol class="arabic simple">
 <li>No todos los depuradores son capaces.</li>
 <li>A veces cuando un depurador interviene en un proceso puede ocurrir que el resto de procesos consigan ejecutarse en el orden correcto y dar lugar a que el programa parezca que funciona bien.</li>
-<li>Un error muy típico es la <code class="docutils literal"><span class="pre">NullPointerException</span></code></li>
+<li>Un error muy típico es la <code class="docutils literal"><span class="pre">NullPointerException</span></code>, que en muchos casos se deben a la utilización de referencias Java no inicializadas o incluso a la devolución de valores NULL que luego no se comprueban en alguna parte del código.</li>
 </ol>
 <p>En general todos los fallos en un programa multiproceso vienen derivado de no usar <code class="docutils literal"><span class="pre">synchronized</span></code> de la forma correcta.</p>
 </div>
