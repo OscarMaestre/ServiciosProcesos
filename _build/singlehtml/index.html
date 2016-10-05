@@ -227,6 +227,108 @@ Programacion de servicios y procesos
 <p>Cuando se lanza un programa desde Eclipse no ocurre lo mismo que cuando se lanza desde Windows. Eclipse trabaja con unos directorios predefinidos y puede ser necesario indicar a nuestro programa cual es la ruta donde hay que buscar algo.</p>
 <p>Usando el método <code class="docutils literal"><span class="pre">.directory(new</span> <span class="pre">File(&quot;c:\\dir\\))</span></code> se puede indicar a Java donde está el archivo que se desea ejecutar.</p>
 </div>
+<div class="section" id="ejercicio">
+<h2>Ejercicio<a class="headerlink" href="#ejercicio" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Crear un programa que permita parametrizar el lanzamiento de sumadores, que vuelque el contenido de las sumas en ficheros y que permita al programa principal recuperar las sumas de los ficheros parciales.</p>
+<p>En el listado siguiente se muestra la clase Sumador</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">es.ies.multiproceso</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sumador</span> <span class="o">{</span>
+        <span class="cm">/** Suma todos los valores incluidos</span>
+<span class="cm">         * entre dos valores</span>
+<span class="cm">         * @param n1 Limite 1</span>
+<span class="cm">         * @param n2 Limite 2</span>
+<span class="cm">         * @return La suma de dichos valores</span>
+<span class="cm">         */</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">sumar</span><span class="o">(</span><span class="kt">int</span> <span class="n">n1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n2</span><span class="o">){</span>
+                <span class="kt">int</span> <span class="n">suma</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">n1</span><span class="o">&gt;</span><span class="n">n2</span><span class="o">){</span>
+                        <span class="kt">int</span> <span class="n">aux</span><span class="o">=</span><span class="n">n1</span><span class="o">;</span>
+                        <span class="n">n1</span><span class="o">=</span><span class="n">n2</span><span class="o">;</span>
+                        <span class="n">n2</span><span class="o">=</span><span class="n">aux</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">n1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n2</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="n">suma</span><span class="o">=</span><span class="n">suma</span><span class="o">+</span><span class="n">i</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="n">suma</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+                <span class="kt">int</span> <span class="n">n1</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+                <span class="kt">int</span> <span class="n">n2</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+                <span class="kt">int</span> <span class="n">suma</span><span class="o">=</span><span class="n">sumar</span><span class="o">(</span><span class="n">n1</span><span class="o">,</span> <span class="n">n2</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">suma</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>En el listado siguiente se muestra la clase Main</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">es.ies.multiproceso</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+
+        <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">NUM_PROCESOS</span><span class="o">=</span><span class="mi">4</span><span class="o">;</span>
+        <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">PREFIJO_FICHEROS</span><span class="o">=</span><span class="s">&quot;fich&quot;</span><span class="o">;</span>
+
+
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">lanzarSumador</span><span class="o">(</span>
+                        <span class="kt">int</span> <span class="n">n1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n2</span><span class="o">,</span><span class="n">String</span> <span class="n">fichResultados</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
+                <span class="n">String</span> <span class="n">comando</span><span class="o">;</span>
+                <span class="n">comando</span><span class="o">=</span><span class="s">&quot;es.ies.multiproceso.Sumador&quot;</span><span class="o">;</span>
+
+                <span class="n">File</span> <span class="n">directorioSumador</span><span class="o">;</span>
+                <span class="n">directorioSumador</span><span class="o">=</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;C:\\Users\\&quot;</span><span class="o">+</span>
+                <span class="s">&quot;ogomez\\workspace\\&quot;</span><span class="o">+</span>
+                <span class="s">&quot;MultiProceso1\\bin\\&quot;</span><span class="o">);</span>
+                <span class="n">File</span> <span class="n">fichResultado</span><span class="o">=</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">fichResultados</span><span class="o">);</span>
+                <span class="n">ProcessBuilder</span> <span class="n">pb</span><span class="o">;</span>
+                <span class="n">pb</span><span class="o">=</span><span class="k">new</span> <span class="n">ProcessBuilder</span><span class="o">(</span><span class="s">&quot;java&quot;</span><span class="o">,</span>
+                                <span class="n">comando</span><span class="o">,</span>
+                                <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">n1</span><span class="o">),</span>
+                                <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">n2</span><span class="o">)</span> <span class="o">);</span>
+                <span class="n">pb</span><span class="o">.</span><span class="na">directory</span><span class="o">(</span><span class="n">directorioSumador</span><span class="o">);</span>
+                <span class="n">pb</span><span class="o">.</span><span class="na">redirectOutput</span><span class="o">(</span><span class="n">fichResultado</span><span class="o">);</span>
+                <span class="n">pb</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getResultadoFichero</span><span class="o">(</span>
+                        <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">){</span>
+
+
+        <span class="o">}</span>
+
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSumaTotal</span><span class="o">(){</span>
+
+        <span class="o">}</span>
+
+        <span class="cm">/* Recibe dos parámetros y hará</span>
+<span class="cm">         * la suma de los valores comprendidos</span>
+<span class="cm">         * entre ambos parametros</span>
+<span class="cm">         */</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
+                <span class="kt">int</span> <span class="n">n1</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+                <span class="kt">int</span> <span class="n">n2</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+                <span class="kt">int</span> <span class="n">salto</span><span class="o">=(</span> <span class="n">n2</span> <span class="o">/</span> <span class="n">NUM_PROCESOS</span> <span class="o">)</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">NUM_PROCESOS</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;n1:&quot;</span><span class="o">+</span><span class="n">n1</span><span class="o">);</span>
+                        <span class="kt">int</span> <span class="n">resultadoSumaConSalto</span><span class="o">=</span><span class="n">n1</span><span class="o">+</span><span class="n">salto</span><span class="o">;</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;n2:&quot;</span><span class="o">+</span><span class="n">resultadoSumaConSalto</span><span class="o">);</span>
+                        <span class="n">lanzarSumador</span><span class="o">(</span><span class="n">n1</span><span class="o">,</span> <span class="n">n1</span><span class="o">+</span><span class="n">salto</span> <span class="o">,</span>
+                                        <span class="n">PREFIJO_FICHEROS</span><span class="o">+</span><span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+                        <span class="n">n1</span><span class="o">=</span><span class="n">n1</span> <span class="o">+</span> <span class="n">salto</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Suma lanzada...&quot;</span><span class="o">);</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="gestion-de-procesos">
 <h2>Gestión de procesos.<a class="headerlink" href="#gestion-de-procesos" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>La gestión de procesos se realiza de dos formas <strong>muy distintas</strong> en función de los dos grandes sistemas operativos: Windows y Linux.</p>
@@ -2609,6 +2711,7 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 <li class="toctree-l2"><a class="reference internal" href="index.html#programacion-paralela-y-distribuida">Programación paralela y distribuida.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#creacion-de-procesos">Creación de procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#comunicacion-entre-procesos">Comunicación entre procesos.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio">Ejercicio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#gestion-de-procesos">Gestión de procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">Comandos para la gestión de procesos en sistemas libres y propietarios.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#sincronizacion-entre-procesos">Sincronización entre procesos.</a></li>

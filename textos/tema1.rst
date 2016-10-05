@@ -228,10 +228,121 @@ En el ejemplo, el segundo proceso suele sobreescribir el resultado del primero, 
 		}
 	}	
 
-	
 Cuando se lanza un programa desde Eclipse no ocurre lo mismo que cuando se lanza desde Windows. Eclipse trabaja con unos directorios predefinidos y puede ser necesario indicar a nuestro programa cual es la ruta donde hay que buscar algo.
 
 Usando el método ``.directory(new File("c:\\dir\\))`` se puede indicar a Java donde está el archivo que se desea ejecutar.
+
+Ejercicio
+---------------
+
+Crear un programa que permita parametrizar el lanzamiento de sumadores, que vuelque el contenido de las sumas en ficheros y que permita al programa principal recuperar las sumas de los ficheros parciales.
+
+En el listado siguiente se muestra la clase Sumador
+
+.. code-block:: java
+
+	package es.ies.multiproceso;
+
+	public class Sumador {
+		/** Suma todos los valores incluidos
+		 * entre dos valores
+		 * @param n1 Limite 1
+		 * @param n2 Limite 2
+		 * @return La suma de dichos valores
+		 */
+		public static int sumar(int n1, int n2){
+			int suma=0;
+			if (n1>n2){
+				int aux=n1;
+				n1=n2;
+				n2=aux;
+			}
+			for (int i=n1; i<=n2; i++){
+				suma=suma+i;
+			}
+			return suma;
+		}
+		
+		public static void main(String[] args){
+			int n1=Integer.parseInt(args[0]);
+			int n2=Integer.parseInt(args[1]);
+			int suma=sumar(n1, n2);
+			System.out.println(suma);
+			System.out.flush();		
+		}
+	}
+
+
+En el listado siguiente se muestra la clase Main
+
+.. code-block:: java
+
+
+	package es.ies.multiproceso;
+
+	import java.io.File;
+	import java.io.IOException;
+
+	public class Main {
+
+		static final int NUM_PROCESOS=4;
+		static final String PREFIJO_FICHEROS="fich";
+		
+		
+		public static void lanzarSumador(
+				int n1, int n2,String fichResultados) throws IOException{
+			String comando;
+			comando="es.ies.multiproceso.Sumador";
+
+			File directorioSumador;
+			directorioSumador=new File("C:\\Users\\"+
+			"ogomez\\workspace\\"+
+			"MultiProceso1\\bin\\");
+			File fichResultado=new File(fichResultados);
+			ProcessBuilder pb;
+			pb=new ProcessBuilder("java", 
+					comando, 
+					String.valueOf(n1),
+					String.valueOf(n2) );
+			pb.directory(directorioSumador);
+			pb.redirectOutput(fichResultado);
+			pb.start();	
+		}
+		
+		public int getResultadoFichero(
+				String nombreFichero){
+			
+			
+		}
+		
+		
+		public int getSumaTotal(){
+			
+		}
+		
+		/* Recibe dos parámetros y hará
+		 * la suma de los valores comprendidos 
+		 * entre ambos parametros
+		 */
+		public static void main(String[] args) throws IOException{
+			int n1=Integer.parseInt(args[0]);
+			int n2=Integer.parseInt(args[1]);
+			int salto=( n2 / NUM_PROCESOS ) - 1;
+			for (int i=1;i<=NUM_PROCESOS; i++){
+				System.out.println("n1:"+n1);
+				int resultadoSumaConSalto=n1+salto;
+				System.out.println("n2:"+resultadoSumaConSalto);
+				lanzarSumador(n1, n1+salto , 
+						PREFIJO_FICHEROS+String.valueOf(i));
+				n1=n1 + salto + 1;
+				System.out.println("Suma lanzada...");
+			}
+		}
+
+	}
+
+
+
 	
 Gestión de procesos.
 --------------------
