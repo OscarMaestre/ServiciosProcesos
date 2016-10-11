@@ -386,9 +386,9 @@ Programacion de servicios y procesos
 <div class="section" id="sincronizacion-entre-procesos">
 <h2>Sincronización entre procesos.<a class="headerlink" href="#sincronizacion-entre-procesos" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Cuando se lanza más de un proceso de una misma sección de código no se sabe qué proceso ejecutará qué instrucción en un cierto momento, lo que es muy peligroso:</p>
-<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">i</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span><span class="n">j</span><span class="o">;</span>
 <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-<span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="o">){</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">2</span><span class="o">){</span>
         <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
         <span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span>
 <span class="o">}</span>

@@ -413,9 +413,9 @@ Cuando se lanza más de un proceso de una misma sección de código no se sabe q
 
 .. code-block:: java
 
-	int i;
+	int i,j;
 	i=0;
-	if (i==0){
+	if (i>=2){
 		i=i+1;
 		j=j+1
 	}
