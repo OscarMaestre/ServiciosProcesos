@@ -264,12 +264,7 @@ Programacion de servicios y procesos
 </pre></div>
 </div>
 <p>En el listado siguiente se muestra la clase Main</p>
-<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">es.ies.multiproceso</span><span class="o">;</span>
-
-<span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
 
         <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">NUM_PROCESOS</span><span class="o">=</span><span class="mi">4</span><span class="o">;</span>
         <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">PREFIJO_FICHEROS</span><span class="o">=</span><span class="s">&quot;fich&quot;</span><span class="o">;</span>
@@ -295,22 +290,47 @@ Programacion de servicios y procesos
                 <span class="n">pb</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getResultadoFichero</span><span class="o">(</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getResultadoFichero</span><span class="o">(</span>
                         <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">){</span>
 
+                <span class="kt">int</span> <span class="n">suma</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">FileInputStream</span> <span class="n">fichero</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span>
+                                                        <span class="n">nombreFichero</span><span class="o">);</span>
+                        <span class="n">InputStreamReader</span> <span class="n">fir</span><span class="o">=</span>
+                                        <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span>
+                                                        <span class="n">fichero</span><span class="o">);</span>
+                        <span class="n">BufferedReader</span> <span class="n">br</span><span class="o">=</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">fir</span><span class="o">);</span>
+                        <span class="n">String</span> <span class="n">linea</span><span class="o">=</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                        <span class="n">suma</span><span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
+                        <span class="k">return</span> <span class="n">suma</span><span class="o">;</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                <span class="s">&quot;No se pudo abrir &quot;</span><span class="o">+</span><span class="n">nombreFichero</span><span class="o">);</span>
 
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                                        <span class="s">&quot;No hay nada en &quot;</span><span class="o">+</span><span class="n">nombreFichero</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="n">suma</span><span class="o">;</span>
         <span class="o">}</span>
 
 
-        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSumaTotal</span><span class="o">(){</span>
-
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getSumaTotal</span><span class="o">(</span><span class="kt">int</span> <span class="n">numFicheros</span><span class="o">){</span>
+                <span class="kt">int</span> <span class="n">sumaTotal</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">NUM_PROCESOS</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                        <span class="n">sumaTotal</span><span class="o">+=</span><span class="n">getResultadoFichero</span><span class="o">(</span>
+                                <span class="n">PREFIJO_FICHEROS</span><span class="o">+</span><span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">);</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="n">sumaTotal</span><span class="o">;</span>
         <span class="o">}</span>
 
         <span class="cm">/* Recibe dos parámetros y hará</span>
 <span class="cm">         * la suma de los valores comprendidos</span>
 <span class="cm">         * entre ambos parametros</span>
 <span class="cm">         */</span>
-        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">InterruptedException</span><span class="o">{</span>
                 <span class="kt">int</span> <span class="n">n1</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
                 <span class="kt">int</span> <span class="n">n2</span><span class="o">=</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
                 <span class="kt">int</span> <span class="n">salto</span><span class="o">=(</span> <span class="n">n2</span> <span class="o">/</span> <span class="n">NUM_PROCESOS</span> <span class="o">)</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
@@ -323,8 +343,11 @@ Programacion de servicios y procesos
                         <span class="n">n1</span><span class="o">=</span><span class="n">n1</span> <span class="o">+</span> <span class="n">salto</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
                         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Suma lanzada...&quot;</span><span class="o">);</span>
                 <span class="o">}</span>
+                <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">5000</span><span class="o">);</span>
+                <span class="kt">int</span> <span class="n">sumaTotal</span><span class="o">=</span><span class="n">getSumaTotal</span><span class="o">(</span><span class="n">NUM_PROCESOS</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;La suma total es:&quot;</span><span class="o">+</span>
+                                                <span class="n">sumaTotal</span><span class="o">);</span>
         <span class="o">}</span>
-
 <span class="o">}</span>
 </pre></div>
 </div>
@@ -333,7 +356,7 @@ Programacion de servicios y procesos
 <h2>Gestión de procesos.<a class="headerlink" href="#gestion-de-procesos" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>La gestión de procesos se realiza de dos formas <strong>muy distintas</strong> en función de los dos grandes sistemas operativos: Windows y Linux.</p>
 <ul class="simple">
-<li>En Windows toda la gestión de procesos se realiza desde el &#8220;Administrador de tareas&#8221; al cual se accede con Ctrl+Alt+Supr. Existen otros programas algo más sofisticados que proporcionan algo más de información sobre los procesos, como Processviewer.</li>
+<li>En Windows toda la gestión de procesos se realiza desde el &#8220;Administrador de tareas&#8221; al cual se accede con Ctrl+Alt+Supr. Existen otros programas algo más sofisticados que proporcionan algo más de información sobre los procesos, como Process Explorer (antes conocido con el nombre de ProcessViewer).</li>
 </ul>
 </div>
 <div class="section" id="comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">

@@ -277,12 +277,6 @@ En el listado siguiente se muestra la clase Main
 
 .. code-block:: java
 
-
-	package es.ies.multiproceso;
-
-	import java.io.File;
-	import java.io.IOException;
-
 	public class Main {
 
 		static final int NUM_PROCESOS=4;
@@ -309,22 +303,47 @@ En el listado siguiente se muestra la clase Main
 			pb.start();	
 		}
 		
-		public int getResultadoFichero(
+		public static int getResultadoFichero(
 				String nombreFichero){
 			
-			
+			int suma=0;
+			try {
+				FileInputStream fichero=
+						new FileInputStream(
+								nombreFichero);
+				InputStreamReader fir=
+						new InputStreamReader(
+								fichero);
+				BufferedReader br=new BufferedReader(fir);
+				String linea=br.readLine();
+				suma= new Integer(linea);
+				return suma;
+			} catch (FileNotFoundException e) {
+				System.out.println(
+					"No se pudo abrir "+nombreFichero);
+				
+			} catch (IOException e) {
+				System.out.println(
+						"No hay nada en "+nombreFichero);
+			}
+			return suma;
 		}
 		
 		
-		public int getSumaTotal(){
-			
+		public static int getSumaTotal(int numFicheros){
+			int sumaTotal=0;
+			for (int i=1; i<=NUM_PROCESOS;i++){
+				sumaTotal+=getResultadoFichero(
+					PREFIJO_FICHEROS+String.valueOf(i) );
+			}
+			return sumaTotal;
 		}
 		
 		/* Recibe dos parámetros y hará
 		 * la suma de los valores comprendidos 
 		 * entre ambos parametros
 		 */
-		public static void main(String[] args) throws IOException{
+		public static void main(String[] args) throws IOException, InterruptedException{
 			int n1=Integer.parseInt(args[0]);
 			int n2=Integer.parseInt(args[1]);
 			int salto=( n2 / NUM_PROCESOS ) - 1;
@@ -337,10 +356,12 @@ En el listado siguiente se muestra la clase Main
 				n1=n1 + salto + 1;
 				System.out.println("Suma lanzada...");
 			}
+			Thread.sleep(5000);
+			int sumaTotal=getSumaTotal(NUM_PROCESOS);
+			System.out.println("La suma total es:"+
+							sumaTotal);
 		}
-
 	}
-
 
 
 	
@@ -349,7 +370,9 @@ Gestión de procesos.
 
 La gestión de procesos se realiza de dos formas **muy distintas** en función de los dos grandes sistemas operativos: Windows y Linux.
 
-* En Windows toda la gestión de procesos se realiza desde el "Administrador de tareas" al cual se accede con Ctrl+Alt+Supr. Existen otros programas algo más sofisticados que proporcionan algo más de información sobre los procesos, como Processviewer.
+* En Windows toda la gestión de procesos se realiza desde el "Administrador de tareas" al cual se accede con Ctrl+Alt+Supr. Existen otros programas algo más sofisticados que proporcionan algo más de información sobre los procesos, como Process Explorer (antes conocido con el nombre de ProcessViewer).
+
+
 
 Comandos para la gestión de procesos en sistemas libres y propietarios.
 -----------------------------------------------------------------------
