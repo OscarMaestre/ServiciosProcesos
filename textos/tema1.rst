@@ -393,7 +393,7 @@ En GNU/Linux se puede utilizar un terminal de consola para la gestión de proces
 
 * Para arrancar un proceso, simplemente tenemos que escribir el nombre del comando correspondiente. Desde GNU/Linux se pueden controlar los servicios que se ejecutan con un comando llamado ``service``. Por ejemplo, se puede usar ``sudo service apache2 stop`` para parar el servidor web y ``sudo service apache2 start`` para volver a ponerlo en marcha. También se puede reiniciar un servicio (tal vez para que relea un fichero de configuración que hemos cambiado) con ``sudo service apache2 restart``.
 
-* Se puede detener y/o terminar un proceso con el comando ``kill``. Se puede usar este comando para **terminar un proceso** sin guardar nada usando ``kill -SIGKILL <numproceso>`` o ``kill -9 <numproceso>``. Se puede pausar un proceso con ``kill -SIGPAUSE <numproceso>`` y rearrancarlo con ``kill -SIGCONT``
+* Se puede detener y/o terminar un proceso con el comando ``kill``. Se puede usar este comando para **terminar un proceso** sin guardar nada usando ``kill -SIGKILL <numproceso>`` o ``kill -9 <numproceso>``. Se puede pausar un proceso con ``kill -SIGSTOP <numproceso>`` y rearrancarlo con ``kill -SIGCONT``
 
 * Se puede enviar un proceso a segundo plano con comandos como ``bg`` o al arrancar el proceso escribir el nombre del comando terminado en ``&``.
 
