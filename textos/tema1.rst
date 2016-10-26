@@ -493,9 +493,7 @@ En general todos los fallos en un programa multiproceso vienen derivado de no us
 Examen
 ------------------------------------------------------
 
-
-Se realizará el 24 de octubre.
-
+Fecha por determinar
 
 
 
