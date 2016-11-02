@@ -486,6 +486,9 @@ Depuración.
 1. No todos los depuradores son capaces.
 2. A veces cuando un depurador interviene en un proceso puede ocurrir que el resto de procesos consigan ejecutarse en el orden correcto y dar lugar a que el programa parezca que funciona bien.
 3. Un error muy típico es la ``NullPointerException``, que en muchos casos se deben a la utilización de referencias Java no inicializadas o incluso a la devolución de valores NULL que luego no se comprueban en alguna parte del código.
+4. Se puede usar el método ``redirectError`` pasándole un objeto de tipo ``File`` para que los mensajes de error vayan a un fichero.
+5. Se debe recordar que la "visión" que tiene Eclipse del sistema puede ser **muy diferente** de la visión que tiene el proceso lanzado. Un problema muy común es que el proceso lanzado no encuentre clases, lo que obligará a indicar el ``CLASSPATH``.
+6. Un buen método para determinar errores consiste en utilizar el entorno de consola para lanzar comandos para ver "como es el sistema" que ve un proceso fuera de Eclipse (o de cualquier otro entorno).
 
 En general todos los fallos en un programa multiproceso vienen derivado de no usar ``synchronized`` de la forma correcta.
 
