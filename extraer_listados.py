@@ -26,9 +26,9 @@ extracciones=[
 for e in extracciones:
 	lista_lanzamiento=lista_extractor[:]
 	if e[2]==EXTRAER_CLASE:
-		fich_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Clase_"+e[1]
+		fich_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Clase_"+e[1]+".java"
 	else:
-		fich_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Metodo_"+e[1]	
+		fich_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Metodo_"+e[1]+".java"
 	lista_lanzamiento = lista_lanzamiento +  [e[0], e[1], e[2] ]
 	print ("Ejecutando "+ " ".join(lista_lanzamiento))
 	with open(fich_salida, "w") as descriptor_salida:
