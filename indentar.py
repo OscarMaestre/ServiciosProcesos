@@ -2,8 +2,8 @@
 from subprocess import call
 import os, glob
 
-DIRECTORIO_EXTRACCION_LISTADOS="listados"
-DIRECTORIO_LISTADOS_RST="listados_a_incluir"
+DIRECTORIO_EXTRACCION_LISTADOS="codigo_extraido"
+DIRECTORIO_LISTADOS_RST="listados"
 INDENTADOR = ["astyle",  "--max-code-length=60"]
 ficheros_java=glob.glob(DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "*.java")
 for f in ficheros_java:

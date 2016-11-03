@@ -3,7 +3,7 @@
 from subprocess import call
 import os
 
-DIRECTORIO_EXTRACCION_LISTADOS="listados"
+DIRECTORIO_EXTRACCION_LISTADOS="codigo_extraido"
 DIRECTORIO_WORKSPACE="workspace"
 DIRECTORIO_CODIGO_FUENTE="src"
 EXTRAER_CLASE = "class"
@@ -20,6 +20,20 @@ extracciones=[
 			"com", "utilidades","UtilidadesFicheros.java"
 		]),
 		"getBufferedReader", EXTRAER_METODO
+	),
+	(
+		os.sep.join([
+			DIRECTORIO_WORKSPACE,"Utilidades", DIRECTORIO_CODIGO_FUENTE,
+			"com", "utilidades","UtilidadesFicheros.java"
+		]),
+		"getPrintWriter", EXTRAER_METODO
+	),
+	(
+		os.sep.join([
+			DIRECTORIO_WORKSPACE,"Multiproceso_Vocales", DIRECTORIO_CODIGO_FUENTE,
+			"com", "ies","ProcesadorFichero.java"
+		]),
+		"hacerRecuento", EXTRAER_METODO
 	)
 ]
 

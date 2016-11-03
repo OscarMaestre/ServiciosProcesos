@@ -17,22 +17,22 @@ public class UtilidadesFicheros {
 		lector=new FileReader(
 				nombreFichero);
 		
-		BufferedReader bfr;
-		bfr=new BufferedReader(
+		BufferedReader bufferedReader;
+		bufferedReader=new BufferedReader(
 				lector);
-		return bfr;
-	} //Fin del método
+		return bufferedReader;
+	} 
+	
 	public static PrintWriter
 		getPrintWriter(
 				String nombreFichero) 
 					throws IOException
 	{
-		PrintWriter pw;
-		FileWriter fw;
-		fw=new FileWriter(nombreFichero);
-		pw=new PrintWriter(fw);
-		return pw;
-		
+		PrintWriter printWriter;
+		FileWriter fileWriter;
+		fileWriter=new FileWriter(nombreFichero);
+		printWriter=new PrintWriter(fileWriter);
+		return printWriter;
 	} //Fin de getPrintWriter
 		
 }

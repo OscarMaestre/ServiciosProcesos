@@ -369,13 +369,43 @@ Ejercicio resuelto
 --------------------
 
 Crear un programa que sea capaz de contar cuantas vocales hay en un fichero. El programa padre debe lanzar cinco procesos hijo, donde cada uno de ellos se ocupará de contar una vocal concreta (que puede ser minúscula o mayúscula). Cada subproceso que cuenta vocales deberá dejar el resultado en un fichero. El programa padre se ocupará de recuperar los resultados de los ficheros, sumar todos los subtotales y mostrar el resultado final en pantalla.
+
+Operaciones con ficheros
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Tanto en este ejercicio como en muchos otros vamos a necesitar realizar ciertas operaciones con ficheros. Para aumentar nuestra productividad utilizaremos una clase llamada ``UtilidadesFicheros`` que nos permita realizar ciertas tareas como las siguientes:
+
+* Obtener un objeto ``BufferedReader`` a partir de un nombre de fichero de tipo ``String``. Llamaremos a este método ``getBufferedReader`` y lo utilizaremos para poder manejar un fichero mediante una clase de muy alto nivel que nos facilita la lectura de ficheros. En el listado adjunto se puede consultar dicho método.
+
+.. literalinclude:: ../listados/Metodo_getBufferedReader.java
+   :language: java
+   
+   
+
+* De la misma forma crearemos un método ``getPrintWriter`` que nos devuelva un objeto de la clase ``PrintWriter`` para poder realizar fácilmente operaciones de escritura en ficheros. En el listado adjunto se muestra el código.
+
+.. literalinclude:: ../listados/Metodo_getPrintWriter.java
+   :language: java
+
+
+Procesado de ficheros
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Necesitaremos una clase ``ProcesadorFicheros`` que nos permita procesar los ficheros de la forma pedida. Antes de crear un programa multiproceso empezaremos por crear una clase simple que nos resuelva este problema.
+
+Dicha clase tendrá un método ``hacerRecuento`` que resuelva el problema de contar el número de apariciones en un fichero dejando el total de apariciones en un fichero de salida distintos. En el código adjunto podemos ver como podría implementarse dicho método.
+
+.. literalinclude:: ../listados/Metodo_hacerRecuento.java
+   :language: java
+
+
 	
 Gestión de procesos.
 --------------------
 
 La gestión de procesos se realiza de dos formas **muy distintas** en función de los dos grandes sistemas operativos: Windows y Linux.
 
-* En Windows toda la gestión de procesos se realiza desde el "Administrador de tareas" al cual se accede con Ctrl+Alt+Supr. Existen otros programas algo más sofisticados que proporcionan algo más de información sobre los procesos, como Process Explorer (antes conocido con el nombre de ProcessViewer).
+* En Windows toda la gestión de procesos se realiza desde el "Administrador de tareas" al cual se accede con Ctrl+Alt+Supr. Existen otros programas más sofisticados que proporcionan algo más de información sobre los procesos, como Process Explorer (antes conocido con el nombre de ProcessViewer).
 
 
 

@@ -10,7 +10,10 @@ import com.utilidades.UtilidadesFicheros;
 
 
 public class ProcesadorFichero {
-
+	
+	// Dado un fichero de entrada y una letra
+	// contamos cuantas veces aparece dicha letra
+	// y dejamos el recuento en un fichero de salida
 	public static void hacerRecuento(
 		String fichEntrada,String letra,
 		String fichSalida
@@ -27,7 +30,9 @@ public class ProcesadorFichero {
 		String lineaLeida;
 		lineaLeida=br.readLine();
 		int totalVocales=0;
+		//Mientras no queden lineas....
 		while (lineaLeida!=null){
+			//...recorremos la linea...
 			for (int i=0; 
 					i<lineaLeida.length();
 					i++){
@@ -35,27 +40,31 @@ public class ProcesadorFichero {
 						lineaLeida.charAt(i);
 				char letraPasada=
 						letra.charAt(0);
+				//...y si la encontramos
+				// incrementamos el contador
 				if (letraLeida==letraPasada){
 					totalVocales++;
-				}
-			}
+				} //Fin del if
+			} //Fin del for
+			// Pasamos a la siguiente linea
 			lineaLeida=br.readLine();
 		}
 		//Escribimos el total de vocales
 		//en el fichero de salida
 		pw.println(totalVocales);
 		pw.flush();
+		//Y cerramos los ficheros
 		pw.close();
 		br.close();
 		
-	} //Fin del método hacerRecuento
+	} //Fin del mï¿½todo hacerRecuento
 	/**
 	 * Dado un fichero pasado como
-	 * argumento, contará cuantas
+	 * argumento, contarï¿½ cuantas
 	 * apariciones hay de una cierta
 	 * vocal (pasada como argumento)
-	 * y dejará la cantidad
-	 * en otro fichero (también pasado como
+	 * y dejarï¿½ la cantidad
+	 * en otro fichero (tambiï¿½n pasado como
 	 * argumento
 	 * @throws IOException 
 	 * @throws FileNotFoundException 

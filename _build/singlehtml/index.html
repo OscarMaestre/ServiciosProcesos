@@ -24,6 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
     <link rel="top" title="None" href="index.html#document-index" /> 
   </head>
   <body role="document">
@@ -147,7 +149,7 @@ Programacion de servicios y procesos
 </pre></div>
 </div>
 <p>Para ejecutar este programa desde dentro de Eclipse es necesario indicar que deseamos enviar <em>argumentos</em> al programa. Por ejemplo, si deseamos sumar los números del 2 al 10, deberemos ir a la venta &#8220;Run configuration&#8221; y en la pestaña &#8220;Arguments&#8221; indicar los argumentos (que en este caso son los dos números a indicar).</p>
-<div class="figure align-center" id="id2" style="width: 50%">
+<div class="figure align-center" id="id1" style="width: 50%">
 <img alt="_images/configuraciones.png" src="_images/configuraciones.png" />
 <p class="caption"><span class="caption-text">Modificando los argumentos del programa</span></p>
 </div>
@@ -352,15 +354,89 @@ Programacion de servicios y procesos
 </pre></div>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>Ejercicio<a class="headerlink" href="#id1" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Crear un programa que sea capaz de contar cuantas vocales hay en un fichero. El programa padre debe lanzar cinco procesos hjo, donde cada uno de ellos se ocupará de contar una vocal concreta (que puede ser minúscula o mayúscula). Cada subproceso que cuenta vocales deberá dejar el resultado en un fichero. El programa padre se ocupará de recuperar los resultados de los ficheros, sumar todos los subtotales y mostrar el resultado final en pantalla.</p>
+<div class="section" id="ejercicio-resuelto">
+<h2>Ejercicio resuelto<a class="headerlink" href="#ejercicio-resuelto" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Crear un programa que sea capaz de contar cuantas vocales hay en un fichero. El programa padre debe lanzar cinco procesos hijo, donde cada uno de ellos se ocupará de contar una vocal concreta (que puede ser minúscula o mayúscula). Cada subproceso que cuenta vocales deberá dejar el resultado en un fichero. El programa padre se ocupará de recuperar los resultados de los ficheros, sumar todos los subtotales y mostrar el resultado final en pantalla.</p>
+<div class="section" id="operaciones-con-ficheros">
+<h3>Operaciones con ficheros<a class="headerlink" href="#operaciones-con-ficheros" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Tanto en este ejercicio como en muchos otros vamos a necesitar realizar ciertas operaciones con ficheros. Para aumentar nuestra productividad utilizaremos una clase llamada <code class="docutils literal"><span class="pre">UtilidadesFicheros</span></code> que nos permita realizar ciertas tareas como las siguientes:</p>
+<ul class="simple">
+<li>Obtener un objeto <code class="docutils literal"><span class="pre">BufferedReader</span></code> a partir de un nombre de fichero de tipo <code class="docutils literal"><span class="pre">String</span></code>. Llamaremos a este método <code class="docutils literal"><span class="pre">getBufferedReader</span></code> y lo utilizaremos para poder manejar un fichero mediante una clase de muy alto nivel que nos facilita la lectura de ficheros. En el listado adjunto se puede consultar dicho método.</li>
+</ul>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">BufferedReader</span> <span class="nf">getBufferedReader</span><span class="o">(</span>
+    <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">FileNotFoundException</span> <span class="o">{</span>
+    <span class="n">FileReader</span> <span class="n">lector</span><span class="o">;</span>
+    <span class="n">lector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+    <span class="n">BufferedReader</span> <span class="n">bufferedReader</span><span class="o">;</span>
+    <span class="n">bufferedReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">lector</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">bufferedReader</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>De la misma forma crearemos un método <code class="docutils literal"><span class="pre">getPrintWriter</span></code> que nos devuelva un objeto de la clase <code class="docutils literal"><span class="pre">PrintWriter</span></code> para poder realizar fácilmente operaciones de escritura en ficheros. En el listado adjunto se muestra el código.</li>
+</ul>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">PrintWriter</span> <span class="nf">getPrintWriter</span><span class="o">(</span><span class="n">String</span>
+        <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">PrintWriter</span> <span class="n">printWriter</span><span class="o">;</span>
+    <span class="n">FileWriter</span> <span class="n">fileWriter</span><span class="o">;</span>
+    <span class="n">fileWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+    <span class="n">printWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">fileWriter</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">printWriter</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="procesado-de-ficheros">
+<h3>Procesado de ficheros<a class="headerlink" href="#procesado-de-ficheros" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Necesitaremos una clase <code class="docutils literal"><span class="pre">ProcesadorFicheros</span></code> que nos permita procesar los ficheros de la forma pedida. Antes de crear un programa multiproceso empezaremos por crear una clase simple que nos resuelva este problema.</p>
+<p>Dicha clase tendrá un método <code class="docutils literal"><span class="pre">hacerRecuento</span></code> que resuelva el problema de contar el número de apariciones en un fichero dejando el total de apariciones en un fichero de salida distintos. En el código adjunto podemos ver como podría implementarse dicho método.</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="c1">// Dado un fichero de entrada y una letra</span>
+<span class="c1">// contamos cuantas veces aparece dicha letra</span>
+<span class="c1">// y dejamos el recuento en un fichero de salida</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">hacerRecuento</span><span class="o">(</span><span class="n">String</span> <span class="n">fichEntrada</span><span class="o">,</span>
+                                 <span class="n">String</span> <span class="n">letra</span><span class="o">,</span> <span class="n">String</span> <span class="n">fichSalida</span><span class="o">)</span> <span class="kd">throws</span>
+<span class="n">FileNotFoundException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">BufferedReader</span> <span class="n">br</span><span class="o">;</span>
+    <span class="n">br</span> <span class="o">=</span> <span class="n">UtilidadesFicheros</span><span class="o">.</span><span class="na">getBufferedReader</span><span class="o">(</span><span class="n">fichEntrada</span><span class="o">);</span>
+    <span class="n">PrintWriter</span> <span class="n">pw</span><span class="o">;</span>
+    <span class="n">pw</span> <span class="o">=</span> <span class="n">UtilidadesFicheros</span><span class="o">.</span><span class="na">getPrintWriter</span><span class="o">(</span><span class="n">fichSalida</span><span class="o">);</span>
+    <span class="n">String</span> <span class="n">lineaLeida</span><span class="o">;</span>
+    <span class="n">lineaLeida</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">totalVocales</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="c1">//Mientras no queden lineas....</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">lineaLeida</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//...recorremos la linea...</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">lineaLeida</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">char</span> <span class="n">letraLeida</span> <span class="o">=</span> <span class="n">lineaLeida</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+            <span class="kt">char</span> <span class="n">letraPasada</span> <span class="o">=</span> <span class="n">letra</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+            <span class="c1">// incrementamos el contador</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">letraLeida</span> <span class="o">==</span> <span class="n">letraPasada</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">totalVocales</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="c1">//Fin del if</span>
+        <span class="o">}</span>
+        <span class="c1">//Fin del for</span>
+        <span class="c1">// Pasamos a la siguiente linea</span>
+        <span class="n">lineaLeida</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="c1">//Escribimos el total de vocales</span>
+    <span class="c1">//en el fichero de salida</span>
+    <span class="n">pw</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">totalVocales</span><span class="o">);</span>
+    <span class="n">pw</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+    <span class="c1">//Y cerramos los ficheros</span>
+    <span class="n">pw</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="n">br</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="gestion-de-procesos">
 <h2>Gestión de procesos.<a class="headerlink" href="#gestion-de-procesos" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>La gestión de procesos se realiza de dos formas <strong>muy distintas</strong> en función de los dos grandes sistemas operativos: Windows y Linux.</p>
 <ul class="simple">
-<li>En Windows toda la gestión de procesos se realiza desde el &#8220;Administrador de tareas&#8221; al cual se accede con Ctrl+Alt+Supr. Existen otros programas algo más sofisticados que proporcionan algo más de información sobre los procesos, como Process Explorer (antes conocido con el nombre de ProcessViewer).</li>
+<li>En Windows toda la gestión de procesos se realiza desde el &#8220;Administrador de tareas&#8221; al cual se accede con Ctrl+Alt+Supr. Existen otros programas más sofisticados que proporcionan algo más de información sobre los procesos, como Process Explorer (antes conocido con el nombre de ProcessViewer).</li>
 </ul>
 </div>
 <div class="section" id="comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">
@@ -2742,7 +2818,7 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 <li class="toctree-l2"><a class="reference internal" href="index.html#creacion-de-procesos">Creación de procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#comunicacion-entre-procesos">Comunicación entre procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio">Ejercicio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#id1">Ejercicio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio-resuelto">Ejercicio resuelto</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#gestion-de-procesos">Gestión de procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">Comandos para la gestión de procesos en sistemas libres y propietarios.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#sincronizacion-entre-procesos">Sincronización entre procesos.</a></li>
@@ -2835,7 +2911,7 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, Oscar Gomez.
-      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
 </html>
