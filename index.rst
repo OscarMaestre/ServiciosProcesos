@@ -1,6 +1,6 @@
-﻿=============================================
+########################################
 Programacion de servicios y procesos
-=============================================
+########################################
 
 .. toctree::
    :maxdepth: 2
@@ -11,4 +11,4 @@ Programacion de servicios y procesos
    textos/tema4
    textos/tema5
 
-
+g
