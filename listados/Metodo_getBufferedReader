@@ -1,0 +1,7 @@
+public static BufferedReader getBufferedReader(String nombreFichero) throws FileNotFoundException {
+    FileReader lector;
+    lector = new FileReader(nombreFichero);
+    BufferedReader bfr;
+    bfr = new BufferedReader(lector);
+    return bfr;
+}

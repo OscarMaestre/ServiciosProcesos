@@ -1,4 +1,5 @@
 *.class
+.metadata
 .classpath
 .project
 .settings
