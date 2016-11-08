@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
@@ -30,7 +30,7 @@
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navegación</h3>
       <ul>
-        <li class="nav-item nav-item-0"><a href="index.html#document-index">documentación de ServiciosProcesos - 1.0</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html#document-index">documentación de ServiciosProcesos - 1.0</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -39,16 +39,15 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <p>﻿=============================================
-Programacion de servicios y procesos
-=============================================</p>
+  <div class="section" id="programacion-de-servicios-y-procesos">
+<h1>Programacion de servicios y procesos<a class="headerlink" href="#programacion-de-servicios-y-procesos" title="Enlazar permanentemente con este título">¶</a></h1>
 <div class="toctree-wrapper compound">
 <span id="document-textos/tema1"></span><div class="section" id="programacion-multiproceso">
-<h1>﻿Programación multiproceso<a class="headerlink" href="#programacion-multiproceso" title="Enlazar permanentemente con este título">¶</a></h1>
+<h2>﻿Programación multiproceso<a class="headerlink" href="#programacion-multiproceso" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="ejecutables-procesos-servicios">
-<h2>Ejecutables. Procesos. Servicios.<a class="headerlink" href="#ejecutables-procesos-servicios" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Ejecutables. Procesos. Servicios.<a class="headerlink" href="#ejecutables-procesos-servicios" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="section" id="ejecutables">
-<h3>Ejecutables<a class="headerlink" href="#ejecutables" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Ejecutables<a class="headerlink" href="#ejecutables" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Un ejecutable es un archivo con la estructura necesaria para que el sistema operativo pueda poner en marcha el programa que hay dentro. En Windows, los ejecutables suelen ser archivos con la extension .EXE.</p>
 <p>Se pueden utilizar &#8220;desensambladores&#8221; para averiguar la secuencia de instrucciones que hay en un EXE. Incluso existen desensambladores en línea como <a class="reference external" href="http://onlinedisassembler.com">http://onlinedisassembler.com</a></p>
 <p>Sin embargo, Java genera ficheros .JAR o .CLASS. Estos ficheros <em>no son ejecutables</em> sino que son archivos que el intérprete de JAVA (el archivo <code class="docutils literal"><span class="pre">java.exe</span></code>) leerá y ejecutará.</p>
@@ -58,7 +57,7 @@ Programacion de servicios y procesos
 <p>Un EXE puede que no contenga las instrucciones de los microprocesadores más modernos. Como todos son compatibles no es un gran problema, sin embargo, puede que no aprovechemos al 100% la capacidad de nuestro micro.</p>
 </div>
 <div class="section" id="procesos">
-<h3>Procesos<a class="headerlink" href="#procesos" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Procesos<a class="headerlink" href="#procesos" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Es un archivo que está en ejecución y bajo el control del sistema operativo. Un proceso puede atravesar diversas etapas en su &#8220;ciclo de vida&#8221;. Los estados en los que puede estar son:</p>
 <ul class="simple">
 <li>En ejecución: está dentro del microprocesador.</li>
@@ -68,22 +67,22 @@ Programacion de servicios y procesos
 </ul>
 </div>
 <div class="section" id="servicios">
-<h3>Servicios<a class="headerlink" href="#servicios" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Servicios<a class="headerlink" href="#servicios" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Un servicio es un proceso que no muestra ninguna ventana ni gráfico en pantalla porque no está pensado para que el usuario lo maneje directamente.</p>
 <p>Habitualmente, un servicio es un programa que atiende a otro programa.</p>
 </div>
 </div>
 <div class="section" id="hilos">
-<h2>Hilos.<a class="headerlink" href="#hilos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Hilos.<a class="headerlink" href="#hilos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Un hilo es un concepto más avanzado que un proceso: al hablar de procesos cada uno tiene su propio espacio en memoria. Si abrimos 20 procesos cada uno de ellos consume 20x de memoria RAM. Un hilo es un proceso mucho más ligero, en el que el código y los datos se comparten de una forma distinta.</p>
 <p>Un proceso no tiene acceso a los datos de otro procesos. Sin embargo un hilo sí accede a los datos de otro hilo. Esto complicará algunas cuestiones a la hora de programar.</p>
 </div>
 <div class="section" id="programacion-concurrente">
-<h2>Programación concurrente.<a class="headerlink" href="#programacion-concurrente" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Programación concurrente.<a class="headerlink" href="#programacion-concurrente" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>La programación concurrente es la parte de la programación que se ocupa de crear programas que pueden tener varios procesos/hilos que colaboran para ejecutar un trabajo y aprovechar al máximo el rendimiento de sistemas multinúcleo.</p>
 </div>
 <div class="section" id="programacion-paralela-y-distribuida">
-<h2>Programación paralela y distribuida.<a class="headerlink" href="#programacion-paralela-y-distribuida" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Programación paralela y distribuida.<a class="headerlink" href="#programacion-paralela-y-distribuida" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Dentro de la programación concurrente tenemos la paralela y la distribuida:</p>
 <ul class="simple">
 <li>En general se denomina &#8220;programación paralela&#8221; a la creación de software que se ejecuta siempre en un solo ordenador (con varios núcleos o no)</li>
@@ -91,7 +90,7 @@ Programacion de servicios y procesos
 </ul>
 </div>
 <div class="section" id="creacion-de-procesos">
-<h2>Creación de procesos.<a class="headerlink" href="#creacion-de-procesos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Creación de procesos.<a class="headerlink" href="#creacion-de-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En Java es posible crear procesos utilizando algunas clases que el entorno ofrece para esta tarea. En este tema, veremos en profundidad la clase ProcessBuilder.</p>
 <p>El ejemplo siguiente muestra como lanzar un proceso de Acrobat Reader:</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LanzadorProcesos</span> <span class="o">{</span>
@@ -147,7 +146,7 @@ Programacion de servicios y procesos
 </pre></div>
 </div>
 <p>Para ejecutar este programa desde dentro de Eclipse es necesario indicar que deseamos enviar <em>argumentos</em> al programa. Por ejemplo, si deseamos sumar los números del 2 al 10, deberemos ir a la venta &#8220;Run configuration&#8221; y en la pestaña &#8220;Arguments&#8221; indicar los argumentos (que en este caso son los dos números a indicar).</p>
-<div class="figure align-center" id="id2" style="width: 50%">
+<div class="figure align-center" id="id1" style="width: 50%">
 <img alt="_images/configuraciones.png" src="_images/configuraciones.png" />
 <p class="caption"><span class="caption-text">Modificando los argumentos del programa</span></p>
 </div>
@@ -193,7 +192,7 @@ Programacion de servicios y procesos
 </div>
 </div>
 <div class="section" id="comunicacion-entre-procesos">
-<h2>Comunicación entre procesos.<a class="headerlink" href="#comunicacion-entre-procesos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Comunicación entre procesos.<a class="headerlink" href="#comunicacion-entre-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Las operaciones multiproceso pueden implicar que sea necesario comunicar información entre muchos procesos, lo que obliga a la necesidad de utilizar mecanismos específicos de comunicación que ofrecerá Java o a diseñar alguno separado que evite los problemas que puedan aparecer.</p>
 <p>En el ejemplo, el segundo proceso suele sobreescribir el resultado del primero, así que modificaremos el código del lanzador para que cada proceso use su propio fichero de resultados.</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lanzador</span> <span class="o">{</span>
@@ -228,7 +227,7 @@ Programacion de servicios y procesos
 <p>Usando el método <code class="docutils literal"><span class="pre">.directory(new</span> <span class="pre">File(&quot;c:\\dir\\))</span></code> se puede indicar a Java donde está el archivo que se desea ejecutar.</p>
 </div>
 <div class="section" id="ejercicio">
-<h2>Ejercicio<a class="headerlink" href="#ejercicio" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Ejercicio<a class="headerlink" href="#ejercicio" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Crear un programa que permita parametrizar el lanzamiento de sumadores, que vuelque el contenido de las sumas en ficheros y que permita al programa principal recuperar las sumas de los ficheros parciales.</p>
 <p>En el listado siguiente se muestra la clase Sumador</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">es.ies.multiproceso</span><span class="o">;</span>
@@ -352,21 +351,59 @@ Programacion de servicios y procesos
 </pre></div>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>Ejercicio<a class="headerlink" href="#id1" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Crear un programa que sea capaz de contar cuantas vocales hay en un fichero. El programa padre debe lanzar cinco procesos hjo, donde cada uno de ellos se ocupará de contar una vocal concreta (que puede ser minúscula o mayúscula). Cada subproceso que cuenta vocales deberá dejar el resultado en un fichero. El programa padre se ocupará de recuperar los resultados de los ficheros, sumar todos los subtotales y mostrar el resultado final en pantalla.</p>
+<div class="section" id="ejercicio-resuelto">
+<h3>Ejercicio resuelto<a class="headerlink" href="#ejercicio-resuelto" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Crear un programa que sea capaz de contar cuantas vocales hay en un fichero. El programa padre debe lanzar cinco procesos hijo, donde cada uno de ellos se ocupará de contar una vocal concreta (que puede ser minúscula o mayúscula). Cada subproceso que cuenta vocales deberá dejar el resultado en un fichero. El programa padre se ocupará de recuperar los resultados de los ficheros, sumar todos los subtotales y mostrar el resultado final en pantalla.</p>
+<div class="section" id="operaciones-con-ficheros">
+<h4>Operaciones con ficheros<a class="headerlink" href="#operaciones-con-ficheros" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Tanto en este ejercicio como en muchos otros vamos a necesitar realizar ciertas operaciones con ficheros. Para aumentar nuestra productividad utilizaremos una clase llamada <code class="docutils literal"><span class="pre">UtilidadesFicheros</span></code> que nos permita realizar ciertas tareas como las siguientes:</p>
+<ul class="simple">
+<li>Obtener un objeto <code class="docutils literal"><span class="pre">BufferedReader</span></code> a partir de un nombre de fichero de tipo <code class="docutils literal"><span class="pre">String</span></code>. Llamaremos a este método <code class="docutils literal"><span class="pre">getBufferedReader</span></code> y lo utilizaremos para poder manejar un fichero mediante una clase de muy alto nivel que nos facilita la lectura de ficheros. En el listado adjunto se puede consultar dicho método.</li>
+</ul>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">BufferedReader</span> <span class="nf">getBufferedReader</span><span class="o">(</span>
+    <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">FileNotFoundException</span> <span class="o">{</span>
+    <span class="n">FileReader</span> <span class="n">lector</span><span class="o">;</span>
+    <span class="n">lector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+    <span class="n">BufferedReader</span> <span class="n">bufferedReader</span><span class="o">;</span>
+    <span class="n">bufferedReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">lector</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">bufferedReader</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>De la misma forma crearemos un método <code class="docutils literal"><span class="pre">getPrintWriter</span></code> que nos devuelva un objeto de la clase <code class="docutils literal"><span class="pre">PrintWriter</span></code> para poder realizar fácilmente operaciones de escritura en ficheros. En el listado adjunto se muestra el código.</li>
+</ul>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">PrintWriter</span> <span class="nf">getPrintWriter</span><span class="o">(</span><span class="n">String</span>
+        <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">PrintWriter</span> <span class="n">printWriter</span><span class="o">;</span>
+    <span class="n">FileWriter</span> <span class="n">fileWriter</span><span class="o">;</span>
+    <span class="n">fileWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+    <span class="n">printWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">fileWriter</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">printWriter</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="procesado-de-ficheros">
+<h4>Procesado de ficheros<a class="headerlink" href="#procesado-de-ficheros" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Necesitaremos una clase <code class="docutils literal"><span class="pre">ProcesadorFicheros</span></code> que nos permita procesar los ficheros de la forma pedida. Antes de crear un programa multiproceso empezaremos por crear una clase simple que nos resuelva este problema.</p>
+<p>Dicha clase tendrá un método <code class="docutils literal"><span class="pre">hacerRecuento</span></code> que resuelva el problema de contar el número de apariciones en un fichero dejando el total de apariciones en un fichero de salida distintos. En el código adjunto podemos ver como podría implementarse dicho método.</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="gestion-de-procesos">
-<h2>Gestión de procesos.<a class="headerlink" href="#gestion-de-procesos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Gestión de procesos.<a class="headerlink" href="#gestion-de-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>La gestión de procesos se realiza de dos formas <strong>muy distintas</strong> en función de los dos grandes sistemas operativos: Windows y Linux.</p>
 <ul class="simple">
-<li>En Windows toda la gestión de procesos se realiza desde el &#8220;Administrador de tareas&#8221; al cual se accede con Ctrl+Alt+Supr. Existen otros programas algo más sofisticados que proporcionan algo más de información sobre los procesos, como Process Explorer (antes conocido con el nombre de ProcessViewer).</li>
+<li>En Windows toda la gestión de procesos se realiza desde el &#8220;Administrador de tareas&#8221; al cual se accede con Ctrl+Alt+Supr. Existen otros programas más sofisticados que proporcionan algo más de información sobre los procesos, como Process Explorer (antes conocido con el nombre de ProcessViewer).</li>
 </ul>
 </div>
 <div class="section" id="comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">
-<h2>Comandos para la gestión de procesos en sistemas libres y propietarios.<a class="headerlink" href="#comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Comandos para la gestión de procesos en sistemas libres y propietarios.<a class="headerlink" href="#comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En sistemas Windows, no existen apenas comandos para gestionar procesos. Puede obligarse al sistema operativo a arrancar la aplicación asociada a un archivo con el comando <code class="docutils literal"><span class="pre">START</span></code>. Es decir, si se ejecuta lo siguiente:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">START</span> <span class="n">documento</span><span class="o">.</span><span class="n">pdf</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span>START documento.pdf
 </pre></div>
 </div>
 <p>se abrirá el visor de archivos PDF el cual cargará automáticamente el fichero <code class="docutils literal"><span class="pre">documento.pdf</span></code></p>
@@ -378,7 +415,7 @@ Programacion de servicios y procesos
 <li>Se puede devolver un proceso a primer plano con el comando <code class="docutils literal"><span class="pre">fg</span></code>.</li>
 </ul>
 <div class="section" id="prioridades">
-<h3>Prioridades<a class="headerlink" href="#prioridades" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Prioridades<a class="headerlink" href="#prioridades" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>En sistemas como GNU/Linux se puede modificar la prioridad con que se ejecuta un proceso. Esto implica dos posibilidades</p>
 <ul class="simple">
 <li>Si pensamos que un programa que necesitamos ejecutar es muy importante podemos darle más prioridad para que reciba &#8220;más turnos&#8221; del planificador.</li>
@@ -388,7 +425,7 @@ Programacion de servicios y procesos
 </div>
 </div>
 <div class="section" id="sincronizacion-entre-procesos">
-<h2>Sincronización entre procesos.<a class="headerlink" href="#sincronizacion-entre-procesos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Sincronización entre procesos.<a class="headerlink" href="#sincronizacion-entre-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Cuando se lanza más de un proceso de una misma sección de código no se sabe qué proceso ejecutará qué instrucción en un cierto momento, lo que es muy peligroso:</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span><span class="n">j</span><span class="o">;</span>
 <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
@@ -404,7 +441,7 @@ Programacion de servicios y procesos
 <p>Si dos o más procesos avanzan por esta sección de código es perfectamente posible que unas veces nuestro programa multiproceso se ejecute bien y otras no.</p>
 <p>En todo programa multiproceso pueden encontrarse estas zonas de código &#8220;peligrosas&#8221; que deben protegerse especialmente utilizando ciertos mecanismos. El nombre global para todos los lenguajes es denominar a estos trozos &#8220;secciones críticas&#8221;.</p>
 <div class="section" id="mecanismos-para-controlar-secciones-criticas">
-<h3>Mecanismos para controlar secciones críticas<a class="headerlink" href="#mecanismos-para-controlar-secciones-criticas" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Mecanismos para controlar secciones críticas<a class="headerlink" href="#mecanismos-para-controlar-secciones-criticas" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Los mecanismos más típicos son los ofrecidos por UNIX/Windows:</p>
 <ul class="simple">
 <li>Semáforos.</li>
@@ -435,13 +472,13 @@ Programacion de servicios y procesos
 </div>
 </div>
 <div class="section" id="documentacion">
-<h2>Documentación<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Documentación<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Para hacer la documentación tradicionalmente hemos usado JavaDOC. Sin embargo, las versiones más modernas de Java incluyen las <strong>anotaciones</strong>.</p>
 <p>Una anotación es un texto que pueden utilizar otras herramientas (no solo el Javadoc) para comprender mejor qué hace ese código o como documentarlo.</p>
 <p>Cualquiera puede crear sus propias anotaciones simplemente definiéndolas como un interfaz Java. Sin embargo tendremos que programar nuestras propias clases para extraer la información que proporcionan dichas anotaciones.</p>
 </div>
 <div class="section" id="depuracion">
-<h2>Depuración.<a class="headerlink" href="#depuracion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Depuración.<a class="headerlink" href="#depuracion" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>¿Como se depura un programa multiproceso/multihilo? Por desgracia puede ser muy difícil:</p>
 <ol class="arabic simple">
 <li>No todos los depuradores son capaces.</li>
@@ -454,14 +491,14 @@ Programacion de servicios y procesos
 <p>En general todos los fallos en un programa multiproceso vienen derivado de no usar <code class="docutils literal"><span class="pre">synchronized</span></code> de la forma correcta.</p>
 </div>
 <div class="section" id="examen">
-<h2>Examen<a class="headerlink" href="#examen" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Examen<a class="headerlink" href="#examen" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Fecha por determinar</p>
 </div>
 </div>
 <span id="document-textos/tema2"></span><div class="section" id="programacion-multihilo">
-<h1>﻿Programación multihilo<a class="headerlink" href="#programacion-multihilo" title="Enlazar permanentemente con este título">¶</a></h1>
+<h2>﻿Programación multihilo<a class="headerlink" href="#programacion-multihilo" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="recursos-compartidos-por-los-hilos">
-<h2>Recursos compartidos por los hilos.<a class="headerlink" href="#recursos-compartidos-por-los-hilos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Recursos compartidos por los hilos.<a class="headerlink" href="#recursos-compartidos-por-los-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Cuando creamos varios objetos de una clase, puede ocurrir que varios hilos de ejecución accedan a un objeto. Es importante recordar que <strong>todos los campos del objeto son compartidos entre todos los hilos</strong>.</p>
 <p>Supongamos una clase como esta:</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nf">Empleado</span><span class="o">(){</span>
@@ -475,7 +512,7 @@ Programacion de servicios y procesos
 <p>Si varios hilos ejecutan sin querer el método <code class="docutils literal"><span class="pre">incrementar</span></code> ocurrirá que el número se incrementará tantas veces como procesos.</p>
 </div>
 <div class="section" id="estados-de-un-hilo-cambios-de-estado">
-<h2>Estados de un hilo. Cambios de estado.<a class="headerlink" href="#estados-de-un-hilo-cambios-de-estado" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Estados de un hilo. Cambios de estado.<a class="headerlink" href="#estados-de-un-hilo-cambios-de-estado" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Aunque no lo vemos, un hilo cambia de estado: puede pasar de la nada a la ejecución. De la ejecución al estado &#8220;en espera&#8221;. De ahí puede volver a estar en ejecución. De cualquier estado se puede pasar al estado &#8220;finalizado&#8221;.</p>
 <p>El programador no necesita controlar esto, lo hace el sistema operativo. Sin embargo un programa multihilo mal hecho puede dar lugar problemas como los siguientes:</p>
 <ul class="simple">
@@ -484,7 +521,7 @@ Programacion de servicios y procesos
 </ul>
 </div>
 <div class="section" id="elementos-relacionados-con-la-programacion-de-hilos-librerias-y-clases">
-<h2>Elementos relacionados con la programación de hilos. Librerías y clases.<a class="headerlink" href="#elementos-relacionados-con-la-programacion-de-hilos-librerias-y-clases" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Elementos relacionados con la programación de hilos. Librerías y clases.<a class="headerlink" href="#elementos-relacionados-con-la-programacion-de-hilos-librerias-y-clases" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Para crear programas multihilo en Java se pueden hacer dos cosas:</p>
 <ol class="arabic simple">
 <li>Heredar de la clase Thread.</li>
@@ -537,7 +574,7 @@ Programacion de servicios y procesos
 </div>
 </div>
 <div class="section" id="gestion-de-hilos">
-<h2>Gestión de hilos.<a class="headerlink" href="#gestion-de-hilos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Gestión de hilos.<a class="headerlink" href="#gestion-de-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Con los hilos se pueden efectuar diversas operaciones que sean de utilidad al programador (y al administrador de sistemas a veces).</p>
 <p>Por ejemplo, un hilo puede tener un nombre. Si queremos asignar un nombre a un hilo podemos usar el método <code class="docutils literal"><span class="pre">setName(&quot;Nombre</span> <span class="pre">que</span> <span class="pre">sea&quot;)</span></code>. También podemos obtener un objeto que represente el hilo de ejecución con <code class="docutils literal"><span class="pre">getCurrentThread</span></code> que nos devolverá un objeto de la clase <code class="docutils literal"><span class="pre">Thread</span></code>.</p>
 <p>Otra operación de utilidad al gestionar hilos es indicar la prioridad que queremos darle a un hilo. En realidad esta prioridad es indicativa, el sistema operativo no está obligado a respetarla aunque por lo general lo hacen. Se puede indicar la prioridad con <code class="docutils literal"><span class="pre">setPriority(10)</span></code>. La máxima prioridad posible es <code class="docutils literal"><span class="pre">MAX_PRIORITY</span></code>, y la mínima es <code class="docutils literal"><span class="pre">MIN_PRIORITY</span></code>.</p>
@@ -635,7 +672,7 @@ Programacion de servicios y procesos
 <p>Las secciones siguientes sirven como resumen de como crear una aplicación multihilo</p>
 </div>
 <div class="section" id="creacion-inicio-y-finalizacion">
-<h2>Creación, inicio y finalización.<a class="headerlink" href="#creacion-inicio-y-finalizacion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Creación, inicio y finalización.<a class="headerlink" href="#creacion-inicio-y-finalizacion" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
 <li>Podemos heredar de Thread o implementar <code class="docutils literal"><span class="pre">Runnable</span></code>. Usaremos el segundo recordando implementar el método <code class="docutils literal"><span class="pre">public</span> <span class="pre">void</span> <span class="pre">run()</span></code>.</li>
 <li>Para crear un hilo asociado a un objeto usaremos algo como:</li>
@@ -655,25 +692,25 @@ Programacion de servicios y procesos
 </ul>
 </div>
 <div class="section" id="sincronizacion-de-hilos">
-<h2>Sincronización de hilos.<a class="headerlink" href="#sincronizacion-de-hilos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Sincronización de hilos.<a class="headerlink" href="#sincronizacion-de-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Cuando un método acceda a una variable miembro que esté compartida deberemos proteger dicha sección crítica, usando <code class="docutils literal"><span class="pre">synchronized</span></code>. Se puede poner todo el método <code class="docutils literal"><span class="pre">synchronized</span></code> o marcar un trozo de código más pequeño.</p>
 </div>
 <div class="section" id="informacion-entre-hilos">
-<h2>Información entre hilos.<a class="headerlink" href="#informacion-entre-hilos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Información entre hilos.<a class="headerlink" href="#informacion-entre-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Todos los hilos comparten todo, así que obtener información es tan sencillo como consultar un miembro.
 En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="docutils literal"><span class="pre">sockets</span> <span class="pre">de</span> <span class="pre">red</span></code>, pero se ve en el tema siguiente.</p>
 </div>
 <div class="section" id="prioridades-de-los-hilos">
-<h2>Prioridades de los hilos.<a class="headerlink" href="#prioridades-de-los-hilos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Prioridades de los hilos.<a class="headerlink" href="#prioridades-de-los-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Podemos asignar distintas prioridades a los hilos usando los campos estáticos <code class="docutils literal"><span class="pre">MAX_PRIORITY</span></code> y <code class="docutils literal"><span class="pre">MIN_PRIORITY</span></code>. Usando valores entre estas dos constantes podemos hacer que un hilo reciba más procesador que otro (se hace en contadas ocasiones).</p>
 <p>Para ello se usa el método <code class="docutils literal"><span class="pre">setPriority(valor)</span></code></p>
 </div>
 <div class="section" id="gestion-de-prioridades">
-<h2>Gestión de prioridades.<a class="headerlink" href="#gestion-de-prioridades" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Gestión de prioridades.<a class="headerlink" href="#gestion-de-prioridades" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En realidad un sistema operativo no está obligado a respetar las prioridades, sino que se lo tomará como &#8220;recomendaciones&#8221;. En general hasta ahora todos respetan hasta cierto punto las prioridades que pone el programador pero no debe tomarse como algo absoluto.</p>
 </div>
 <div class="section" id="programacion-de-aplicaciones-multihilo">
-<h2>Programación de aplicaciones multihilo.<a class="headerlink" href="#programacion-de-aplicaciones-multihilo" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Programación de aplicaciones multihilo.<a class="headerlink" href="#programacion-de-aplicaciones-multihilo" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>La estructura típica de un programa multihilo es esta:</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">TareaCompleja</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
         <span class="nd">@Override</span>
@@ -776,7 +813,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="problema">
-<h2>Problema<a class="headerlink" href="#problema" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Problema<a class="headerlink" href="#problema" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En una mesa hay procesos que simulan el comportamiento de unos filósofos que intentan comer de un plato. Cada filósofo tiene un cubierto a su izquierda y uno a su derecha y para poder comer tiene que conseguir los dos. Si lo consigue, mostrará un mensaje en pantalla que indique &#8220;Filosofo 2 comiendo&#8221;.</p>
 <p>Despues de comer, soltará los cubiertos y esperará al azar un tiempo entre 1000 y 5000 milisegundos, indicando por pantalla &#8220;El filósofo 2 está pensando&#8221;.</p>
 <p>En general todos los objetos de la clase Filósofo está en un bucle infinito dedicándose a comer y a pensar.</p>
@@ -786,7 +823,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 <p class="caption"><span class="caption-text">Esquema de los filósofos</span></p>
 </div>
 <div class="section" id="boceto-de-solucion">
-<h3>Boceto de solución<a class="headerlink" href="#boceto-de-solucion" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Boceto de solución<a class="headerlink" href="#boceto-de-solucion" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
 
 
@@ -823,9 +860,9 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="solucion-completa-al-problema-de-los-filosofos">
-<h2>Solución completa al problema de los filósofos<a class="headerlink" href="#solucion-completa-al-problema-de-los-filosofos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Solución completa al problema de los filósofos<a class="headerlink" href="#solucion-completa-al-problema-de-los-filosofos" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="section" id="gestor-de-recursos-compartidos-palillos">
-<h3>Gestor de recursos compartidos (palillos)<a class="headerlink" href="#gestor-de-recursos-compartidos-palillos" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Gestor de recursos compartidos (palillos)<a class="headerlink" href="#gestor-de-recursos-compartidos-palillos" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GestorPalillos</span> <span class="o">{</span>
         <span class="cm">/* False significa que no están cogidos*/</span>
         <span class="kd">private</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">palillos</span><span class="o">;</span>
@@ -861,7 +898,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="simulacion-de-un-filosofo">
-<h3>Simulación de un filósofo<a class="headerlink" href="#simulacion-de-un-filosofo" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Simulación de un filósofo<a class="headerlink" href="#simulacion-de-un-filosofo" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Filosofo</span>  <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
         <span class="kt">int</span> <span class="n">num_palillo_izq</span><span class="o">;</span>
@@ -917,7 +954,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="lanzador-de-hilos">
-<h3>Lanzador de hilos<a class="headerlink" href="#lanzador-de-hilos" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Lanzador de hilos<a class="headerlink" href="#lanzador-de-hilos" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LanzadorFilosofos</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
                 <span class="kt">int</span> <span class="n">MAX_FILOSOFOS</span><span class="o">=</span><span class="mi">5</span><span class="o">;</span>
@@ -957,7 +994,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="id1">
-<h2>Problema<a class="headerlink" href="#id1" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Problema<a class="headerlink" href="#id1" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En una peluquería hay barberos y sillas para los clientes (siempre hay más sillas que clientes). Sin embargo, en esta peluquería no siempre hay trabajo por lo que los barberos duermen cuando no hay clientes a los que afeitar. Un cliente puede llegar a la barbería y encontrar alguna silla libre, en cuyo caso, el cliente se sienta y esperará que algún barbero le afeite. Puede ocurrir que el cliente llegue y no haya sillas libres, en cuyo caso se marcha. Simular el comportamiento de la barbería mediante un programa Java.</p>
 <div class="figure align-center" id="id3" style="width: 50%">
 <img alt="_images/barberodormilon.png" src="_images/barberodormilon.png" />
@@ -965,10 +1002,10 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="una-mala-solucion-al-problema-de-los-barberos">
-<h2>Una (mala) solución al problema de los barberos<a class="headerlink" href="#una-mala-solucion-al-problema-de-los-barberos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Una (mala) solución al problema de los barberos<a class="headerlink" href="#una-mala-solucion-al-problema-de-los-barberos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Prueba la siguiente solución:</p>
 <div class="section" id="clase-barbero">
-<h3>Clase Barbero<a class="headerlink" href="#clase-barbero" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Clase Barbero<a class="headerlink" href="#clase-barbero" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Barbero</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
         <span class="kd">private</span> <span class="n">String</span>                          <span class="n">nombre</span><span class="o">;</span>
         <span class="kd">private</span> <span class="n">GestorConcurrencia</span>      <span class="n">gc</span><span class="o">;</span>
@@ -1016,7 +1053,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="clase-cliente">
-<h3>Clase Cliente<a class="headerlink" href="#clase-cliente" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Clase Cliente<a class="headerlink" href="#clase-cliente" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Cliente</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
         <span class="n">GestorConcurrencia</span>      <span class="n">gc</span><span class="o">;</span>
         <span class="kd">public</span> <span class="nf">Cliente</span><span class="o">(</span><span class="n">GestorConcurrencia</span> <span class="n">gc</span><span class="o">){</span>
@@ -1034,7 +1071,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="clase-gestorconcurrencia">
-<h3>Clase GestorConcurrencia<a class="headerlink" href="#clase-gestorconcurrencia" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Clase GestorConcurrencia<a class="headerlink" href="#clase-gestorconcurrencia" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GestorConcurrencia</span> <span class="o">{</span>
         <span class="cm">/* Vector que indica cuantas sillas hay y</span>
 <span class="cm">         * si están libres o no</span>
@@ -1117,7 +1154,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="clase-lanzador">
-<h3>Clase Lanzador<a class="headerlink" href="#clase-lanzador" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Clase Lanzador<a class="headerlink" href="#clase-lanzador" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lanzador</span> <span class="o">{</span>
 
         <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
@@ -1160,12 +1197,12 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="criticas-a-la-solucion-anterior">
-<h3>Críticas a la solución anterior<a class="headerlink" href="#criticas-a-la-solucion-anterior" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Críticas a la solución anterior<a class="headerlink" href="#criticas-a-la-solucion-anterior" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>¿Cual es el problema?</p>
 <p>El problema está en que la forma que tiene el gestor de concurrencia de decirle a un barbero qué silla tiene un cliente sin afeitar es incorrecta: como siempre se empieza a buscar por el principio del vector, los clientes sentados al final <strong>nunca son atendidos</strong>. Hay que corregir esa asignación para <em>evitar que los procesos sufrán de inanición</em>.</p>
 </div>
 <div class="section" id="metodo-corregido">
-<h3>Método corregido<a class="headerlink" href="#metodo-corregido" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Método corregido<a class="headerlink" href="#metodo-corregido" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">int</span> <span class="nf">atenderAlgunCliente</span><span class="o">(){</span>
         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">pasos</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
                         <span class="n">pasos</span><span class="o">&lt;</span><span class="n">clienteEstaAtendido</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
@@ -1201,16 +1238,16 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="problema-productores-y-consumidores">
-<h2>Problema: productores y consumidores.<a class="headerlink" href="#problema-productores-y-consumidores" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Problema: productores y consumidores.<a class="headerlink" href="#problema-productores-y-consumidores" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En un cierto programa se tienen procesos que producen números y procesos que leen esos números. Todos los números se introducen en una cola (o vector) limitada.</p>
 <p>Todo el mundo lee y escribe de/en esa cola. Cuando un productor quiere poner un número tendrá que comprobar si la cola está llena. Si está llena, espera un tiempo al azar. Si no está llena pone su número en la última posición libre.</p>
 <p>Cuando un lector quiere leer, examina si la cola está vacía. Si lo está espera un tiempo al azar, y sino coge el número que haya al principio de la cola y ese número <em>ya no está disponible para el siguiente</em>.</p>
 <p>Crear un programa que simule el comportamiento de estos procesos evitando problemas de entrelazado e inanición.</p>
 </div>
 <div class="section" id="solucion">
-<h2>Solución<a class="headerlink" href="#solucion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Solución<a class="headerlink" href="#solucion" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="section" id="una-cola-limitada-en-tamano">
-<h3>Una cola limitada en tamaño<a class="headerlink" href="#una-cola-limitada-en-tamano" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Una cola limitada en tamaño<a class="headerlink" href="#una-cola-limitada-en-tamano" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ColaLimitada</span> <span class="o">{</span>
         <span class="kt">int</span><span class="o">[]</span> <span class="n">cola</span><span class="o">;</span>
         <span class="kt">int</span> <span class="n">posParaEncolar</span><span class="o">;</span>
@@ -1258,7 +1295,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="un-gestor-de-concurrencia-para-la-cola">
-<h3>Un gestor de concurrencia para la cola<a class="headerlink" href="#un-gestor-de-concurrencia-para-la-cola" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Un gestor de concurrencia para la cola<a class="headerlink" href="#un-gestor-de-concurrencia-para-la-cola" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GestorColasConcurrentes</span> <span class="o">{</span>
         <span class="kd">private</span> <span class="n">ColaLimitada</span> <span class="n">colaProtegida</span><span class="o">;</span>
         <span class="kd">public</span> <span class="nf">GestorColasConcurrentes</span><span class="o">(</span><span class="kt">int</span> <span class="n">numElementos</span><span class="o">){</span>
@@ -1276,7 +1313,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="la-clase-productor">
-<h3>La clase Productor<a class="headerlink" href="#la-clase-productor" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>La clase Productor<a class="headerlink" href="#la-clase-productor" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Productor</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
         <span class="kd">private</span> <span class="n">Random</span>                                                  <span class="n">generadorAzar</span><span class="o">;</span>
         <span class="kd">private</span>         <span class="n">GestorColasConcurrentes</span>         <span class="n">gc</span><span class="o">;</span>
@@ -1304,7 +1341,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="la-clase-consumidor">
-<h3>La clase consumidor<a class="headerlink" href="#la-clase-consumidor" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>La clase consumidor<a class="headerlink" href="#la-clase-consumidor" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Consumidor</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
         <span class="kd">private</span> <span class="n">Random</span>                                                  <span class="n">generadorAzar</span><span class="o">;</span>
         <span class="kd">private</span> <span class="n">GestorColasConcurrentes</span>         <span class="n">gc</span><span class="o">;</span>
@@ -1332,7 +1369,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="un-lanzador">
-<h3>Un lanzador<a class="headerlink" href="#un-lanzador" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Un lanzador<a class="headerlink" href="#un-lanzador" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lanzador</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">(){</span>
                 <span class="n">ColaLimitada</span> <span class="n">c</span><span class="o">=</span><span class="k">new</span> <span class="n">ColaLimitada</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
@@ -1409,7 +1446,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="ejercicio">
-<h2>Ejercicio<a class="headerlink" href="#ejercicio" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Ejercicio<a class="headerlink" href="#ejercicio" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En unos grandes almacenes hay 300 clientes agolpados en la puerta para intentar conseguir un producto del cual solo hay 100 unidades.</p>
 <p>Por la puerta solo cabe una persona, pero la paciencia de los clientes es limitada por lo que solo se harán un máximo de 10 intentos para entrar por la puerta. Si despues de 10 intentos la puerta no se ha encontrado libre ni una sola vez, el cliente desiste y se marcha.</p>
 <p>Cuando se consigue entrar por la puerta el cliente puede encontrarse con dos situaciones:</p>
@@ -1420,16 +1457,16 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 <p>Realizar la simulación en Java de dicha situación.</p>
 </div>
 <div class="section" id="documentacion">
-<h2>Documentación.<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Documentación.<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="depuracion">
-<h2>Depuración.<a class="headerlink" href="#depuracion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Depuración.<a class="headerlink" href="#depuracion" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 </div>
 <span id="document-textos/tema3"></span><div class="section" id="programacion-de-comunicaciones-en-red">
-<h1>﻿Programación de comunicaciones en red<a class="headerlink" href="#programacion-de-comunicaciones-en-red" title="Enlazar permanentemente con este título">¶</a></h1>
+<h2>﻿Programación de comunicaciones en red<a class="headerlink" href="#programacion-de-comunicaciones-en-red" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="comunicacion-entre-aplicaciones">
-<h2>Comunicación entre aplicaciones.<a class="headerlink" href="#comunicacion-entre-aplicaciones" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Comunicación entre aplicaciones.<a class="headerlink" href="#comunicacion-entre-aplicaciones" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En Java toda la comunicación vista en primer curso de DAM consiste en dos cosas</p>
 <ul class="simple">
 <li>Entrada/salida por consola: con las clases <code class="docutils literal"><span class="pre">System.in</span></code> o <code class="docutils literal"><span class="pre">System.out</span></code>.</li>
@@ -1438,7 +1475,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 <p>Se puede avanzar un paso más utilizando Java para enviar datos a través de Internet a otro programa Java remoto, que es lo que haremos en este capítulo.</p>
 </div>
 <div class="section" id="roles-cliente-y-servidor">
-<h2>Roles cliente y servidor.<a class="headerlink" href="#roles-cliente-y-servidor" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Roles cliente y servidor.<a class="headerlink" href="#roles-cliente-y-servidor" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Cuando se hacen programas Java que se comuniquen lo habitual es que uno o varios actúen de cliente y uno o varios actúen de servidores.</p>
 <ul class="simple">
 <li>Servidor: espera peticiones, recibe datos de entrada y devuelve respuestas.</li>
@@ -1455,21 +1492,21 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="recordatorio-de-los-flujos-en-java">
-<h2>Recordatorio de los flujos en Java<a class="headerlink" href="#recordatorio-de-los-flujos-en-java" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Recordatorio de los flujos en Java<a class="headerlink" href="#recordatorio-de-los-flujos-en-java" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="section" id="inputstreams-y-outputstreams">
-<h3>InputStreams y OutputStreams<a class="headerlink" href="#inputstreams-y-outputstreams" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>InputStreams y OutputStreams<a class="headerlink" href="#inputstreams-y-outputstreams" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Manejan bytes a secas. Por ejemplo, si queremos leer un fichero byte a byte usaremos <code class="docutils literal"><span class="pre">FileInputStream</span></code> y si queremos escribir usaremos <code class="docutils literal"><span class="pre">FileOutputStream</span></code>.</p>
 <p>Son operaciones a muy bajo nivel que usaremos muy pocas veces (por ejemplo, solo si quisiéramos cambiar el primer byte de un archivo). En general usaremos otras clases más cómodas de usar.</p>
 </div>
 <div class="section" id="readers-y-writers">
-<h3>Readers y Writers<a class="headerlink" href="#readers-y-writers" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Readers y Writers<a class="headerlink" href="#readers-y-writers" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>En lugar de manejar <em>bytes</em> manejan <em>caracteres</em> (recordemos que hoy en día y con Unicode una letra como la <em>ñ</em> en realidad podría ocupar más de un byte).</p>
 <p>Así, cuando queramos leer letras de un archivo usaremos clases como <code class="docutils literal"><span class="pre">FileReader</span></code> y <code class="docutils literal"><span class="pre">FileWriter</span></code>.</p>
 <p>Las clases <code class="docutils literal"><span class="pre">Readers</span></code> y <code class="docutils literal"><span class="pre">Writers</span></code> en realidad se apoyan sobre las <code class="docutils literal"><span class="pre">InputStreams</span></code> y <code class="docutils literal"><span class="pre">OutputStreams</span></code>.</p>
 <p>A veces nos interesará mezclar conceptos y por ejemplo poder tener una clase que use caracteres cuando a lo mejor Java nos ha dado una clase que usa bytes. Así, por ejemplo <code class="docutils literal"><span class="pre">InputStreamReader</span></code> puede coger un objeto que lea bytes y nos devolverá caracteres. De la misma forma <code class="docutils literal"><span class="pre">OutputStreamWriter</span></code> coge letras y devuelve los bytes que la componen.</p>
 </div>
 <div class="section" id="bufferedreaders-y-printwriters">
-<h3><code class="docutils literal"><span class="pre">BufferedReaders</span></code> y <code class="docutils literal"><span class="pre">PrintWriters</span></code><a class="headerlink" href="#bufferedreaders-y-printwriters" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4><code class="docutils literal"><span class="pre">BufferedReaders</span></code> y <code class="docutils literal"><span class="pre">PrintWriters</span></code><a class="headerlink" href="#bufferedreaders-y-printwriters" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Cuando trabajamos con caracteres (que recordemos pueden tener varios bytes) normalmente no trabajamos de uno en uno. Es más frecuente usar <strong>líneas</strong> que se leen y escriben de una sola vez. Así por ejemplo, la clase <code class="docutils literal"><span class="pre">PrintWriter</span></code> tiene un método <code class="docutils literal"><span class="pre">print(ln)</span></code> que puede imprimir elementos complejos como <code class="docutils literal"><span class="pre">floats</span></code> o cadenas largas.</p>
 <p>Además, Java ofrece clases que gestionan automáticamente los <em>buffers</em> por nosotros lo que nos da más comodidad y eficiencia. Por ello es muy habitual hacer cosas como esta:</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">lectorEficiente</span> <span class="o">=</span> <span class="k">new</span>
@@ -1483,11 +1520,11 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="elementos-de-programacion-de-aplicaciones-en-red-librerias">
-<h2>Elementos de programación de aplicaciones en red. Librerías.<a class="headerlink" href="#elementos-de-programacion-de-aplicaciones-en-red-librerias" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Elementos de programación de aplicaciones en red. Librerías.<a class="headerlink" href="#elementos-de-programacion-de-aplicaciones-en-red-librerias" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En Java toda la infraestructura de clases para trabajar con redes está en el paquete <code class="docutils literal"><span class="pre">java.net</span></code>.</p>
 <p>En muchos casos nuestros programas empezarán con la sentencia <code class="docutils literal"><span class="pre">import</span> <span class="pre">java.net.*</span></code> pero muchos entornos (como Eclipse) son capaces de importar automáticamente las clases necesarias.</p>
 <div class="section" id="la-clase-url">
-<h3>La clase URL<a class="headerlink" href="#la-clase-url" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>La clase URL<a class="headerlink" href="#la-clase-url" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>La clase URL permite gestionar accesos a URLs del tipo <code class="docutils literal"><span class="pre">http://marca.com/fichero.html</span></code> y descargar cosas con bastante sencillez.</p>
 <p>Al crear un objeto URL se debe capturar la excepción <code class="docutils literal"><span class="pre">MalformedURLException</span></code> que sucede cuando hay algún error en la URL (como escribir <code class="docutils literal"><span class="pre">htp://marca.com</span></code>).</p>
 <p>La clase URL nos ofrece un método <code class="docutils literal"><span class="pre">openStream</span></code> que nos devuelve un flujo básico de bytes. Podemos crear objetos más sofisticados para leer bloques como muestra el programa siguiente:</p>
@@ -1539,7 +1576,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 </div>
 <div class="section" id="funciones-y-objetos-de-las-librerias">
-<h2>Funciones y objetos de las librerías.<a class="headerlink" href="#funciones-y-objetos-de-las-librerias" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Funciones y objetos de las librerías.<a class="headerlink" href="#funciones-y-objetos-de-las-librerias" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>La clase URL proporciona un mecanismo muy sencillo pero por desgracia completamente atado al protocolo de las URL.</p>
 <p>Java ofrece otros objetos que permiten tener un mayor control sobre lo que se envía o recibe a través de la red. Por desgracia esto implica que en muchos casos tendremos solo flujos de bajo nivel (streams).</p>
 <p>En concreto Java ofrece dos elementos fundamentales para crear programas que usen redes</p>
@@ -1548,7 +1585,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 <li>ServerSockets</li>
 </ul>
 <div class="section" id="repaso-de-redes">
-<h3>Repaso de redes<a class="headerlink" href="#repaso-de-redes" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Repaso de redes<a class="headerlink" href="#repaso-de-redes" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>En redes el protocolo IP es el responsable de dos cuestiones fundamentales:</p>
 <ul class="simple">
 <li>Establecer un sistema de direcciones universal (direcciones IP)</li>
@@ -1570,13 +1607,13 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <div class="section" id="sockets">
-<h2>Sockets.<a class="headerlink" href="#sockets" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Sockets.<a class="headerlink" href="#sockets" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Un <em>socket</em> es un objeto Java que nos permite contactar con un programa o servidor remoto. Dicho objeto nos proporcionará flujos de entrada y/o salida y podremos comunicarnos con dicho programa.</p>
 <p>Existe otro tipo de sockets, los <em>ServerSocket</em>. Se utilizan para crear programas que acepten conexiones o peticiones.</p>
 <p>Todos los objetos mencionados en este tema están en el paquete <code class="docutils literal"><span class="pre">java.net</span></code>.</p>
 </div>
 <div class="section" id="creacion-de-sockets">
-<h2>Creación de sockets.<a class="headerlink" href="#creacion-de-sockets" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Creación de sockets.<a class="headerlink" href="#creacion-de-sockets" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En el siguiente código puede verse el proceso básico de creación de un socket. En los párrafos siguientes explicaremos el significado de los bloques de código.:</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Conector</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
@@ -1615,7 +1652,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <div class="section" id="enlazado-y-establecimiento-de-conexiones">
-<h2>Enlazado y establecimiento de conexiones.<a class="headerlink" href="#enlazado-y-establecimiento-de-conexiones" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Enlazado y establecimiento de conexiones.<a class="headerlink" href="#enlazado-y-establecimiento-de-conexiones" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>El paso crítico para iniciar la comunicación es llamar al método <code class="docutils literal"><span class="pre">connect</span></code>. Este método puede disparar una excepción del tipo <code class="docutils literal"><span class="pre">IOException</span></code> que puede significar dos cosas:</p>
 <ul class="simple">
 <li>La conexión no se pudo establecer.</li>
@@ -1641,10 +1678,10 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <div class="section" id="utilizacion-de-sockets-para-la-transmision-y-recepcion-de-informacion">
-<h2>Utilización de sockets para la transmisión y recepción de información.<a class="headerlink" href="#utilizacion-de-sockets-para-la-transmision-y-recepcion-de-informacion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Utilización de sockets para la transmisión y recepción de información.<a class="headerlink" href="#utilizacion-de-sockets-para-la-transmision-y-recepcion-de-informacion" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>La clase <code class="docutils literal"><span class="pre">Socket</span></code> tiene dos métodos llamados <code class="docutils literal"><span class="pre">getInputStream</span></code> y <code class="docutils literal"><span class="pre">getOutputSream</span></code> que nos permiten obtener <em>flujos orientados a bytes</em>. Recordemos que es posible crear nuestros propios flujos, con más métodos que ofrecen más comodidad.</p>
 <div class="section" id="el-ejemplo-completo">
-<h3>El ejemplo completo<a class="headerlink" href="#el-ejemplo-completo" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>El ejemplo completo<a class="headerlink" href="#el-ejemplo-completo" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Podemos contactar con un programa cualquiera escrito en cualquier lenguaje y enviar las peticiones de acuerdo a un protocolo. Nuestro programa podrá leer las respuestas independientemente de como fuera el servidor.</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Conector</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
@@ -1703,7 +1740,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <div class="section" id="programacion-de-aplicaciones-cliente-y-servidor">
-<h2>Programación de aplicaciones cliente y servidor.<a class="headerlink" href="#programacion-de-aplicaciones-cliente-y-servidor" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Programación de aplicaciones cliente y servidor.<a class="headerlink" href="#programacion-de-aplicaciones-cliente-y-servidor" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Al crear aplicaciones cliente y servidor puede ocurrir que tengamos que implementar varias operaciones:</p>
 <ul class="simple">
 <li>Si tenemos que programar el servidor <strong>deberemos definir un protocolo</strong> de acceso a ese servidor.</li>
@@ -1781,7 +1818,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </pre></div>
 </div>
 <div class="section" id="ejemplo-de-servidor-java">
-<h3>Ejemplo de servidor Java<a class="headerlink" href="#ejemplo-de-servidor-java" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Ejemplo de servidor Java<a class="headerlink" href="#ejemplo-de-servidor-java" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Supongamos que se nos pide crear un servidor de operaciones de cálculo que sea menos estricto que el anterior:</p>
 <ul class="simple">
 <li>Cualquier parámetro que envíe el usuario debe ir terminado en un fin de línea UNIX (&#8220;n&#8221;).</li>
@@ -1927,7 +1964,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <div class="section" id="utilizacion-de-hilos-en-la-programacion-de-aplicaciones-en-red">
-<h2>Utilización de hilos en la programación de aplicaciones en red.<a class="headerlink" href="#utilizacion-de-hilos-en-la-programacion-de-aplicaciones-en-red" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Utilización de hilos en la programación de aplicaciones en red.<a class="headerlink" href="#utilizacion-de-hilos-en-la-programacion-de-aplicaciones-en-red" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En el caso de aplicaciones que necesiten aceptar varias conexiones <strong>habrá que mover todo el código de gestión de peticiones a una clase que implemente Runnable</strong></p>
 <p>Ahora el servidor será así:</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
@@ -2005,7 +2042,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </pre></div>
 </div>
 <div class="section" id="ejercicio-servicio-de-ordenacion">
-<h3>Ejercicio: servicio de ordenación<a class="headerlink" href="#ejercicio-servicio-de-ordenacion" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Ejercicio: servicio de ordenación<a class="headerlink" href="#ejercicio-servicio-de-ordenacion" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Crear una arquitectura cliente/servidor que permita a un cliente, enviar dos cadenas a un servidor para saber cual de ellas va antes que otra:</p>
 <ul class="simple">
 <li>Un cliente puede enviar las cadenas &#8220;hola&#8221;, &#8220;mundo&#8221;. El servidor comprobará que en el diccionario la primera va antes que la segunda, por lo cual contestará &#8220;hola&#8221;, &#8220;mundo&#8221;.</li>
@@ -2016,7 +2053,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <p>Se debe aceptar que un cliente que ya tenga un socket abierto envíe todas las parejas de cadenas que desee.</p>
 </div>
 <div class="section" id="una-clase-protocolo">
-<h3>Una clase Protocolo<a class="headerlink" href="#una-clase-protocolo" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Una clase Protocolo<a class="headerlink" href="#una-clase-protocolo" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Dado que los protocolos pueden ser variables puede ser útil encapsular el comportamiento del protocolo en una pequeña clase separada:</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Protocolo</span> <span class="o">{</span>
         <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">terminador</span><span class="o">=</span><span class="s">&quot;\n&quot;</span><span class="o">;</span>
@@ -2036,7 +2073,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <div class="section" id="una-clase-con-funciones-de-utilidad">
-<h3>Una clase con funciones de utilidad<a class="headerlink" href="#una-clase-con-funciones-de-utilidad" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Una clase con funciones de utilidad<a class="headerlink" href="#una-clase-con-funciones-de-utilidad" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Algunas operaciones son muy sencillas, pero muy engorrosas. Alargan el código innecesariamente y lo hacen más difícil de entender. Si además se realizan a menudo puede ser interesante empaquetar toda la funcionalidad en una clase.</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Utilidades</span> <span class="o">{</span>
         <span class="cm">/* Obtiene un flujo de escritura</span>
@@ -2063,7 +2100,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <div class="section" id="la-clase-peticion">
-<h3>La clase Petición<a class="headerlink" href="#la-clase-peticion" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>La clase Petición<a class="headerlink" href="#la-clase-peticion" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Peticion</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
         <span class="n">Socket</span> <span class="n">conexionParaAtender</span><span class="o">;</span>
 
@@ -2113,7 +2150,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <div class="section" id="la-clase-servidor">
-<h3>La clase Servidor<a class="headerlink" href="#la-clase-servidor" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>La clase Servidor<a class="headerlink" href="#la-clase-servidor" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServidorOrdenacion</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">escuchar</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
                 <span class="n">ServerSocket</span> <span class="n">socket</span><span class="o">;</span>
@@ -2151,7 +2188,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <div class="section" id="la-clase-cliente">
-<h3>La clase Cliente<a class="headerlink" href="#la-clase-cliente" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>La clase Cliente<a class="headerlink" href="#la-clase-cliente" title="Enlazar permanentemente con este título">¶</a></h4>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Cliente</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ordenar</span><span class="o">(</span><span class="n">String</span> <span class="n">s1</span><span class="o">,</span> <span class="n">String</span> <span class="n">s2</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">{</span>
                 <span class="n">InetSocketAddress</span> <span class="n">direccion</span><span class="o">=</span>
@@ -2196,7 +2233,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <div class="section" id="ampliacion">
-<h3>Ampliación<a class="headerlink" href="#ampliacion" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Ampliación<a class="headerlink" href="#ampliacion" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Finalmente la empresa va a necesitar una versión mejorada del servidor que permita a otros cliente enviar un número de palabras y luego las palabras. Se desea hacer todo sin romper la compatibilidad con los clientes viejos. Mostrar el código Java del servidor y del cliente.</p>
 <p>En el servidor se añade este código extra a la hora de comprobar el protocolo:</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">(</span><span class="n">numVersion</span><span class="o">==</span><span class="mi">2</span><span class="o">){</span>
@@ -2225,71 +2262,71 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </div>
 </div>
 <span id="document-textos/tema4"></span><div class="section" id="generacion-de-servicios-en-red">
-<h1>﻿Generación de servicios en red<a class="headerlink" href="#generacion-de-servicios-en-red" title="Enlazar permanentemente con este título">¶</a></h1>
+<h2>﻿Generación de servicios en red<a class="headerlink" href="#generacion-de-servicios-en-red" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="protocolos-estandar-de-comunicacion-en-red-a-nivel-de-aplicacion">
-<h2>Protocolos estándar de comunicación en red a nivel de aplicación<a class="headerlink" href="#protocolos-estandar-de-comunicacion-en-red-a-nivel-de-aplicacion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Protocolos estándar de comunicación en red a nivel de aplicación<a class="headerlink" href="#protocolos-estandar-de-comunicacion-en-red-a-nivel-de-aplicacion" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="section" id="telnet">
-<h3>Telnet<a class="headerlink" href="#telnet" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Telnet<a class="headerlink" href="#telnet" title="Enlazar permanentemente con este título">¶</a></h4>
 </div>
 <div class="section" id="ftp">
-<h3>FTP<a class="headerlink" href="#ftp" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>FTP<a class="headerlink" href="#ftp" title="Enlazar permanentemente con este título">¶</a></h4>
 </div>
 <div class="section" id="http">
-<h3>HTTP<a class="headerlink" href="#http" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>HTTP<a class="headerlink" href="#http" title="Enlazar permanentemente con este título">¶</a></h4>
 </div>
 <div class="section" id="pop3">
-<h3>POP3<a class="headerlink" href="#pop3" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>POP3<a class="headerlink" href="#pop3" title="Enlazar permanentemente con este título">¶</a></h4>
 </div>
 <div class="section" id="smtp">
-<h3>SMTP<a class="headerlink" href="#smtp" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>SMTP<a class="headerlink" href="#smtp" title="Enlazar permanentemente con este título">¶</a></h4>
 </div>
 </div>
 <div class="section" id="librerias-de-clases-y-componentes">
-<h2>Librerías de clases y componentes.<a class="headerlink" href="#librerias-de-clases-y-componentes" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Librerías de clases y componentes.<a class="headerlink" href="#librerias-de-clases-y-componentes" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="utilizacion-de-objetos-predefinidos">
-<h2>Utilización de objetos predefinidos.<a class="headerlink" href="#utilizacion-de-objetos-predefinidos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Utilización de objetos predefinidos.<a class="headerlink" href="#utilizacion-de-objetos-predefinidos" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="propiedades-de-los-objetos-predefinidos">
-<h2>Propiedades de los objetos predefinidos.<a class="headerlink" href="#propiedades-de-los-objetos-predefinidos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Propiedades de los objetos predefinidos.<a class="headerlink" href="#propiedades-de-los-objetos-predefinidos" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="metodos-y-eventos-de-los-objetos-predefinidos">
-<h2>Métodos y eventos de los objetos predefinidos.<a class="headerlink" href="#metodos-y-eventos-de-los-objetos-predefinidos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Métodos y eventos de los objetos predefinidos.<a class="headerlink" href="#metodos-y-eventos-de-los-objetos-predefinidos" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="establecimiento-y-finalizacion-de-conexiones">
-<h2>Establecimiento y finalización de conexiones.<a class="headerlink" href="#establecimiento-y-finalizacion-de-conexiones" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Establecimiento y finalización de conexiones.<a class="headerlink" href="#establecimiento-y-finalizacion-de-conexiones" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="transmision-de-informacion">
-<h2>Transmisión de información.<a class="headerlink" href="#transmision-de-informacion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Transmisión de información.<a class="headerlink" href="#transmision-de-informacion" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="programacion-de-aplicaciones-cliente">
-<h2>Programación de aplicaciones cliente.<a class="headerlink" href="#programacion-de-aplicaciones-cliente" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Programación de aplicaciones cliente.<a class="headerlink" href="#programacion-de-aplicaciones-cliente" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="programacion-de-servidores">
-<h2>Programación de servidores.<a class="headerlink" href="#programacion-de-servidores" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Programación de servidores.<a class="headerlink" href="#programacion-de-servidores" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="implementacion-de-comunicaciones-simultaneas">
-<h2>Implementación de comunicaciones simultáneas.<a class="headerlink" href="#implementacion-de-comunicaciones-simultaneas" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Implementación de comunicaciones simultáneas.<a class="headerlink" href="#implementacion-de-comunicaciones-simultaneas" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="documentacion">
-<h2>Documentación.<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Documentación.<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="depuracion">
-<h2>Depuración.<a class="headerlink" href="#depuracion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Depuración.<a class="headerlink" href="#depuracion" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="monitorizacion-de-tiempos-de-respuesta">
-<h2>Monitorización de tiempos de respuesta.<a class="headerlink" href="#monitorizacion-de-tiempos-de-respuesta" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Monitorización de tiempos de respuesta.<a class="headerlink" href="#monitorizacion-de-tiempos-de-respuesta" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 </div>
 <span id="document-textos/tema5"></span><div class="section" id="utilizacion-de-tecnicas-de-programacion-segura">
-<h1>﻿Utilización de técnicas de programación segura<a class="headerlink" href="#utilizacion-de-tecnicas-de-programacion-segura" title="Enlazar permanentemente con este título">¶</a></h1>
+<h2>﻿Utilización de técnicas de programación segura<a class="headerlink" href="#utilizacion-de-tecnicas-de-programacion-segura" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="introduccion">
-<h2>Introducción<a class="headerlink" href="#introduccion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Introducción<a class="headerlink" href="#introduccion" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En general, cuando se envía algo a través de sockets se envía como &#8220;texto plano&#8221;, es decir, no sabemos si hay alguien usando un sniffer en la red y por tanto no sabemos si alguien está capturando los datos.</p>
 <p>En general, cualquier sistema que pretenda ser seguro necesitará usar cifrado.</p>
 </div>
 <div class="section" id="practicas-de-programacion-segura">
-<h2>Prácticas de programación segura.<a class="headerlink" href="#practicas-de-programacion-segura" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Prácticas de programación segura.<a class="headerlink" href="#practicas-de-programacion-segura" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Para enviar mensajes cifrados se necesita algún mecanismo o algoritmo para convertir un texto normal en uno más difícil de comprender.</p>
 <p>El esquema general de todos los métodos es tener código como el siguiente:</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">String</span> <span class="nf">cifrar</span> <span class="o">(</span><span class="n">String</span> <span class="n">texto</span><span class="o">,</span> <span class="n">String</span> <span class="n">clave</span><span class="o">)</span>
@@ -2302,7 +2339,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 </pre></div>
 </div>
 <div class="section" id="metodo-cesar">
-<h3>Método César<a class="headerlink" href="#metodo-cesar" title="Enlazar permanentemente con este título">¶</a></h3>
+<h4>Método César<a class="headerlink" href="#metodo-cesar" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Si el alfabeto es el siguiente:</p>
 <p>ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789-
 BCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789-A</p>
@@ -2355,11 +2392,11 @@ IPMBNVÑEP</div></blockquote>
 </div>
 </div>
 <div class="section" id="criptografia-de-clave-publica-y-clave-privada">
-<h2>Criptografía de clave pública y clave privada.<a class="headerlink" href="#criptografia-de-clave-publica-y-clave-privada" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Criptografía de clave pública y clave privada.<a class="headerlink" href="#criptografia-de-clave-publica-y-clave-privada" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Los principales sistemas modernos de seguridad utilizan dos claves ,una para cifrar y otra para descifrar. Esto se puede usar de diversas formas.</p>
 </div>
 <div class="section" id="principales-aplicaciones-de-la-criptografia">
-<h2>Principales aplicaciones de la criptografía.<a class="headerlink" href="#principales-aplicaciones-de-la-criptografia" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Principales aplicaciones de la criptografía.<a class="headerlink" href="#principales-aplicaciones-de-la-criptografia" title="Enlazar permanentemente con este título">¶</a></h3>
 <ul class="simple">
 <li>Mensajería segura: todo el mundo da su clave de cifrado pero conserva la de descifrado. Si queremos enviar un mensaje a alguien cogemos su clave de cifrado y ciframos el mensaje que le enviamos. Solo él podrá descifrarlo.</li>
 <li>Firma digital: pilar del comercio electrónico. Permite verificar que un archivo no ha sido modificado.</li>
@@ -2368,7 +2405,7 @@ IPMBNVÑEP</div></blockquote>
 </ul>
 </div>
 <div class="section" id="protocolos-criptograficos">
-<h2>Protocolos criptográficos.<a class="headerlink" href="#protocolos-criptograficos" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Protocolos criptográficos.<a class="headerlink" href="#protocolos-criptograficos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En realidad protocolos criptográficos hay muchos, y suelen dividirse en sistemas simétricos o asimétricos.</p>
 <ul class="simple">
 <li>Los sistemas simétricos son aquellos basados en una función que convierte un mensaje en otro mensaje cifrado. Si se desea descifrar algo se aplica el proceso inverso con la misma clave que se usó.</li>
@@ -2378,7 +2415,7 @@ IPMBNVÑEP</div></blockquote>
 <p>En este curso usaremos el cifrado asimétrico RSA.</p>
 </div>
 <div class="section" id="encriptacion-de-informacion">
-<h2>Encriptación de información.<a class="headerlink" href="#encriptacion-de-informacion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Encriptación de información.<a class="headerlink" href="#encriptacion-de-informacion" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>El siguiente código muestra como crear una clase que permita cifrar y descifrar textos.</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GestorCifrado</span> <span class="o">{</span>
         <span class="n">KeyPair</span> <span class="n">claves</span><span class="o">;</span>
@@ -2482,7 +2519,7 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 </div>
 </div>
 <div class="section" id="protocolos-seguros-de-comunicaciones">
-<h2>Protocolos seguros de comunicaciones.<a class="headerlink" href="#protocolos-seguros-de-comunicaciones" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Protocolos seguros de comunicaciones.<a class="headerlink" href="#protocolos-seguros-de-comunicaciones" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En general, ahora que ya conocemos sockets, el uso de servidores y clientes y el uso de la criptografía de clave asimétrica ya es posible crear aplicaciones que se comuniquen de forma muy segura.</p>
 <p>En general, todo protocolo que queramos implementar dará estos pasos.</p>
 <ol class="arabic simple">
@@ -2496,7 +2533,7 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 <p>En realidad se puede asegurar más el proceso haciendo que en el paso 5 el servidor cifre su propia clave pública con la clave pública del cliente. De esta forma, incluso aunque alguien robara la clave privada del cliente tampoco tendría demasiado, ya que tendría que robar la clave privada del servidor.</p>
 </div>
 <div class="section" id="programacion-de-aplicaciones-con-comunicaciones-seguras">
-<h2>Programación de aplicaciones con comunicaciones seguras.<a class="headerlink" href="#programacion-de-aplicaciones-con-comunicaciones-seguras" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Programación de aplicaciones con comunicaciones seguras.<a class="headerlink" href="#programacion-de-aplicaciones-con-comunicaciones-seguras" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Por fortuna Java dispone de clases ya prefabricadas que facilitan enormemente el que dos aplicaciones intercambios datos de forma segura a través de una red. Se deben considerar los siguientes puntos:</p>
 <ul class="simple">
 <li>El servidor debe tener su propio certificado. Si no lo tenemos, se puede generar primero una pareja de claves con la herramienta <code class="docutils literal"><span class="pre">keytool</span></code>, como se muestra en la figura adjunta. La herramienta guardará la pareja de claves en un almacén (el cual tiene su propia clave). Despues generaremos un certificado a partir de esa pareja con <code class="docutils literal"><span class="pre">keytool</span> <span class="pre">-export</span> <span class="pre">-file</span> <span class="pre">certificadoservidor.cer</span> <span class="pre">-keystore</span> <span class="pre">almacenclaves</span></code>.</li>
@@ -2509,28 +2546,28 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 <p class="caption"><span class="caption-text">Generando la pareja de claves del servidor.</span></p>
 </div>
 <p>Los pasos desglosados implican ejecutar estos comandos en el servidor:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># El servidor genera una pareja de claves que se almacena en un</span>
-<span class="c1">#fichero llamado &quot;clavesservidor&quot;. Dentro del fichero se indica</span>
-<span class="c1">#un alias para poder referirnos a esa clave fácilmente</span>
-<span class="n">keytool</span> <span class="o">-</span><span class="n">genkeypair</span> <span class="o">-</span><span class="n">keyalg</span> <span class="n">RSA</span>
-     <span class="o">-</span><span class="n">alias</span> <span class="n">servidor</span> <span class="o">-</span><span class="n">keystore</span> <span class="n">clavesservidor</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span># El servidor genera una pareja de claves que se almacena en un
+#fichero llamado &quot;clavesservidor&quot;. Dentro del fichero se indica
+#un alias para poder referirnos a esa clave fácilmente
+keytool -genkeypair -keyalg RSA
+     -alias servidor -keystore clavesservidor
 
-<span class="c1">#El servidor genera su &quot;certificado&quot;, es decir un fichero que</span>
-<span class="c1">#de alguna forma indica quien es él. El certificado se almacena</span>
-<span class="c1">#en un fichero llamado clavesservidor y a partir de él queremos</span>
-<span class="c1">#generar el certificado de un alias que tiene que haber llamado servidor</span>
-<span class="n">keytool</span> <span class="o">--</span><span class="n">exportcert</span> <span class="o">-</span><span class="n">alias</span> <span class="n">servidor</span>
-     <span class="o">-</span><span class="n">file</span> <span class="n">servidor</span><span class="o">.</span><span class="n">cer</span> <span class="o">-</span><span class="n">keystore</span> <span class="n">clavesservidor</span>
+#El servidor genera su &quot;certificado&quot;, es decir un fichero que
+#de alguna forma indica quien es él. El certificado se almacena
+#en un fichero llamado clavesservidor y a partir de él queremos
+#generar el certificado de un alias que tiene que haber llamado servidor
+keytool --exportcert -alias servidor
+     -file servidor.cer -keystore clavesservidor
 </pre></div>
 </div>
 <p>En el cliente daremos estos pasos:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Se genera una pareja de claves (en realidad no nos hace falta solo</span>
-<span class="c1">#queremos tener un almacén de claves.</span>
-<span class="n">keytool</span> <span class="o">-</span><span class="n">genkeypair</span> <span class="o">-</span><span class="n">keyalg</span> <span class="n">RSA</span> <span class="o">-</span><span class="n">alias</span> <span class="n">cliente</span> <span class="o">-</span><span class="n">keystore</span> <span class="n">clavescliente</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span>#Se genera una pareja de claves (en realidad no nos hace falta solo
+#queremos tener un almacén de claves.
+keytool -genkeypair -keyalg RSA -alias cliente -keystore clavescliente
 
-<span class="c1">#Se importa el certificado del servidor indicando que pertenece a</span>
-<span class="c1">#la lista de certificados confiables.</span>
-<span class="n">keytool</span> <span class="o">-</span><span class="n">importcert</span> <span class="o">-</span><span class="n">trustcacerts</span> <span class="o">-</span><span class="n">alias</span> <span class="n">servidor</span> <span class="o">-</span><span class="n">file</span> <span class="n">servidor</span><span class="o">.</span><span class="n">cer</span> <span class="o">-</span><span class="n">keystore</span> <span class="n">clavescliente</span>
+#Se importa el certificado del servidor indicando que pertenece a
+#la lista de certificados confiables.
+keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore clavescliente
 </pre></div>
 </div>
 <p>Una vez creados los ficheros iniciales se deben dar los siguientes pasos en Java (servidor y cliente van por separado):</p>
@@ -2682,7 +2719,7 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 </div>
 </div>
 <div class="section" id="firmado-de-aplicaciones">
-<h2>Firmado de aplicaciones<a class="headerlink" href="#firmado-de-aplicaciones" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Firmado de aplicaciones<a class="headerlink" href="#firmado-de-aplicaciones" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Utilizando la criptografía de clave pública es posible &#8220;firmar&#8221; aplicaciones. El firmado es un mecanismo que permite al usuario de una aplicación el verificar que la aplicación no ha sido alterada desde que el programador la creó (virus o programas malignos, personal descontento con la empresa, etc...).</p>
 <p>Antes de efectuar el firmado se debe disponer de un par de claves generadas con la herramienta <code class="docutils literal"><span class="pre">keytool</span></code> mencionada anteriormente. Supongamos que el almacén de claves está creado y que en él hay uno o varios <em>alias</em> creados. El proceso de firmado es el siguiente:</p>
 <ol class="arabic simple">
@@ -2693,12 +2730,12 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 </ol>
 <p>Con estos pasos se tiene un aplicación firmada que el usuario puede verificar si así lo desea. De hecho, si se extrae el contenido del JAR con <code class="docutils literal"><span class="pre">jar</span> <span class="pre">-xf</span> <span class="pre">Aplicacion.jar</span></code> se extraen los archivos <code class="docutils literal"><span class="pre">.class</span></code> y un fichero <code class="docutils literal"><span class="pre">META-INF/Manifest</span></code> que se puede abrir con un editor para ver que realmente está firmado.</p>
 <p>Para que otras personas puedan comprobar que nuestra aplicacion es correcta los programadores deberemos exportar un certificado que los usuarios puedan importar para hacer el verificado. Recordemos que el comando es:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">keytool</span> <span class="o">-</span><span class="n">exportcert</span> <span class="o">-</span><span class="n">keystore</span> <span class="o">..</span>\<span class="n">Almacen</span><span class="o">.</span><span class="n">store</span> <span class="o">-</span><span class="n">file</span> <span class="n">Programador</span><span class="o">.</span><span class="n">cer</span> <span class="o">-</span><span class="n">alias</span> <span class="n">Programador</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span>keytool -exportcert -keystore ..\Almacen.store -file Programador.cer -alias Programador
 </pre></div>
 </div>
 </div>
 <div class="section" id="verificado-de-aplicaciones">
-<h2>Verificado de aplicaciones<a class="headerlink" href="#verificado-de-aplicaciones" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Verificado de aplicaciones<a class="headerlink" href="#verificado-de-aplicaciones" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Si ahora otro usuario desea ejecutar nuestra aplicación deberá importar nuestro certificado. El proceso de verificado es simple:</p>
 <ol class="arabic simple">
 <li>El usuario importa el certificado.</li>
@@ -2707,23 +2744,25 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 <p>El comando deberá responder con algo como <code class="docutils literal"><span class="pre">jar</span> <span class="pre">verified</span></code>. Sin embargo si no tenemos un certificado firmado por alguna autoridad de certificación (CA) la herramienta se quejará de que algunos criterios de seguridad no se cumplen.</p>
 </div>
 <div class="section" id="ejercicio">
-<h2>Ejercicio<a class="headerlink" href="#ejercicio" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Ejercicio<a class="headerlink" href="#ejercicio" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Intenta extraer el archivo JAR y reemplaza el <code class="docutils literal"><span class="pre">.class</span></code> por alguna otra clase. Vuelve a crear el archivo .JAR y vuelve a intentar verificarlo, ¿qué ocurre?</p>
 </div>
 <div class="section" id="recordatorio">
-<h2>Recordatorio<a class="headerlink" href="#recordatorio" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Recordatorio<a class="headerlink" href="#recordatorio" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Hemos hecho el proceso de firmado y verificado con <strong>certificados autofirmados</strong>, lo cual es útil para practicar pero <strong>completamente inútil desde el punto de vista de la seguridad</strong>. Para que un certificado sea seguro debemos hacer que previamente alguna autoridad de certificación nos lo firme primero (para lo cual suele ser habitual el tener que pagar).</p>
 </div>
 <div class="section" id="politica-de-seguridad">
-<h2>Política de seguridad.<a class="headerlink" href="#politica-de-seguridad" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Política de seguridad.<a class="headerlink" href="#politica-de-seguridad" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="programacion-de-mecanismos-de-control-de-acceso">
-<h2>Programación de mecanismos de control de acceso.<a class="headerlink" href="#programacion-de-mecanismos-de-control-de-acceso" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Programación de mecanismos de control de acceso.<a class="headerlink" href="#programacion-de-mecanismos-de-control-de-acceso" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="pruebas-y-depuracion">
-<h2>Pruebas y depuración.<a class="headerlink" href="#pruebas-y-depuracion" title="Enlazar permanentemente con este título">¶</a></h2>
+<h3>Pruebas y depuración.<a class="headerlink" href="#pruebas-y-depuracion" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 </div>
+</div>
+<p>g</p>
 </div>
 
 
@@ -2742,7 +2781,7 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 <li class="toctree-l2"><a class="reference internal" href="index.html#creacion-de-procesos">Creación de procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#comunicacion-entre-procesos">Comunicación entre procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio">Ejercicio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#id1">Ejercicio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio-resuelto">Ejercicio resuelto</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#gestion-de-procesos">Gestión de procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">Comandos para la gestión de procesos en sistemas libres y propietarios.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#sincronizacion-entre-procesos">Sincronización entre procesos.</a></li>
@@ -2830,12 +2869,12 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navegación</h3>
       <ul>
-        <li class="nav-item nav-item-0"><a href="index.html#document-index">documentación de ServiciosProcesos - 1.0</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html#document-index">documentación de ServiciosProcesos - 1.0</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014, Oscar Gomez.
-      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+        &copy; Copyright 2014, Oscar Gomez.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>
