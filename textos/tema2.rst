@@ -17,7 +17,7 @@ Supongamos una clase como esta:
 	}
 
 
-Si varios hilos ejecutan sin querer el método ``incrementar`` ocurrirá que el número se incrementará tantas veces como procesos.
+Si varios hilos ejecutan sin querer el método ``incrementar`` en teoría debería ocurrir que el número se incrementase tantas veces como procesos. Sin embargo, **es muy probable que eso no ocurra**
 
 
 Estados de un hilo. Cambios de estado.
