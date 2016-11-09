@@ -411,6 +411,13 @@ La clase `ProcesadorFichero`` será lanzada desde otra clase que llamaremos ``La
 2. La letra de la que hay que hacer el recuento de apariciones. La llamaremos ``letra`` y estará en la posición 1.
 
 3. El nombre del fichero donde se dejarán los resultados. Lo llamaremos ``nombreFicheroResultado`` y estará en la posición 1 de los argumentos.
+
+El código del main se muestra a continuación.
+
+.. literalinclude:: ../listados/Metodo_hacerRecuento.java
+   :language: java
+
+
 	
 Ejercicio propuesto
 --------------------

@@ -387,7 +387,7 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li>Aunque nos estamos anticipando, puede ser útil tener un método que dado un nombre de fichero nos devuelva un <code class="docutils literal"><span class="pre">ArrayList&lt;String&gt;</span></code> con todas las líneas que hay en el fichero. Este método podría implementarse así:</li>
+<li>Aunque nos estamos anticipando, puede ser útil tener un método que dado un nombre de fichero nos devuelva un <code class="docutils literal"><span class="pre">ArrayList&lt;String&gt;</span></code> con todas las líneas que hay en el fichero. <strong>En este ejercicio no lo usaremos</strong>. Este método podría implementarse así:</li>
 </ul>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="c1">//Fin de getPrintWriter</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getLineasFichero</span><span class="o">(</span>
@@ -409,7 +409,7 @@
 </div>
 <div class="section" id="procesado-de-ficheros">
 <h4>Procesado de ficheros<a class="headerlink" href="#procesado-de-ficheros" title="Enlazar permanentemente con este título">¶</a></h4>
-<p>Necesitaremos una clase <code class="docutils literal"><span class="pre">ProcesadorFicheros</span></code> que nos permita procesar los ficheros de la forma pedida. Antes de crear un programa multiproceso empezaremos por crear una clase simple que nos resuelva este problema.</p>
+<p>Necesitaremos una clase <code class="docutils literal"><span class="pre">ProcesadorFichero</span></code> que nos permita procesar los ficheros de la forma pedida. Antes de crear un programa multiproceso empezaremos por crear una clase simple que nos resuelva este problema.</p>
 <p>Dicha clase tendrá un método <code class="docutils literal"><span class="pre">hacerRecuento</span></code> que resuelva el problema de contar el número de apariciones en un fichero dejando el total de apariciones en un fichero de salida distintos. En el código adjunto podemos ver como podría implementarse dicho método.</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="c1">// Dado un fichero de entrada y una letra</span>
 <span class="c1">// contamos cuantas veces aparece dicha letra</span>
@@ -451,6 +451,12 @@
 <span class="o">}</span>
 </pre></div>
 </div>
+<p>La clase <cite>ProcesadorFichero`</cite> será lanzada desde otra clase que llamaremos <code class="docutils literal"><span class="pre">Lanzador</span></code>. Nuestra <code class="docutils literal"><span class="pre">ProcesadorFichero</span></code> recogerá en su método <code class="docutils literal"><span class="pre">main</span></code> los siguientes parámetros:</p>
+<ol class="arabic simple">
+<li>El nombre del fichero a procesar. Lo llamaremos <code class="docutils literal"><span class="pre">nombreFicheroEntrada</span></code> y estará en la posición 0 de los argumentos.</li>
+<li>La letra de la que hay que hacer el recuento de apariciones. La llamaremos <code class="docutils literal"><span class="pre">letra</span></code> y estará en la posición 1.</li>
+<li>El nombre del fichero donde se dejarán los resultados. Lo llamaremos <code class="docutils literal"><span class="pre">nombreFicheroResultado</span></code> y estará en la posición 1 de los argumentos.</li>
+</ol>
 </div>
 </div>
 <div class="section" id="ejercicio-propuesto">

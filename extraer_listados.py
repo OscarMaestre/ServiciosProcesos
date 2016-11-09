@@ -23,14 +23,30 @@ class Extraccion(object):
 		lista=[DIRECTORIO_WORKSPACE, self.dir_proyecto,
 			   DIRECTORIO_CODIGO_FUENTE, self.archivo_clase]
 		return os.sep.join(lista)
+	def ejecutar_lista(self, lista, fichero_salida=None):
+		if fichero_salida!=None:
+			fichero_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Clase_"+self.archivo_salida_clase
+			with open(fichero_salida, "w") as descriptor_salida:
+				print ("Ejecutando "+ " ".join(lista_lanzamiento)+ " > " + fichero_salida)
+				call (lista_lanzamiento, stdout=descriptor_salida)
+		else:
+			print ("Ejecutando "+ " ".join(lista_lanzamiento)+ " > " + fichero_salida)
+			call (lista_lanzamiento)
+			
+			
 	def extraer_clase(self):
 		ruta_clase=self.get_ruta()
 		lista_lanzamiento = lista_extractor + [ruta_clase, self.nombre_clase, EXTRAER_CLASE ]
 		fich_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Clase_"+self.archivo_salida_clase
+		self.ejecutar_lista(lista_lanzamiento, fichero_salida=fich_salida)
+		return 
 		with open(fich_salida, "w") as descriptor_salida:
 			print ("Ejecutando "+ " ".join(lista_lanzamiento)+ " > " + fich_salida)
 			call (lista_lanzamiento, stdout=descriptor_salida)
 		print("Clase extraida")
+		
+	def extraer_metodo(self, nombre_metodo):
+		pass
 		
 		
 		
