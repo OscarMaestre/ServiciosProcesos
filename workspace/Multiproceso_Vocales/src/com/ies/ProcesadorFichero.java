@@ -72,23 +72,12 @@ public class ProcesadorFichero {
 	 */
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		
-		String nombreFicheroEntrada=
-				args[0];
-		System.out.println(
-				"Fichero entrada:"+
-				nombreFicheroEntrada);
-		String letra=args[1];
-		System.out.println("Letra:"+letra);
-		String nombreFicheroResultado=
-				args[2];
-		System.out.println("Resultados en:"+
-				nombreFicheroResultado);
-		String fichEntrada;
-		hacerRecuento(
-				nombreFicheroEntrada,
+		String nombreFicheroEntrada		=	args[0];
+		String letra					=	args[1];
+		String nombreFicheroResultado	=	args[2];
+		hacerRecuento(nombreFicheroEntrada,
 				letra,
 				nombreFicheroResultado);
-
-	}
+	} //Fin del main
 
 }

@@ -1,7 +1,10 @@
 // Dado un fichero de entrada y una letra
 // contamos cuantas veces aparece dicha letra
 // y dejamos el recuento en un fichero de salida
-public static void hacerRecuento(String fichEntrada, String letra, String fichSalida) throws FileNotFoundException, IOException {
+public static void hacerRecuento(String
+                                 fichEntrada, String letra,
+                                 String fichSalida) throws FileNotFoundException,
+IOException {
     BufferedReader br;
     br = UtilidadesFicheros.getBufferedReader(fichEntrada);
     PrintWriter pw;
@@ -19,7 +22,7 @@ public static void hacerRecuento(String fichEntrada, String letra, String fichSa
             if (letraLeida == letraPasada) {
                 totalVocales++;
             }
-        //Fin del if
+            //Fin del if
         }
         //Fin del for
         // Pasamos a la siguiente linea

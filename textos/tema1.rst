@@ -386,12 +386,17 @@ Tanto en este ejercicio como en muchos otros vamos a necesitar realizar ciertas 
 
 .. literalinclude:: ../listados/Metodo_getPrintWriter.java
    :language: java
+   
+* Aunque nos estamos anticipando, puede ser útil tener un método que dado un nombre de fichero nos devuelva un ``ArrayList<String>`` con todas las líneas que hay en el fichero. **En este ejercicio no lo usaremos**. Este método podría implementarse así:
+
+.. literalinclude:: ../listados/Metodo_getLineasFichero.java
+   :language: java
 
 
 Procesado de ficheros
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Necesitaremos una clase ``ProcesadorFicheros`` que nos permita procesar los ficheros de la forma pedida. Antes de crear un programa multiproceso empezaremos por crear una clase simple que nos resuelva este problema.
+Necesitaremos una clase ``ProcesadorFichero`` que nos permita procesar los ficheros de la forma pedida. Antes de crear un programa multiproceso empezaremos por crear una clase simple que nos resuelva este problema.
 
 Dicha clase tendrá un método ``hacerRecuento`` que resuelva el problema de contar el número de apariciones en un fichero dejando el total de apariciones en un fichero de salida distintos. En el código adjunto podemos ver como podría implementarse dicho método.
 
@@ -399,6 +404,13 @@ Dicha clase tendrá un método ``hacerRecuento`` que resuelva el problema de con
    :language: java
 
 
+La clase `ProcesadorFichero`` será lanzada desde otra clase que llamaremos ``Lanzador``. Nuestra ``ProcesadorFichero`` recogerá en su método ``main`` los siguientes parámetros:
+
+1. El nombre del fichero a procesar. Lo llamaremos ``nombreFicheroEntrada`` y estará en la posición 0 de los argumentos.
+
+2. La letra de la que hay que hacer el recuento de apariciones. La llamaremos ``letra`` y estará en la posición 1.
+
+3. El nombre del fichero donde se dejarán los resultados. Lo llamaremos ``nombreFicheroResultado`` y estará en la posición 1 de los argumentos.
 	
 Ejercicio propuesto
 --------------------

@@ -4,7 +4,7 @@ import os, glob
 
 DIRECTORIO_EXTRACCION_LISTADOS="codigo_extraido"
 DIRECTORIO_LISTADOS_RST="listados"
-INDENTADOR = ["astyle",  "--max-code-length=60"]
+INDENTADOR = ["astyle",  "--max-code-length=50"]
 ficheros_java=glob.glob(DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "*.java")
 for f in ficheros_java:
 	print ("Indentando "+f)

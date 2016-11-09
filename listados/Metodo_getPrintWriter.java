@@ -1,5 +1,5 @@
-public static PrintWriter getPrintWriter(String
-        nombreFichero) throws IOException {
+public static PrintWriter getPrintWriter(
+    String nombreFichero) throws IOException {
     PrintWriter printWriter;
     FileWriter fileWriter;
     fileWriter = new FileWriter(nombreFichero);
