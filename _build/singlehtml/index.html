@@ -360,95 +360,17 @@
 <ul class="simple">
 <li>Obtener un objeto <code class="docutils literal"><span class="pre">BufferedReader</span></code> a partir de un nombre de fichero de tipo <code class="docutils literal"><span class="pre">String</span></code>. Llamaremos a este método <code class="docutils literal"><span class="pre">getBufferedReader</span></code> y lo utilizaremos para poder manejar un fichero mediante una clase de muy alto nivel que nos facilita la lectura de ficheros. En el listado adjunto se puede consultar dicho método.</li>
 </ul>
-<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">BufferedReader</span> <span class="nf">getBufferedReader</span><span class="o">(</span>
-    <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span>
-<span class="n">FileNotFoundException</span> <span class="o">{</span>
-    <span class="n">FileReader</span> <span class="n">lector</span><span class="o">;</span>
-    <span class="n">lector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
-    <span class="n">BufferedReader</span> <span class="n">bufferedReader</span><span class="o">;</span>
-    <span class="n">bufferedReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">lector</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">bufferedReader</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-</div>
 <ul class="simple">
 <li>De la misma forma crearemos un método <code class="docutils literal"><span class="pre">getPrintWriter</span></code> que nos devuelva un objeto de la clase <code class="docutils literal"><span class="pre">PrintWriter</span></code> para poder realizar fácilmente operaciones de escritura en ficheros. En el listado adjunto se muestra el código.</li>
 </ul>
-<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">PrintWriter</span> <span class="nf">getPrintWriter</span><span class="o">(</span>
-    <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-    <span class="n">PrintWriter</span> <span class="n">printWriter</span><span class="o">;</span>
-    <span class="n">FileWriter</span> <span class="n">fileWriter</span><span class="o">;</span>
-    <span class="n">fileWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
-    <span class="n">printWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">fileWriter</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">printWriter</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-</div>
 <ul class="simple">
 <li>Aunque nos estamos anticipando, puede ser útil tener un método que dado un nombre de fichero nos devuelva un <code class="docutils literal"><span class="pre">ArrayList&lt;String&gt;</span></code> con todas las líneas que hay en el fichero. <strong>En este ejercicio no lo usaremos</strong>. Este método podría implementarse así:</li>
 </ul>
-<div class="highlight-java"><div class="highlight"><pre><span></span><span class="c1">//Fin de getPrintWriter</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getLineasFichero</span><span class="o">(</span>
-    <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">lineas</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
-    <span class="n">BufferedReader</span> <span class="n">bfr</span> <span class="o">=</span> <span class="n">getBufferedReader</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
-    <span class="c1">//Leemos líneas del fichero...</span>
-    <span class="n">String</span> <span class="n">linea</span> <span class="o">=</span> <span class="n">bfr</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
-    <span class="k">while</span> <span class="o">(</span><span class="n">linea</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">//Y las añadimos al array</span>
-        <span class="n">lineas</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
-        <span class="n">linea</span> <span class="o">=</span> <span class="n">bfr</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
-    <span class="o">}</span>
-    <span class="c1">//Fin del bucle que lee líneas</span>
-    <span class="k">return</span> <span class="n">lineas</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="procesado-de-ficheros">
 <h4>Procesado de ficheros<a class="headerlink" href="#procesado-de-ficheros" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Necesitaremos una clase <code class="docutils literal"><span class="pre">ProcesadorFichero</span></code> que nos permita procesar los ficheros de la forma pedida. Antes de crear un programa multiproceso empezaremos por crear una clase simple que nos resuelva este problema.</p>
 <p>Dicha clase tendrá un método <code class="docutils literal"><span class="pre">hacerRecuento</span></code> que resuelva el problema de contar el número de apariciones en un fichero dejando el total de apariciones en un fichero de salida distintos. En el código adjunto podemos ver como podría implementarse dicho método.</p>
-<div class="highlight-java"><div class="highlight"><pre><span></span><span class="c1">// Dado un fichero de entrada y una letra</span>
-<span class="c1">// contamos cuantas veces aparece dicha letra</span>
-<span class="c1">// y dejamos el recuento en un fichero de salida</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">hacerRecuento</span><span class="o">(</span><span class="n">String</span>
-                                 <span class="n">fichEntrada</span><span class="o">,</span> <span class="n">String</span> <span class="n">letra</span><span class="o">,</span>
-                                 <span class="n">String</span> <span class="n">fichSalida</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">FileNotFoundException</span><span class="o">,</span>
-<span class="n">IOException</span> <span class="o">{</span>
-    <span class="n">BufferedReader</span> <span class="n">br</span><span class="o">;</span>
-    <span class="n">br</span> <span class="o">=</span> <span class="n">UtilidadesFicheros</span><span class="o">.</span><span class="na">getBufferedReader</span><span class="o">(</span><span class="n">fichEntrada</span><span class="o">);</span>
-    <span class="n">PrintWriter</span> <span class="n">pw</span><span class="o">;</span>
-    <span class="n">pw</span> <span class="o">=</span> <span class="n">UtilidadesFicheros</span><span class="o">.</span><span class="na">getPrintWriter</span><span class="o">(</span><span class="n">fichSalida</span><span class="o">);</span>
-    <span class="n">String</span> <span class="n">lineaLeida</span><span class="o">;</span>
-    <span class="n">lineaLeida</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">totalVocales</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="c1">//Mientras no queden lineas....</span>
-    <span class="k">while</span> <span class="o">(</span><span class="n">lineaLeida</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">//...recorremos la linea...</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">lineaLeida</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="kt">char</span> <span class="n">letraLeida</span> <span class="o">=</span> <span class="n">lineaLeida</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-            <span class="kt">char</span> <span class="n">letraPasada</span> <span class="o">=</span> <span class="n">letra</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
-            <span class="c1">// incrementamos el contador</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">letraLeida</span> <span class="o">==</span> <span class="n">letraPasada</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">totalVocales</span><span class="o">++;</span>
-            <span class="o">}</span>
-            <span class="c1">//Fin del if</span>
-        <span class="o">}</span>
-        <span class="c1">//Fin del for</span>
-        <span class="c1">// Pasamos a la siguiente linea</span>
-        <span class="n">lineaLeida</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
-    <span class="o">}</span>
-    <span class="c1">//Escribimos el total de vocales</span>
-    <span class="c1">//en el fichero de salida</span>
-    <span class="n">pw</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">totalVocales</span><span class="o">);</span>
-    <span class="n">pw</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
-    <span class="c1">//Y cerramos los ficheros</span>
-    <span class="n">pw</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-    <span class="n">br</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="o">}</span>
-</pre></div>
-</div>
 <p>La clase <cite>ProcesadorFichero`</cite> será lanzada desde otra clase que llamaremos <code class="docutils literal"><span class="pre">Lanzador</span></code>. Nuestra <code class="docutils literal"><span class="pre">ProcesadorFichero</span></code> recogerá en su método <code class="docutils literal"><span class="pre">main</span></code> los siguientes parámetros:</p>
 <ol class="arabic simple">
 <li>El nombre del fichero a procesar. Lo llamaremos <code class="docutils literal"><span class="pre">nombreFicheroEntrada</span></code> y estará en la posición 0 de los argumentos.</li>
@@ -456,46 +378,6 @@
 <li>El nombre del fichero donde se dejarán los resultados. Lo llamaremos <code class="docutils literal"><span class="pre">nombreFicheroResultado</span></code> y estará en la posición 1 de los argumentos.</li>
 </ol>
 <p>El código del main se muestra a continuación.</p>
-<div class="highlight-java"><div class="highlight"><pre><span></span><span class="c1">// Dado un fichero de entrada y una letra</span>
-<span class="c1">// contamos cuantas veces aparece dicha letra</span>
-<span class="c1">// y dejamos el recuento en un fichero de salida</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">hacerRecuento</span><span class="o">(</span><span class="n">String</span>
-                                 <span class="n">fichEntrada</span><span class="o">,</span> <span class="n">String</span> <span class="n">letra</span><span class="o">,</span>
-                                 <span class="n">String</span> <span class="n">fichSalida</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">FileNotFoundException</span><span class="o">,</span>
-<span class="n">IOException</span> <span class="o">{</span>
-    <span class="n">BufferedReader</span> <span class="n">br</span><span class="o">;</span>
-    <span class="n">br</span> <span class="o">=</span> <span class="n">UtilidadesFicheros</span><span class="o">.</span><span class="na">getBufferedReader</span><span class="o">(</span><span class="n">fichEntrada</span><span class="o">);</span>
-    <span class="n">PrintWriter</span> <span class="n">pw</span><span class="o">;</span>
-    <span class="n">pw</span> <span class="o">=</span> <span class="n">UtilidadesFicheros</span><span class="o">.</span><span class="na">getPrintWriter</span><span class="o">(</span><span class="n">fichSalida</span><span class="o">);</span>
-    <span class="n">String</span> <span class="n">lineaLeida</span><span class="o">;</span>
-    <span class="n">lineaLeida</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">totalVocales</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="c1">//Mientras no queden lineas....</span>
-    <span class="k">while</span> <span class="o">(</span><span class="n">lineaLeida</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">//...recorremos la linea...</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">lineaLeida</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="kt">char</span> <span class="n">letraLeida</span> <span class="o">=</span> <span class="n">lineaLeida</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-            <span class="kt">char</span> <span class="n">letraPasada</span> <span class="o">=</span> <span class="n">letra</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
-            <span class="c1">// incrementamos el contador</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">letraLeida</span> <span class="o">==</span> <span class="n">letraPasada</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">totalVocales</span><span class="o">++;</span>
-            <span class="o">}</span>
-            <span class="c1">//Fin del if</span>
-        <span class="o">}</span>
-        <span class="c1">//Fin del for</span>
-        <span class="c1">// Pasamos a la siguiente linea</span>
-        <span class="n">lineaLeida</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
-    <span class="o">}</span>
-    <span class="c1">//Escribimos el total de vocales</span>
-    <span class="c1">//en el fichero de salida</span>
-    <span class="n">pw</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">totalVocales</span><span class="o">);</span>
-    <span class="n">pw</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
-    <span class="c1">//Y cerramos los ficheros</span>
-    <span class="n">pw</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-    <span class="n">br</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="o">}</span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="ejercicio-propuesto">

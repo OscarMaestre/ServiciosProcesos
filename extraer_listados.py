@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 from subprocess import call
-import os
-
+import os, sys
+	
 DIRECTORIO_EXTRACCION_LISTADOS="codigo_extraido"
 DIRECTORIO_WORKSPACE="workspace"
 DIRECTORIO_CODIGO_FUENTE="src"
@@ -24,14 +24,11 @@ class Extraccion(object):
 			   DIRECTORIO_CODIGO_FUENTE, self.archivo_clase]
 		return os.sep.join(lista)
 	def ejecutar_lista(self, lista, fichero_salida=None):
-		if fichero_salida!=None:
+		if fichero_salida==None:
 			fichero_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Clase_"+self.archivo_salida_clase
-			with open(fichero_salida, "w") as descriptor_salida:
-				print ("Ejecutando "+ " ".join(lista_lanzamiento)+ " > " + fichero_salida)
-				call (lista_lanzamiento, stdout=descriptor_salida)
-		else:
-			print ("Ejecutando "+ " ".join(lista_lanzamiento)+ " > " + fichero_salida)
-			call (lista_lanzamiento)
+		with open(fichero_salida, "w") as descriptor_salida:
+			print ("Ejecutando "+ " ".join(lista)+ " > " + fichero_salida)
+			call (lista, stdout=descriptor_salida)
 			
 			
 	def extraer_clase(self):
@@ -40,66 +37,28 @@ class Extraccion(object):
 		fich_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Clase_"+self.archivo_salida_clase
 		self.ejecutar_lista(lista_lanzamiento, fichero_salida=fich_salida)
 		return 
-		with open(fich_salida, "w") as descriptor_salida:
-			print ("Ejecutando "+ " ".join(lista_lanzamiento)+ " > " + fich_salida)
-			call (lista_lanzamiento, stdout=descriptor_salida)
-		print("Clase extraida")
 		
 	def extraer_metodo(self, nombre_metodo):
-		pass
+		ruta_clase=self.get_ruta()
+		lista_lanzamiento = lista_extractor + [ruta_clase, nombre_metodo, EXTRAER_METODO ]
+		fich_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Metodo_"+nombre_metodo+"_"+self.archivo_salida_clase
+		self.ejecutar_lista(lista_lanzamiento, fichero_salida=fich_salida)
+		return 
 		
 		
 		
 		
-e1=Extraccion("com.utilidades.UtilidadesFicheros", "Utilidades")
+e1=Extraccion(clase_cualificada="com.utilidades.UtilidadesFicheros",
+							dir_proyecto="Utilidades")
 e1.extraer_clase()
+e1.extraer_metodo	("getBufferedReader")
+e1.extraer_metodo	("getPrintWriter")
+e1.extraer_metodo	("getLineasFichero")
 
-extracciones=[
-	("LanzaHilos.java", "LanzaHilos", EXTRAER_CLASE),
-	(
-		os.sep.join([
-			DIRECTORIO_WORKSPACE,"Utilidades", DIRECTORIO_CODIGO_FUENTE,
-			"com", "utilidades","UtilidadesFicheros.java"
-		]),
-		"getBufferedReader", EXTRAER_METODO
-	),
-	(
-		os.sep.join([
-			DIRECTORIO_WORKSPACE,"Utilidades", DIRECTORIO_CODIGO_FUENTE,
-			"com", "utilidades","UtilidadesFicheros.java"
-		]),
-		"getPrintWriter", EXTRAER_METODO
-	),
-	(
-		os.sep.join([
-			DIRECTORIO_WORKSPACE,"Utilidades", DIRECTORIO_CODIGO_FUENTE,
-			"com", "utilidades","UtilidadesFicheros.java"
-		]),
-		"getLineasFichero", EXTRAER_METODO
-	),
-	(
-		os.sep.join([
-			DIRECTORIO_WORKSPACE,"Multiproceso_Vocales", DIRECTORIO_CODIGO_FUENTE,
-			"com", "ies","ProcesadorFichero.java"
-		]),
-		"hacerRecuento", EXTRAER_METODO
-	),
-	(
-		os.sep.join([
-			DIRECTORIO_WORKSPACE,"Multiproceso_Vocales", DIRECTORIO_CODIGO_FUENTE,
-			"com", "ies","ProcesadorFichero.java"
-		]),
-		"main", EXTRAER_METODO
-	)
-]
+e2=Extraccion(clase_cualificada="com.ies.ProcesadorFichero",
+							dir_proyecto="Multiproceso_Vocales")
+e2.extraer_clase()
+e2.extraer_metodo("main")
+e2.extraer_metodo("hacerRecuento")
 
-for e in extracciones:
-	lista_lanzamiento=lista_extractor[:]
-	if e[2]==EXTRAER_CLASE:
-		fich_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Clase_"+e[1]+".java"
-	else:
-		fich_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Metodo_"+e[1]+".java"
-	lista_lanzamiento = lista_lanzamiento +  [e[0], e[1], e[2] ]
-	print ("Ejecutando "+ " ".join(lista_lanzamiento))
-	with open(fich_salida, "w") as descriptor_salida:
-		call (lista_lanzamiento, stdout=descriptor_salida)
+		

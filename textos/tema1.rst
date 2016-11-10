@@ -377,19 +377,19 @@ Tanto en este ejercicio como en muchos otros vamos a necesitar realizar ciertas 
 
 * Obtener un objeto ``BufferedReader`` a partir de un nombre de fichero de tipo ``String``. Llamaremos a este método ``getBufferedReader`` y lo utilizaremos para poder manejar un fichero mediante una clase de muy alto nivel que nos facilita la lectura de ficheros. En el listado adjunto se puede consultar dicho método.
 
-.. literalinclude:: ../listados/Metodo_getBufferedReader.java
+.. literalinclude:: ../listados/Metodo_getBufferedReader_com_utilidades_UtilidadesFicheros
    :language: java
    
    
 
 * De la misma forma crearemos un método ``getPrintWriter`` que nos devuelva un objeto de la clase ``PrintWriter`` para poder realizar fácilmente operaciones de escritura en ficheros. En el listado adjunto se muestra el código.
 
-.. literalinclude:: ../listados/Metodo_getPrintWriter.java
+.. literalinclude:: ../listados/Metodo_getPrintWriter_com_utilidades_UtilidadesFicheros.java
    :language: java
    
 * Aunque nos estamos anticipando, puede ser útil tener un método que dado un nombre de fichero nos devuelva un ``ArrayList<String>`` con todas las líneas que hay en el fichero. **En este ejercicio no lo usaremos**. Este método podría implementarse así:
 
-.. literalinclude:: ../listados/Metodo_getLineasFichero.java
+.. literalinclude:: ../listados/Metodo_getLineasFichero_com_utilidades_UtilidadesFicheros.java
    :language: java
 
 
@@ -400,7 +400,7 @@ Necesitaremos una clase ``ProcesadorFichero`` que nos permita procesar los fiche
 
 Dicha clase tendrá un método ``hacerRecuento`` que resuelva el problema de contar el número de apariciones en un fichero dejando el total de apariciones en un fichero de salida distintos. En el código adjunto podemos ver como podría implementarse dicho método.
 
-.. literalinclude:: ../listados/Metodo_hacerRecuento.java
+.. literalinclude:: ../listados/Metodo_getLineasFichero_com_utilidades_UtilidadesFicheros.java.java
    :language: java
 
 
@@ -414,7 +414,7 @@ La clase `ProcesadorFichero`` será lanzada desde otra clase que llamaremos ``La
 
 El código del main se muestra a continuación.
 
-.. literalinclude:: ../listados/Metodo_hacerRecuento.java
+.. literalinclude:: ../listados/Metodo_main_com_ies_ProcesadorFichero.java
    :language: java
 
 
