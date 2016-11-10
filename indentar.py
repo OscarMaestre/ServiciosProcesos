@@ -12,5 +12,5 @@ for f in ficheros_java:
 	fich_entrada = open ( f , "r")
 	trozos=f.split(os.sep)
 	print(trozos[-1])
-	fich_salida = open (DIRECTORIO_LISTADOS_RST + os.sep + trozos[-1], "w")
+	fich_salida = open (DIRECTORIO_LISTADOS_RST + os.sep + trozos[-1], "w", encoding="utf-8")
 	call (lista_lanzamiento, stdin=fich_entrada, stdout=fich_salida)

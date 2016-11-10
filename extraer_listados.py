@@ -26,7 +26,7 @@ class Extraccion(object):
 	def ejecutar_lista(self, lista, fichero_salida=None):
 		if fichero_salida==None:
 			fichero_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Clase_"+self.archivo_salida_clase
-		with open(fichero_salida, "w") as descriptor_salida:
+		with open(fichero_salida, "w", encoding="utf-8"	) as descriptor_salida:
 			print ("Ejecutando "+ " ".join(lista)+ " > " + fichero_salida)
 			call (lista, stdout=descriptor_salida)
 			
