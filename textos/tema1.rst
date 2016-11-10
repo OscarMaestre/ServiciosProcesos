@@ -404,7 +404,7 @@ Dicha clase tendrá un método ``hacerRecuento`` que resuelva el problema de con
    :language: java
 
 
-La clase `ProcesadorFichero`` será lanzada desde otra clase que llamaremos ``Lanzador``. Nuestra ``ProcesadorFichero`` recogerá en su método ``main`` los siguientes parámetros:
+La clase ``ProcesadorFichero`` será lanzada desde otra clase que llamaremos ``Lanzador``. Nuestra ``ProcesadorFichero`` recogerá en su método ``main`` los siguientes parámetros:
 
 1. El nombre del fichero a procesar. Lo llamaremos ``nombreFicheroEntrada`` y estará en la posición 0 de los argumentos.
 
