@@ -400,7 +400,7 @@ Necesitaremos una clase ``ProcesadorFichero`` que nos permita procesar los fiche
 
 Dicha clase tendrá un método ``hacerRecuento`` que resuelva el problema de contar el número de apariciones en un fichero dejando el total de apariciones en un fichero de salida distintos. En el código adjunto podemos ver como podría implementarse dicho método.
 
-.. literalinclude:: ../listados/Metodo_getLineasFichero_com_utilidades_UtilidadesFicheros.java.java
+.. literalinclude:: ../listados/Metodo_getLineasFichero_com_utilidades_UtilidadesFicheros.java
    :language: java
 
 
