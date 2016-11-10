@@ -377,7 +377,7 @@ Tanto en este ejercicio como en muchos otros vamos a necesitar realizar ciertas 
 
 * Obtener un objeto ``BufferedReader`` a partir de un nombre de fichero de tipo ``String``. Llamaremos a este método ``getBufferedReader`` y lo utilizaremos para poder manejar un fichero mediante una clase de muy alto nivel que nos facilita la lectura de ficheros. En el listado adjunto se puede consultar dicho método.
 
-.. literalinclude:: ../listados/Metodo_getBufferedReader_com_utilidades_UtilidadesFicheros
+.. literalinclude:: ../listados/Metodo_getBufferedReader_com_utilidades_UtilidadesFicheros.java
    :language: java
    
    

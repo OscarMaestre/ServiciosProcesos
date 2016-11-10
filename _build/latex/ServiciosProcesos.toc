@@ -16,7 +16,7 @@
 \contentsline {section}{\numberline {1.9}Ejercicio propuesto}{11}{section.1.9}
 \contentsline {section}{\numberline {1.10}Gesti\IeC {\'o}n de procesos.}{12}{section.1.10}
 \contentsline {section}{\numberline {1.11}Comandos para la gesti\IeC {\'o}n de procesos en sistemas libres y propietarios.}{12}{section.1.11}
-\contentsline {subsection}{\numberline {1.11.1}Prioridades}{12}{subsection.1.11.1}
+\contentsline {subsection}{\numberline {1.11.1}Prioridades}{13}{subsection.1.11.1}
 \contentsline {section}{\numberline {1.12}Sincronizaci\IeC {\'o}n entre procesos.}{13}{section.1.12}
 \contentsline {subsection}{\numberline {1.12.1}Mecanismos para controlar secciones cr\IeC {\'\i }ticas}{13}{subsection.1.12.1}
 \contentsline {section}{\numberline {1.13}Documentaci\IeC {\'o}n}{14}{section.1.13}

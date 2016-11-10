@@ -360,6 +360,17 @@
 <ul class="simple">
 <li>Obtener un objeto <code class="docutils literal"><span class="pre">BufferedReader</span></code> a partir de un nombre de fichero de tipo <code class="docutils literal"><span class="pre">String</span></code>. Llamaremos a este método <code class="docutils literal"><span class="pre">getBufferedReader</span></code> y lo utilizaremos para poder manejar un fichero mediante una clase de muy alto nivel que nos facilita la lectura de ficheros. En el listado adjunto se puede consultar dicho método.</li>
 </ul>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">BufferedReader</span> <span class="nf">getBufferedReader</span><span class="o">(</span>
+    <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span>
+<span class="n">FileNotFoundException</span> <span class="o">{</span>
+    <span class="n">FileReader</span> <span class="n">lector</span><span class="o">;</span>
+    <span class="n">lector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+    <span class="n">BufferedReader</span> <span class="n">bufferedReader</span><span class="o">;</span>
+    <span class="n">bufferedReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">lector</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">bufferedReader</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
 <ul class="simple">
 <li>De la misma forma crearemos un método <code class="docutils literal"><span class="pre">getPrintWriter</span></code> que nos devuelva un objeto de la clase <code class="docutils literal"><span class="pre">PrintWriter</span></code> para poder realizar fácilmente operaciones de escritura en ficheros. En el listado adjunto se muestra el código.</li>
 </ul>
