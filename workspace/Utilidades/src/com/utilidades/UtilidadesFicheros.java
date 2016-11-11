@@ -34,7 +34,8 @@ public class UtilidadesFicheros {
 		fileWriter=new FileWriter(nombreFichero);
 		printWriter=new PrintWriter(fileWriter);
 		return printWriter;
-	} //Fin de getPrintWriter
+		//Fin de getPrintWriter
+	} 
 	
 	public static ArrayList<String> getLineasFichero(String nombreFichero) throws IOException{
 		ArrayList<String> lineas=new ArrayList<String>();

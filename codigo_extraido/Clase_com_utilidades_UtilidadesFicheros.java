@@ -14,20 +14,20 @@ public class UtilidadesFicheros {
         fileWriter = new FileWriter(nombreFichero);
         printWriter = new PrintWriter(fileWriter);
         return printWriter;
+    //Fin de getPrintWriter
     }
 
-    //Fin de getPrintWriter
     public static ArrayList<String> getLineasFichero(String nombreFichero) throws IOException {
         ArrayList<String> lineas = new ArrayList<String>();
         BufferedReader bfr = getBufferedReader(nombreFichero);
-        //Leemos líneas del fichero...
+        //Leemos lÃ­neas del fichero...
         String linea = bfr.readLine();
         while (linea != null) {
-            //Y las añadimos al array
+            //Y las aÃ±adimos al array
             lineas.add(linea);
             linea = bfr.readLine();
         }
-        //Fin del bucle que lee líneas
+        //Fin del bucle que lee lÃ­neas
         return lineas;
     }
     //Fin de getLineasFichero

@@ -417,6 +417,25 @@ El código del main se muestra a continuación.
 .. literalinclude:: ../listados/Metodo_main_com_ies_ProcesadorFichero.java
    :language: java
 
+Lanzamiento de los procesos
+-------------------------------
+
+La clase ``Lanzador`` tendrá un método ``main`` que se encargará de varias cosas:
+
+1. Recoger el primer parámetro (``args[0]``), que contendrá el fichero a procesar.
+2. Recoger el segundo parámetro, que contendrá el directorio de ``CLASSPATH`` donde habrá que buscar la clase ``UtilidadesFicheros``.
+3. Recoger el tercer parámetro, que contendrá el directorio donde habrá que buscar la clase ``ProcesadorFicheros``.
+4. Una vez recogidos los parámetros, se lanzarán los procesos utilizando la clase ``ProcessBuilder``.
+5. Los procesos se ejecutarán y después recogeremos los resultados de los ficheros.
+
+
+
+
+En el código siguiente puede verse el método ``main`` de esta clase ``Lanzador``. La recogida de resultados se deja como ejercicio:
+
+.. literalinclude:: ../listados/Metodo_main_com_ies_Lanzador.java
+   :language: java
+
 
 	
 Ejercicio propuesto

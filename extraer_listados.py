@@ -62,3 +62,7 @@ e2.extraer_metodo("main")
 e2.extraer_metodo("hacerRecuento")
 
 		
+e3=Extraccion(clase_cualificada="com.ies.Lanzador",
+							dir_proyecto="Multiproceso_Vocales")
+e3.extraer_clase()
+e3.extraer_metodo("main")

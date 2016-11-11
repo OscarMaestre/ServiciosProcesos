@@ -6,11 +6,7 @@ import java.io.PrintWriter;
 
 import com.utilidades.UtilidadesFicheros;
 
-
-
-
 public class ProcesadorFichero {
-	
 	// Dado un fichero de entrada y una letra
 	// contamos cuantas veces aparece dicha letra
 	// y dejamos el recuento en un fichero de salida
@@ -30,7 +26,7 @@ public class ProcesadorFichero {
 		String lineaLeida;
 		lineaLeida=br.readLine();
 		int totalVocales=0;
-		//Mientras no queden lineas....
+		//Mientras no queden líneas....
 		while (lineaLeida!=null){
 			//...recorremos la linea...
 			for (int i=0; 
@@ -56,20 +52,15 @@ public class ProcesadorFichero {
 		//Y cerramos los ficheros
 		pw.close();
 		br.close();
-		
-	} //Fin del m�todo hacerRecuento
+		//Fin del método hacerRecuento
+	} 
 	/**
-	 * Dado un fichero pasado como
-	 * argumento, contar� cuantas
-	 * apariciones hay de una cierta
-	 * vocal (pasada como argumento)
-	 * y dejar� la cantidad
-	 * en otro fichero (tambi�n pasado como
-	 * argumento
+	 * Dado un fichero pasado como argumento, contará cuantas
+	 * apariciones hay de una cierta vocal (pasada como argumento)
+	 * y dejará la cantidad en otro fichero (también pasado como
+	 * argumento)
 	 * @throws IOException 
-	 * @throws FileNotFoundException 
-	 * 
-	 */
+	 * @throws FileNotFoundException  */
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		
 		String nombreFicheroEntrada		=	args[0];
@@ -78,6 +69,7 @@ public class ProcesadorFichero {
 		hacerRecuento(nombreFicheroEntrada,
 				letra,
 				nombreFicheroResultado);
-	} //Fin del main
+		//Fin del main
+	} 
 
 }

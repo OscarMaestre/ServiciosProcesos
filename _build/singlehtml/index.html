@@ -381,17 +381,50 @@
     <span class="n">fileWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
     <span class="n">printWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">fileWriter</span><span class="o">);</span>
     <span class="k">return</span> <span class="n">printWriter</span><span class="o">;</span>
+<span class="c1">//Fin de getPrintWriter</span>
 <span class="o">}</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>Aunque nos estamos anticipando, puede ser útil tener un método que dado un nombre de fichero nos devuelva un <code class="docutils literal"><span class="pre">ArrayList&lt;String&gt;</span></code> con todas las líneas que hay en el fichero. <strong>En este ejercicio no lo usaremos</strong>. Este método podría implementarse así:</li>
 </ul>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getLineasFichero</span><span class="o">(</span>
+    <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">lineas</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+    <span class="n">BufferedReader</span> <span class="n">bfr</span> <span class="o">=</span> <span class="n">getBufferedReader</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+    <span class="c1">//Leemos líneas del fichero...</span>
+    <span class="n">String</span> <span class="n">linea</span> <span class="o">=</span> <span class="n">bfr</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">linea</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//Y las añadimos al array</span>
+        <span class="n">lineas</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
+        <span class="n">linea</span> <span class="o">=</span> <span class="n">bfr</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="c1">//Fin del bucle que lee líneas</span>
+    <span class="k">return</span> <span class="n">lineas</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="procesado-de-ficheros">
 <h4>Procesado de ficheros<a class="headerlink" href="#procesado-de-ficheros" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Necesitaremos una clase <code class="docutils literal"><span class="pre">ProcesadorFichero</span></code> que nos permita procesar los ficheros de la forma pedida. Antes de crear un programa multiproceso empezaremos por crear una clase simple que nos resuelva este problema.</p>
 <p>Dicha clase tendrá un método <code class="docutils literal"><span class="pre">hacerRecuento</span></code> que resuelva el problema de contar el número de apariciones en un fichero dejando el total de apariciones en un fichero de salida distintos. En el código adjunto podemos ver como podría implementarse dicho método.</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getLineasFichero</span><span class="o">(</span>
+    <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">lineas</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+    <span class="n">BufferedReader</span> <span class="n">bfr</span> <span class="o">=</span> <span class="n">getBufferedReader</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+    <span class="c1">//Leemos líneas del fichero...</span>
+    <span class="n">String</span> <span class="n">linea</span> <span class="o">=</span> <span class="n">bfr</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">linea</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//Y las añadimos al array</span>
+        <span class="n">lineas</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
+        <span class="n">linea</span> <span class="o">=</span> <span class="n">bfr</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="c1">//Fin del bucle que lee líneas</span>
+    <span class="k">return</span> <span class="n">lineas</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
 <p>La clase <code class="docutils literal"><span class="pre">ProcesadorFichero</span></code> será lanzada desde otra clase que llamaremos <code class="docutils literal"><span class="pre">Lanzador</span></code>. Nuestra <code class="docutils literal"><span class="pre">ProcesadorFichero</span></code> recogerá en su método <code class="docutils literal"><span class="pre">main</span></code> los siguientes parámetros:</p>
 <ol class="arabic simple">
 <li>El nombre del fichero a procesar. Lo llamaremos <code class="docutils literal"><span class="pre">nombreFicheroEntrada</span></code> y estará en la posición 0 de los argumentos.</li>
@@ -399,28 +432,67 @@
 <li>El nombre del fichero donde se dejarán los resultados. Lo llamaremos <code class="docutils literal"><span class="pre">nombreFicheroResultado</span></code> y estará en la posición 1 de los argumentos.</li>
 </ol>
 <p>El código del main se muestra a continuación.</p>
-<div class="highlight-java"><div class="highlight"><pre><span></span><span class="c1">//Fin del m?todo hacerRecuento</span>
-<span class="cm">/**</span>
-<span class="cm">	 * Dado un fichero pasado como</span>
-<span class="cm">	 * argumento, contar? cuantas</span>
-<span class="cm">	 * apariciones hay de una cierta</span>
-<span class="cm">	 * vocal (pasada como argumento)</span>
-<span class="cm">	 * y dejar? la cantidad</span>
-<span class="cm">	 * en otro fichero (tambi?n pasado como</span>
-<span class="cm">	 * argumento</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm">	 * Dado un fichero pasado como argumento, contará cuantas</span>
+<span class="cm">	 * apariciones hay de una cierta vocal (pasada como argumento)</span>
+<span class="cm">	 * y dejará la cantidad en otro fichero (también pasado como</span>
+<span class="cm">	 * argumento)</span>
 <span class="cm">	 * @throws IOException</span>
-<span class="cm">	 * @throws FileNotFoundException</span>
-<span class="cm">	 *</span>
-<span class="cm">	 */</span>
+<span class="cm">	 * @throws FileNotFoundException  */</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span>
 <span class="n">FileNotFoundException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
     <span class="n">String</span> <span class="n">nombreFicheroEntrada</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
     <span class="n">String</span> <span class="n">letra</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
     <span class="n">String</span> <span class="n">nombreFicheroResultado</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
     <span class="n">hacerRecuento</span><span class="o">(</span><span class="n">nombreFicheroEntrada</span><span class="o">,</span> <span class="n">letra</span><span class="o">,</span> <span class="n">nombreFicheroResultado</span><span class="o">);</span>
+<span class="c1">//Fin del main</span>
 <span class="o">}</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="lanzamiento-de-los-procesos">
+<h3>Lanzamiento de los procesos<a class="headerlink" href="#lanzamiento-de-los-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>La clase <code class="docutils literal"><span class="pre">Lanzador</span></code> tendrá un método <code class="docutils literal"><span class="pre">main</span></code> que se encargará de varias cosas:</p>
+<ol class="arabic simple">
+<li>Recoger el primer parámetro (<code class="docutils literal"><span class="pre">args[0]</span></code>), que contendrá el fichero a procesar.</li>
+<li>Recoger el segundo parámetro, que contendrá el directorio de <code class="docutils literal"><span class="pre">CLASSPATH</span></code> donde habrá que buscar la clase <code class="docutils literal"><span class="pre">UtilidadesFicheros</span></code>.</li>
+<li>Recoger el tercer parámetro, que contendrá el directorio donde habrá que buscar la clase <code class="docutils literal"><span class="pre">ProcesadorFicheros</span></code>.</li>
+<li>Una vez recogidos los parámetros, se lanzarán los procesos utilizando la clase <code class="docutils literal"><span class="pre">ProcessBuilder</span></code>.</li>
+<li>Los procesos se ejecutarán y después recogeremos los resultados de los ficheros.</li>
+</ol>
+<p>En el código siguiente puede verse el método <code class="docutils literal"><span class="pre">main</span></code> de esta clase <code class="docutils literal"><span class="pre">Lanzador</span></code>. La recogida de resultados se deja como ejercicio:</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span>
+<span class="n">IOException</span><span class="o">,</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">ficheroEntrada</span><span class="o">;</span>
+    <span class="n">ficheroEntrada</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+    <span class="n">String</span> <span class="n">classpathUtilidades</span><span class="o">;</span>
+    <span class="n">classpathUtilidades</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+    <span class="n">String</span> <span class="n">classpathProcesadorFichero</span><span class="o">;</span>
+    <span class="n">classpathProcesadorFichero</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+    <span class="n">String</span><span class="o">[]</span> <span class="n">vocales</span> <span class="o">=</span> <span class="o">{</span> <span class="s">&quot;A&quot;</span><span class="o">,</span> <span class="s">&quot;E&quot;</span><span class="o">,</span> <span class="s">&quot;I&quot;</span><span class="o">,</span> <span class="s">&quot;O&quot;</span><span class="o">,</span> <span class="s">&quot;U&quot;</span> <span class="o">};</span>
+    <span class="n">String</span> <span class="n">classPath</span><span class="o">;</span>
+    <span class="n">classPath</span> <span class="o">=</span> <span class="n">classpathProcesadorFichero</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">classpathUtilidades</span><span class="o">;</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Usando classpath:&quot;</span> <span class="o">+</span> <span class="n">classPath</span><span class="o">);</span>
+    <span class="cm">/* Se lanzan los procesos*/</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">vocales</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">fichErrores</span> <span class="o">=</span> <span class="s">&quot;Errores_&quot;</span> <span class="o">+</span> <span class="n">vocales</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span>
+                             <span class="s">&quot;.txt&quot;</span><span class="o">;</span>
+        <span class="n">ProcessBuilder</span> <span class="n">pb</span><span class="o">;</span>
+        <span class="n">pb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ProcessBuilder</span><span class="o">(</span><span class="s">&quot;java&quot;</span><span class="o">,</span> <span class="s">&quot;-cp&quot;</span><span class="o">,</span> <span class="n">classPath</span><span class="o">,</span>
+                                <span class="s">&quot;com.ies.ProcesadorFichero&quot;</span><span class="o">,</span> <span class="n">ficheroEntrada</span><span class="o">,</span>
+                                <span class="n">vocales</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">vocales</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span><span class="o">);</span>
+        <span class="c1">//Si hay algún error, almacenarlo en un fichero</span>
+        <span class="n">pb</span><span class="o">.</span><span class="na">redirectError</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">fichErrores</span><span class="o">));</span>
+        <span class="n">pb</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="c1">//Fin del for</span>
+    <span class="o">}</span>
+    <span class="cm">/* Esperamos un poco*/</span>
+    <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">3000</span><span class="o">);</span>
+    <span class="cm">/* La recogida de resultados se deja como</span>
+<span class="cm">    		 * ejercicio al lector. ;) */</span>
+<span class="o">}</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="ejercicio-propuesto">
@@ -2824,6 +2896,7 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 <li class="toctree-l2"><a class="reference internal" href="index.html#comunicacion-entre-procesos">Comunicación entre procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio">Ejercicio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio-resuelto">Ejercicio resuelto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#lanzamiento-de-los-procesos">Lanzamiento de los procesos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio-propuesto">Ejercicio propuesto</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#gestion-de-procesos">Gestión de procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">Comandos para la gestión de procesos en sistemas libres y propietarios.</a></li>
