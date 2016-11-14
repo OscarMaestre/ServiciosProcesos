@@ -54,6 +54,7 @@ e1.extraer_clase()
 e1.extraer_metodo	("getBufferedReader")
 e1.extraer_metodo	("getPrintWriter")
 e1.extraer_metodo	("getLineasFichero")
+e1.extraer_metodo	("getSuma")
 
 e2=Extraccion(clase_cualificada="com.ies.ProcesadorFichero",
 							dir_proyecto="Multiproceso_Vocales")
@@ -66,3 +67,7 @@ e3=Extraccion(clase_cualificada="com.ies.Lanzador",
 							dir_proyecto="Multiproceso_Vocales")
 e3.extraer_clase()
 e3.extraer_metodo("main")
+
+e4=Extraccion(clase_cualificada="com.ies.ProcesadorContabilidad",
+							dir_proyecto="SumaContabilidades")
+e4.extraer_metodo("main")

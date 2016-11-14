@@ -438,8 +438,8 @@ En el código siguiente puede verse el método ``main`` de esta clase ``Lanzador
 
 
 	
-Ejercicio propuesto
---------------------
+Ejercicio propuesto (I)
+---------------------------
 Se desea crear un programa que procese ficheros aprovechando el paralelismo de la máquina. Se tienen cinco ficheros con los siguientes nombres:
 
 * ``informatica.txt``
@@ -448,7 +448,28 @@ Se desea crear un programa que procese ficheros aprovechando el paralelismo de l
 * ``comercio.txt``
 * ``rrhh.txt``
 
-En cada fichero hay una lista de cantidades enteras. Hay una cantidad en cada línea. Se desea que el programa creado sume la cantidad total que suman todas las cantidades de los cinco ficheros haciendo uso del paralelismo.
+En cada fichero hay una lista de cantidades enteras que representa las contabilidades de distintos departamentos. Hay una cantidad en cada línea. Se desea que el programa creado sume la cantidad total que suman todas las cantidades de los cinco ficheros haciendo uso del paralelismo.
+
+Solución al ejercicio propuesto (I)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Este ejercicio es bastante parecido al anterior, con la salvedad de que ahora necesitaremos sumar cantidades en lugar de buscar elementos. Por lo demás,  también generaremos un fichero de resultados por cada fichero de datos y los llamaremos "Resultado_xxxx", siendo *xxxx* el nombre del fichero. Es decir, la suma de las cantidades de ``informatica.txt`` se dejará en ``Resultado_informatica.txt``.
+
+Una vez generados todos los fichero ``Resultado`` tendremos que sumar todas las cantidades de estos ficheros. Su estructura es muy simple, todos contienen una única línea con una cantidad. Dado que esta operación de sumar cantidades almacenadas en distintos ficheros es una operación muy habitual, añadiremos un método a ``UtilidadesFicheros`` que se encargue de hacer esta operación. Obsérvese que usaremos tipos de datos ``long`` y no ``int`` dado que no sabemos como de grandes serán las cantidades a procesar.
+
+A continuación se muestra el código de este método.
+
+.. literalinclude:: ../listados/Metodo_getSuma_com_utilidades_UtilidadesFicheros.java
+   :language: java
+
+Una vez creado este método que usaremos al final, pasemos a crear una clase ``ProcesadorContabilidad`` que leerá un fichero, sumará las cantidades y las dejará en un fichero llamado ``Resultado_xxxx`` **y que se deberá pasar como parámetro**. Esta clase solo tendrá un método ``main`` que realizará esta tarea.
+
+.. literalinclude:: ../listados/Metodo_main_com_ies_ProcesadorContabilidad.java
+   :language: java
+
+
+Por último, solo queda crear la clase ``Lanzador`` que recogerá los nombres de fichero que hay que sumar y lanzará un proceso de la clase ``ProcesadorContabilidad`` para cada uno de ellos. Por último, sumará todos los resultados y los dejará en un fichero que llamaremos (por ejemplo) ``Resultado_global.txt``
+
 
 
 Gestión de procesos.

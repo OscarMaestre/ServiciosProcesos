@@ -120,3 +120,5 @@
 \contentsline {section}{\numberline {5.13}Pol\IeC {\'\i }tica de seguridad.}{77}{section.5.13}
 \contentsline {section}{\numberline {5.14}Programaci\IeC {\'o}n de mecanismos de control de acceso.}{77}{section.5.14}
 \contentsline {section}{\numberline {5.15}Pruebas y depuraci\IeC {\'o}n.}{77}{section.5.15}
+\contentsline {chapter}{\numberline {6}Anexos}{79}{chapter.6}
+\contentsline {section}{\numberline {6.1}La clase \texttt {UtilidadesFicheros}}{79}{section.6.1}

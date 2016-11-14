@@ -192,7 +192,7 @@ latex_elements = {
 # Additional stuff for the LaTeX preamble.
 #'preamble': '\usepackage[spanish]{babel}',
 
-'releasename':'Version'
+'releasename':'Versión'
 }
 
 # Grouping the document tree into LaTeX files. List of tuples

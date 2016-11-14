@@ -24,6 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
     <link rel="top" title="None" href="index.html#document-index" /> 
   </head>
   <body role="document">
@@ -495,8 +497,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="ejercicio-propuesto">
-<h3>Ejercicio propuesto<a class="headerlink" href="#ejercicio-propuesto" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="ejercicio-propuesto-i">
+<h3>Ejercicio propuesto (I)<a class="headerlink" href="#ejercicio-propuesto-i" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Se desea crear un programa que procese ficheros aprovechando el paralelismo de la máquina. Se tienen cinco ficheros con los siguientes nombres:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">informatica.txt</span></code></li>
@@ -505,7 +507,61 @@
 <li><code class="docutils literal"><span class="pre">comercio.txt</span></code></li>
 <li><code class="docutils literal"><span class="pre">rrhh.txt</span></code></li>
 </ul>
-<p>En cada fichero hay una lista de cantidades enteras. Hay una cantidad en cada línea. Se desea que el programa creado sume la cantidad total que suman todas las cantidades de los cinco ficheros haciendo uso del paralelismo.</p>
+<p>En cada fichero hay una lista de cantidades enteras que representa las contabilidades de distintos departamentos. Hay una cantidad en cada línea. Se desea que el programa creado sume la cantidad total que suman todas las cantidades de los cinco ficheros haciendo uso del paralelismo.</p>
+<div class="section" id="solucion-al-ejercicio-propuesto-i">
+<h4>Solución al ejercicio propuesto (I)<a class="headerlink" href="#solucion-al-ejercicio-propuesto-i" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Este ejercicio es bastante parecido al anterior, con la salvedad de que ahora necesitaremos sumar cantidades en lugar de buscar elementos. Por lo demás,  también generaremos un fichero de resultados por cada fichero de datos y los llamaremos &#8220;Resultado_xxxx&#8221;, siendo <em>xxxx</em> el nombre del fichero. Es decir, la suma de las cantidades de <code class="docutils literal"><span class="pre">informatica.txt</span></code> se dejará en <code class="docutils literal"><span class="pre">Resultado_informatica.txt</span></code>.</p>
+<p>Una vez generados todos los fichero <code class="docutils literal"><span class="pre">Resultado</span></code> tendremos que sumar todas las cantidades de estos ficheros. Su estructura es muy simple, todos contienen una única línea con una cantidad. Dado que esta operación de sumar cantidades almacenadas en distintos ficheros es una operación muy habitual, añadiremos un método a <code class="docutils literal"><span class="pre">UtilidadesFicheros</span></code> que se encargue de hacer esta operación. Obsérvese que usaremos tipos de datos <code class="docutils literal"><span class="pre">long</span></code> y no <code class="docutils literal"><span class="pre">int</span></code> dado que no sabemos como de grandes serán las cantidades a procesar.</p>
+<p>A continuación se muestra el código de este método.</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="c1">//Fin de getLineasFichero</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">getSuma</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span>
+                           <span class="n">listaNombresFichero</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">long</span> <span class="n">suma</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">lineas</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">lineaCantidad</span><span class="o">;</span>
+    <span class="kt">long</span> <span class="n">cantidad</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">nombreFichero</span> <span class="o">:</span> <span class="n">listaNombresFichero</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">//Recuperamos todas las lineas</span>
+            <span class="n">lineas</span> <span class="o">=</span> <span class="n">getLineasFichero</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+            <span class="c1">//Pero solo nos interesa la primera</span>
+            <span class="n">lineaCantidad</span> <span class="o">=</span> <span class="n">lineas</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+            <span class="c1">//Convertimos la linea a número</span>
+            <span class="n">cantidad</span> <span class="o">=</span> <span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">lineaCantidad</span><span class="o">);</span>
+            <span class="c1">//Y se incrementa la suma total</span>
+            <span class="n">suma</span> <span class="o">=</span> <span class="n">suma</span> <span class="o">+</span> <span class="n">cantidad</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Fallo al procesar el fichero &quot;</span>
+                               <span class="o">+</span> <span class="n">nombreFichero</span><span class="o">);</span>
+            <span class="c1">//Fin del catch</span>
+        <span class="o">}</span>
+        <span class="c1">//Fin del for que recorre los nombres de fichero</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">suma</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Una vez creado este método que usaremos al final, pasemos a crear una clase <code class="docutils literal"><span class="pre">ProcesadorContabilidad</span></code> que leerá un fichero, sumará las cantidades y las dejará en un fichero llamado <code class="docutils literal"><span class="pre">Resultado_xxxx</span></code>. Esta clase solo tendrá un método <code class="docutils literal"><span class="pre">main</span></code> que realizará esta tarea.</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span>
+<span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">nombreFichero</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">cantidades</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="c1">//Extraemos las cantidades</span>
+        <span class="n">cantidades</span> <span class="o">=</span> <span class="n">UtilidadesFicheros</span><span class="o">.</span><span class="na">getLineasFichero</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+        <span class="c1">//Y las sumamos una por una</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">lineaCantidad</span> <span class="o">:</span> <span class="n">cantidades</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">}</span>
+    <span class="o">}</span><span class="c1">//Fin del try</span>
+    <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;No se pudo procesar el fichero &quot;</span>
+        <span class="o">+</span> <span class="n">nombreFichero</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="c1">//Fin del main</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="gestion-de-procesos">
 <h3>Gestión de procesos.<a class="headerlink" href="#gestion-de-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -2875,8 +2931,80 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 <h3>Pruebas y depuración.<a class="headerlink" href="#pruebas-y-depuracion" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 </div>
+<span id="document-textos/anexos"></span><div class="section" id="anexos">
+<h2>Anexos<a class="headerlink" href="#anexos" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="la-clase-utilidadesficheros">
+<h3>La clase <code class="docutils literal"><span class="pre">UtilidadesFicheros</span></code><a class="headerlink" href="#la-clase-utilidadesficheros" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>A continuación se muestra el código completo de la clase <code class="docutils literal"><span class="pre">UtilidadesFicheros</span></code>:</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UtilidadesFicheros</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">BufferedReader</span> <span class="nf">getBufferedReader</span><span class="o">(</span>
+        <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span>
+    <span class="n">FileNotFoundException</span> <span class="o">{</span>
+        <span class="n">FileReader</span> <span class="n">lector</span><span class="o">;</span>
+        <span class="n">lector</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+        <span class="n">BufferedReader</span> <span class="n">bufferedReader</span><span class="o">;</span>
+        <span class="n">bufferedReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="n">lector</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">bufferedReader</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">PrintWriter</span> <span class="nf">getPrintWriter</span><span class="o">(</span>
+        <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">PrintWriter</span> <span class="n">printWriter</span><span class="o">;</span>
+        <span class="n">FileWriter</span> <span class="n">fileWriter</span><span class="o">;</span>
+        <span class="n">fileWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+        <span class="n">printWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="n">fileWriter</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">printWriter</span><span class="o">;</span>
+        <span class="c1">//Fin de getPrintWriter</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getLineasFichero</span><span class="o">(</span>
+        <span class="n">String</span> <span class="n">nombreFichero</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">lineas</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+        <span class="n">BufferedReader</span> <span class="n">bfr</span> <span class="o">=</span> <span class="n">getBufferedReader</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+        <span class="c1">//Leemos líneas del fichero...</span>
+        <span class="n">String</span> <span class="n">linea</span> <span class="o">=</span> <span class="n">bfr</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">linea</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">//Y las añadimos al array</span>
+            <span class="n">lineas</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">linea</span><span class="o">);</span>
+            <span class="n">linea</span> <span class="o">=</span> <span class="n">bfr</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="c1">//Fin del bucle que lee líneas</span>
+        <span class="k">return</span> <span class="n">lineas</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">//Fin de getLineasFichero</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">getSuma</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span>
+                               <span class="n">listaNombresFichero</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">long</span> <span class="n">suma</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">lineas</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">lineaCantidad</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">cantidad</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">nombreFichero</span> <span class="o">:</span> <span class="n">listaNombresFichero</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="c1">//Recuperamos todas las lineas</span>
+                <span class="n">lineas</span> <span class="o">=</span> <span class="n">getLineasFichero</span><span class="o">(</span><span class="n">nombreFichero</span><span class="o">);</span>
+                <span class="c1">//Pero solo nos interesa la primera</span>
+                <span class="n">lineaCantidad</span> <span class="o">=</span> <span class="n">lineas</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+                <span class="c1">//Convertimos la linea a número</span>
+                <span class="n">cantidad</span> <span class="o">=</span> <span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">lineaCantidad</span><span class="o">);</span>
+                <span class="c1">//Y se incrementa la suma total</span>
+                <span class="n">suma</span> <span class="o">=</span> <span class="n">suma</span> <span class="o">+</span> <span class="n">cantidad</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Fallo al procesar el fichero &quot;</span>
+                                   <span class="o">+</span> <span class="n">nombreFichero</span><span class="o">);</span>
+                <span class="c1">//Fin del catch</span>
+            <span class="o">}</span>
+            <span class="c1">//Fin del for que recorre los nombres de fichero</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">suma</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
 </div>
-<p>g</p>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -2897,7 +3025,7 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 <li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio">Ejercicio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio-resuelto">Ejercicio resuelto</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#lanzamiento-de-los-procesos">Lanzamiento de los procesos</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio-propuesto">Ejercicio propuesto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ejercicio-propuesto-i">Ejercicio propuesto (I)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#gestion-de-procesos">Gestión de procesos.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">Comandos para la gestión de procesos en sistemas libres y propietarios.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#sincronizacion-entre-procesos">Sincronización entre procesos.</a></li>
@@ -2976,6 +3104,10 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 <li class="toctree-l2"><a class="reference internal" href="index.html#pruebas-y-depuracion">Pruebas y depuración.</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-textos/anexos">Anexos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#la-clase-utilidadesficheros">La clase <code class="docutils literal"><span class="pre">UtilidadesFicheros</span></code></a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -2990,7 +3122,7 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014, Oscar Gomez.
-      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Creado con <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
 </html>
