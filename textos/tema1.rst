@@ -453,7 +453,7 @@ En cada fichero hay una lista de cantidades enteras que representa las contabili
 Solución al ejercicio propuesto (I)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Este ejercicio es bastante parecido al anterior, con la salvedad de que ahora necesitaremos sumar cantidades en lugar de buscar elementos. Por lo demás,  también generaremos un fichero de resultados por cada fichero de datos y los llamaremos "Resultado_xxxx", siendo *xxxx* el nombre del fichero. Es decir, la suma de las cantidades de ``informatica.txt`` se dejará en ``Resultado_informatica.txt``.
+Este ejercicio es bastante parecido al anterior, con la salvedad de que ahora necesitaremos sumar cantidades en lugar de buscar elementos. Por lo demás,  también generaremos un fichero de resultados por cada fichero de datos y los llamaremos igual pero añadiendo la extensión ".res". Es decir, la suma de las cantidades de ``informatica.txt`` se dejará en ``informatica.txt.res``. 
 
 Una vez generados todos los fichero ``Resultado`` tendremos que sumar todas las cantidades de estos ficheros. Su estructura es muy simple, todos contienen una única línea con una cantidad. Dado que esta operación de sumar cantidades almacenadas en distintos ficheros es una operación muy habitual, añadiremos un método a ``UtilidadesFicheros`` que se encargue de hacer esta operación. Obsérvese que usaremos tipos de datos ``long`` y no ``int`` dado que no sabemos como de grandes serán las cantidades a procesar.
 
@@ -462,7 +462,9 @@ A continuación se muestra el código de este método.
 .. literalinclude:: ../listados/Metodo_getSuma_com_utilidades_UtilidadesFicheros.java
    :language: java
 
-Una vez creado este método que usaremos al final, pasemos a crear una clase ``ProcesadorContabilidad`` que leerá un fichero, sumará las cantidades y las dejará en un fichero llamado ``Resultado_xxxx`` **y que se deberá pasar como parámetro**. Esta clase solo tendrá un método ``main`` que realizará esta tarea.
+Una vez creado este método que usaremos al final, pasemos a crear una clase ``ProcesadorContabilidad`` que leerá un fichero, sumará las cantidades y las dejará en el fichero de resultados. Esta clase solo tendrá un método ``main`` que realizará esta tarea.
+
+Como nuestro programa está formado por varias clases que están dispersas por distintos directorios, nuestro ``main`` tomará el ``CLASSPATH`` de los argumentos. 
 
 .. literalinclude:: ../listados/Metodo_main_com_ies_ProcesadorContabilidad.java
    :language: java
