@@ -471,6 +471,9 @@ Una vez creado este método que usaremos al final, pasemos a crear una clase ``P
 Por último, solo queda crear la clase ``Lanzador`` que recogerá los nombres de fichero que hay que sumar y lanzará un proceso de la clase ``ProcesadorContabilidad`` para cada uno de ellos. Por último, sumará todos los resultados y los dejará en un fichero que llamaremos (por ejemplo) ``Resultado_global.txt``
 
 
+.. literalinclude:: ../listados/Metodo_main_com_ies_LanzadorContabilidades.java
+   :language: java
+
 
 Gestión de procesos.
 --------------------

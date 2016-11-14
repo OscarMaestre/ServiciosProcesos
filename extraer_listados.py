@@ -71,3 +71,8 @@ e3.extraer_metodo("main")
 e4=Extraccion(clase_cualificada="com.ies.ProcesadorContabilidad",
 							dir_proyecto="SumaContabilidades")
 e4.extraer_metodo("main")
+
+e5=Extraccion(clase_cualificada="com.ies.LanzadorContabilidades",
+							dir_proyecto="SumaContabilidades")
+e5.extraer_clase()
+e5.extraer_metodo("main")
