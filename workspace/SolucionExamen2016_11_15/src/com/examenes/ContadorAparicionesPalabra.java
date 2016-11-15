@@ -24,6 +24,9 @@ public class ContadorAparicionesPalabra {
 				/* Y la siguiente busqueda se hará a partir de la 
 				 * siguiente posición correcta */
 				posBusqueda = posBusqueda + subcadena.length() + 1;
+			} else {
+				/* 
+				break;
 			}
 		}
 		return apariciones;

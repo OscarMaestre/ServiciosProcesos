@@ -11,7 +11,7 @@ public class ProcesadorFichero {
         String lineaLeida;
         lineaLeida = br.readLine();
         int totalVocales = 0;
-        //Mientras no queden lÃ­neas....
+        //Mientras no queden líneas....
         while (lineaLeida != null) {
             //...recorremos la linea...
             for (int i = 0; i < lineaLeida.length(); i++) {
@@ -34,13 +34,13 @@ public class ProcesadorFichero {
         //Y cerramos los ficheros
         pw.close();
         br.close();
-    //Fin del mÃ©todo hacerRecuento
+    //Fin del método hacerRecuento
     }
 
     /**
-	 * Dado un fichero pasado como argumento, contarÃ¡ cuantas
+	 * Dado un fichero pasado como argumento, contará cuantas
 	 * apariciones hay de una cierta vocal (pasada como argumento)
-	 * y dejarÃ¡ la cantidad en otro fichero (tambiÃ©n pasado como
+	 * y dejará la cantidad en otro fichero (también pasado como
 	 * argumento)
 	 * @throws IOException 
 	 * @throws FileNotFoundException  */
