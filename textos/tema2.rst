@@ -94,7 +94,7 @@ Gestión de hilos.
 --------------------------------------------------------------------------
 Con los hilos se pueden efectuar diversas operaciones que sean de utilidad al programador (y al administrador de sistemas a veces).
 
-Por ejemplo, un hilo puede tener un nombre. Si queremos asignar un nombre a un hilo podemos usar el método ``setName("Nombre que sea")``. También podemos obtener un objeto que represente el hilo de ejecución con ``getCurrentThread`` que nos devolverá un objeto de la clase ``Thread``.
+Por ejemplo, un hilo puede tener un nombre. Si queremos asignar un nombre a un hilo podemos usar el método ``setName("Nombre que sea")``. También podemos obtener un objeto que represente el hilo de ejecución con ``currentThread`` que nos devolverá un objeto de la clase ``Thread``.
 
 Otra operación de utilidad al gestionar hilos es indicar la prioridad que queremos darle a un hilo. En realidad esta prioridad es indicativa, el sistema operativo no está obligado a respetarla aunque por lo general lo hacen. Se puede indicar la prioridad con ``setPriority(10)``. La máxima prioridad posible es ``MAX_PRIORITY``, y la mínima es ``MIN_PRIORITY``.
 

@@ -25,7 +25,7 @@ public class ContadorAparicionesPalabra {
 				 * siguiente posición correcta */
 				posBusqueda = posBusqueda + subcadena.length() + 1;
 			} else {
-				/* 
+				
 				break;
 			}
 		}
@@ -48,7 +48,7 @@ public class ContadorAparicionesPalabra {
 		lineas=UtilidadesFicheros.getLineasFichero(nombreFichero);
 		//Vamos recorriendo las líneas...
 		for (String linea : lineas) {
-			linea.
+
 			//Y si encontramos la palabra...
 			if ( linea.contains( palabraParaBuscar ) ) {
 				//..incrementamos el contador
