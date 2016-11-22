@@ -10,7 +10,7 @@ public class LanzadorContabilidades {
         String classpath = args[0];
         String[] ficheros = { "informatica.txt", "gerencia.txt", "contabilidad.txt", "comercio.txt", "rrhh.txt" };
         //Los nombres de los ficheros de resultados
-        //se generar·n y luego se almacenar·n aquÌ
+        //se generar√°n y luego se almacenar√°n aqu√≠
         String[] ficherosResultado;
         ficherosResultado = new String[ficheros.length];
         /* Lanzamos los procesos*/
@@ -23,8 +23,8 @@ public class LanzadorContabilidades {
             ficherosResultado[i] = fichResultado;
             constructores[i] = new ProcessBuilder();
             constructores[i].command("java", "-cp", classpath, "com.ies.ProcesadorContabilidad", ficheros[i], fichResultado);
-            //El fichero de errores se generar·, aunque
-            //puede que vacÌo
+            //El fichero de errores se generar√°, aunque
+            //puede que vac√≠o
             constructores[i].redirectError(new File(fichErrores));
             constructores[i].start();
         //Fin del for que recorre los ficheros

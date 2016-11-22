@@ -1,5 +1,6 @@
 extraer_listados.py
 call make singlehtml
+copiar.py
 call make latex
 cd _build\latex
 call pdflatex ServiciosProcesos.tex
