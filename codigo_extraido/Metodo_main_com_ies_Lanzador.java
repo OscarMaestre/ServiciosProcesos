@@ -14,7 +14,7 @@ public static void main(String[] args) throws IOException, InterruptedException 
         String fichErrores = "Errores_" + vocales[i] + ".txt";
         ProcessBuilder pb;
         pb = new ProcessBuilder("java", "-cp", classPath, "com.ies.ProcesadorFichero", ficheroEntrada, vocales[i], vocales[i] + ".txt");
-        //Si hay algÃºn error, almacenarlo en un fichero
+        //Si hay algún error, almacenarlo en un fichero
         pb.redirectError(new File(fichErrores));
         pb.start();
     //Fin del for

@@ -9,7 +9,7 @@ public static void hacerRecuento(String fichEntrada, String letra, String fichSa
     String lineaLeida;
     lineaLeida = br.readLine();
     int totalVocales = 0;
-    //Mientras no queden lÃ­neas....
+    //Mientras no queden líneas....
     while (lineaLeida != null) {
         //...recorremos la linea...
         for (int i = 0; i < lineaLeida.length(); i++) {
@@ -32,5 +32,5 @@ public static void hacerRecuento(String fichEntrada, String letra, String fichSa
     //Y cerramos los ficheros
     pw.close();
     br.close();
-//Fin del mÃ©todo hacerRecuento
+//Fin del método hacerRecuento
 }

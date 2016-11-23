@@ -31,6 +31,7 @@ public class LanzadorContadoresApariciones {
 			//..y se ejecuta
 			constructores[i-1].start();
 		}
+		//Procesar los ficheros de resultados.
 		
 	}
 }

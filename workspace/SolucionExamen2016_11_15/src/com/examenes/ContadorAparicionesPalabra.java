@@ -11,22 +11,19 @@ public class ContadorAparicionesPalabra {
 	 * en dicha cadena. Usaremos el metodo String.indexOf para
 	 * ir buscando todas las apariciones de la subcadena
 	 */
-	private static long contarApariciones(String cadena, String subcadena){
+	public static long contarApariciones(String cadena, String subcadena){
 		int posBusqueda=0;
 		int posAparicion;
 		long apariciones=0;
-		while (posBusqueda <= cadena.length() ){
-			/* Buscamos la primera aparicion de la subcadena*/
+		posBusqueda=0;
+		while (posBusqueda<cadena.length()){
 			posAparicion=cadena.indexOf(subcadena, posBusqueda);
-			/* Si aparece, incrementamos el contador...*/
 			if (posAparicion!=-1){
 				apariciones++;
-				/* Y la siguiente busqueda se hará a partir de la 
-				 * siguiente posición correcta */
-				posBusqueda = posBusqueda + subcadena.length() + 1;
-			} else {
-				
-				break;
+				posBusqueda=posAparicion+1;
+			}
+			else {
+				posBusqueda++;
 			}
 		}
 		return apariciones;

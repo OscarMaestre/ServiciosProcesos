@@ -10,7 +10,7 @@ public static long getSuma(String[] listaNombresFichero) {
             lineas = getLineasFichero(nombreFichero);
             //Pero solo nos interesa la primera
             lineaCantidad = lineas.get(0);
-            //Convertimos la linea a nÃºmero
+            //Convertimos la linea a número
             cantidad = Long.parseLong(lineaCantidad);
             //Y se incrementa la suma total
             suma = suma + cantidad;

@@ -20,14 +20,14 @@ public class UtilidadesFicheros {
     public static ArrayList<String> getLineasFichero(String nombreFichero) throws IOException {
         ArrayList<String> lineas = new ArrayList<String>();
         BufferedReader bfr = getBufferedReader(nombreFichero);
-        //Leemos lÃ­neas del fichero...
+        //Leemos líneas del fichero...
         String linea = bfr.readLine();
         while (linea != null) {
-            //Y las aÃ±adimos al array
+            //Y las añadimos al array
             lineas.add(linea);
             linea = bfr.readLine();
         }
-        //Fin del bucle que lee lÃ­neas
+        //Fin del bucle que lee líneas
         return lineas;
     }
 
@@ -43,7 +43,7 @@ public class UtilidadesFicheros {
                 lineas = getLineasFichero(nombreFichero);
                 //Pero solo nos interesa la primera
                 lineaCantidad = lineas.get(0);
-                //Convertimos la linea a nÃºmero
+                //Convertimos la linea a número
                 cantidad = Long.parseLong(lineaCantidad);
                 //Y se incrementa la suma total
                 suma = suma + cantidad;

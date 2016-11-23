@@ -36,14 +36,14 @@
 \contentsline {section}{\numberline {2.9}Gesti\IeC {\'o}n de prioridades.}{26}{section.2.9}
 \contentsline {section}{\numberline {2.10}Programaci\IeC {\'o}n de aplicaciones multihilo.}{26}{section.2.10}
 \contentsline {section}{\numberline {2.11}Problema}{29}{section.2.11}
-\contentsline {subsection}{\numberline {2.11.1}Boceto de soluci\IeC {\'o}n}{29}{subsection.2.11.1}
+\contentsline {subsection}{\numberline {2.11.1}Boceto de soluci\IeC {\'o}n}{30}{subsection.2.11.1}
 \contentsline {section}{\numberline {2.12}Soluci\IeC {\'o}n completa al problema de los fil\IeC {\'o}sofos}{30}{section.2.12}
 \contentsline {subsection}{\numberline {2.12.1}Gestor de recursos compartidos (palillos)}{30}{subsection.2.12.1}
 \contentsline {subsection}{\numberline {2.12.2}Simulaci\IeC {\'o}n de un fil\IeC {\'o}sofo}{31}{subsection.2.12.2}
 \contentsline {subsection}{\numberline {2.12.3}Lanzador de hilos}{32}{subsection.2.12.3}
 \contentsline {section}{\numberline {2.13}Problema}{33}{section.2.13}
-\contentsline {section}{\numberline {2.14}Una (mala) soluci\IeC {\'o}n al problema de los barberos}{34}{section.2.14}
-\contentsline {subsection}{\numberline {2.14.1}Clase Barbero}{34}{subsection.2.14.1}
+\contentsline {section}{\numberline {2.14}Una (mala) soluci\IeC {\'o}n al problema de los barberos}{33}{section.2.14}
+\contentsline {subsection}{\numberline {2.14.1}Clase Barbero}{33}{subsection.2.14.1}
 \contentsline {subsection}{\numberline {2.14.2}Clase Cliente}{35}{subsection.2.14.2}
 \contentsline {subsection}{\numberline {2.14.3}Clase GestorConcurrencia}{35}{subsection.2.14.3}
 \contentsline {subsection}{\numberline {2.14.4}Clase Lanzador}{37}{subsection.2.14.4}
@@ -53,12 +53,12 @@
 \contentsline {section}{\numberline {2.16}Soluci\IeC {\'o}n}{39}{section.2.16}
 \contentsline {subsection}{\numberline {2.16.1}Una cola limitada en tama\IeC {\~n}o}{39}{subsection.2.16.1}
 \contentsline {subsection}{\numberline {2.16.2}Un gestor de concurrencia para la cola}{40}{subsection.2.16.2}
-\contentsline {subsection}{\numberline {2.16.3}La clase Productor}{40}{subsection.2.16.3}
+\contentsline {subsection}{\numberline {2.16.3}La clase Productor}{41}{subsection.2.16.3}
 \contentsline {subsection}{\numberline {2.16.4}La clase consumidor}{41}{subsection.2.16.4}
 \contentsline {subsection}{\numberline {2.16.5}Un lanzador}{42}{subsection.2.16.5}
 \contentsline {section}{\numberline {2.17}Ejercicio}{43}{section.2.17}
-\contentsline {section}{\numberline {2.18}Documentaci\IeC {\'o}n.}{43}{section.2.18}
-\contentsline {section}{\numberline {2.19}Depuraci\IeC {\'o}n.}{43}{section.2.19}
+\contentsline {section}{\numberline {2.18}Documentaci\IeC {\'o}n.}{44}{section.2.18}
+\contentsline {section}{\numberline {2.19}Depuraci\IeC {\'o}n.}{44}{section.2.19}
 \contentsline {chapter}{\numberline {3}{}Programaci\IeC {\'o}n de comunicaciones en red}{45}{chapter.3}
 \contentsline {section}{\numberline {3.1}Comunicaci\IeC {\'o}n entre aplicaciones.}{45}{section.3.1}
 \contentsline {section}{\numberline {3.2}Roles cliente y servidor.}{45}{section.3.2}

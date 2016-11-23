@@ -1,7 +1,7 @@
 /**
-	 * Dado un fichero pasado como argumento, contar√° cuantas
+	 * Dado un fichero pasado como argumento, contar· cuantas
 	 * apariciones hay de una cierta vocal (pasada como argumento)
-	 * y dejar√° la cantidad en otro fichero (tambi√©n pasado como
+	 * y dejar· la cantidad en otro fichero (tambiÈn pasado como
 	 * argumento)
 	 * @throws IOException 
 	 * @throws FileNotFoundException  */

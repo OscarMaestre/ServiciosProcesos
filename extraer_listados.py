@@ -38,6 +38,14 @@ class Extraccion(object):
 		self.ejecutar_lista(lista_lanzamiento, fichero_salida=fich_salida)
 		return 
 		
+	def extraer_clase_con_nombre(self, nombre):
+		ruta_clase=self.get_ruta()
+		lista_lanzamiento = lista_extractor + [ruta_clase, nombre, EXTRAER_CLASE ]
+		nuevo_archivo_salida=nombre.replace(".", "_")
+		fich_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Clase_"+nuevo_archivo_salida
+		self.ejecutar_lista(lista_lanzamiento, fichero_salida=fich_salida)
+		return 
+		
 	def extraer_metodo(self, nombre_metodo):
 		ruta_clase=self.get_ruta()
 		lista_lanzamiento = lista_extractor + [ruta_clase, nombre_metodo, EXTRAER_METODO ]
@@ -76,3 +84,10 @@ e5=Extraccion(clase_cualificada="com.ies.LanzadorContabilidades",
 							dir_proyecto="SumaContabilidades")
 e5.extraer_clase()
 e5.extraer_metodo("main")
+
+e6=Extraccion(clase_cualificada="com.ies.AreasEnParalelo",
+							dir_proyecto="EjemplosHilos")
+e6.extraer_clase()
+e6.extraer_clase_con_nombre("CalculadorAreas")
+e6.extraer_metodo("main")
+
