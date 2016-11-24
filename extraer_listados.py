@@ -15,6 +15,8 @@ class Extraccion(object):
 	def __init__(self, clase_cualificada, dir_proyecto):
 		self.clase			=	clase_cualificada
 		self.nombre_clase	=	self.clase.split(".")[-1]
+		self.nombre_paquete = 	".".join ( self.clase.split(".")[:-1] )
+		print (self.nombre_paquete)
 		self.archivo_salida_clase = self.clase.replace(".", "_")+".java"
 		print(self.nombre_clase)
 		self.dir_proyecto	=	dir_proyecto
@@ -41,8 +43,10 @@ class Extraccion(object):
 	def extraer_clase_con_nombre(self, nombre):
 		ruta_clase=self.get_ruta()
 		lista_lanzamiento = lista_extractor + [ruta_clase, nombre, EXTRAER_CLASE ]
-		nuevo_archivo_salida=nombre.replace(".", "_")
-		fich_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Clase_"+nuevo_archivo_salida
+		nombre_cualificado=self.nombre_paquete+"."+nombre
+		print (nombre_cualificado)
+		nuevo_archivo_salida=nombre_cualificado.replace(".","_")
+		fich_salida = DIRECTORIO_EXTRACCION_LISTADOS + os.sep + "Clase_"+nuevo_archivo_salida+".java"
 		self.ejecutar_lista(lista_lanzamiento, fichero_salida=fich_salida)
 		return 
 		
@@ -54,7 +58,16 @@ class Extraccion(object):
 		return 
 		
 		
-		
+
+
+e6=Extraccion(clase_cualificada="com.ies.AreasEnParalelo",
+							dir_proyecto="EjemplosHilos")
+e6.extraer_clase()
+e6.extraer_clase_con_nombre("CalculadorAreas")
+e6.extraer_metodo("main")
+
+
+sys.exit(0)		
 		
 e1=Extraccion(clase_cualificada="com.utilidades.UtilidadesFicheros",
 							dir_proyecto="Utilidades")
@@ -84,10 +97,4 @@ e5=Extraccion(clase_cualificada="com.ies.LanzadorContabilidades",
 							dir_proyecto="SumaContabilidades")
 e5.extraer_clase()
 e5.extraer_metodo("main")
-
-e6=Extraccion(clase_cualificada="com.ies.AreasEnParalelo",
-							dir_proyecto="EjemplosHilos")
-e6.extraer_clase()
-e6.extraer_clase_con_nombre("CalculadorAreas")
-e6.extraer_metodo("main")
 
