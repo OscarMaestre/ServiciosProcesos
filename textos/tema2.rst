@@ -158,12 +158,12 @@ Ejercicio: crear un programa que lance 10 hilos de ejecución donde a cada hilo 
 Una posibilidad (quizá incorrecta) sería esta:
 
 Para implementar la clase ``CalculadorAreas``
-`
+
 .. literalinclude:: ../listados/Clase_com_ies_CalculadorAreas.java
    :language: java
 
 Para implementar la clase ``AreasEnParalelo`` que lanza los hilos para hacer muchos cálculos de áreas en paralelo usaremos esto:
-`
+
 .. literalinclude:: ../listados/Clase_com_ies_AreasEnParalelo.java
    :language: java
 
