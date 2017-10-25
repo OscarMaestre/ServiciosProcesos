@@ -1,36 +1,38 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Programación de servicios y procesos</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
         VERSION:     '2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
-    <link rel="top" title="None" href="index.html#document-index" />
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
    
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">  
+  <body>
+  
 
     <div class="document">
       <div class="documentwrapper">
@@ -47,16 +49,16 @@
 <div class="section" id="ejecutables">
 <h4>Ejecutables<a class="headerlink" href="#ejecutables" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Un ejecutable es un archivo con la estructura necesaria para que el sistema operativo pueda poner en marcha el programa que hay dentro. En Windows, los ejecutables suelen ser archivos con la extension .EXE.</p>
-<p>Se pueden utilizar &#8220;desensambladores&#8221; para averiguar la secuencia de instrucciones que hay en un EXE. Incluso existen desensambladores en línea como <a class="reference external" href="http://onlinedisassembler.com">http://onlinedisassembler.com</a></p>
+<p>Se pueden utilizar «desensambladores» para averiguar la secuencia de instrucciones que hay en un EXE. Incluso existen desensambladores en línea como <a class="reference external" href="http://onlinedisassembler.com">http://onlinedisassembler.com</a></p>
 <p>Sin embargo, Java genera ficheros .JAR o .CLASS. Estos ficheros <em>no son ejecutables</em> sino que son archivos que el intérprete de JAVA (el archivo <code class="docutils literal"><span class="pre">java.exe</span></code>) leerá y ejecutará.</p>
-<p>El intérprete toma el programa y lo traduce a instrucciones del microprocesador en el que estemos, que puede ser x86 o un x64 o lo que sea. Ese proceso se hace &#8220;al instante&#8221; o JIT (Just-In-Time).</p>
-<p>Un archivo .CLASS puede desensamblarse utilizando el comando <code class="docutils literal"><span class="pre">javap</span> <span class="pre">-c</span> <span class="pre">&lt;archivo.class&gt;</span></code> . Cuando se hace así, se obtiene un listado de &#8220;instrucciones&#8221; que no se corresponden con las instrucciones del microprocesador, sino con &#8220;instrucciones virtuales de Java&#8221;. El intérprte Java (el archivo <code class="docutils literal"><span class="pre">java.exe</span></code>) traducirá en el momento del arranque dichas instrucciones virtuales Java a instrucciones reales del microprocesador.</p>
+<p>El intérprete toma el programa y lo traduce a instrucciones del microprocesador en el que estemos, que puede ser x86 o un x64 o lo que sea. Ese proceso se hace «al instante» o JIT (Just-In-Time).</p>
+<p>Un archivo .CLASS puede desensamblarse utilizando el comando <code class="docutils literal"><span class="pre">javap</span> <span class="pre">-c</span> <span class="pre">&lt;archivo.class&gt;</span></code> . Cuando se hace así, se obtiene un listado de «instrucciones» que no se corresponden con las instrucciones del microprocesador, sino con «instrucciones virtuales de Java». El intérprte Java (el archivo <code class="docutils literal"><span class="pre">java.exe</span></code>) traducirá en el momento del arranque dichas instrucciones virtuales Java a instrucciones reales del microprocesador.</p>
 <p>Este último aspecto es el esgrimido por Java para defender que su ejecución puede ser más rápida que la de un EXE, ya que Java puede averiguar en qué microprocesador se está ejecutando y así generar el código más óptimo posible.</p>
 <p>Un EXE puede que no contenga las instrucciones de los microprocesadores más modernos. Como todos son compatibles no es un gran problema, sin embargo, puede que no aprovechemos al 100% la capacidad de nuestro micro.</p>
 </div>
 <div class="section" id="procesos">
 <h4>Procesos<a class="headerlink" href="#procesos" title="Enlazar permanentemente con este título">¶</a></h4>
-<p>Es un archivo que está en ejecución y bajo el control del sistema operativo. Un proceso puede atravesar diversas etapas en su &#8220;ciclo de vida&#8221;. Los estados en los que puede estar son:</p>
+<p>Es un archivo que está en ejecución y bajo el control del sistema operativo. Un proceso puede atravesar diversas etapas en su «ciclo de vida». Los estados en los que puede estar son:</p>
 <ul class="simple">
 <li>En ejecución: está dentro del microprocesador.</li>
 <li>Pausado/detenido/en espera: el proceso tiene que seguir en ejecución pero en ese momento el S.O tomó la decisión de dejar paso a otro.</li>
@@ -83,8 +85,8 @@
 <h3>Programación paralela y distribuida.<a class="headerlink" href="#programacion-paralela-y-distribuida" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Dentro de la programación concurrente tenemos la paralela y la distribuida:</p>
 <ul class="simple">
-<li>En general se denomina &#8220;programación paralela&#8221; a la creación de software que se ejecuta siempre en un solo ordenador (con varios núcleos o no)</li>
-<li>Se denomina &#8220;programación distribuida&#8221; a la creación de software que se ejecuta en ordenadores distintos y que se comunican a través de una red.</li>
+<li>En general se denomina «programación paralela» a la creación de software que se ejecuta siempre en un solo ordenador (con varios núcleos o no)</li>
+<li>Se denomina «programación distribuida» a la creación de software que se ejecuta en ordenadores distintos y que se comunican a través de una red.</li>
 </ul>
 </div>
 <div class="section" id="creacion-de-procesos">
@@ -143,7 +145,7 @@
 <span class="o">}</span>
 </pre></div>
 </div>
-<p>Para ejecutar este programa desde dentro de Eclipse es necesario indicar que deseamos enviar <em>argumentos</em> al programa. Por ejemplo, si deseamos sumar los números del 2 al 10, deberemos ir a la venta &#8220;Run configuration&#8221; y en la pestaña &#8220;Arguments&#8221; indicar los argumentos (que en este caso son los dos números a indicar).</p>
+<p>Para ejecutar este programa desde dentro de Eclipse es necesario indicar que deseamos enviar <em>argumentos</em> al programa. Por ejemplo, si deseamos sumar los números del 2 al 10, deberemos ir a la venta «Run configuration» y en la pestaña «Arguments» indicar los argumentos (que en este caso son los dos números a indicar).</p>
 <div class="figure align-center" id="id1" style="width: 50%">
 <img alt="_images/configuraciones.png" src="_images/configuraciones.png" />
 <p class="caption"><span class="caption-text">Modificando los argumentos del programa</span></p>
@@ -403,7 +405,7 @@
 <p>En cada fichero hay una lista de cantidades enteras que representa las contabilidades de distintos departamentos. Hay una cantidad en cada línea. Se desea que el programa creado sume la cantidad total que suman todas las cantidades de los cinco ficheros haciendo uso del paralelismo.</p>
 <div class="section" id="solucion-al-ejercicio-propuesto-i">
 <h4>Solución al ejercicio propuesto (I)<a class="headerlink" href="#solucion-al-ejercicio-propuesto-i" title="Enlazar permanentemente con este título">¶</a></h4>
-<p>Este ejercicio es bastante parecido al anterior, con la salvedad de que ahora necesitaremos sumar cantidades en lugar de buscar elementos. Por lo demás,  también generaremos un fichero de resultados por cada fichero de datos y los llamaremos igual pero añadiendo la extensión &#8221;.res&#8221;. Es decir, la suma de las cantidades de <code class="docutils literal"><span class="pre">informatica.txt</span></code> se dejará en <code class="docutils literal"><span class="pre">informatica.txt.res</span></code>.</p>
+<p>Este ejercicio es bastante parecido al anterior, con la salvedad de que ahora necesitaremos sumar cantidades en lugar de buscar elementos. Por lo demás,  también generaremos un fichero de resultados por cada fichero de datos y los llamaremos igual pero añadiendo la extensión «.res». Es decir, la suma de las cantidades de <code class="docutils literal"><span class="pre">informatica.txt</span></code> se dejará en <code class="docutils literal"><span class="pre">informatica.txt.res</span></code>.</p>
 <p>Una vez generados todos los fichero <code class="docutils literal"><span class="pre">Resultado</span></code> tendremos que sumar todas las cantidades de estos ficheros. Su estructura es muy simple, todos contienen una única línea con una cantidad. Dado que esta operación de sumar cantidades almacenadas en distintos ficheros es una operación muy habitual, añadiremos un método a <code class="docutils literal"><span class="pre">UtilidadesFicheros</span></code> que se encargue de hacer esta operación. Obsérvese que usaremos tipos de datos <code class="docutils literal"><span class="pre">long</span></code> y no <code class="docutils literal"><span class="pre">int</span></code> dado que no sabemos como de grandes serán las cantidades a procesar.</p>
 <p>A continuación se muestra el código de este método.</p>
 <p>Una vez creado este método que usaremos al final, pasemos a crear una clase <code class="docutils literal"><span class="pre">ProcesadorContabilidad</span></code> que leerá un fichero, sumará las cantidades y las dejará en el fichero de resultados. Esta clase solo tendrá un método <code class="docutils literal"><span class="pre">main</span></code> que realizará esta tarea.</p>
@@ -415,13 +417,13 @@
 <h3>Gestión de procesos.<a class="headerlink" href="#gestion-de-procesos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>La gestión de procesos se realiza de dos formas <strong>muy distintas</strong> en función de los dos grandes sistemas operativos: Windows y Linux.</p>
 <ul class="simple">
-<li>En Windows toda la gestión de procesos se realiza desde el &#8220;Administrador de tareas&#8221; al cual se accede con Ctrl+Alt+Supr. Existen otros programas más sofisticados que proporcionan algo más de información sobre los procesos, como Process Explorer (antes conocido con el nombre de ProcessViewer).</li>
+<li>En Windows toda la gestión de procesos se realiza desde el «Administrador de tareas» al cual se accede con Ctrl+Alt+Supr. Existen otros programas más sofisticados que proporcionan algo más de información sobre los procesos, como Process Explorer (antes conocido con el nombre de ProcessViewer).</li>
 </ul>
 </div>
 <div class="section" id="comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios">
 <h3>Comandos para la gestión de procesos en sistemas libres y propietarios.<a class="headerlink" href="#comandos-para-la-gestion-de-procesos-en-sistemas-libres-y-propietarios" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En sistemas Windows, no existen apenas comandos para gestionar procesos. Puede obligarse al sistema operativo a arrancar la aplicación asociada a un archivo con el comando <code class="docutils literal"><span class="pre">START</span></code>. Es decir, si se ejecuta lo siguiente:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>START documento.pdf
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">START</span> <span class="n">documento</span><span class="o">.</span><span class="n">pdf</span>
 </pre></div>
 </div>
 <p>se abrirá el visor de archivos PDF el cual cargará automáticamente el fichero <code class="docutils literal"><span class="pre">documento.pdf</span></code></p>
@@ -436,8 +438,8 @@
 <h4>Prioridades<a class="headerlink" href="#prioridades" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>En sistemas como GNU/Linux se puede modificar la prioridad con que se ejecuta un proceso. Esto implica dos posibilidades</p>
 <ul class="simple">
-<li>Si pensamos que un programa que necesitamos ejecutar es muy importante podemos darle más prioridad para que reciba &#8220;más turnos&#8221; del planificador.</li>
-<li>Y por el contrario, si pensamos que un programa no es muy necesario podemos quitarle prioridad y reservar &#8220;más turnos de planificador&#8221; para otros posibles procesos.</li>
+<li>Si pensamos que un programa que necesitamos ejecutar es muy importante podemos darle más prioridad para que reciba «más turnos» del planificador.</li>
+<li>Y por el contrario, si pensamos que un programa no es muy necesario podemos quitarle prioridad y reservar «más turnos de planificador» para otros posibles procesos.</li>
 </ul>
 <p>El comando <code class="docutils literal"><span class="pre">nice</span></code> permite indicar prioridades entre -20 y 19. El -20 implica que un proceso reciba la <strong>máxima prioridad</strong>, y el 19 supone asignar la <strong>mínima prioridad</strong></p>
 </div>
@@ -457,7 +459,7 @@
 </pre></div>
 </div>
 <p>Si dos o más procesos avanzan por esta sección de código es perfectamente posible que unas veces nuestro programa multiproceso se ejecute bien y otras no.</p>
-<p>En todo programa multiproceso pueden encontrarse estas zonas de código &#8220;peligrosas&#8221; que deben protegerse especialmente utilizando ciertos mecanismos. El nombre global para todos los lenguajes es denominar a estos trozos &#8220;secciones críticas&#8221;.</p>
+<p>En todo programa multiproceso pueden encontrarse estas zonas de código «peligrosas» que deben protegerse especialmente utilizando ciertos mecanismos. El nombre global para todos los lenguajes es denominar a estos trozos «secciones críticas».</p>
 <div class="section" id="mecanismos-para-controlar-secciones-criticas">
 <h4>Mecanismos para controlar secciones críticas<a class="headerlink" href="#mecanismos-para-controlar-secciones-criticas" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Los mecanismos más típicos son los ofrecidos por UNIX/Windows:</p>
@@ -467,7 +469,7 @@
 <li>Tuberías (pipes)</li>
 <li>Bloques de memoria compartida.</li>
 </ul>
-<p>En realidad algunos de estos mecanismos se utilizan más para intercomunicar procesos, aunque para los programadores Java la forma de resolver el problema de la &#8220;sección crítica&#8221; es más simple.</p>
+<p>En realidad algunos de estos mecanismos se utilizan más para intercomunicar procesos, aunque para los programadores Java la forma de resolver el problema de la «sección crítica» es más simple.</p>
 <p>En Java, si el programador piensa que un trozo de código es peligroso puede ponerle la palabra clave <code class="docutils literal"><span class="pre">synchronized</span></code> y la máquina virtual Java protege el código automáticamente.</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span>    <span class="cm">/* La máquina virtual Java evitará que más de un proceso/hilo acceda a este método*/</span>
     <span class="kd">synchronized</span>
@@ -503,8 +505,8 @@
 <li>A veces cuando un depurador interviene en un proceso puede ocurrir que el resto de procesos consigan ejecutarse en el orden correcto y dar lugar a que el programa parezca que funciona bien.</li>
 <li>Un error muy típico es la <code class="docutils literal"><span class="pre">NullPointerException</span></code>, que en muchos casos se deben a la utilización de referencias Java no inicializadas o incluso a la devolución de valores NULL que luego no se comprueban en alguna parte del código.</li>
 <li>Se puede usar el método <code class="docutils literal"><span class="pre">redirectError</span></code> pasándole un objeto de tipo <code class="docutils literal"><span class="pre">File</span></code> para que los mensajes de error vayan a un fichero.</li>
-<li>Se debe recordar que la &#8220;visión&#8221; que tiene Eclipse del sistema puede ser <strong>muy diferente</strong> de la visión que tiene el proceso lanzado. Un problema muy común es que el proceso lanzado no encuentre clases, lo que obligará a indicar el <code class="docutils literal"><span class="pre">CLASSPATH</span></code>.</li>
-<li>Un buen método para determinar errores consiste en utilizar el entorno de consola para lanzar comandos para ver &#8220;como es el sistema&#8221; que ve un proceso fuera de Eclipse (o de cualquier otro entorno).</li>
+<li>Se debe recordar que la «visión» que tiene Eclipse del sistema puede ser <strong>muy diferente</strong> de la visión que tiene el proceso lanzado. Un problema muy común es que el proceso lanzado no encuentre clases, lo que obligará a indicar el <code class="docutils literal"><span class="pre">CLASSPATH</span></code>.</li>
+<li>Un buen método para determinar errores consiste en utilizar el entorno de consola para lanzar comandos para ver «como es el sistema» que ve un proceso fuera de Eclipse (o de cualquier otro entorno).</li>
 </ol>
 <p>En general todos los fallos en un programa multiproceso vienen derivado de no usar <code class="docutils literal"><span class="pre">synchronized</span></code> de la forma correcta.</p>
 </div>
@@ -531,7 +533,7 @@
 </div>
 <div class="section" id="estados-de-un-hilo-cambios-de-estado">
 <h3>Estados de un hilo. Cambios de estado.<a class="headerlink" href="#estados-de-un-hilo-cambios-de-estado" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>Aunque no lo vemos, un hilo cambia de estado: puede pasar de la nada a la ejecución. De la ejecución al estado &#8220;en espera&#8221;. De ahí puede volver a estar en ejecución. De cualquier estado se puede pasar al estado &#8220;finalizado&#8221;.</p>
+<p>Aunque no lo vemos, un hilo cambia de estado: puede pasar de la nada a la ejecución. De la ejecución al estado «en espera». De ahí puede volver a estar en ejecución. De cualquier estado se puede pasar al estado «finalizado».</p>
 <p>El programador no necesita controlar esto, lo hace el sistema operativo. Sin embargo un programa multihilo mal hecho puede dar lugar problemas como los siguientes:</p>
 <ul class="simple">
 <li>Interbloqueo. Se produce cuando las peticiones y las esperas se entrelazan de forma que ningún proceso puede avanzar.</li>
@@ -596,7 +598,7 @@
 <p>Con los hilos se pueden efectuar diversas operaciones que sean de utilidad al programador (y al administrador de sistemas a veces).</p>
 <p>Por ejemplo, un hilo puede tener un nombre. Si queremos asignar un nombre a un hilo podemos usar el método <code class="docutils literal"><span class="pre">setName(&quot;Nombre</span> <span class="pre">que</span> <span class="pre">sea&quot;)</span></code>. También podemos obtener un objeto que represente el hilo de ejecución con <code class="docutils literal"><span class="pre">currentThread</span></code> que nos devolverá un objeto de la clase <code class="docutils literal"><span class="pre">Thread</span></code>.</p>
 <p>Otra operación de utilidad al gestionar hilos es indicar la prioridad que queremos darle a un hilo. En realidad esta prioridad es indicativa, el sistema operativo no está obligado a respetarla aunque por lo general lo hacen. Se puede indicar la prioridad con <code class="docutils literal"><span class="pre">setPriority(10)</span></code>. La máxima prioridad posible es <code class="docutils literal"><span class="pre">MAX_PRIORITY</span></code>, y la mínima es <code class="docutils literal"><span class="pre">MIN_PRIORITY</span></code>.</p>
-<p>Cuando lanzamos una operación también podemos usar el método <code class="docutils literal"><span class="pre">Thread.sleep(numero)</span></code> y poner nuestro hilo &#8220;a dormir&#8221;.</p>
+<p>Cuando lanzamos una operación también podemos usar el método <code class="docutils literal"><span class="pre">Thread.sleep(numero)</span></code> y poner nuestro hilo «a dormir».</p>
 <p>Cuando se trabaja con prioridades en hilos <strong>no hay garantías de que un hilo termine cuando esperemos</strong>.</p>
 <p>Podemos terminar un hilo de ejecución llamando al método <code class="docutils literal"><span class="pre">join</span></code>. Este método devuelve el control al hilo principal que lanzó el hilo secundario con la posibilidad de elegir un tiempo de espera en milisegundos.</p>
 <p>El siguiente programa ilustra el uso de estos métodos:</p>
@@ -758,7 +760,7 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li>Todo programa multihilo tiene un &#8220;hilo principal&#8221;, el cual deberá esperar a que terminen los hilos asociados ejecutando el método <code class="docutils literal"><span class="pre">join()</span></code>  .</li>
+<li>Todo programa multihilo tiene un «hilo principal», el cual deberá esperar a que terminen los hilos asociados ejecutando el método <code class="docutils literal"><span class="pre">join()</span></code>  .</li>
 </ul>
 </div>
 <div class="section" id="sincronizacion-de-hilos">
@@ -777,7 +779,7 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 <div class="section" id="gestion-de-prioridades">
 <h3>Gestión de prioridades.<a class="headerlink" href="#gestion-de-prioridades" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>En realidad un sistema operativo no está obligado a respetar las prioridades, sino que se lo tomará como &#8220;recomendaciones&#8221;. En general hasta ahora todos respetan hasta cierto punto las prioridades que pone el programador pero no debe tomarse como algo absoluto.</p>
+<p>En realidad un sistema operativo no está obligado a respetar las prioridades, sino que se lo tomará como «recomendaciones». En general hasta ahora todos respetan hasta cierto punto las prioridades que pone el programador pero no debe tomarse como algo absoluto.</p>
 </div>
 <div class="section" id="programacion-de-aplicaciones-multihilo">
 <h3>Programación de aplicaciones multihilo.<a class="headerlink" href="#programacion-de-aplicaciones-multihilo" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -884,8 +886,8 @@ En realidad podemos comunicar los hilos con otro mecanismo llamado <code class="
 </div>
 <div class="section" id="problema">
 <h3>Problema<a class="headerlink" href="#problema" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>En una mesa hay procesos que simulan el comportamiento de unos filósofos que intentan comer de un plato. Cada filósofo tiene un cubierto a su izquierda y uno a su derecha y para poder comer tiene que conseguir los dos. Si lo consigue, mostrará un mensaje en pantalla que indique &#8220;Filosofo 2 comiendo&#8221;.</p>
-<p>Despues de comer, soltará los cubiertos y esperará al azar un tiempo entre 1000 y 5000 milisegundos, indicando por pantalla &#8220;El filósofo 2 está pensando&#8221;.</p>
+<p>En una mesa hay procesos que simulan el comportamiento de unos filósofos que intentan comer de un plato. Cada filósofo tiene un cubierto a su izquierda y uno a su derecha y para poder comer tiene que conseguir los dos. Si lo consigue, mostrará un mensaje en pantalla que indique «Filosofo 2 comiendo».</p>
+<p>Despues de comer, soltará los cubiertos y esperará al azar un tiempo entre 1000 y 5000 milisegundos, indicando por pantalla «El filósofo 2 está pensando».</p>
 <p>En general todos los objetos de la clase Filósofo está en un bucle infinito dedicándose a comer y a pensar.</p>
 <p>Simular este problema en un programa Java que muestre el progreso de todos sin caer en problemas de sincronización ni de inanición.</p>
 <div class="figure align-center" id="id2" style="width: 50%">
@@ -1671,9 +1673,9 @@ IP pero <em>solo a veces tendrá un nombre DNS</em>. Para nosotros no habrá dif
 </ul>
 <p>A partir de ahora cuando usemos un número de puerto habrá que comprobar si ese número ya está usado.</p>
 <p>Por ejemplo, es mala idea que nuestros programas usen el puerto 80 TCP, probablemente ya esté en uso.
-Antes de usar un puerto en una aplicación comercial deberíamos consultar la lista de &#8220;IANA assigned ports&#8221;.</p>
+Antes de usar un puerto en una aplicación comercial deberíamos consultar la lista de «IANA assigned ports».</p>
 <p>En líneas generales se pueden usar los puertos desde 1024 TCP a 49151 TCP, pero deberíamos comprobar que el número que elegimos no sea un número usado por un puerto de alguna aplicación que haya en la empresa.</p>
-<p>En las prácticas de clase usaremos el 9876 TCP. Si se desea conectar desde el instituto con algún programa ejecutado en casa se deberá &#8220;abrir el puerto 9876 TCP&#8221;. Abrir un puerto consiste en configurar el router para que <strong>SÍ ACEPTE TRÁFICO INICIADO DESDE EL EXTERIOR</strong> cosa que no hace nunca por motivos de protección.</p>
+<p>En las prácticas de clase usaremos el 9876 TCP. Si se desea conectar desde el instituto con algún programa ejecutado en casa se deberá «abrir el puerto 9876 TCP». Abrir un puerto consiste en configurar el router para que <strong>SÍ ACEPTE TRÁFICO INICIADO DESDE EL EXTERIOR</strong> cosa que no hace nunca por motivos de protección.</p>
 </div>
 </div>
 <div class="section" id="sockets">
@@ -1891,9 +1893,9 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <h4>Ejemplo de servidor Java<a class="headerlink" href="#ejemplo-de-servidor-java" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Supongamos que se nos pide crear un servidor de operaciones de cálculo que sea menos estricto que el anterior:</p>
 <ul class="simple">
-<li>Cualquier parámetro que envíe el usuario debe ir terminado en un fin de línea UNIX (&#8220;n&#8221;).</li>
-<li>El usuario enviará primero un símbolo &#8220;+&#8221;, &#8220;-&#8221;, &#8220;*&#8221; o &#8220;/&#8221;.</li>
-<li>Despues se puede enviar un positivo de 1 a 8 cifras. El usuario podría equivocarse y enviar en vez de &#8220;3762&#8221; algo como &#8220;37a62&#8221;. En ese caso se asume que el parámetro es 0.</li>
+<li>Cualquier parámetro que envíe el usuario debe ir terminado en un fin de línea UNIX («n»).</li>
+<li>El usuario enviará primero un símbolo «+», «-«, «*» o «/».</li>
+<li>Despues se puede enviar un positivo de 1 a 8 cifras. El usuario podría equivocarse y enviar en vez de «3762» algo como «37a62». En ese caso se asume que el parámetro es 0.</li>
 <li>Despues se envía un segundo positivo de 1 a 8 cifras igual que el anterior.</li>
 <li>Cuando se haya procesado todo el servidor contestará al cliente con un positivo de 1 a 12 cifras.</li>
 </ul>
@@ -2115,8 +2117,8 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <h4>Ejercicio: servicio de ordenación<a class="headerlink" href="#ejercicio-servicio-de-ordenacion" title="Enlazar permanentemente con este título">¶</a></h4>
 <p>Crear una arquitectura cliente/servidor que permita a un cliente, enviar dos cadenas a un servidor para saber cual de ellas va antes que otra:</p>
 <ul class="simple">
-<li>Un cliente puede enviar las cadenas &#8220;hola&#8221;, &#8220;mundo&#8221;. El servidor comprobará que en el diccionario la primera va antes que la segunda, por lo cual contestará &#8220;hola&#8221;, &#8220;mundo&#8221;.</li>
-<li>Si el cliente enviase &#8220;mundo&#8221;, &#8220;hola&#8221; el servidor debe devolver la respuesta &#8220;hola&#8221;, &#8220;mundo&#8221;.</li>
+<li>Un cliente puede enviar las cadenas «hola», «mundo». El servidor comprobará que en el diccionario la primera va antes que la segunda, por lo cual contestará «hola», «mundo».</li>
+<li>Si el cliente enviase «mundo», «hola» el servidor debe devolver la respuesta «hola», «mundo».</li>
 </ul>
 <p>Debido a posibles mejoras futuras, se espera que el servidor sea capaz de saber qué versión del protocolo se maneja. Esto es debido a que en el futuro se espera lanzar una versión 2 del protocolo en la que se puedan enviar varias cadenas seguidas.</p>
 <p>Crear el protocolo, el código Java del cliente y el código Java del servidor con capacidad para procesar muchas peticiones a la vez (multihilo).</p>
@@ -2392,7 +2394,7 @@ Antes de usar un puerto en una aplicación comercial deberíamos consultar la li
 <h2>﻿Utilización de técnicas de programación segura<a class="headerlink" href="#utilizacion-de-tecnicas-de-programacion-segura" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="section" id="introduccion">
 <h3>Introducción<a class="headerlink" href="#introduccion" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>En general, cuando se envía algo a través de sockets se envía como &#8220;texto plano&#8221;, es decir, no sabemos si hay alguien usando un sniffer en la red y por tanto no sabemos si alguien está capturando los datos.</p>
+<p>En general, cuando se envía algo a través de sockets se envía como «texto plano», es decir, no sabemos si hay alguien usando un sniffer en la red y por tanto no sabemos si alguien está capturando los datos.</p>
 <p>En general, cualquier sistema que pretenda ser seguro necesitará usar cifrado.</p>
 </div>
 <div class="section" id="practicas-de-programacion-segura">
@@ -2616,34 +2618,34 @@ son los que debemos manejar siempre. Las conversiones a <code class="docutils li
 <p class="caption"><span class="caption-text">Generando la pareja de claves del servidor.</span></p>
 </div>
 <p>Los pasos desglosados implican ejecutar estos comandos en el servidor:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span># El servidor genera una pareja de claves que se almacena en un
-#fichero llamado &quot;clavesservidor&quot;. Dentro del fichero se indica
-#un alias para poder referirnos a esa clave fácilmente
-keytool -genkeypair -keyalg RSA
-     -alias servidor -keystore clavesservidor
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># El servidor genera una pareja de claves que se almacena en un</span>
+<span class="c1">#fichero llamado &quot;clavesservidor&quot;. Dentro del fichero se indica</span>
+<span class="c1">#un alias para poder referirnos a esa clave fácilmente</span>
+<span class="n">keytool</span> <span class="o">-</span><span class="n">genkeypair</span> <span class="o">-</span><span class="n">keyalg</span> <span class="n">RSA</span>
+     <span class="o">-</span><span class="n">alias</span> <span class="n">servidor</span> <span class="o">-</span><span class="n">keystore</span> <span class="n">clavesservidor</span>
 
-#El servidor genera su &quot;certificado&quot;, es decir un fichero que
-#de alguna forma indica quien es él. El certificado se almacena
-#en un fichero llamado clavesservidor y a partir de él queremos
-#generar el certificado de un alias que tiene que haber llamado servidor
-keytool --exportcert -alias servidor
-     -file servidor.cer -keystore clavesservidor
+<span class="c1">#El servidor genera su &quot;certificado&quot;, es decir un fichero que</span>
+<span class="c1">#de alguna forma indica quien es él. El certificado se almacena</span>
+<span class="c1">#en un fichero llamado clavesservidor y a partir de él queremos</span>
+<span class="c1">#generar el certificado de un alias que tiene que haber llamado servidor</span>
+<span class="n">keytool</span> <span class="o">--</span><span class="n">exportcert</span> <span class="o">-</span><span class="n">alias</span> <span class="n">servidor</span>
+     <span class="o">-</span><span class="n">file</span> <span class="n">servidor</span><span class="o">.</span><span class="n">cer</span> <span class="o">-</span><span class="n">keystore</span> <span class="n">clavesservidor</span>
 </pre></div>
 </div>
 <p>En el cliente daremos estos pasos:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>#Se genera una pareja de claves (en realidad no nos hace falta solo
-#queremos tener un almacén de claves.
-keytool -genkeypair -keyalg RSA -alias cliente -keystore clavescliente
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Se genera una pareja de claves (en realidad no nos hace falta solo</span>
+<span class="c1">#queremos tener un almacén de claves.</span>
+<span class="n">keytool</span> <span class="o">-</span><span class="n">genkeypair</span> <span class="o">-</span><span class="n">keyalg</span> <span class="n">RSA</span> <span class="o">-</span><span class="n">alias</span> <span class="n">cliente</span> <span class="o">-</span><span class="n">keystore</span> <span class="n">clavescliente</span>
 
-#Se importa el certificado del servidor indicando que pertenece a
-#la lista de certificados confiables.
-keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore clavescliente
+<span class="c1">#Se importa el certificado del servidor indicando que pertenece a</span>
+<span class="c1">#la lista de certificados confiables.</span>
+<span class="n">keytool</span> <span class="o">-</span><span class="n">importcert</span> <span class="o">-</span><span class="n">trustcacerts</span> <span class="o">-</span><span class="n">alias</span> <span class="n">servidor</span> <span class="o">-</span><span class="n">file</span> <span class="n">servidor</span><span class="o">.</span><span class="n">cer</span> <span class="o">-</span><span class="n">keystore</span> <span class="n">clavescliente</span>
 </pre></div>
 </div>
 <p>Una vez creados los ficheros iniciales se deben dar los siguientes pasos en Java (servidor y cliente van por separado):</p>
 <ol class="arabic simple">
 <li>El servidor debe cargar su almacén de claves (el fichero <code class="docutils literal"><span class="pre">clavesservidor</span></code>)</li>
-<li>Ese almacén (cargado en un objeto Java llamado <code class="docutils literal"><span class="pre">KeyStore</span></code>), se usará para crear un gestor de claves (objeto <code class="docutils literal"><span class="pre">KeyManager</span></code>), el cual se obtiene a partir de una &#8220;fábrica&#8221; llamada <code class="docutils literal"><span class="pre">KeyManagerFactory</span></code>.</li>
+<li>Ese almacén (cargado en un objeto Java llamado <code class="docutils literal"><span class="pre">KeyStore</span></code>), se usará para crear un gestor de claves (objeto <code class="docutils literal"><span class="pre">KeyManager</span></code>), el cual se obtiene a partir de una «fábrica» llamada <code class="docutils literal"><span class="pre">KeyManagerFactory</span></code>.</li>
 <li>Se creará un contexto SSL (objeto <code class="docutils literal"><span class="pre">SSLContext</span></code>) a partir de la fábrica comentada.</li>
 <li>El objeto <code class="docutils literal"><span class="pre">SSLContext</span></code> permitirá crear una fábrica de sockets que será la que finalmente nos permita tener un <code class="docutils literal"><span class="pre">SSLServerSocket</span></code>, es decir un socket de servidor que usará cifrado.</li>
 </ol>
@@ -2713,8 +2715,8 @@ keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore c
 </div>
 <p>En el cliente se tienen que dar algunos pasos parecidos:</p>
 <ol class="arabic simple">
-<li>En primer lugar se carga el almacén de claves del cliente (que contiene el certificado del servidor y que es la clave para poder &#8220;autenticar&#8221; el servidor)</li>
-<li>El almacén del cliente se usará para crear un &#8220;gestor de confianza&#8221; (<code class="docutils literal"><span class="pre">TrustManager</span></code>) que Java usará para determinar si puede confiar o no en una conexión. Usaremos un <code class="docutils literal"><span class="pre">TrustManagerFactory</span></code> que usará el almacén del cliente para crear objetos que puedan gestionar la confianza.</li>
+<li>En primer lugar se carga el almacén de claves del cliente (que contiene el certificado del servidor y que es la clave para poder «autenticar» el servidor)</li>
+<li>El almacén del cliente se usará para crear un «gestor de confianza» (<code class="docutils literal"><span class="pre">TrustManager</span></code>) que Java usará para determinar si puede confiar o no en una conexión. Usaremos un <code class="docutils literal"><span class="pre">TrustManagerFactory</span></code> que usará el almacén del cliente para crear objetos que puedan gestionar la confianza.</li>
 <li>Se creará un contexto SSL (<code class="docutils literal"><span class="pre">SSLContext</span></code>) que se basará en los <code class="docutils literal"><span class="pre">TrustManager</span></code> que pueda crear la fábrica.</li>
 <li>A partir del contexto SSL el cliente ya puede crear un socket seguro (<code class="docutils literal"><span class="pre">SSLSocket</span></code>) que puede usar para conectar con el servidor de forma segura.</li>
 </ol>
@@ -2790,7 +2792,7 @@ keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore c
 </div>
 <div class="section" id="firmado-de-aplicaciones">
 <h3>Firmado de aplicaciones<a class="headerlink" href="#firmado-de-aplicaciones" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>Utilizando la criptografía de clave pública es posible &#8220;firmar&#8221; aplicaciones. El firmado es un mecanismo que permite al usuario de una aplicación el verificar que la aplicación no ha sido alterada desde que el programador la creó (virus o programas malignos, personal descontento con la empresa, etc...).</p>
+<p>Utilizando la criptografía de clave pública es posible «firmar» aplicaciones. El firmado es un mecanismo que permite al usuario de una aplicación el verificar que la aplicación no ha sido alterada desde que el programador la creó (virus o programas malignos, personal descontento con la empresa, etc…).</p>
 <p>Antes de efectuar el firmado se debe disponer de un par de claves generadas con la herramienta <code class="docutils literal"><span class="pre">keytool</span></code> mencionada anteriormente. Supongamos que el almacén de claves está creado y que en él hay uno o varios <em>alias</em> creados. El proceso de firmado es el siguiente:</p>
 <ol class="arabic simple">
 <li>Crear la aplicación, que puede estar formada por un conjunto de clases pero que en última instancia tendrá un <code class="docutils literal"><span class="pre">main</span></code>.</li>
@@ -2800,7 +2802,7 @@ keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore c
 </ol>
 <p>Con estos pasos se tiene un aplicación firmada que el usuario puede verificar si así lo desea. De hecho, si se extrae el contenido del JAR con <code class="docutils literal"><span class="pre">jar</span> <span class="pre">-xf</span> <span class="pre">Aplicacion.jar</span></code> se extraen los archivos <code class="docutils literal"><span class="pre">.class</span></code> y un fichero <code class="docutils literal"><span class="pre">META-INF/Manifest</span></code> que se puede abrir con un editor para ver que realmente está firmado.</p>
 <p>Para que otras personas puedan comprobar que nuestra aplicacion es correcta los programadores deberemos exportar un certificado que los usuarios puedan importar para hacer el verificado. Recordemos que el comando es:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>keytool -exportcert -keystore ..\Almacen.store -file Programador.cer -alias Programador
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">keytool</span> <span class="o">-</span><span class="n">exportcert</span> <span class="o">-</span><span class="n">keystore</span> <span class="o">..</span>\<span class="n">Almacen</span><span class="o">.</span><span class="n">store</span> <span class="o">-</span><span class="n">file</span> <span class="n">Programador</span><span class="o">.</span><span class="n">cer</span> <span class="o">-</span><span class="n">alias</span> <span class="n">Programador</span>
 </pre></div>
 </div>
 </div>
@@ -2958,8 +2960,8 @@ keytool -importcert -trustcacerts -alias servidor -file servidor.cer -keystore c
       &copy;2014, Oscar Gomez.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
     </div>
 
