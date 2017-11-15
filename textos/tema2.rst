@@ -1046,6 +1046,19 @@ Un lanzador
 			}
 		}	
 	}
+
+
+
+Ejercicio: productores/consumidores con colas múltiples
+----------------------------------------------------------
+
+Supongamos que ahora tenemos el mismo problema de antes: un conjunto de procesos que producen datos y un conjunto de procesos que consumen datos. Sin embargo ahora puede haber varias colas por lo que el comportamiento de productores y consumidores cambia.
+
+* Los productores tienen acceso a varias colas, por lo que si no pueden poner elementos en una cola deberían intentarlo en otra. Puede ocurrir que todas las colas estén llenas y el productor tenga que esperar.
+
+* Los consumidores también tienen acceso a varias colas, por lo que si una cierta cola está vacía deberían intentar extraer elementos de otra cola. Por supuesto también puede ocurrir que todas las colas estén vacías y el consumidor tenga que esperar.
+
+
 	
 Ejercicio
 ------------------------------------------------------
