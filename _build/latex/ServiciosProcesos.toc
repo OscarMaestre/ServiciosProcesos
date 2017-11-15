@@ -56,9 +56,10 @@
 \contentsline {subsection}{\numberline {2.16.3}La clase Productor}{38}{subsection.2.16.3}
 \contentsline {subsection}{\numberline {2.16.4}La clase consumidor}{38}{subsection.2.16.4}
 \contentsline {subsection}{\numberline {2.16.5}Un lanzador}{39}{subsection.2.16.5}
-\contentsline {section}{\numberline {2.17}Ejercicio}{40}{section.2.17}
-\contentsline {section}{\numberline {2.18}Documentaci\IeC {\'o}n.}{41}{section.2.18}
-\contentsline {section}{\numberline {2.19}Depuraci\IeC {\'o}n.}{41}{section.2.19}
+\contentsline {section}{\numberline {2.17}Ejercicio: productores/consumidores con colas m\IeC {\'u}ltiples}{40}{section.2.17}
+\contentsline {section}{\numberline {2.18}Ejercicio}{41}{section.2.18}
+\contentsline {section}{\numberline {2.19}Documentaci\IeC {\'o}n.}{41}{section.2.19}
+\contentsline {section}{\numberline {2.20}Depuraci\IeC {\'o}n.}{41}{section.2.20}
 \contentsline {chapter}{\numberline {3}{}Programaci\IeC {\'o}n de comunicaciones en red}{43}{chapter.3}
 \contentsline {section}{\numberline {3.1}Comunicaci\IeC {\'o}n entre aplicaciones.}{43}{section.3.1}
 \contentsline {section}{\numberline {3.2}Roles cliente y servidor.}{43}{section.3.2}
